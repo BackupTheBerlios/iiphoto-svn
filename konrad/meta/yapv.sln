@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yapv", "yapv.csproj", "{F0C9D570-1528-4A55-B040-0016C4A15FFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "imageWindow", "..\imageWindow\imageWindow.csproj", "{E3BAE9A6-1040-4FF2-AFF0-D30E5A88FE1F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0C9D570-1528-4A55-B040-0016C4A15FFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0C9D570-1528-4A55-B040-0016C4A15FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0C9D570-1528-4A55-B040-0016C4A15FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0C9D570-1528-4A55-B040-0016C4A15FFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3BAE9A6-1040-4FF2-AFF0-D30E5A88FE1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3BAE9A6-1040-4FF2-AFF0-D30E5A88FE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3BAE9A6-1040-4FF2-AFF0-D30E5A88FE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3BAE9A6-1040-4FF2-AFF0-D30E5A88FE1F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
