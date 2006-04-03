@@ -48,6 +48,7 @@ namespace yapv
             this.button1.TabIndex = 1;
             this.button1.Text = "Ustaw";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -57,7 +58,6 @@ namespace yapv
             this.label2.Size = new System.Drawing.Size(131, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "40096 - ID naszej property";
-            this.label2.Click += new System.EventHandler(this.label1_Click);
             // 
             // SetProp
             // 
