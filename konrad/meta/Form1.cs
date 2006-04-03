@@ -303,7 +303,7 @@ namespace yapv
 		private void openFile(object sender, System.EventArgs e)
 		{
 			OpenFileDialog ofd = new OpenFileDialog();
-			ofd.Filter="JPEG Images (*.jpg,*.jpeg)|*.jpg;*.jpeg|Gif Images (*.gif)|*.gif|Bitmaps (*.bmp)|*.bmp";
+            ofd.Filter = "JPEG Images (*.jpg,*.jpeg)|*.jpg;*.jpeg|Gif Images (*.gif)|*.gif|Bitmaps (*.bmp)|*.bmp|Png Images (*.png)|*.png|Tiff Images(*.tif)|*.tif";
 			if (ofd.ShowDialog() == DialogResult.OK) 
 			{
 				imageWindow imageW = new imageWindow(ofd.FileName);
@@ -319,7 +319,7 @@ namespace yapv
 			if (this.ActiveMdiChild != null) 
 			{
 				SaveFileDialog sfd = new SaveFileDialog();
-				sfd.Filter="JPEG Images (*.jpg,*.jpeg)|*.jpg;*.jpeg|Gif Images (*.gif)|*.gif|Bitmaps (*.bmp)|*.bmp";
+                sfd.Filter = "JPEG Images (*.jpg,*.jpeg)|*.jpg;*.jpeg|Gif Images (*.gif)|*.gif|Bitmaps (*.bmp)|*.bmp|Png Images (*.png)|*.png|Tiff Images(*.tif)|*.tif";
 				imageWindow activeImage = ((imageWindow)this.ActiveMdiChild);
 				/*			Bitmap i = activeImage.Image;
 							i.Save("c:\test.jpg",ImageFormat.Jpeg);*/
@@ -328,10 +328,14 @@ namespace yapv
 					string strImgName = sfd.FileName;
 					if (strImgName.EndsWith("jpg"))
 						activeImage.Image.Save(strImgName,ImageFormat.Jpeg);
-					if (strImgName.EndsWith("gif"))
+					else if (strImgName.EndsWith("gif"))
 						activeImage.Image.Save(strImgName,ImageFormat.Gif);
-					if (strImgName.EndsWith("bmp"))
+					else if (strImgName.EndsWith("bmp"))
 						activeImage.Image.Save(strImgName,ImageFormat.Bmp);
+                    else if (strImgName.EndsWith("png"))
+                        activeImage.Image.Save(strImgName,ImageFormat.Png);
+                    else if (strImgName.EndsWith("tif"))
+                        activeImage.Image.Save(strImgName, ImageFormat.Tiff);
 				}
 			}
 		}
