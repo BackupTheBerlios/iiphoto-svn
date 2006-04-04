@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Data;
 using System.Data.Common;
 using System.Data.SQLite;
@@ -32,6 +33,34 @@ namespace ConsoleApplication1
             conn.Close();
         }
 
+        public void fastInserts(string tableName, string parameters, string[,] fields)
+        {
+            using (SQLiteTransaction dbTrans = conn.BeginTransaction())
+            {
+                using (SQLiteCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "insert into " + tableName + " values(" + parameters + ");";
+
+                    SQLiteParameter[] sqlparams = new SQLiteParameter[fields.GetLength(1)];
+
+                    for (int i = 0; i < fields.GetLength(1); i++) {
+                        sqlparams[i] = cmd.CreateParameter();
+                        cmd.Parameters.Add(sqlparams[i]);
+                    }
+
+                    for (int i = 0; i < fields.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < fields.GetLength(1); j++)
+                        {
+                            sqlparams[j].Value = fields[i, j];
+                        }
+                        cmd.ExecuteNonQuery();
+                    }
+                    dbTrans.Commit();
+                }
+            }
+        }
+
         public DataSet select(string select)
         {
             SQLiteDataAdapter sqladapt = new SQLiteDataAdapter(select, conn);
@@ -43,7 +72,7 @@ namespace ConsoleApplication1
         public void executeQuery(string query)
         {
             SQLiteCommand cmd = conn.CreateCommand();
-            cmd.CommandText = command;
+            cmd.CommandText = query;
             cmd.ExecuteNonQuery();
         }
 
@@ -51,39 +80,7 @@ namespace ConsoleApplication1
 
     class Program
     {
-        static void CreateTable(SQLiteConnection cnn)
-        {
-            SQLiteCommand cmd = cnn.CreateCommand();
 
-            cmd.CommandText = "create table users(" +
-                              "id integer primary key autoincrement," +
-                              "username varchar(32)," +
-                              "password varchar(128))";
-
-            cmd.ExecuteNonQuery();
-        }
-
-        static void FastInsert(SQLiteConnection cnn)
-        {
-            using (SQLiteTransaction dbTrans = cnn.BeginTransaction())
-            {
-                using (SQLiteCommand cmd = cnn.CreateCommand())
-                {
-                    cmd.CommandText = "insert into users VALUES(NULL,?,?)";
-                    SQLiteParameter Field1 = cmd.CreateParameter();
-                    SQLiteParameter Field2 = cmd.CreateParameter();
-                    cmd.Parameters.Add(Field1);
-                    cmd.Parameters.Add(Field2);
-                    for (int n = 0; n < 50; n++)
-                    {
-                        Field1.Value = "user_" + n.ToString();
-                        Field2.Value = "password_" + n.ToString();
-                        cmd.ExecuteNonQuery();
-                    }
-                    dbTrans.Commit();
-                }
-            }
-        }
         static private SQLiteCommand prepareUpdate(SQLiteConnection cnn)
         {
             SQLiteCommand cmd = cnn.CreateCommand();
@@ -106,15 +103,37 @@ namespace ConsoleApplication1
             cmd.ExecuteNonQuery();
         }
 
-        static public void SelectUsers(SQLiteConnection cnn)
+        static void Main(string[] args)
         {
-            SQLiteDataAdapter sqladapt = new SQLiteDataAdapter("SELECT * FROM users;", cnn);
-            DataSet dataSet = new DataSet("Dane");
+            MySqlite db = new MySqlite("mydb.db3");
+            db.connect();
 
-            sqladapt.Fill(dataSet);
+            try
+            {
+                db.executeQuery("create table users(" +
+                                "id integer primary key autoincrement," +
+                                "username varchar(32)," +
+                                "password varchar(128))");
+            } catch (SQLiteException e) {
+                Console.WriteLine("{0}", e.Message);
+            }
 
-            Console.WriteLine("DataSet {0} zawiera {1} tabele", dataSet.DataSetName, dataSet.Tables.Count);
+            string[,] users = new string[50, 2];
+            for (int n = 0; n < 50; n++) {
+                users[n, 0] = "user_" + n.ToString();
+                users[n, 1] = "pass_" + n.ToString();
+            }
 
+            db.fastInserts("users", "NULL, ?,?", users);
+
+            /*SQLiteCommand cmd = Program.prepareUpdate(conn);
+            for (int i = 5; i < 10; i++)
+            {
+                Program.UpdateUser(cmd, "updatedName_" + i.ToString(), "updatedPass_" + i.ToString(), i.ToString());
+            }
+            */
+
+            DataSet dataSet = db.select("select * from users;");
             foreach (DataTable t in dataSet.Tables)
             {
                 Console.WriteLine("Tabela {0} zawiera {1} wiersze", t.TableName, t.Rows.Count);
@@ -126,31 +145,8 @@ namespace ConsoleApplication1
                     Console.WriteLine();
                 }
             }
-        }
 
-        static void Main(string[] args)
-        {
-            MySqlite db = new MySqlite("mydb.db3");
-            db.connect();
-
-            try
-            {
-                Program.CreateTable(conn);
-            } catch (SQLiteException e) {
-                Console.WriteLine("{0}", e.Message);
-            }
-
-            Program.FastInsert(conn);
-
-            SQLiteCommand cmd = Program.prepareUpdate(conn);
-            for (int i = 5; i < 10; i++)
-            {
-                Program.UpdateUser(cmd, "updatedName_" + i.ToString(), "updatedPass_" + i.ToString(), i.ToString());
-            }
-
-            Program.SelectUsers(conn);
-
-            conn.Close();
+            db.close();
             Console.ReadLine();
         }
     }
