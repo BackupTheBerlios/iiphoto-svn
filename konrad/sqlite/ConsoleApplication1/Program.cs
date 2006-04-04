@@ -81,7 +81,7 @@ namespace ConsoleApplication1
     class Program
     {
 
-        static private SQLiteCommand prepareUpdate(SQLiteConnection cnn)
+        /*static private SQLiteCommand prepareUpdate(SQLiteConnection cnn)
         {
             SQLiteCommand cmd = cnn.CreateCommand();
 
@@ -101,7 +101,7 @@ namespace ConsoleApplication1
             cmd.Parameters["@id"].Value = id;
 
             cmd.ExecuteNonQuery();
-        }
+        }*/
 
         static void Main(string[] args)
         {
