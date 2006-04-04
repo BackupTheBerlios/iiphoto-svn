@@ -69,21 +69,9 @@ namespace ConsoleApplication1
             return dataSet;
         }
 
-        public void executeQuery(string query)
+        /* public SQLiteCommand prepareUpdate(string tableName, )
         {
             SQLiteCommand cmd = conn.CreateCommand();
-            cmd.CommandText = query;
-            cmd.ExecuteNonQuery();
-        }
-
-    }
-
-    class Program
-    {
-
-        /*static private SQLiteCommand prepareUpdate(SQLiteConnection cnn)
-        {
-            SQLiteCommand cmd = cnn.CreateCommand();
 
             cmd.CommandText = "UPDATE users SET username = @userName, password = @pass WHERE id = @id";
 
@@ -103,6 +91,17 @@ namespace ConsoleApplication1
             cmd.ExecuteNonQuery();
         }*/
 
+        public void executeQuery(string query)
+        {
+            SQLiteCommand cmd = conn.CreateCommand();
+            cmd.CommandText = query;
+            cmd.ExecuteNonQuery();
+        }
+
+    }
+
+    class Program
+    {
         static void Main(string[] args)
         {
             MySqlite db = new MySqlite("mydb.db3");
