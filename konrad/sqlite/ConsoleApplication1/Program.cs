@@ -28,6 +28,10 @@ namespace ConsoleApplication1
             conn.Open();
         }
 
+        public void close() {
+            conn.Close();
+        }
+
         public DataSet select(string select)
         {
             SQLiteDataAdapter sqladapt = new SQLiteDataAdapter(select, conn);
@@ -126,13 +130,8 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
-
-            if (System.IO.File.Exists("mydb.db3") == false)
-            {
-                SQLiteConnection.CreateFile("mydb.db3");
-            }
-            SQLiteConnection conn = new SQLiteConnection("Data Source=mydb.db3;Version=3;");
-            conn.Open();
+            MySqlite db = new MySqlite("mydb.db3");
+            db.connect();
 
             try
             {
