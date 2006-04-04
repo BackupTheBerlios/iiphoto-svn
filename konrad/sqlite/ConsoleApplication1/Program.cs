@@ -7,6 +7,44 @@ using System.Data.SqlClient;
 
 namespace ConsoleApplication1
 {
+    class MySqlite {
+        private string DBfile;
+        private SQLiteConnection conn;
+
+        public MySqlite(string path) {
+            DBfile = path;
+        }
+
+        public void createDB() {
+            if (System.IO.File.Exists(DBfile) == false)
+            {
+                SQLiteConnection.CreateFile(DBfile);
+            }
+        }
+
+        public void connect() {
+            this.createDB();
+            this.conn = new SQLiteConnection("Data Source="+DBfile+";Version=3;");
+            conn.Open();
+        }
+
+        public DataSet select(string select)
+        {
+            SQLiteDataAdapter sqladapt = new SQLiteDataAdapter(select, conn);
+            DataSet dataSet = new DataSet("Dane");
+            sqladapt.Fill(dataSet);
+            return dataSet;
+        }
+
+        public void executeQuery(string query)
+        {
+            SQLiteCommand cmd = conn.CreateCommand();
+            cmd.CommandText = command;
+            cmd.ExecuteNonQuery();
+        }
+
+    }
+
     class Program
     {
         static void CreateTable(SQLiteConnection cnn)
@@ -20,6 +58,7 @@ namespace ConsoleApplication1
 
             cmd.ExecuteNonQuery();
         }
+
         static void FastInsert(SQLiteConnection cnn)
         {
             using (SQLiteTransaction dbTrans = cnn.BeginTransaction())
@@ -87,6 +126,7 @@ namespace ConsoleApplication1
 
         static void Main(string[] args)
         {
+
             if (System.IO.File.Exists("mydb.db3") == false)
             {
                 SQLiteConnection.CreateFile("mydb.db3");
