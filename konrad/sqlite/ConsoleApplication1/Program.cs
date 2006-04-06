@@ -61,6 +61,23 @@ namespace ConsoleApplication1
             }
         }
 
+        public SQLiteDataAdapter getAdapter(string query, bool forEdit) {
+            SQLiteDataAdapter sqladapt = new SQLiteDataAdapter(query, conn);
+            DataSet dataSet = new DataSet("Dane");
+            if (forEdit)
+            {
+                new SQLiteCommandBuilder(sqladapt);
+            }
+            return sqladapt;
+        }
+
+        public DataSet getData(SQLiteDataAdapter ad)
+        {
+            DataSet dataSet = new DataSet("Dane");
+            ad.Fill(dataSet);
+            return dataSet;
+        }
+
         public DataSet select(string select)
         {
             SQLiteDataAdapter sqladapt = new SQLiteDataAdapter(select, conn);
@@ -68,28 +85,6 @@ namespace ConsoleApplication1
             sqladapt.Fill(dataSet);
             return dataSet;
         }
-
-        /* public SQLiteCommand prepareUpdate(string tableName, )
-        {
-            SQLiteCommand cmd = conn.CreateCommand();
-
-            cmd.CommandText = "UPDATE users SET username = @userName, password = @pass WHERE id = @id";
-
-            cmd.Parameters.Add(new SQLiteParameter("@userName"));
-            cmd.Parameters.Add(new SQLiteParameter("@pass"));
-            cmd.Parameters.Add(new SQLiteParameter("@id"));
-
-            return cmd;
-        }
-
-        static public void UpdateUser(SQLiteCommand cmd, string username, string pass, string id)
-        {
-            cmd.Parameters["@userName"].Value = username;
-            cmd.Parameters["@pass"].Value = pass;
-            cmd.Parameters["@id"].Value = id;
-
-            cmd.ExecuteNonQuery();
-        }*/
 
         public void executeQuery(string query)
         {
@@ -125,14 +120,36 @@ namespace ConsoleApplication1
 
             db.fastInserts("users", "NULL, ?,?", users);
 
-            /*SQLiteCommand cmd = Program.prepareUpdate(conn);
-            for (int i = 5; i < 10; i++)
-            {
-                Program.UpdateUser(cmd, "updatedName_" + i.ToString(), "updatedPass_" + i.ToString(), i.ToString());
-            }
-            */
-
             DataSet dataSet = db.select("select * from users;");
+            foreach (DataTable t in dataSet.Tables)
+            {
+                Console.WriteLine("Tabela {0} zawiera {1} wiersze", t.TableName, t.Rows.Count);
+                foreach (DataRow r in t.Rows)
+                {
+                    Console.Write("-> ");
+                    foreach (DataColumn c in t.Columns)
+                        Console.Write("{0}={1}, ", c.ColumnName, r[c.ColumnName]);
+                    Console.WriteLine();
+                }
+            }
+
+            dataSet.Dispose();
+
+            SQLiteDataAdapter da = db.getAdapter("select * from users;", true);
+            DataSet ds = db.getData(da);
+
+            DataRow[] drows = ds.Tables[0].Select("username = 'user_30'");
+            for (int i = 0; i < drows.Length; i++)
+            {
+                drows[i].BeginEdit();
+                drows[i]["password"] = "NOWE HASLO!";
+                drows[i].EndEdit();
+            }
+            Console.WriteLine("zmodyfikowano: {0} wierszy", da.Update(ds));
+            ds.Dispose();
+            da.Dispose();
+
+            dataSet = db.select("select * from users;");
             foreach (DataTable t in dataSet.Tables)
             {
                 Console.WriteLine("Tabela {0} zawiera {1} wiersze", t.TableName, t.Rows.Count);
