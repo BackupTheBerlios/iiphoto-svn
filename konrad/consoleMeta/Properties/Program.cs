@@ -4,7 +4,7 @@ using System.Text;
 using System.Drawing.Imaging;
 
 /*
- Pierwszy parametr to sciezka do zdjecia wejsciowego, 
+ * Pierwszy parametr to sciezka do zdjecia wejsciowego, 
  * Drugi to sciezka do zdjecia w ktorym bedzie zapisany nasz tag przykladowy + odczytane jakies dane z Exif'a
  */
 
