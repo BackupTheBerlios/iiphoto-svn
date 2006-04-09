@@ -136,7 +136,7 @@ namespace yapv
         {
             System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
             PropertyItem propItem = image.PropertyItems[0];
-            propItem.Id = 40096;
+            propItem.Id = PropertyTags.IIPhotoTag;
             propItem.Type = 2;
             propItem.Value = encoding.GetBytes(value);
             propItem.Len = propItem.Value.Length;
