@@ -18,6 +18,7 @@ namespace Listview2
 
         private void button1_Click(object sender, EventArgs e)
         {
+            imageViewer1.SetThumbnailView();
             List<Bitmap> images = new List<Bitmap>();
             Bitmap tempBitmap;
 
@@ -29,6 +30,7 @@ namespace Listview2
             }
             imageViewer1.Thumbnailview.AddImages(images);
             imageViewer1.Thumbnailview.ShowImages(1.0);
+            
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -41,6 +43,11 @@ namespace Listview2
                 case "150%": imageViewer1.Thumbnailview.ShowImages(1.5); break;
                 default: break;
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            imageViewer1.SetThumbnailView();
         }
     }
 }

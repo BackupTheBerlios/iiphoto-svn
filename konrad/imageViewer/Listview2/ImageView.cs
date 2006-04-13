@@ -26,9 +26,7 @@ namespace Listview2
             }
         }
 
-        protected override void OnResize(EventArgs e)
-        {
-            base.OnResize(e);
+        private void checkImagePosition() {
             if (this.Image != null)
             {
                 int x, y;
@@ -53,8 +51,20 @@ namespace Listview2
                     y = (this.Height - Image.Height) / 2;
                     this.pictureBox1.Height = Image.Height;
                 }
-                this.pictureBox1.Location = new Point(x,y);
+                this.pictureBox1.Location = new Point(x, y);
             }
+        }
+
+        protected override void OnVisibleChanged(EventArgs e)
+        {
+            base.OnVisibleChanged(e);
+            this.checkImagePosition();
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            this.checkImagePosition();
         }
     }
 }
