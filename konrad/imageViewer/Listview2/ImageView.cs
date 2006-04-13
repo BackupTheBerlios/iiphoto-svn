@@ -30,29 +30,34 @@ namespace Listview2
             if (this.Image != null)
             {
                 int x, y;
-                if (this.Size.Width < Image.Width)
+                if (this.Width < Image.Width)
                 {
-                    this.pictureBox1.Width = Image.Width;
-                    x = 3;
+                    x = 0;
                 }
                 else
                 {
-
-                    x = (this.Width - Image.Width) / 2;
-                    this.pictureBox1.Width = Image.Width;
+                    x = ((this.Width - Image.Width) / 2) ;
+                    if (x < 0)
+                        MessageBox.Show("test");
                 }
-                if (this.Size.Height < Image.Height)
+                if (this.Height < Image.Height)
                 {
-                    this.pictureBox1.Height = Image.Height;
-                    y = 3;
+                    y = 0;
                 }
                 else
                 {
-                    y = (this.Height - Image.Height) / 2;
-                    this.pictureBox1.Height = Image.Height;
+                    y = ((this.Height - Image.Height) / 2) ;
+                    if (y < 0)
+                        MessageBox.Show("test");
                 }
-                this.pictureBox1.Location = new Point(x, y);
+                this.pictureBox1.Width = Image.Width;
+                this.pictureBox1.Height = Image.Height;
+                this.pictureBox1.Location = new Point(x+3, y+3);
             }
+        }
+
+        public void Zoom(double zoom) { 
+            
         }
 
         protected override void OnVisibleChanged(EventArgs e)
