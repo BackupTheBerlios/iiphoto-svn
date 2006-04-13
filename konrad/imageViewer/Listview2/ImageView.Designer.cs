@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Listview2
 {
@@ -58,6 +59,7 @@ namespace Listview2
         #endregion
 
         private PictureBox pictureBox1;
+        private Bitmap rescueBitmap;
 
     }
 }

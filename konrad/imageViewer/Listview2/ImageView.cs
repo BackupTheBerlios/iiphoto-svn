@@ -14,6 +14,13 @@ namespace Listview2
         {
             InitializeComponent();
         }
+
+        public void openImage(Bitmap b)
+        {
+            this.Image = b;
+            this.rescueBitmap = b;
+        }
+
         public Image Image
         {
             get
@@ -56,8 +63,9 @@ namespace Listview2
             }
         }
 
-        public void Zoom(double zoom) { 
-            
+        public void Zoom(double zoom) {
+            this.Image = new Bitmap(this.rescueBitmap, (int)(rescueBitmap.Width * zoom), (int)(rescueBitmap.Height * zoom));
+            this.checkImagePosition();
         }
 
         protected override void OnVisibleChanged(EventArgs e)

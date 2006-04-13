@@ -37,10 +37,10 @@ namespace Listview2
         {
             switch (comboBox1.SelectedItem.ToString())
             {
-                case "50%": imageViewer1.Thumbnailview.ShowImages(0.5); break;
-                case "75%": imageViewer1.Thumbnailview.ShowImages(0.75); break;
-                case "100%": imageViewer1.Thumbnailview.ShowImages(1.0); break;
-                case "150%": imageViewer1.Thumbnailview.ShowImages(1.5); break;
+                case "50%": imageViewer1.Zoom(0.5); break;
+                case "75%": imageViewer1.Zoom(0.75); break;
+                case "100%": imageViewer1.Zoom(1.0); break;
+                case "150%": imageViewer1.Zoom(1.5); break;
                 default: break;
             }
         }

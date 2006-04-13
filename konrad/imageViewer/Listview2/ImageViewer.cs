@@ -40,11 +40,23 @@ namespace Listview2
             }
         }
 
+        public void Zoom(double zoom)
+        {
+            if (imageView1.Visible == true)
+            {
+                imageView1.Zoom(zoom);
+            }
+            else if (thumbnailView1.Visible == true)
+            {
+                thumbnailView1.ShowImages(zoom);
+            }
+        }
+
         private void mouseDoubleClick(object sender, MouseEventArgs e)
         {
             ListViewItem listViewItem = ((ThumbnailView)sender).FocusedItem;
             Bitmap b = (Bitmap)thumbnailView1.Images[listViewItem.ImageIndex];
-            this.imageView1.Image = new Bitmap(((ThumbnailTag)b.Tag).Path);
+            this.imageView1.openImage(new Bitmap(((ThumbnailTag)b.Tag).Path));
             this.SetImageView();
         }
     }
