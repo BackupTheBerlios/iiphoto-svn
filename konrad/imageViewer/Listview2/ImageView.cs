@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
@@ -78,6 +79,46 @@ namespace Listview2
         {
             base.OnResize(e);
             this.checkImagePosition();
+        }
+
+        private void onMouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isDrag = true;
+                this.lmStartingPoint = ((Control)sender).PointToScreen(new Point(e.X, e.Y));
+                Graphics.FromImage(this.Image).FillEllipse(Brushes.Green, e.X, e.Y, 3, 3);
+            }
+            Console.WriteLine("mouseDown");
+        }
+
+        private void onMouseUp(object sender, MouseEventArgs e)
+        {
+            isDrag = false;
+            if (e.Button == MouseButtons.Left)
+            {
+                //ControlPaint.DrawReversibleFrame(selectedRectangle, this.BackColor, FrameStyle.Dashed);
+            }
+        }
+
+        private void onMouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDrag)
+            {
+                ControlPaint.DrawReversibleFrame(selectedRectangle , this.BackColor, FrameStyle.Dashed);
+
+                // Calculate the endpoint and dimensions for the new 
+                // rectangle, again using the PointToScreen method.
+                Point endPoint = ((Control)sender).PointToScreen(new Point(e.X, e.Y));
+                int width = endPoint.X - lmStartingPoint.X;
+                int height = endPoint.Y - lmStartingPoint.Y;
+                selectedRectangle = new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, width, height);
+                //selectedRectangle = new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, e.X - lmStartingPoint.X, e.Y - lmStartingPoint.Y);
+                Graphics.FromImage(this.Image).FillEllipse(Brushes.Blue, e.X, e.Y, 3, 3);
+                // Draw the new rectangle by calling DrawReversibleFrame
+                // again.  
+                ControlPaint.DrawReversibleFrame(selectedRectangle, this.BackColor, FrameStyle.Dashed);
+            }
         }
     }
 }
