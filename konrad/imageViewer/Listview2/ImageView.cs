@@ -22,6 +22,10 @@ namespace Listview2
             this.Image = b;
             this.rescueBitmap = b;
             this.checkImagePosition();
+            this.lmStartingPoint = new Point();
+            this.lmEndPoint = new Point();
+            this.selectedRectangle = new Rectangle(0, 0, 0, 0);
+            this.clearRect = false;
         }
 
         public Bitmap Image
@@ -73,13 +77,16 @@ namespace Listview2
 
         public void Crop()
         {
-            this.DrawMyRectangle(selectedRectangle);
-            Rectangle r = new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, lmEndPoint.X - lmStartingPoint.X, lmEndPoint.Y - lmStartingPoint.Y);
-            Bitmap cropped = new Bitmap(r.Width, r.Height, this.Image.PixelFormat);
-            Graphics g = Graphics.FromImage(cropped);
-            g.DrawImage(this.Image, new Rectangle(0, 0, cropped.Width, cropped.Height), r, GraphicsUnit.Pixel);
-            g.Dispose();
-            this.openImage(cropped);
+            if (selectedRectangle.Width != 0 && selectedRectangle.Height != 0)
+            {
+                this.DrawMyRectangle(selectedRectangle);
+
+                Bitmap cropped = new Bitmap(selectedRectangle.Width, selectedRectangle.Height, this.Image.PixelFormat);
+                Graphics g = Graphics.FromImage(cropped);
+                g.DrawImage(this.Image, new Rectangle(0, 0, cropped.Width, cropped.Height), selectedRectangle, GraphicsUnit.Pixel);
+                g.Dispose();
+                this.openImage(cropped);
+            }
         }
 
         private Color MyGetPixel(int x, int y)
@@ -177,9 +184,11 @@ namespace Listview2
         {
             this.data = this.Image.LockBits(new Rectangle(0, 0, this.Image.Width, this.Image.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             DrawMyLine(new Point(r.X, r.Y), new Point(r.X + r.Width, r.Y));
-            DrawMyLine(new Point(r.X, r.Y + 1), new Point(r.X, r.Y + r.Height));
+            DrawMyLine(new Point(r.X, r.Y), new Point(r.X, r.Y + r.Height));
             DrawMyLine(new Point(r.X + r.Width, r.Y), new Point(r.X + r.Width, r.Y + r.Height));
-            DrawMyLine(new Point(r.X, r.Y + r.Height), new Point(r.X + r.Width + 1, r.Y + r.Height));
+            DrawMyLine(new Point(r.X, r.Y + r.Height), new Point(r.X + r.Width, r.Y + r.Height));
+            XorPixel(r.X, r.Y, Color.Gray);
+            XorPixel(r.X + r.Width, r.Y + r.Height, Color.Gray);
             this.Image.UnlockBits(data);
         }
 
@@ -199,8 +208,11 @@ namespace Listview2
         {
             if (e.Button == MouseButtons.Left)
             {
-                selectedRectangle = new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, lmEndPoint.X - lmStartingPoint.X, lmEndPoint.Y - lmStartingPoint.Y);
-                this.DrawMyRectangle(selectedRectangle);
+                /*if (clearRect)
+                {
+                    this.DrawMyRectangle(selectedRectangle);
+                    clearRect = false;
+                }*/
                 isDrag = true;
                 moving = false;
                 this.lmStartingPoint = new Point(e.X, e.Y);
@@ -215,10 +227,11 @@ namespace Listview2
 
         private void onMouseUp(object sender, MouseEventArgs e)
         {
+            
             isDrag = false;
             if (e.Button == MouseButtons.Left)
             {
-                this.lmEndPoint = new Point(e.X, e.Y);
+                //this.lmEndPoint = new Point(e.X, e.Y);
                 this.Refresh();
             }
             else if (e.Button == MouseButtons.Right)
@@ -237,39 +250,30 @@ namespace Listview2
                 {
                     int maxX, maxY;
 
-                    // Calculate the endpoint and dimensions for the new 
-                    // rectangle, again using the PointToScreen method.
-
-                    /*if (e.X > this.pictureBox1.Width)
-                        maxX = this.pictureBox1.Width;
+                    if (e.X >= this.pictureBox1.Width)
+                        maxX = this.pictureBox1.Width - 1;
+                    else if (e.X < 0)
+                        maxX = 0;
                     else
                         maxX = e.X;
-                    if (e.Y > this.pictureBox1.Height)
-                        maxY = this.pictureBox1.Height;
+                    if (e.Y >= this.pictureBox1.Height)
+                        maxY = this.pictureBox1.Height - 1;
+                    else if (e.Y < 0)
+                        maxY = 0;
                     else
-                        maxY = e.Y;*/
-                    if (moving == true)
-                        this.DrawMyRectangle(selectedRectangle);
-                    else
-                        moving = true;
+                        maxY = e.Y;
 
-                    selectedRectangle = new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, e.X - lmStartingPoint.X, e.Y - lmStartingPoint.Y);
-                    //selectedRectangle = new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, e.X - lmStartingPoint.X, e.Y - lmStartingPoint.Y);
-                    // Draw the new rectangle by calling DrawReversibleFrame
-                    // again.  
+                    //if (moving == true)
+                        this.DrawMyRectangle(selectedRectangle);
+                    //else
+                    //    moving = true;
+
+                    selectedRectangle = new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, maxX - lmStartingPoint.X, maxY - lmStartingPoint.Y);
+
                     this.DrawMyRectangle(selectedRectangle);
                     this.Refresh();
                 }
             }
-        }
-
-        private void onPaint(object sender, PaintEventArgs e)
-        {
-            //if (isDrag == false)
-            //Rectangle r = new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, lmEndPoint.X - lmStartingPoint.X, lmEndPoint.Y - lmStartingPoint.Y);
-            //Rectangle r =  this.pictureBox1.RectangleToScreen(new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, lmEndPoint.X - lmStartingPoint.X, lmEndPoint.Y - lmStartingPoint.Y));
-            //ControlPaint.DrawReversibleFrame(r, this.BackColor, FrameStyle.Dashed);
-            //Console.WriteLine("onpaint" + r.ToString());
         }
     }
 }
