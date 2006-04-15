@@ -6,6 +6,7 @@ using System.Drawing.Drawing2D;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace Listview2
 {
@@ -23,11 +24,11 @@ namespace Listview2
             this.checkImagePosition();
         }
 
-        public Image Image
+        public Bitmap Image
         {
             get
             {
-                return this.pictureBox1.Image;
+                return (Bitmap)this.pictureBox1.Image;
             }
             set
             {
@@ -72,12 +73,114 @@ namespace Listview2
 
         public void Crop()
         {
+            this.DrawMyRectangle(selectedRectangle);
             Rectangle r = new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, lmEndPoint.X - lmStartingPoint.X, lmEndPoint.Y - lmStartingPoint.Y);
             Bitmap cropped = new Bitmap(r.Width, r.Height, this.Image.PixelFormat);
             Graphics g = Graphics.FromImage(cropped);
             g.DrawImage(this.Image, new Rectangle(0, 0, cropped.Width, cropped.Height), r, GraphicsUnit.Pixel);
             g.Dispose();
             this.openImage(cropped);
+        }
+
+        private Color MyGetPixel(int x, int y)
+        {
+            unsafe
+            {
+                byte* imgPtr = (byte*)(data.Scan0);
+                imgPtr += y * data.Stride + x * 3;
+                return Color.FromArgb(*(imgPtr++), *(imgPtr++), *imgPtr);
+            }
+        }
+
+        private void MySetPixel(int x, int y, Color c)
+        {
+            unsafe
+            {
+                byte* imgPtr = (byte*)(data.Scan0);
+                imgPtr += y * data.Stride + x * 3;
+                *(imgPtr++) = c.R;
+                *(imgPtr++) = c.G;
+                *(imgPtr++) = c.B;
+            }
+        }
+
+        private void XorPixel(int x, int y, Color color) 
+        {
+            
+            Color srcPixel = this.MyGetPixel(x, y);
+            this.MySetPixel(x, y, Color.FromArgb(color.R ^ srcPixel.R, srcPixel.G ^ color.G, srcPixel.B ^ color.B));
+
+        }
+
+        private void DrawMyLine(Point srcPoint, Point destPoint)
+        {
+            int d, delta_A, delta_B, x, y;
+            int dx = destPoint.X - srcPoint.X;
+            int dy = destPoint.Y - srcPoint.Y;
+
+            int inc_x = (dx >= 0) ? 1 : -1;
+            int inc_y = (dy >= 0) ? 1 : -1;
+
+            dx = Math.Abs(dx);
+            dy = Math.Abs(dy);
+
+            x = 0; y = 0;
+
+            if (dx >= dy)
+            {
+                d = 2 * dy - dx;
+                delta_A = 2 * dy;
+                delta_B = 2 * (dy - dx);
+
+                for (int i = 0; i < dx; i++)
+                {
+                    XorPixel(srcPoint.X + x, srcPoint.Y + y, Color.Gray);
+                    if (d > 0)
+                    {
+                        d += delta_B;
+                        x += inc_x;
+                        y += inc_y;
+                    }
+                    else
+                    {
+                        d += delta_A;
+                        x += inc_x;
+                    }
+                }
+
+            }
+            else
+            {
+                d = 2 * dx - dy;
+                delta_A = 2 * dx;
+                delta_B = 2 * (dx - dy);
+
+                for (int i = 0; i < dy; i++)
+                {
+                    XorPixel(srcPoint.X + y, srcPoint.Y + x, Color.Gray);
+                    if (d > 0)
+                    {
+                        d += delta_B;
+                        y += inc_x;
+                        x += inc_y;
+                    }
+                    else
+                    {
+                        d += delta_A;
+                        x += inc_y;
+                    }
+                }
+            }
+        }
+
+        private void DrawMyRectangle(Rectangle r)
+        {
+            this.data = this.Image.LockBits(new Rectangle(0, 0, this.Image.Width, this.Image.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            DrawMyLine(new Point(r.X, r.Y), new Point(r.X + r.Width, r.Y));
+            DrawMyLine(new Point(r.X, r.Y + 1), new Point(r.X, r.Y + r.Height));
+            DrawMyLine(new Point(r.X + r.Width, r.Y), new Point(r.X + r.Width, r.Y + r.Height));
+            DrawMyLine(new Point(r.X, r.Y + r.Height), new Point(r.X + r.Width + 1, r.Y + r.Height));
+            this.Image.UnlockBits(data);
         }
 
         protected override void OnVisibleChanged(EventArgs e)
@@ -96,11 +199,17 @@ namespace Listview2
         {
             if (e.Button == MouseButtons.Left)
             {
-                selectedRectangle = this.pictureBox1.RectangleToScreen(new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, lmEndPoint.X - lmStartingPoint.X, lmEndPoint.Y - lmStartingPoint.Y));
-                ControlPaint.DrawReversibleFrame(selectedRectangle, this.BackColor, FrameStyle.Dashed);
+                selectedRectangle = new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, lmEndPoint.X - lmStartingPoint.X, lmEndPoint.Y - lmStartingPoint.Y);
+                this.DrawMyRectangle(selectedRectangle);
                 isDrag = true;
                 moving = false;
                 this.lmStartingPoint = new Point(e.X, e.Y);
+                this.Refresh();
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                isDrag = true;
+                this.rmStartingPoint = new Point(e.X, e.Y);
             }
         }
 
@@ -109,8 +218,14 @@ namespace Listview2
             isDrag = false;
             if (e.Button == MouseButtons.Left)
             {
-                this.lmEndPoint.X = e.X;
-                this.lmEndPoint.Y = e.Y;
+                this.lmEndPoint = new Point(e.X, e.Y);
+                this.Refresh();
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                this.rmEndPoint = new Point(e.X, e.Y);
+                this.DrawMyRectangle(new Rectangle(rmStartingPoint.X, rmStartingPoint.Y, rmEndPoint.X - rmStartingPoint.X, rmEndPoint.Y - rmStartingPoint.Y));
+                this.Refresh();
             }
         }
 
@@ -118,29 +233,33 @@ namespace Listview2
         {
             if (isDrag)
             {
-                int maxX, maxY;
+                if (e.Button == MouseButtons.Left)
+                {
+                    int maxX, maxY;
 
-                // Calculate the endpoint and dimensions for the new 
-                // rectangle, again using the PointToScreen method.
-                
-                /*if (e.X > this.pictureBox1.Width)
-                    maxX = this.pictureBox1.Width;
-                else
-                    maxX = e.X;
-                if (e.Y > this.pictureBox1.Height)
-                    maxY = this.pictureBox1.Height;
-                else
-                    maxY = e.Y;*/
-                if (moving == true)
-                    ControlPaint.DrawReversibleFrame(selectedRectangle, this.BackColor, FrameStyle.Dashed);
-                else
-                    moving = true;
+                    // Calculate the endpoint and dimensions for the new 
+                    // rectangle, again using the PointToScreen method.
 
-                selectedRectangle = this.pictureBox1.RectangleToScreen(new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, e.X - lmStartingPoint.X, e.Y - lmStartingPoint.Y));
-                //selectedRectangle = new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, e.X - lmStartingPoint.X, e.Y - lmStartingPoint.Y);
-                // Draw the new rectangle by calling DrawReversibleFrame
-                // again.  
-                ControlPaint.DrawReversibleFrame(selectedRectangle, this.BackColor, FrameStyle.Dashed);
+                    /*if (e.X > this.pictureBox1.Width)
+                        maxX = this.pictureBox1.Width;
+                    else
+                        maxX = e.X;
+                    if (e.Y > this.pictureBox1.Height)
+                        maxY = this.pictureBox1.Height;
+                    else
+                        maxY = e.Y;*/
+                    if (moving == true)
+                        this.DrawMyRectangle(selectedRectangle);
+                    else
+                        moving = true;
+
+                    selectedRectangle = new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, e.X - lmStartingPoint.X, e.Y - lmStartingPoint.Y);
+                    //selectedRectangle = new Rectangle(lmStartingPoint.X, lmStartingPoint.Y, e.X - lmStartingPoint.X, e.Y - lmStartingPoint.Y);
+                    // Draw the new rectangle by calling DrawReversibleFrame
+                    // again.  
+                    this.DrawMyRectangle(selectedRectangle);
+                    this.Refresh();
+                }
             }
         }
 

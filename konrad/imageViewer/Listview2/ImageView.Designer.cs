@@ -1,5 +1,6 @@
 using System.Windows.Forms;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace Listview2
 {
@@ -65,8 +66,9 @@ namespace Listview2
         private PictureBox pictureBox1;
         private Bitmap rescueBitmap;
         private bool isDrag, moving;
-        private Point lmStartingPoint, lmEndPoint;
+        private Point lmStartingPoint, lmEndPoint, rmStartingPoint, rmEndPoint;
         private Rectangle selectedRectangle;
+        private BitmapData data;
 
     }
 }
