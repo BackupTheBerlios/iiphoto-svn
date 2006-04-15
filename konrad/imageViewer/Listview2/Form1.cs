@@ -49,5 +49,10 @@ namespace Listview2
         {
             imageViewer1.SetThumbnailView();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            imageViewer1.Crop();
+        }
     }
 }

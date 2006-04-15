@@ -52,6 +52,14 @@ namespace Listview2
             }
         }
 
+        public void Crop()
+        {
+            if (imageView1.Visible == true)
+            {
+                imageView1.Crop();
+            }
+        }
+
         private void mouseDoubleClick(object sender, MouseEventArgs e)
         {
             ListViewItem listViewItem = ((ThumbnailView)sender).FocusedItem;

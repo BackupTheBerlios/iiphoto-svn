@@ -30,9 +30,10 @@ namespace Listview2
         {
             this.button1 = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.imageViewer1 = new Listview2.ImageViewer();
+            this.button3 = new System.Windows.Forms.Button();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -62,12 +63,24 @@ namespace Listview2
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.button3);
             this.splitContainer1.Panel2.Controls.Add(this.button2);
             this.splitContainer1.Panel2.Controls.Add(this.comboBox1);
             this.splitContainer1.Panel2.Controls.Add(this.button1);
             this.splitContainer1.Size = new System.Drawing.Size(920, 538);
             this.splitContainer1.SplitterDistance = 503;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // button2
+            // 
+            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.button2.Location = new System.Drawing.Point(171, 2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(153, 25);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Miniatury";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // comboBox1
             // 
@@ -86,17 +99,6 @@ namespace Listview2
             this.comboBox1.Text = "Zoom";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // button2
-            // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button2.Location = new System.Drawing.Point(171, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(153, 25);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Miniatury";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // imageViewer1
             // 
             this.imageViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -104,6 +106,16 @@ namespace Listview2
             this.imageViewer1.Name = "imageViewer1";
             this.imageViewer1.Size = new System.Drawing.Size(920, 503);
             this.imageViewer1.TabIndex = 0;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(330, 4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 
@@ -127,6 +139,7 @@ namespace Listview2
         private System.Windows.Forms.ComboBox comboBox1;
         private ImageViewer imageViewer1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 

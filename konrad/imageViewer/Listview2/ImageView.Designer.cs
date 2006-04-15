@@ -44,6 +44,7 @@ namespace Listview2
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.onMouseDown);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.onMouseMove);
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.onPaint);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.onMouseUp);
             // 
             // ImageView
@@ -63,7 +64,7 @@ namespace Listview2
 
         private PictureBox pictureBox1;
         private Bitmap rescueBitmap;
-        private bool isDrag;
+        private bool isDrag, moving;
         private Point lmStartingPoint, lmEndPoint;
         private Rectangle selectedRectangle;
 
