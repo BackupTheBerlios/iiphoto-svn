@@ -50,7 +50,6 @@ namespace Listview2
             // 
             this.imageView1.AutoScroll = true;
             this.imageView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imageView1.Image = null;
             this.imageView1.Location = new System.Drawing.Point(0, 0);
             this.imageView1.Name = "imageView1";
             this.imageView1.Size = new System.Drawing.Size(743, 457);

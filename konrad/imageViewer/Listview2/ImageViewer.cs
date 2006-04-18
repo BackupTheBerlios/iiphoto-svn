@@ -60,11 +60,19 @@ namespace Listview2
             }
         }
 
+        public void toGrayScale()
+        {
+            if (imageView1.Visible == true)
+            {
+                imageView1.toGrayScale();
+            }
+        }
+
         private void mouseDoubleClick(object sender, MouseEventArgs e)
         {
             ListViewItem listViewItem = ((ThumbnailView)sender).FocusedItem;
             Bitmap b = (Bitmap)thumbnailView1.Images[listViewItem.ImageIndex];
-            this.imageView1.openImage(new Bitmap(((ThumbnailTag)b.Tag).Path));
+            this.imageView1.setImage(new Bitmap(((ThumbnailTag)b.Tag).Path));
             this.SetImageView();
         }
     }

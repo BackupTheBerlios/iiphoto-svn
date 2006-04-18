@@ -64,7 +64,7 @@ namespace Listview2
 
         private PictureBox pictureBox1;
         private Bitmap rescueBitmap;
-        private bool isDrag, moving, clearRect;
+        private bool isDrag, moving;
         private Point lmStartingPoint, lmEndPoint, rmStartingPoint, rmEndPoint;
         private Rectangle selectedRectangle;
         private BitmapData data;

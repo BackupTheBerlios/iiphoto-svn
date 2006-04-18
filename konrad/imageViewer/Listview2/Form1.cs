@@ -54,5 +54,10 @@ namespace Listview2
         {
             imageViewer1.Crop();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            imageViewer1.toGrayScale();
+        }
     }
 }

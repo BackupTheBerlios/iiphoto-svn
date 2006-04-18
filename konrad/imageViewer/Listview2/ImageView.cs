@@ -17,7 +17,7 @@ namespace Listview2
             InitializeComponent();
         }
 
-        public void openImage(Bitmap b)
+        public void setImage(Bitmap b)
         {
             this.Image = b;
             this.rescueBitmap = b;
@@ -25,10 +25,10 @@ namespace Listview2
             this.lmStartingPoint = new Point();
             this.lmEndPoint = new Point();
             this.selectedRectangle = new Rectangle(0, 0, 0, 0);
-            this.clearRect = false;
+            //this.clearRect = false;
         }
 
-        public Bitmap Image
+        private Bitmap Image
         {
             get
             {
@@ -51,8 +51,6 @@ namespace Listview2
                 else
                 {
                     x = ((this.Width - Image.Width) / 2) ;
-                    if (x < 0)
-                        MessageBox.Show("test");
                 }
                 if (this.Height < Image.Height)
                 {
@@ -61,8 +59,6 @@ namespace Listview2
                 else
                 {
                     y = ((this.Height - Image.Height) / 2) ;
-                    if (y < 0)
-                        MessageBox.Show("test");
                 }
                 this.pictureBox1.Width = Image.Width;
                 this.pictureBox1.Height = Image.Height;
@@ -85,9 +81,35 @@ namespace Listview2
                 Graphics g = Graphics.FromImage(cropped);
                 g.DrawImage(this.Image, new Rectangle(0, 0, cropped.Width, cropped.Height), selectedRectangle, GraphicsUnit.Pixel);
                 g.Dispose();
-                this.openImage(cropped);
+                this.setImage(cropped);
             }
         }
+
+        public void Rotate(int x)
+        {
+            this.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+        }
+
+        public void toGrayScale() {
+            this.data = this.Image.LockBits(new Rectangle(0, 0, this.Image.Width, this.Image.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            unsafe
+            {
+                byte tempC;
+                byte* imgPtr = ( byte* )( data.Scan0 );
+                for( int i = 0 ; i < data.Height ; i ++ )
+                {
+                      for( int j = 0 ;  j < data.Width ;  j ++ )
+                      {
+                          tempC = (byte)(((int)*(imgPtr) + (int)*(imgPtr + 1) + (int)*(imgPtr + 2))/3); 
+                          *(imgPtr++) = tempC;
+                          *(imgPtr++) = tempC;
+                          *(imgPtr++) = tempC; 
+                      }
+                }
+            }
+            this.Image.UnlockBits(data);
+			this.Refresh();
+		}
 
         private Color MyGetPixel(int x, int y)
         {
@@ -107,7 +129,7 @@ namespace Listview2
                 imgPtr += y * data.Stride + x * 3;
                 *(imgPtr++) = c.R;
                 *(imgPtr++) = c.G;
-                *(imgPtr++) = c.B;
+                *(imgPtr) = c.B;
             }
         }
 
