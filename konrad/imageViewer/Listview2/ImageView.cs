@@ -76,8 +76,17 @@ namespace Listview2
             if (selectedRectangle.Width != 0 && selectedRectangle.Height != 0)
             {
                 this.DrawMyRectangle(selectedRectangle);
-
-                Bitmap cropped = new Bitmap(selectedRectangle.Width, selectedRectangle.Height, this.Image.PixelFormat);
+                if (selectedRectangle.Width < 0)
+                {
+                    selectedRectangle.X +=  selectedRectangle.Width;
+                    selectedRectangle.Width *= -1;
+                }
+                if (selectedRectangle.Height < 0)
+                {
+                    selectedRectangle.Y += selectedRectangle.Height;
+                    selectedRectangle.Height *= -1;
+                }
+                Bitmap cropped = new Bitmap(Math.Abs(selectedRectangle.Width), Math.Abs(selectedRectangle.Height), this.Image.PixelFormat);
                 Graphics g = Graphics.FromImage(cropped);
                 g.DrawImage(this.Image, new Rectangle(0, 0, cropped.Width, cropped.Height), selectedRectangle, GraphicsUnit.Pixel);
                 g.Dispose();
