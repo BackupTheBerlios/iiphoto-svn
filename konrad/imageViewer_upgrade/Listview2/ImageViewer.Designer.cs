@@ -1,5 +1,5 @@
 using System.Windows.Forms;
-namespace Listview2
+namespace Photo
 {
     partial class ImageViewer
     {
@@ -31,8 +31,8 @@ namespace Listview2
         /// </summary>
         private void InitializeComponent()
         {
-            this.thumbnailView1 = new Listview2.ThumbnailView();
-            this.imageView1 = new Listview2.ImageView();
+            this.thumbnailView1 = new Photo.ThumbnailView();
+            this.imageView1 = new Photo.ImageView();
             this.SuspendLayout();
             // 
             // thumbnailView1

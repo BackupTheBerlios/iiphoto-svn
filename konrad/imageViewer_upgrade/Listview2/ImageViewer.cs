@@ -7,7 +7,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Listview2
+namespace Photo
 {
     public partial class ImageViewer : UserControl
     {

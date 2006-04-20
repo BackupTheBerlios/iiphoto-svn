@@ -2,7 +2,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace Listview2
+namespace Photo
 {
     partial class ImageView
     {
@@ -63,7 +63,8 @@ namespace Listview2
         #endregion
 
         private PictureBox pictureBox1;
-        private Bitmap rescueBitmap;
+        private Zdjecie zdjecie;
+        private Zdjecie zdjecieZapas;
         private bool isDrag, moving;
         private Point lmStartingPoint, lmEndPoint, rmStartingPoint, rmEndPoint;
         private Rectangle selectedRectangle;

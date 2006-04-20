@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 
-namespace Listview2
+namespace Photo
 {
     public partial class ImageView : UserControl
     {

@@ -1,4 +1,4 @@
-namespace Listview2
+namespace Photo
 {
     partial class Form1
     {
@@ -33,7 +33,7 @@ namespace Listview2
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.imageViewer1 = new Listview2.ImageViewer();
+            this.imageViewer1 = new Photo.ImageViewer();
             this.button4 = new System.Windows.Forms.Button();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();

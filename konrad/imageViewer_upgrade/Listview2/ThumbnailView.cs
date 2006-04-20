@@ -4,7 +4,7 @@ using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Listview2
+namespace Photo
 {
     public class ThumbnailView : System.Windows.Forms.ListView
     {

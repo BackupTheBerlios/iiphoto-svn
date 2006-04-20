@@ -7,7 +7,7 @@
     <ProjectGuid>{FCDCB7F7-02AA-4189-B8F9-1922C5465D7B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Listview2</RootNamespace>
+    <RootNamespace>Photo</RootNamespace>
     <AssemblyName>Listview2</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -51,6 +51,7 @@
       <DependentUpon>ImageViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfejsy.cs" />
+    <Compile Include="Operacje.cs" />
     <Compile Include="ThumbnailView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -82,6 +83,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
