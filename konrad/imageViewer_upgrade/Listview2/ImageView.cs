@@ -17,10 +17,11 @@ namespace Photo
             InitializeComponent();
         }
 
-        public void setImage(Bitmap b)
+        public void setImage(Zdjecie zdjecie)
         {
-            this.Image = b;
-            this.rescueBitmap = b;
+            this.zdjecie = zdjecie;
+            this.zdjecieZapas = zdjecie;
+            this.pictureBoxImage = this.zdjecie.Bitmap;
             this.checkImagePosition();
             this.lmStartingPoint = new Point();
             this.lmEndPoint = new Point();
@@ -28,7 +29,7 @@ namespace Photo
             //this.clearRect = false;
         }
 
-        private Bitmap Image
+        private Bitmap pictureBoxImage
         {
             get
             {
@@ -41,37 +42,37 @@ namespace Photo
         }
 
         private void checkImagePosition() {
-            if (this.Image != null)
+            if (this.pictureBoxImage != null)
             {
                 int x, y;
-                if (this.Width < Image.Width)
+                if (this.Width < pictureBoxImage.Width)
                 {
                     x = 0;
                 }
                 else
                 {
-                    x = ((this.Width - Image.Width) / 2) ;
+                    x = ((this.Width - pictureBoxImage.Width) / 2) ;
                 }
-                if (this.Height < Image.Height)
+                if (this.Height < pictureBoxImage.Height)
                 {
                     y = 0;
                 }
                 else
                 {
-                    y = ((this.Height - Image.Height) / 2) ;
+                    y = ((this.Height - pictureBoxImage.Height) / 2) ;
                 }
-                this.pictureBox1.Width = Image.Width;
-                this.pictureBox1.Height = Image.Height;
+                this.pictureBox1.Width = pictureBoxImage.Width;
+                this.pictureBox1.Height = pictureBoxImage.Height;
                 this.pictureBox1.Location = new Point(x+3, y+3);
             }
         }
 
-        public void Zoom(double zoom) {
-            this.Image = new Bitmap(this.rescueBitmap, (int)(rescueBitmap.Width * zoom), (int)(rescueBitmap.Height * zoom));
+        /*public void Zoom(double zoom) {
+            this.pictureBoxImage = new Bitmap(this.rescueBitmap, (int)(rescueBitmap.Width * zoom), (int)(rescueBitmap.Height * zoom));
             this.checkImagePosition();
-        }
+        }*/
 
-        public void Crop()
+        /*public void Crop()
         {
             if (selectedRectangle.Width != 0 && selectedRectangle.Height != 0)
             {
@@ -86,21 +87,21 @@ namespace Photo
                     selectedRectangle.Y += selectedRectangle.Height;
                     selectedRectangle.Height *= -1;
                 }
-                Bitmap cropped = new Bitmap(Math.Abs(selectedRectangle.Width), Math.Abs(selectedRectangle.Height), this.Image.PixelFormat);
+                Bitmap cropped = new Bitmap(Math.Abs(selectedRectangle.Width), Math.Abs(selectedRectangle.Height), this.pictureBoxImage.PixelFormat);
                 Graphics g = Graphics.FromImage(cropped);
-                g.DrawImage(this.Image, new Rectangle(0, 0, cropped.Width, cropped.Height), selectedRectangle, GraphicsUnit.Pixel);
+                g.DrawImage(this.pictureBoxImage, new Rectangle(0, 0, cropped.Width, cropped.Height), selectedRectangle, GraphicsUnit.Pixel);
                 g.Dispose();
                 this.setImage(cropped);
             }
-        }
+        }*/
 
         public void Rotate(int x)
         {
-            this.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            this.pictureBoxImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
         }
 
         public void toGrayScale() {
-            this.data = this.Image.LockBits(new Rectangle(0, 0, this.Image.Width, this.Image.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            this.data = this.pictureBoxImage.LockBits(new Rectangle(0, 0, this.pictureBoxImage.Width, this.pictureBoxImage.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             unsafe
             {
                 byte tempC;
@@ -116,7 +117,7 @@ namespace Photo
                       }
                 }
             }
-            this.Image.UnlockBits(data);
+            this.pictureBoxImage.UnlockBits(data);
 			this.Refresh();
 		}
 
@@ -213,14 +214,14 @@ namespace Photo
 
         private void DrawMyRectangle(Rectangle r)
         {
-            this.data = this.Image.LockBits(new Rectangle(0, 0, this.Image.Width, this.Image.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            this.data = this.pictureBoxImage.LockBits(new Rectangle(0, 0, this.pictureBoxImage.Width, this.pictureBoxImage.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             DrawMyLine(new Point(r.X, r.Y), new Point(r.X + r.Width, r.Y));
             DrawMyLine(new Point(r.X, r.Y), new Point(r.X, r.Y + r.Height));
             DrawMyLine(new Point(r.X + r.Width, r.Y), new Point(r.X + r.Width, r.Y + r.Height));
             DrawMyLine(new Point(r.X, r.Y + r.Height), new Point(r.X + r.Width, r.Y + r.Height));
             XorPixel(r.X, r.Y, Color.Gray);
             XorPixel(r.X + r.Width, r.Y + r.Height, Color.Gray);
-            this.Image.UnlockBits(data);
+            this.pictureBoxImage.UnlockBits(data);
         }
 
         protected override void OnVisibleChanged(EventArgs e)

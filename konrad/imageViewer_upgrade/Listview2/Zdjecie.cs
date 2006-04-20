@@ -9,6 +9,16 @@ namespace Photo
     {
         Bitmap bitmap;
         List<PolecenieOperacji> operacje = new List<PolecenieOperacji>();
+        public ZdjecieTag tag;
+
+        public Zdjecie()
+        {
+        }
+
+        public Zdjecie(string filename)
+        {
+            this.bitmap = new Bitmap(filename);
+        }
 
         public Bitmap Bitmap
         {

@@ -19,21 +19,21 @@ namespace Photo
         private void button1_Click(object sender, EventArgs e)
         {
             imageViewer1.SetThumbnailView();
-            List<Bitmap> images = new List<Bitmap>();
-            Bitmap tempBitmap;
+            List<Miniatura> images = new List<Miniatura>();
+            Miniatura tempMini;
 
             for (int i = 1; i < 11; i++)
             {
-                tempBitmap = new Bitmap(@"img\\small_img" + i.ToString() + ".jpg");
-                tempBitmap.Tag = new ThumbnailTag(@"img\\img" + i.ToString() + ".jpg");
-                images.Add(tempBitmap);
+                tempMini = new Miniatura(@"img\\small_img" + i.ToString() + ".jpg");
+                tempMini.tag = new MiniaturaTag(@"img\\img" + i.ToString() + ".jpg");
+                images.Add(tempMini);
             }
             imageViewer1.Thumbnailview.AddImages(images);
             imageViewer1.Thumbnailview.ShowImages(1.0);
             
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        /*private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (comboBox1.SelectedItem.ToString())
             {
@@ -43,14 +43,14 @@ namespace Photo
                 case "150%": imageViewer1.Zoom(1.5); break;
                 default: break;
             }
-        }
+        }*/
 
         private void button2_Click(object sender, EventArgs e)
         {
             imageViewer1.SetThumbnailView();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        /*private void button3_Click(object sender, EventArgs e)
         {
             imageViewer1.Crop();
         }
@@ -58,6 +58,6 @@ namespace Photo
         private void button4_Click(object sender, EventArgs e)
         {
             imageViewer1.toGrayScale();
-        }
+        }*/
     }
 }

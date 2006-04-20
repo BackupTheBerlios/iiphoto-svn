@@ -83,7 +83,6 @@ namespace Photo
             this.button3.TabIndex = 4;
             this.button3.Text = "Wytnij zaznaczenie";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -111,7 +110,6 @@ namespace Photo
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 2;
             this.comboBox1.Text = "Zoom";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // imageViewer1
             // 
@@ -129,7 +127,6 @@ namespace Photo
             this.button4.TabIndex = 5;
             this.button4.Text = "Gray";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form1
             // 

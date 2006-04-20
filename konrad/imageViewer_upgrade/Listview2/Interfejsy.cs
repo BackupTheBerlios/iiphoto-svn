@@ -197,6 +197,15 @@ namespace Photo
     }
 
     /// <summary>
+    /// Interfejs opisuj¹cy miniaturê.
+    /// </summary>
+    public interface IMiniatura
+    {
+
+    }
+
+
+    /// <summary>
     /// Interfejs dla obiektów które chc¹ byæ kontekstem w którym pojawia siê zdjêcie.
     /// Umo¿liwia to reakcjê na zmiany zachodz¹ce na obiekcie IZdjecie, które znajduje
     /// siê w wielu kontekstach przez ka¿dy z kontekstów.

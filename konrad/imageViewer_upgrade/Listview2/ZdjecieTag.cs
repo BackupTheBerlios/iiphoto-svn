@@ -4,16 +4,18 @@ using System.Text;
 
 namespace Photo
 {
-    class ImageTag
+    public class ZdjecieTag
     {
         string filename;
 
-        public ImageTag(string file)
+        public ZdjecieTag(string file)
         {
             this.filename = file;
         }
-        public string Filename {
-            get {
+        public string Filename
+        {
+            get
+            {
                 return filename;
             }
             set

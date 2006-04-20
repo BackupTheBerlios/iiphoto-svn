@@ -4,16 +4,19 @@ using System.Text;
 
 namespace Photo
 {
-    class ThumbnailTag
+    public class MiniaturaTag
     {
         string path;
 
-        public ThumbnailTag(string path) {
+        public MiniaturaTag(string path)
+        {
             this.path = path;
         }
-        public string Filename {
-            get {
-                return path.Substring(path.LastIndexOf('\\')+1);
+        public string Filename
+        {
+            get
+            {
+                return path.Substring(path.LastIndexOf('\\') + 1);
             }
         }
         public string Path

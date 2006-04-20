@@ -25,7 +25,7 @@ namespace Photo
             imageView1.Visible = true;
             thumbnailView1.Visible = false;
         }
-        public ThumbnailView Thumbnailview
+        public WidokMiniatur Thumbnailview
         {
             get
             {
@@ -40,7 +40,7 @@ namespace Photo
             }
         }
 
-        public void Zoom(double zoom)
+        /*public void Zoom(double zoom)
         {
             if (imageView1.Visible == true)
             {
@@ -50,29 +50,29 @@ namespace Photo
             {
                 thumbnailView1.ShowImages(zoom);
             }
-        }
+        }*/
 
-        public void Crop()
+        /*public void Crop()
         {
             if (imageView1.Visible == true)
             {
                 imageView1.Crop();
             }
-        }
+        }*/
 
-        public void toGrayScale()
+        /*public void toGrayScale()
         {
             if (imageView1.Visible == true)
             {
                 imageView1.toGrayScale();
             }
-        }
+        }*/
 
         private void mouseDoubleClick(object sender, MouseEventArgs e)
         {
-            ListViewItem listViewItem = ((ThumbnailView)sender).FocusedItem;
-            Bitmap b = (Bitmap)thumbnailView1.Images[listViewItem.ImageIndex];
-            this.imageView1.setImage(new Bitmap(((ThumbnailTag)b.Tag).Path));
+            ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
+            Zdjecie z = thumbnailView1.Images[listViewItem.ImageIndex];
+            this.imageView1.setImage(z);
             this.SetImageView();
         }
     }

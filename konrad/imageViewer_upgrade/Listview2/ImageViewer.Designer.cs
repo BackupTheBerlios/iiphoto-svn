@@ -3,7 +3,7 @@ namespace Photo
 {
     partial class ImageViewer
     {
-        private ThumbnailView thumbnailView1;
+        private WidokMiniatur thumbnailView1;
 
         /// <summary> 
         /// Required designer variable.
@@ -31,7 +31,7 @@ namespace Photo
         /// </summary>
         private void InitializeComponent()
         {
-            this.thumbnailView1 = new Photo.ThumbnailView();
+            this.thumbnailView1 = new Photo.WidokMiniatur();
             this.imageView1 = new Photo.ImageView();
             this.SuspendLayout();
             // 
