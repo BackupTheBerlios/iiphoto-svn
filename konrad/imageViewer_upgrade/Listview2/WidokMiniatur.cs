@@ -98,7 +98,7 @@ namespace Photo
                     MyGraphics.DrawRectangle(p, 0, 0, maxSize - 1, maxSize - 1);
                 }
                 MyGraphics.DrawImage(z.Bitmap, MyRectan);
-                newBitmap.Tag = new MiniaturaTag(z.tag.Filename);
+                newBitmap.Tag = new MiniaturaTag(z.tag.Path);
                 newImageList.Images.Add(newBitmap);
                 listViewItem = this.Items.Add(new ListViewItem(z.tag.Filename));
                 listViewItem.ImageIndex = i;
@@ -115,12 +115,12 @@ namespace Photo
 
         public IZdjecie this[int numer]
         {
-            get { throw new Exception("The method or operation is not implemented."); }
+            get { return new Zdjecie(miniatury[numer].tag.Path); }
         }
 
         public int Ilosc
         {
-            get { throw new Exception("The method or operation is not implemented."); }
+            get { return miniatury.Count; }
         }
 
         public void Dodaj(IZdjecie zdjecie)

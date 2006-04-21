@@ -71,7 +71,7 @@ namespace Photo
         private void mouseDoubleClick(object sender, MouseEventArgs e)
         {
             ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
-            Zdjecie z = thumbnailView1.Images[listViewItem.ImageIndex];
+            Zdjecie z = (Zdjecie)thumbnailView1[listViewItem.ImageIndex];
             this.imageView1.setImage(z);
             this.SetImageView();
         }
