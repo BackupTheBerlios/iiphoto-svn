@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Photo
 {
-    partial class WidokMiniatur
+    partial class WidokMiniatur : System.Windows.Forms.ListView, IOpakowanieZdjec, IKontekst
     {
         private void InitializeComponent()
         {
