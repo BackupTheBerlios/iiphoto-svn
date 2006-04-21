@@ -77,11 +77,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="PrzegladarkaZdjec.cs">
+    <Compile Include="qwe.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PrzegladarkaZdjec.Designer.cs">
-      <DependentUpon>PrzegladarkaZdjec.cs</DependentUpon>
+    <Compile Include="qwe.Designer.cs">
+      <DependentUpon>qwe.cs</DependentUpon>
     </Compile>
     <Compile Include="WidokMiniatur.cs">
       <SubType>Component</SubType>
@@ -89,11 +89,11 @@
     <Compile Include="WidokMiniatur.Designer.cs">
       <DependentUpon>WidokMiniatur.cs</DependentUpon>
     </Compile>
-    <Compile Include="WidokZdjecia.cs">
+    <Compile Include="PrzegladarkaZdjec.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WidokZdjecia.Designer.cs">
-      <DependentUpon>WidokZdjecia.cs</DependentUpon>
+    <Compile Include="PrzegladarkaZdjec.Designer.cs">
+      <DependentUpon>PrzegladarkaZdjec.cs</DependentUpon>
     </Compile>
     <Compile Include="Zdjecie.cs" />
     <Compile Include="ZdjecieTag.cs" />
