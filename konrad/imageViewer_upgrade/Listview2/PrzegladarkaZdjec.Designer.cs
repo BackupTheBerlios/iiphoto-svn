@@ -65,8 +65,8 @@ namespace Photo
         private PictureBox pictureBox1;
         private Zdjecie zdjecie;
         private Zdjecie zdjecieZapas;
-        private bool isDrag, moving;
-        private Point lmStartingPoint, lmEndPoint, rmStartingPoint, rmEndPoint;
+        private bool isDrag;
+        private Point lmStartingPoint, rmStartingPoint, rmEndPoint;
         private Rectangle selectedRectangle;
         private BitmapData data;
 

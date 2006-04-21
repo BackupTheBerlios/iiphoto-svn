@@ -24,7 +24,6 @@ namespace Photo
             this.pictureBoxImage = this.zdjecie.Bitmap;
             this.checkImagePosition();
             this.lmStartingPoint = new Point();
-            this.lmEndPoint = new Point();
             this.selectedRectangle = new Rectangle(0, 0, 0, 0);
             //this.clearRect = false;
         }
@@ -248,7 +247,6 @@ namespace Photo
                     clearRect = false;
                 }*/
                 isDrag = true;
-                moving = false;
                 this.lmStartingPoint = new Point(e.X, e.Y);
                 this.Refresh();
             }

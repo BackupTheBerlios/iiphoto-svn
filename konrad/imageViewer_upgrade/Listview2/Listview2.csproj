@@ -59,6 +59,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="WidokMiniatur.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>WidokMiniatur.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -81,6 +85,9 @@
     </Compile>
     <Compile Include="WidokMiniatur.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WidokMiniatur.Designer.cs">
+      <DependentUpon>WidokMiniatur.cs</DependentUpon>
     </Compile>
     <Compile Include="WidokZdjecia.cs">
       <SubType>UserControl</SubType>

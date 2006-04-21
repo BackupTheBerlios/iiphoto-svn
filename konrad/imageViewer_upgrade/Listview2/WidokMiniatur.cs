@@ -6,21 +6,14 @@ using System.Windows.Forms;
 
 namespace Photo
 {
-    public class WidokMiniatur : System.Windows.Forms.ListView, IOpakowanieZdjec, IKontekst
+    public partial class WidokMiniatur : System.Windows.Forms.ListView, IOpakowanieZdjec, IKontekst
     {
         private int defaultImageSize;
         private List<Miniatura> miniatury;
 
         public WidokMiniatur()
         {
-            miniatury = new List<Miniatura>();
-            //Activate double buffering
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
-
-            //Enable the OnNotifyMessage event so we get a chance to filter out 
-            // Windows messages before they get to the form's WndProc
-            this.SetStyle(ControlStyles.EnableNotifyMessage, true);
-            this.defaultImageSize = 120;
+            InitializeComponent();
         }
         public WidokMiniatur(int imgSize)
             : this()
@@ -40,19 +33,6 @@ namespace Photo
         public void AddImages(List<Miniatura> images)
         {
             this.miniatury.AddRange(images);
-        }
-
-        public List<Zdjecie> Images
-        {
-            get
-            {
-                List<Zdjecie> zdjecia = new List<Zdjecie>();
-                foreach (Miniatura m in miniatury)
-                {
-                    zdjecia.Add(new Zdjecie(m.tag.Path));
-                }
-                return zdjecia;
-            }
         }
 
         public void ShowImages(double zoom)
