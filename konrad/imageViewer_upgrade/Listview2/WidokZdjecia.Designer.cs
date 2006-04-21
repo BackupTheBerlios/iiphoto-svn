@@ -1,7 +1,7 @@
 using System.Windows.Forms;
 namespace Photo
 {
-    partial class ImageViewer
+    partial class WidokZdjecia
     {
         private WidokMiniatur thumbnailView1;
 
@@ -32,7 +32,7 @@ namespace Photo
         private void InitializeComponent()
         {
             this.thumbnailView1 = new Photo.WidokMiniatur();
-            this.imageView1 = new Photo.ImageView();
+            this.imageView1 = new Photo.PrzegladarkaZdjec();
             this.SuspendLayout();
             // 
             // thumbnailView1
@@ -70,7 +70,7 @@ namespace Photo
 
         #endregion
 
-        private ImageView imageView1;
+        private PrzegladarkaZdjec imageView1;
 
     }
 }

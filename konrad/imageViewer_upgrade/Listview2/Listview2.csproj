@@ -38,18 +38,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ImageView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ImageView.Designer.cs">
-      <DependentUpon>ImageView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ImageViewer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ImageViewer.Designer.cs">
-      <DependentUpon>ImageViewer.cs</DependentUpon>
-    </Compile>
     <Compile Include="Interfejsy.cs" />
     <Compile Include="Miniatura.cs" />
     <Compile Include="MiniaturaTag.cs" />
@@ -65,14 +53,6 @@
     <EmbeddedResource Include="Form1.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImageView.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ImageView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImageViewer.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ImageViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -93,8 +73,20 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="PrzegladarkaZdjec.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PrzegladarkaZdjec.Designer.cs">
+      <DependentUpon>PrzegladarkaZdjec.cs</DependentUpon>
+    </Compile>
     <Compile Include="WidokMiniatur.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WidokZdjecia.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WidokZdjecia.Designer.cs">
+      <DependentUpon>WidokZdjecia.cs</DependentUpon>
     </Compile>
     <Compile Include="Zdjecie.cs" />
     <Compile Include="ZdjecieTag.cs" />

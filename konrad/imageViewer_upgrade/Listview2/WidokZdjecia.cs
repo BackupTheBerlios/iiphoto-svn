@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Photo
 {
-    public partial class ImageViewer : UserControl
+    public partial class WidokZdjecia : UserControl
     {
-        public ImageViewer()
+        public WidokZdjecia()
         {
             InitializeComponent();
         }
@@ -32,7 +32,7 @@ namespace Photo
                 return thumbnailView1;
             }
         }
-        public ImageView Imageview
+        public PrzegladarkaZdjec Imageview
         {
             get
             {

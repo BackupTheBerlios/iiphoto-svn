@@ -10,9 +10,9 @@ using System.Drawing.Imaging;
 
 namespace Photo
 {
-    public partial class ImageView : UserControl
+    public partial class PrzegladarkaZdjec : UserControl
     {
-        public ImageView()
+        public PrzegladarkaZdjec()
         {
             InitializeComponent();
         }
@@ -41,7 +41,8 @@ namespace Photo
             }
         }
 
-        private void checkImagePosition() {
+        private void checkImagePosition()
+        {
             if (this.pictureBoxImage != null)
             {
                 int x, y;
@@ -51,7 +52,7 @@ namespace Photo
                 }
                 else
                 {
-                    x = ((this.Width - pictureBoxImage.Width) / 2) ;
+                    x = ((this.Width - pictureBoxImage.Width) / 2);
                 }
                 if (this.Height < pictureBoxImage.Height)
                 {
@@ -59,11 +60,11 @@ namespace Photo
                 }
                 else
                 {
-                    y = ((this.Height - pictureBoxImage.Height) / 2) ;
+                    y = ((this.Height - pictureBoxImage.Height) / 2);
                 }
                 this.pictureBox1.Width = pictureBoxImage.Width;
                 this.pictureBox1.Height = pictureBoxImage.Height;
-                this.pictureBox1.Location = new Point(x+3, y+3);
+                this.pictureBox1.Location = new Point(x + 3, y + 3);
             }
         }
 
@@ -100,26 +101,27 @@ namespace Photo
             this.pictureBoxImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
         }
 
-        public void toGrayScale() {
+        public void toGrayScale()
+        {
             this.data = this.pictureBoxImage.LockBits(new Rectangle(0, 0, this.pictureBoxImage.Width, this.pictureBoxImage.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             unsafe
             {
                 byte tempC;
-                byte* imgPtr = ( byte* )( data.Scan0 );
-                for( int i = 0 ; i < data.Height ; i ++ )
+                byte* imgPtr = (byte*)(data.Scan0);
+                for (int i = 0; i < data.Height; i++)
                 {
-                      for( int j = 0 ;  j < data.Width ;  j ++ )
-                      {
-                          tempC = (byte)(((int)*(imgPtr) + (int)*(imgPtr + 1) + (int)*(imgPtr + 2))/3); 
-                          *(imgPtr++) = tempC;
-                          *(imgPtr++) = tempC;
-                          *(imgPtr++) = tempC; 
-                      }
+                    for (int j = 0; j < data.Width; j++)
+                    {
+                        tempC = (byte)(((int)*(imgPtr) + (int)*(imgPtr + 1) + (int)*(imgPtr + 2)) / 3);
+                        *(imgPtr++) = tempC;
+                        *(imgPtr++) = tempC;
+                        *(imgPtr++) = tempC;
+                    }
                 }
             }
             this.pictureBoxImage.UnlockBits(data);
-			this.Refresh();
-		}
+            this.Refresh();
+        }
 
         private Color MyGetPixel(int x, int y)
         {
@@ -143,9 +145,9 @@ namespace Photo
             }
         }
 
-        private void XorPixel(int x, int y, Color color) 
+        private void XorPixel(int x, int y, Color color)
         {
-            
+
             Color srcPixel = this.MyGetPixel(x, y);
             this.MySetPixel(x, y, Color.FromArgb(color.R ^ srcPixel.R, srcPixel.G ^ color.G, srcPixel.B ^ color.B));
 
@@ -259,7 +261,7 @@ namespace Photo
 
         private void onMouseUp(object sender, MouseEventArgs e)
         {
-            
+
             isDrag = false;
             if (e.Button == MouseButtons.Left)
             {
@@ -296,7 +298,7 @@ namespace Photo
                         maxY = e.Y;
 
                     //if (moving == true)
-                        this.DrawMyRectangle(selectedRectangle);
+                    this.DrawMyRectangle(selectedRectangle);
                     //else
                     //    moving = true;
 
