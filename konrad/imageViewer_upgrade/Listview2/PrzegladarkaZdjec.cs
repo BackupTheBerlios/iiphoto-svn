@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Photo
 {
-    public partial class WidokZdjecie : UserControl
+    public partial class PrzegladarkaZdjec : UserControl
     {
-        public WidokZdjecie()
+        public PrzegladarkaZdjec()
         {
             InitializeComponent();
         }

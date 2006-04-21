@@ -1,7 +1,7 @@
 using System.Windows.Forms;
 namespace Photo
 {
-    partial class WidokZdjecie
+    partial class PrzegladarkaZdjec
     {
         /// <summary> 
         /// Required designer variable.
