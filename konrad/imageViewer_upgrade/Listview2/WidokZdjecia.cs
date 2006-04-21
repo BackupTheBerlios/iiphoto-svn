@@ -74,6 +74,8 @@ namespace Photo
             Zdjecie z = (Zdjecie)thumbnailView1[listViewItem.ImageIndex];
             this.imageView1.setImage(z);
             this.SetImageView();
+            if (WybranoZdjecie != null)
+                WybranoZdjecie(z);
         }
     }
 }

@@ -3,8 +3,6 @@ namespace Photo
 {
     partial class WidokZdjecia
     {
-        private WidokMiniatur thumbnailView1;
-
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -71,6 +69,9 @@ namespace Photo
         #endregion
 
         private PrzegladarkaZdjec imageView1;
+        private WidokMiniatur thumbnailView1;
+
+        public event WybranoZdjecieDelegate WybranoZdjecie;
 
     }
 }
