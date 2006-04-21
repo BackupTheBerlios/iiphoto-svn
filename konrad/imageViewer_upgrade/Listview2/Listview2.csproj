@@ -89,11 +89,11 @@
     <Compile Include="WidokMiniatur.Designer.cs">
       <DependentUpon>WidokMiniatur.cs</DependentUpon>
     </Compile>
-    <Compile Include="WidokZdjecia.cs">
+    <Compile Include="WidokZdjecie.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WidokZdjecia.Designer.cs">
-      <DependentUpon>WidokZdjecia.cs</DependentUpon>
+    <Compile Include="WidokZdjecie.Designer.cs">
+      <DependentUpon>WidokZdjecie.cs</DependentUpon>
     </Compile>
     <Compile Include="Zdjecie.cs" />
     <Compile Include="ZdjecieTag.cs" />

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Photo
 {
-    public partial class WidokZdjecia : UserControl
+    public partial class WidokZdjecie : UserControl
     {
         public WidokZdjecia()
         {
