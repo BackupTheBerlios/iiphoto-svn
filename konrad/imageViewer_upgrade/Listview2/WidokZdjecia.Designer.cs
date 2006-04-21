@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 
 namespace Photo
 {
-    partial class PrzegladarkaZdjec
+    partial class WidokZdjecia
     {
         /// <summary> 
         /// Required designer variable.

@@ -10,9 +10,9 @@ using System.Drawing.Imaging;
 
 namespace Photo
 {
-    public partial class PrzegladarkaZdjec : UserControl
+    public partial class WidokZdjecia : UserControl
     {
-        public PrzegladarkaZdjec()
+        public WidokZdjecia()
         {
             InitializeComponent();
         }

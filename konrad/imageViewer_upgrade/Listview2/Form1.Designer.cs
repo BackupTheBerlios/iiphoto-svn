@@ -33,7 +33,7 @@ namespace Photo
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.imageViewer1 = new Photo.WidokZdjecia();
+            this.imageViewer1 = new Photo.WidokZdjecie();
             this.button4 = new System.Windows.Forms.Button();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -148,7 +148,7 @@ namespace Photo
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private WidokZdjecia imageViewer1;
+        private WidokZdjecie imageViewer1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;

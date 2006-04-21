@@ -1,7 +1,7 @@
 using System.Windows.Forms;
 namespace Photo
 {
-    partial class WidokZdjecia
+    partial class WidokZdjecie
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace Photo
         private void InitializeComponent()
         {
             this.thumbnailView1 = new Photo.WidokMiniatur();
-            this.imageView1 = new Photo.PrzegladarkaZdjec();
+            this.imageView1 = new Photo.WidokZdjecia();
             this.SuspendLayout();
             // 
             // thumbnailView1
@@ -68,7 +68,7 @@ namespace Photo
 
         #endregion
 
-        private PrzegladarkaZdjec imageView1;
+        private WidokZdjecia imageView1;
         private WidokMiniatur thumbnailView1;
 
         public event WybranoZdjecieDelegate WybranoZdjecie;

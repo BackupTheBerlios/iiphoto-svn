@@ -11,7 +11,7 @@ namespace Photo
 {
     public partial class WidokZdjecie : UserControl
     {
-        public WidokZdjecia()
+        public WidokZdjecie()
         {
             InitializeComponent();
         }
@@ -32,7 +32,7 @@ namespace Photo
                 return thumbnailView1;
             }
         }
-        public PrzegladarkaZdjec Imageview
+        public WidokZdjecia Imageview
         {
             get
             {
