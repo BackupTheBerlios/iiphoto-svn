@@ -42,6 +42,7 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
     </DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -62,6 +63,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DrzewoKatalogow.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="EdytorZdjeciaControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -74,14 +78,11 @@
     <Compile Include="InformacjeControl.Designer.cs">
       <DependentUpon>InformacjeControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ListaOpakowanControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Photo.cs">
+    <Compile Include="IIPhoto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Photo.Designer.cs">
-      <DependentUpon>Photo.cs</DependentUpon>
+    <Compile Include="IIPhoto.Designer.cs">
+      <DependentUpon>IIPhoto.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfejsy.cs" />
     <Compile Include="ListaAlbumowControl.cs">
@@ -90,21 +91,13 @@
     <Compile Include="ListaAlbumowControl.Designer.cs">
       <DependentUpon>ListaAlbumowControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="MiniaturaControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MiniaturaControl.Designer.cs">
-      <DependentUpon>MiniaturaControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ListaMiniaturControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ListaMiniaturControl.Designer.cs">
-      <DependentUpon>ListaMiniaturControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Operacje.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DrzewoKatalogow.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DrzewoKatalogow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EdytorZdjeciaControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>EdytorZdjeciaControl.cs</DependentUpon>
@@ -113,21 +106,13 @@
       <SubType>Designer</SubType>
       <DependentUpon>InformacjeControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Photo.resx">
+    <EmbeddedResource Include="IIPhoto.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>Photo.cs</DependentUpon>
+      <DependentUpon>IIPhoto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListaAlbumowControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ListaAlbumowControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ListaMiniaturControl.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>ListaMiniaturControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MiniaturaControl.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>MiniaturaControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -152,6 +137,21 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="PrzegladarkaZdjec.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PrzegladarkaZdjec.Designer.cs">
+      <DependentUpon>PrzegladarkaZdjec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WidokMiniatur.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WidokZdjecia.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WidokZdjecia.designer.cs">
+      <DependentUpon>WidokZdjecia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Wyszukiwanie.cs" />
     <Compile Include="WyszukiwarkaControl.cs">
       <SubType>UserControl</SubType>
@@ -162,7 +162,6 @@
     <Compile Include="Zdjecie.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram2.cd" />
     <None Include="OgolnyDiagramKlas.cd" />
     <None Include="GUI_TemporaryKey.pfx" />
     <None Include="icons\nozyce.png" />
@@ -174,6 +173,10 @@
       <ProductName>.NET Framework 2.0</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons\folder.ico" />
+    <Content Include="icons\hd.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

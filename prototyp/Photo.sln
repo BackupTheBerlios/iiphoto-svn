@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Photo", "GUI\Photo.csproj", "{E7E1F977-20A7-4E11-BD5B-7C3ECE2F38B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wyostrzenie", "Wyostrzenie\Wyostrzenie.csproj", "{11970D21-D9C1-4DF5-9F98-34DF2453B5C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7E1F977-20A7-4E11-BD5B-7C3ECE2F38B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7E1F977-20A7-4E11-BD5B-7C3ECE2F38B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7E1F977-20A7-4E11-BD5B-7C3ECE2F38B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7E1F977-20A7-4E11-BD5B-7C3ECE2F38B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11970D21-D9C1-4DF5-9F98-34DF2453B5C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11970D21-D9C1-4DF5-9F98-34DF2453B5C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11970D21-D9C1-4DF5-9F98-34DF2453B5C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11970D21-D9C1-4DF5-9F98-34DF2453B5C4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

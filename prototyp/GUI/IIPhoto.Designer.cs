@@ -1,6 +1,6 @@
 namespace Photo
 {
-    partial class Photo
+    partial class IIPhoto
     {
         /// <summary>
         /// Required designer variable.
@@ -28,15 +28,16 @@ namespace Photo
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Photo));
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IIPhoto));
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.fileTree1 = new Photo.FileTree();
             this.wyszukiwarkaControl1 = new Photo.WyszukiwarkaControl();
             this.listaAlbumowControl = new Photo.ListaAlbumowControl();
-            this.listaOpakowanControl = new Photo.ListaOpakowanControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.przegladarkaZdjec = new Photo.PrzegladarkaZdjec();
             this.informacjeControl = new Photo.InformacjeControl();
             this.toolStripOperacje = new System.Windows.Forms.ToolStrip();
             this.Alfa = new System.Windows.Forms.ToolStripButton();
@@ -52,7 +53,6 @@ namespace Photo
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            this.listaOpakowanControl.SuspendLayout();
             this.toolStripOperacje.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,11 +75,11 @@ namespace Photo
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.splitContainer1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(637, 308);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(637, 373);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(637, 355);
+            this.toolStripContainer1.Size = new System.Drawing.Size(637, 420);
             this.toolStripContainer1.TabIndex = 3;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -103,7 +103,7 @@ namespace Photo
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.splitContainer1.Panel2.Controls.Add(this.informacjeControl);
-            this.splitContainer1.Size = new System.Drawing.Size(637, 308);
+            this.splitContainer1.Size = new System.Drawing.Size(637, 373);
             this.splitContainer1.SplitterDistance = 535;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -118,16 +118,28 @@ namespace Photo
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.splitContainer2.Panel1.Controls.Add(this.fileTree1);
             this.splitContainer2.Panel1.Controls.Add(this.wyszukiwarkaControl1);
             this.splitContainer2.Panel1.Controls.Add(this.listaAlbumowControl);
             // 
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.splitContainer2.Panel2.Controls.Add(this.listaOpakowanControl);
-            this.splitContainer2.Size = new System.Drawing.Size(535, 308);
+            this.splitContainer2.Panel2.Controls.Add(this.przegladarkaZdjec);
+            this.splitContainer2.Size = new System.Drawing.Size(535, 373);
             this.splitContainer2.SplitterDistance = 210;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // fileTree1
+            // 
+            this.fileTree1.BackColor = System.Drawing.Color.Beige;
+            this.fileTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileTree1.ImageIndex = 0;
+            this.fileTree1.Location = new System.Drawing.Point(0, 226);
+            this.fileTree1.Name = "fileTree1";
+            this.fileTree1.SelectedImageIndex = 0;
+            this.fileTree1.Size = new System.Drawing.Size(210, 147);
+            this.fileTree1.TabIndex = 2;
             // 
             // wyszukiwarkaControl1
             // 
@@ -145,24 +157,13 @@ namespace Photo
             this.listaAlbumowControl.Size = new System.Drawing.Size(210, 144);
             this.listaAlbumowControl.TabIndex = 0;
             // 
-            // listaOpakowanControl
+            // przegladarkaZdjec
             // 
-            this.listaOpakowanControl.Controls.Add(this.tabPage1);
-            this.listaOpakowanControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listaOpakowanControl.Location = new System.Drawing.Point(0, 0);
-            this.listaOpakowanControl.Name = "listaOpakowanControl";
-            this.listaOpakowanControl.SelectedIndex = 0;
-            this.listaOpakowanControl.Size = new System.Drawing.Size(321, 308);
-            this.listaOpakowanControl.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(313, 282);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Wynik wyszukiwania";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.przegladarkaZdjec.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.przegladarkaZdjec.Location = new System.Drawing.Point(0, 0);
+            this.przegladarkaZdjec.Name = "przegladarkaZdjec";
+            this.przegladarkaZdjec.Size = new System.Drawing.Size(321, 373);
+            this.przegladarkaZdjec.TabIndex = 0;
             // 
             // informacjeControl
             // 
@@ -182,7 +183,7 @@ namespace Photo
             this.toolStripOperacje.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripOperacje.Location = new System.Drawing.Point(3, 0);
             this.toolStripOperacje.Name = "toolStripOperacje";
-            this.toolStripOperacje.Size = new System.Drawing.Size(208, 25);
+            this.toolStripOperacje.Size = new System.Drawing.Size(177, 25);
             this.toolStripOperacje.TabIndex = 1;
             this.toolStripOperacje.Text = "toolStrip1";
             // 
@@ -209,13 +210,13 @@ namespace Photo
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // Photo
+            // IIPhoto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(637, 355);
+            this.ClientSize = new System.Drawing.Size(637, 420);
             this.Controls.Add(this.toolStripContainer1);
-            this.Name = "Photo";
+            this.Name = "IIPhoto";
             this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
             this.toolStripContainer1.BottomToolStripPanel.PerformLayout();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
@@ -229,7 +230,6 @@ namespace Photo
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.ResumeLayout(false);
-            this.listaOpakowanControl.ResumeLayout(false);
             this.toolStripOperacje.ResumeLayout(false);
             this.toolStripOperacje.PerformLayout();
             this.ResumeLayout(false);
@@ -249,8 +249,9 @@ namespace Photo
         private WyszukiwarkaControl wyszukiwarkaControl1;
         private ListaAlbumowControl listaAlbumowControl;
         private InformacjeControl informacjeControl;
-        private ListaOpakowanControl listaOpakowanControl;
-        private System.Windows.Forms.TabPage tabPage1;
+        private PrzegladarkaZdjec przegladarkaZdjec;
+        private FileTree fileTree1;
+
     }
 }
 
