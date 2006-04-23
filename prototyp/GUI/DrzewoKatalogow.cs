@@ -123,7 +123,7 @@ namespace Photo
             {
                 path = s.ToLower();
                 setLeaf(true);
-                type = HD;
+                type = Dysk;
                 ImageIndex = type;
                 SelectedImageIndex = type;
             }
@@ -155,7 +155,7 @@ namespace Photo
                 string[] files = Directory.GetDirectories(Path);
                 Array.Sort(files);
 
-                if (files.Length == 0 && type == HD)
+                if (files.Length == 0 && type == Dysk)
                     return;
 
                 for (int i = 0; i < files.Length; i++)
