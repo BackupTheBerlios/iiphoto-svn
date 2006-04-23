@@ -61,7 +61,7 @@ namespace Photo
             this.statusStrip.Dock = System.Windows.Forms.DockStyle.None;
             this.statusStrip.Location = new System.Drawing.Point(0, 0);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(637, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1016, 22);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -75,11 +75,11 @@ namespace Photo
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.splitContainer1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(637, 373);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1016, 515);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(637, 420);
+            this.toolStripContainer1.Size = new System.Drawing.Size(1016, 562);
             this.toolStripContainer1.TabIndex = 3;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -103,8 +103,8 @@ namespace Photo
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.splitContainer1.Panel2.Controls.Add(this.informacjeControl);
-            this.splitContainer1.Size = new System.Drawing.Size(637, 373);
-            this.splitContainer1.SplitterDistance = 535;
+            this.splitContainer1.Size = new System.Drawing.Size(1016, 515);
+            this.splitContainer1.SplitterDistance = 914;
             this.splitContainer1.TabIndex = 2;
             // 
             // splitContainer2
@@ -126,7 +126,7 @@ namespace Photo
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.splitContainer2.Panel2.Controls.Add(this.przegladarkaZdjec);
-            this.splitContainer2.Size = new System.Drawing.Size(535, 373);
+            this.splitContainer2.Size = new System.Drawing.Size(914, 515);
             this.splitContainer2.SplitterDistance = 210;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -138,7 +138,7 @@ namespace Photo
             this.fileTree1.Location = new System.Drawing.Point(0, 226);
             this.fileTree1.Name = "fileTree1";
             this.fileTree1.SelectedImageIndex = 0;
-            this.fileTree1.Size = new System.Drawing.Size(210, 147);
+            this.fileTree1.Size = new System.Drawing.Size(210, 289);
             this.fileTree1.TabIndex = 2;
             // 
             // wyszukiwarkaControl1
@@ -162,7 +162,7 @@ namespace Photo
             this.przegladarkaZdjec.Dock = System.Windows.Forms.DockStyle.Fill;
             this.przegladarkaZdjec.Location = new System.Drawing.Point(0, 0);
             this.przegladarkaZdjec.Name = "przegladarkaZdjec";
-            this.przegladarkaZdjec.Size = new System.Drawing.Size(321, 373);
+            this.przegladarkaZdjec.Size = new System.Drawing.Size(700, 515);
             this.przegladarkaZdjec.TabIndex = 0;
             // 
             // informacjeControl
@@ -214,9 +214,11 @@ namespace Photo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(637, 420);
+            this.ClientSize = new System.Drawing.Size(1016, 562);
             this.Controls.Add(this.toolStripContainer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "IIPhoto";
+            this.Text = "IIPhoto";
             this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
             this.toolStripContainer1.BottomToolStripPanel.PerformLayout();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);

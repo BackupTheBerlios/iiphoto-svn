@@ -241,19 +241,13 @@ namespace Photo
         {
             if (e.Button == MouseButtons.Left)
             {
-                /*if (clearRect)
-                {
-                    this.DrawMyRectangle(selectedRectangle);
-                    clearRect = false;
-                }*/
                 isDrag = true;
                 this.lmStartingPoint = new Point(e.X, e.Y);
                 this.Refresh();
             }
             else if (e.Button == MouseButtons.Right)
             {
-                isDrag = true;
-                this.rmStartingPoint = new Point(e.X, e.Y);
+
             }
         }
 
@@ -263,14 +257,11 @@ namespace Photo
             isDrag = false;
             if (e.Button == MouseButtons.Left)
             {
-                //this.lmEndPoint = new Point(e.X, e.Y);
                 this.Refresh();
             }
             else if (e.Button == MouseButtons.Right)
             {
-                this.rmEndPoint = new Point(e.X, e.Y);
-                this.DrawMyRectangle(new Rectangle(rmStartingPoint.X, rmStartingPoint.Y, rmEndPoint.X - rmStartingPoint.X, rmEndPoint.Y - rmStartingPoint.Y));
-                this.Refresh();
+
             }
         }
 

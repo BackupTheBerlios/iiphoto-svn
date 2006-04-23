@@ -50,10 +50,5 @@ namespace Photo
         {
             przegladarkaZdjec.ZakonczEdycje();
         }
-
-        private void fileTree1_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
-        }
     }
 }
