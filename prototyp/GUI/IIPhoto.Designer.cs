@@ -34,15 +34,17 @@ namespace Photo
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.toolStripOperacje = new System.Windows.Forms.ToolStrip();
+            this.Alfa = new System.Windows.Forms.ToolStripButton();
+            this.Omega = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.fileTree1 = new Photo.FileTree();
             this.wyszukiwarkaControl1 = new Photo.WyszukiwarkaControl();
             this.listaAlbumowControl = new Photo.ListaAlbumowControl();
             this.przegladarkaZdjec = new Photo.PrzegladarkaZdjec();
             this.informacjeControl = new Photo.InformacjeControl();
-            this.toolStripOperacje = new System.Windows.Forms.ToolStrip();
-            this.Alfa = new System.Windows.Forms.ToolStripButton();
-            this.Omega = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -96,7 +98,7 @@ namespace Photo
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
             // 
             // splitContainer1.Panel2
@@ -129,6 +131,55 @@ namespace Photo
             this.splitContainer2.Size = new System.Drawing.Size(914, 515);
             this.splitContainer2.SplitterDistance = 210;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // toolStripOperacje
+            // 
+            this.toolStripOperacje.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStripOperacje.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.toolStripSeparator2,
+            this.Alfa,
+            this.Omega,
+            this.toolStripSeparator1});
+            this.toolStripOperacje.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.toolStripOperacje.Location = new System.Drawing.Point(3, 0);
+            this.toolStripOperacje.Name = "toolStripOperacje";
+            this.toolStripOperacje.Size = new System.Drawing.Size(264, 25);
+            this.toolStripOperacje.TabIndex = 1;
+            this.toolStripOperacje.Text = "toolStrip1";
+            // 
+            // Alfa
+            // 
+            this.Alfa.Image = ((System.Drawing.Image)(resources.GetObject("Alfa.Image")));
+            this.Alfa.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Alfa.Name = "Alfa";
+            this.Alfa.Size = new System.Drawing.Size(58, 22);
+            this.Alfa.Text = "Edytuj";
+            this.Alfa.Click += new System.EventHandler(this.Alfa_Click);
+            // 
+            // Omega
+            // 
+            this.Omega.Image = ((System.Drawing.Image)(resources.GetObject("Omega.Image")));
+            this.Omega.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Omega.Name = "Omega";
+            this.Omega.Size = new System.Drawing.Size(101, 22);
+            this.Omega.Text = "Zakoncz Edycje";
+            this.Omega.Click += new System.EventHandler(this.Omega_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(81, 22);
+            this.toolStripButton1.Text = "Widok Miniatur";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // fileTree1
             // 
@@ -173,42 +224,10 @@ namespace Photo
             this.informacjeControl.Size = new System.Drawing.Size(98, 192);
             this.informacjeControl.TabIndex = 0;
             // 
-            // toolStripOperacje
+            // toolStripSeparator2
             // 
-            this.toolStripOperacje.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStripOperacje.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Alfa,
-            this.Omega,
-            this.toolStripSeparator1});
-            this.toolStripOperacje.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStripOperacje.Location = new System.Drawing.Point(3, 0);
-            this.toolStripOperacje.Name = "toolStripOperacje";
-            this.toolStripOperacje.Size = new System.Drawing.Size(208, 25);
-            this.toolStripOperacje.TabIndex = 1;
-            this.toolStripOperacje.Text = "toolStrip1";
-            // 
-            // Alfa
-            // 
-            this.Alfa.Image = ((System.Drawing.Image)(resources.GetObject("Alfa.Image")));
-            this.Alfa.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Alfa.Name = "Alfa";
-            this.Alfa.Size = new System.Drawing.Size(58, 22);
-            this.Alfa.Text = "Edytuj";
-            this.Alfa.Click += new System.EventHandler(this.Alfa_Click);
-            // 
-            // Omega
-            // 
-            this.Omega.Image = ((System.Drawing.Image)(resources.GetObject("Omega.Image")));
-            this.Omega.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Omega.Name = "Omega";
-            this.Omega.Size = new System.Drawing.Size(101, 22);
-            this.Omega.Text = "Zakoncz Edycje";
-            this.Omega.Click += new System.EventHandler(this.Omega_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // IIPhoto
             // 
@@ -253,6 +272,8 @@ namespace Photo
         private InformacjeControl informacjeControl;
         private PrzegladarkaZdjec przegladarkaZdjec;
         private FileTree fileTree1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 
     }
 }

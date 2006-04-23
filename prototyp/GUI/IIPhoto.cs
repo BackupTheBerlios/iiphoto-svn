@@ -50,5 +50,10 @@ namespace Photo
         {
             przegladarkaZdjec.ZakonczEdycje();
         }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            przegladarkaZdjec.SetThumbnailView();
+        }
     }
 }
