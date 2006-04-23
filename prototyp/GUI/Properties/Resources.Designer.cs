@@ -60,6 +60,27 @@ namespace Photo.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Cdrom {
+            get {
+                object obj = ResourceManager.GetObject("Cdrom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Dysk {
+            get {
+                object obj = ResourceManager.GetObject("Dysk", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Dyskietka {
+            get {
+                object obj = ResourceManager.GetObject("Dyskietka", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Icon folder {
             get {
                 object obj = ResourceManager.GetObject("folder", resourceCulture);

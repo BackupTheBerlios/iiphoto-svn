@@ -19,27 +19,34 @@ namespace Photo
             //Fill();
             this.BackColor = Color.Beige;
         }
-        const int HD = 0;
+        const int Dysk = 0;
         const int FOLDER = 1;
+        const int Dyskietka = 2;
+        const int Cdrom = 3;        
 
         private IWyszukiwanie W;
 
         public void GenerateImage()
         {
             ImageList list = new ImageList();
-            list.Images.Add(Properties.Resources.hd);
+            list.Images.Add(Properties.Resources.Dysk);
             list.Images.Add(Properties.Resources.folder);
-
+            list.Images.Add(Properties.Resources.Dyskietka);
+            list.Images.Add(Properties.Resources.Cdrom);            
             ImageList = list;
         }
         public void Fill()
         {
             BeginUpdate();
             string[] drives = Directory.GetLogicalDrives();
+
+            //Directory.g
+
             for (int i = 0; i < drives.Length; i++)
             {
+                //drives[i].GetType
                 DirTreeNode dn = new DirTreeNode(drives[i]);
-                dn.ImageIndex = HD;
+                dn.ImageIndex = Dysk;
 
                 Nodes.Add(dn);
             }
