@@ -66,7 +66,7 @@ namespace Photo
         private Zdjecie zdjecie;
         private Zdjecie zdjecieZapas;
         private bool isDrag;
-        private Point lmStartingPoint, rmStartingPoint, rmEndPoint;
+        private Point lmStartingPoint;
         private Rectangle selectedRectangle;
         private BitmapData data;
 

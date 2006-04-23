@@ -210,22 +210,47 @@ namespace Photo
                 string[] files3 = Directory.GetFiles(e.Node.FullPath, "*.tif");
                 //string[] files4 = Directory.GetFiles(e.Node.FullPath, "*.tiff");
 
-                Zdjecie[] zdjecia = new Zdjecie[files.Length + files2.Length + files3.Length];
+                List<Zdjecie> zdjecia = new List<Zdjecie>(files.Length + files2.Length + files3.Length);
                 int i = 0;
                 int ile = 0;
                 for (i = 0; i < files.Length; i++)
                 {
-                    zdjecia[i] = new Zdjecie(files[i]);
+                    try
+                    {
+                        Zdjecie z = new Zdjecie(files[i]);
+                        zdjecia.Add(z);
+                    }
+                    catch (ArgumentException)
+                    {
+                        MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
+                    }
                 }
                 ile = i;
                 for (i = 0; i < files2.Length; i++)
                 {
-                    zdjecia[ile + i] = new Zdjecie(files2[i]);
+                    try
+                    {
+                        Zdjecie z = new Zdjecie(files2[i]);
+                        zdjecia.Add(z);
+                    }
+                    catch (ArgumentException)
+                    {
+                        MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
+
+                    }
                 }
                 ile += i;
                 for (i = 0; i < files3.Length; i++)
                 {
-                    zdjecia[ile + i] = new Zdjecie(files3[i]);
+                    try
+                    {
+                        Zdjecie z = new Zdjecie(files3[i]);
+                        zdjecia.Add(z);
+                    }
+                    catch (ArgumentException)
+                    {
+                        MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
+                    }
                 }
                 /*ile += i;
                 for (i = 0; i < files4.Length; i++)
@@ -233,9 +258,9 @@ namespace Photo
                     zdjecia[ile + i] = new Zdjecie(files4[i]);
                 }*/
                 if (ZakonczonoWyszukiwanie != null)
-                    ZakonczonoWyszukiwanie(zdjecia);
+                    ZakonczonoWyszukiwanie(zdjecia.ToArray());
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Odmowa dostêpu", e.Node.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
