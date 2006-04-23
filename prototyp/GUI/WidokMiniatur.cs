@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 
 namespace Photo
@@ -180,6 +181,13 @@ namespace Photo
         {
             miniatury.Clear();
             miniatury.AddRange(zdjecia);
+            foreach (Zdjecie z in zdjecia)
+            {
+                if (!z.Miniatura.RawFormat.Equals(ImageFormat.Jpeg) && !z.Miniatura.RawFormat.Equals(ImageFormat.Tiff))
+                {
+                    miniatury.Remove(z);
+                }
+            }
             ShowImages();
         }
 
