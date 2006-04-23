@@ -144,6 +144,8 @@ namespace Photo
 
                 string[] files = Directory.GetDirectories(Path);
 
+                Array.Sort(files);
+
                 if (files.Length == 0 && type == HD)
                     return;
 
@@ -151,7 +153,7 @@ namespace Photo
                 {
                     folder.Add(new DirTreeNode(files[i], FOLDER));
                 }
-
+                
                 Nodes.Clear();
                 foreach (DirTreeNode dtn in folder)
                 {
