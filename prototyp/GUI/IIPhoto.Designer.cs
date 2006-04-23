@@ -101,7 +101,7 @@ namespace Photo
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitContainer1.Panel2.Controls.Add(this.informacjeControl);
             this.splitContainer1.Size = new System.Drawing.Size(1016, 515);
             this.splitContainer1.SplitterDistance = 914;
@@ -117,14 +117,14 @@ namespace Photo
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitContainer2.Panel1.Controls.Add(this.fileTree1);
             this.splitContainer2.Panel1.Controls.Add(this.wyszukiwarkaControl1);
             this.splitContainer2.Panel1.Controls.Add(this.listaAlbumowControl);
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitContainer2.Panel2.Controls.Add(this.przegladarkaZdjec);
             this.splitContainer2.Size = new System.Drawing.Size(914, 515);
             this.splitContainer2.SplitterDistance = 210;
@@ -183,7 +183,7 @@ namespace Photo
             this.toolStripOperacje.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripOperacje.Location = new System.Drawing.Point(3, 0);
             this.toolStripOperacje.Name = "toolStripOperacje";
-            this.toolStripOperacje.Size = new System.Drawing.Size(177, 25);
+            this.toolStripOperacje.Size = new System.Drawing.Size(208, 25);
             this.toolStripOperacje.TabIndex = 1;
             this.toolStripOperacje.Text = "toolStrip1";
             // 
