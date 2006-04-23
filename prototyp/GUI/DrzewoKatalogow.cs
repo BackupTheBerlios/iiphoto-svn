@@ -21,6 +21,7 @@ namespace Photo
         }
         const int HD = 0;
         const int FOLDER = 1;
+
         private IWyszukiwanie W;
 
         public void GenerateImage()
@@ -142,8 +143,9 @@ namespace Photo
             {
                 ArrayList folder = new ArrayList();
 
-                string[] files = Directory.GetDirectories(Path);
+                //string
 
+                string[] files = Directory.GetDirectories(Path);
                 Array.Sort(files);
 
                 if (files.Length == 0 && type == HD)
@@ -153,12 +155,16 @@ namespace Photo
                 {
                     folder.Add(new DirTreeNode(files[i], FOLDER));
                 }
-                
+
                 Nodes.Clear();
                 foreach (DirTreeNode dtn in folder)
                 {
                     Nodes.Add(dtn);
                 }
+
+                //wyjate
+
+
             }
 
             bool isLeaf = true;
@@ -189,14 +195,43 @@ namespace Photo
         protected override void OnAfterSelect(TreeViewEventArgs e)
         {
             base.OnAfterSelect(e);
-            string[] files = Directory.GetFiles(e.Node.FullPath, "*.jpg");
-            Zdjecie[] zdjecia = new Zdjecie[files.Length];
-            for (int i = 0; i < files.Length; i++)
+
+            try
             {
-                zdjecia[i] = new Zdjecie(files[i]);
+                string[] files = Directory.GetFiles(e.Node.FullPath, "*.jpg");
+                string[] files2 = Directory.GetFiles(e.Node.FullPath, "*.jpeg");
+                string[] files3 = Directory.GetFiles(e.Node.FullPath, "*.tif");
+                //string[] files4 = Directory.GetFiles(e.Node.FullPath, "*.tiff");
+
+                Zdjecie[] zdjecia = new Zdjecie[files.Length + files2.Length + files3.Length];
+                int i = 0;
+                int ile = 0;
+                for (i = 0; i < files.Length; i++)
+                {
+                    zdjecia[i] = new Zdjecie(files[i]);
+                }
+                ile = i;
+                for (i = 0; i < files2.Length; i++)
+                {
+                    zdjecia[ile + i] = new Zdjecie(files2[i]);
+                }
+                ile += i;
+                for (i = 0; i < files3.Length; i++)
+                {
+                    zdjecia[ile + i] = new Zdjecie(files3[i]);
+                }
+                /*ile += i;
+                for (i = 0; i < files4.Length; i++)
+                {
+                    zdjecia[ile + i] = new Zdjecie(files4[i]);
+                }*/
+                if (ZakonczonoWyszukiwanie != null)
+                    ZakonczonoWyszukiwanie(zdjecia);
             }
-            if (ZakonczonoWyszukiwanie != null)
-                ZakonczonoWyszukiwanie(zdjecia);
+            catch (Exception ex)
+            {
+                MessageBox.Show("Odmowa dostêpu", e.Node.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
