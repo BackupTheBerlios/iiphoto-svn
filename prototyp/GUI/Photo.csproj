@@ -181,6 +181,8 @@
     <Content Include="icons\Dyskietka.png" />
     <Content Include="icons\Dyskietka_z.png" />
     <Content Include="icons\folder.ico" />
+    <Content Include="icons\W_lewo.ico" />
+    <Content Include="icons\W_prawo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
