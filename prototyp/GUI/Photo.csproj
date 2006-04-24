@@ -176,8 +176,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons\Cdrom.png" />
+    <Content Include="icons\Cdrom_z.jpg" />
     <Content Include="icons\Dysk.png" />
     <Content Include="icons\Dyskietka.png" />
+    <Content Include="icons\Dyskietka_z.png" />
     <Content Include="icons\folder.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

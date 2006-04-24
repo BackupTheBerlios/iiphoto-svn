@@ -34,17 +34,18 @@ namespace Photo
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.fileTree1 = new Photo.FileTree();
+            this.wyszukiwarkaControl1 = new Photo.WyszukiwarkaControl();
+            this.listaAlbumowControl = new Photo.ListaAlbumowControl();
+            this.przegladarkaZdjec = new Photo.PrzegladarkaZdjec();
+            this.informacjeControl = new Photo.InformacjeControl();
             this.toolStripOperacje = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.Alfa = new System.Windows.Forms.ToolStripButton();
             this.Omega = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.fileTree1 = new Photo.FileTree();
-            this.wyszukiwarkaControl1 = new Photo.WyszukiwarkaControl();
-            this.listaAlbumowControl = new Photo.ListaAlbumowControl();
-            this.przegladarkaZdjec = new Photo.PrzegladarkaZdjec();
-            this.informacjeControl = new Photo.InformacjeControl();
+            this.button1 = new System.Windows.Forms.Button();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -120,6 +121,7 @@ namespace Photo
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.splitContainer2.Panel1.Controls.Add(this.button1);
             this.splitContainer2.Panel1.Controls.Add(this.fileTree1);
             this.splitContainer2.Panel1.Controls.Add(this.wyszukiwarkaControl1);
             this.splitContainer2.Panel1.Controls.Add(this.listaAlbumowControl);
@@ -131,6 +133,50 @@ namespace Photo
             this.splitContainer2.Size = new System.Drawing.Size(914, 515);
             this.splitContainer2.SplitterDistance = 210;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // fileTree1
+            // 
+            this.fileTree1.BackColor = System.Drawing.Color.Beige;
+            this.fileTree1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileTree1.ImageIndex = 0;
+            this.fileTree1.Location = new System.Drawing.Point(0, 226);
+            this.fileTree1.Name = "fileTree1";
+            this.fileTree1.RightToLeftLayout = true;
+            this.fileTree1.SelectedImageIndex = 0;
+            this.fileTree1.Size = new System.Drawing.Size(210, 289);
+            this.fileTree1.TabIndex = 2;
+            // 
+            // wyszukiwarkaControl1
+            // 
+            this.wyszukiwarkaControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.wyszukiwarkaControl1.Location = new System.Drawing.Point(0, 144);
+            this.wyszukiwarkaControl1.Name = "wyszukiwarkaControl1";
+            this.wyszukiwarkaControl1.Size = new System.Drawing.Size(210, 82);
+            this.wyszukiwarkaControl1.TabIndex = 1;
+            // 
+            // listaAlbumowControl
+            // 
+            this.listaAlbumowControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.listaAlbumowControl.Location = new System.Drawing.Point(0, 0);
+            this.listaAlbumowControl.Name = "listaAlbumowControl";
+            this.listaAlbumowControl.Size = new System.Drawing.Size(210, 144);
+            this.listaAlbumowControl.TabIndex = 0;
+            // 
+            // przegladarkaZdjec
+            // 
+            this.przegladarkaZdjec.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.przegladarkaZdjec.Location = new System.Drawing.Point(0, 0);
+            this.przegladarkaZdjec.Name = "przegladarkaZdjec";
+            this.przegladarkaZdjec.Size = new System.Drawing.Size(700, 515);
+            this.przegladarkaZdjec.TabIndex = 0;
+            // 
+            // informacjeControl
+            // 
+            this.informacjeControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.informacjeControl.Location = new System.Drawing.Point(0, 0);
+            this.informacjeControl.Name = "informacjeControl";
+            this.informacjeControl.Size = new System.Drawing.Size(98, 192);
+            this.informacjeControl.TabIndex = 0;
             // 
             // toolStripOperacje
             // 
@@ -186,49 +232,16 @@ namespace Photo
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // fileTree1
+            // button1
             // 
-            this.fileTree1.BackColor = System.Drawing.Color.Beige;
-            this.fileTree1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fileTree1.ImageIndex = 0;
-            this.fileTree1.Location = new System.Drawing.Point(0, 226);
-            this.fileTree1.Name = "fileTree1";
-            this.fileTree1.RightToLeftLayout = true;
-            this.fileTree1.SelectedImageIndex = 0;
-            this.fileTree1.Size = new System.Drawing.Size(210, 289);
-            this.fileTree1.TabIndex = 2;
-            // 
-            // wyszukiwarkaControl1
-            // 
-            this.wyszukiwarkaControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.wyszukiwarkaControl1.Location = new System.Drawing.Point(0, 144);
-            this.wyszukiwarkaControl1.Name = "wyszukiwarkaControl1";
-            this.wyszukiwarkaControl1.Size = new System.Drawing.Size(210, 82);
-            this.wyszukiwarkaControl1.TabIndex = 1;
-            // 
-            // listaAlbumowControl
-            // 
-            this.listaAlbumowControl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listaAlbumowControl.Location = new System.Drawing.Point(0, 0);
-            this.listaAlbumowControl.Name = "listaAlbumowControl";
-            this.listaAlbumowControl.Size = new System.Drawing.Size(210, 144);
-            this.listaAlbumowControl.TabIndex = 0;
-            // 
-            // przegladarkaZdjec
-            // 
-            this.przegladarkaZdjec.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.przegladarkaZdjec.Location = new System.Drawing.Point(0, 0);
-            this.przegladarkaZdjec.Name = "przegladarkaZdjec";
-            this.przegladarkaZdjec.Size = new System.Drawing.Size(700, 515);
-            this.przegladarkaZdjec.TabIndex = 0;
-            // 
-            // informacjeControl
-            // 
-            this.informacjeControl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.informacjeControl.Location = new System.Drawing.Point(0, 0);
-            this.informacjeControl.Name = "informacjeControl";
-            this.informacjeControl.Size = new System.Drawing.Size(98, 192);
-            this.informacjeControl.TabIndex = 0;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button1.Location = new System.Drawing.Point(0, 492);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(210, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Odœwie¿";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // IIPhoto
             // 
@@ -275,6 +288,7 @@ namespace Photo
         private FileTree fileTree1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.Button button1;
 
     }
 }

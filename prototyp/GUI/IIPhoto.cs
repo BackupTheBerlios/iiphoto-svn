@@ -55,5 +55,13 @@ namespace Photo
         {
             przegladarkaZdjec.SetThumbnailView();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            fileTree1.Delete();
+            fileTree1.Fill();
+            //fileTree1.Nodes.re
+        }
     }
 }

@@ -67,6 +67,13 @@ namespace Photo.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Cdrom_z {
+            get {
+                object obj = ResourceManager.GetObject("Cdrom_z", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Dysk {
             get {
                 object obj = ResourceManager.GetObject("Dysk", resourceCulture);
@@ -77,6 +84,13 @@ namespace Photo.Properties {
         internal static System.Drawing.Bitmap Dyskietka {
             get {
                 object obj = ResourceManager.GetObject("Dyskietka", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Dyskietka_z {
+            get {
+                object obj = ResourceManager.GetObject("Dyskietka_z", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

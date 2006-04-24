@@ -20,12 +20,6 @@ namespace Photo
             //Fill();
             this.BackColor = Color.Beige;
         }
-        const int Dysk = 0;
-        const int FOLDER = 1;
-        const int Dyskietka = 2;
-        const int Cdrom = 3;        
-
-        //private IWyszukiwanie W;
 
         public void GenerateImage()
         {
@@ -33,25 +27,12 @@ namespace Photo
             list.Images.Add(Properties.Resources.Dysk);
             list.Images.Add(Properties.Resources.folder);
             list.Images.Add(Properties.Resources.Dyskietka);
-            list.Images.Add(Properties.Resources.Cdrom);            
+            list.Images.Add(Properties.Resources.Cdrom);
+            list.Images.Add(Properties.Resources.Cdrom_z);
+            list.Images.Add(Properties.Resources.Dyskietka_z);
             ImageList = list;
         }
-
-
-        [DllImport("kernel32.dll")]
-        public static extern long GetDriveType(string driveLetter);
-        [DllImport("Kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        extern static bool GetVolumeInformation(
-                                string RootPathName,
-                                StringBuilder VolumeNameBuffer,
-                                int VolumeNameSize,
-                                out uint VolumeSerialNumber,
-                                out uint MaximumComponentLength,
-                                out uint FileSystemFlags,
-                                StringBuilder FileSystemNameBuffer,
-                                int nFileSystemNameSize);
-
-
+        
         public void Fill()
         {
             BeginUpdate();
@@ -71,17 +52,8 @@ namespace Photo
                 */
                 //string tempName = GetDriveName(tempDrive);
 
-                DirTreeNode dn;
-                if (tempDrive.CompareTo("A:\\") == 0 || tempDrive.CompareTo("B:\\") == 0)
-                {
-                    dn = new DirTreeNode(tempDrive, tempDrive + " [Floppy]");
-                    dn.ImageIndex = Dyskietka;
-                }
-                else
-                {
-                    dn = new DirTreeNode(tempDrive, tempDrive + " [" + GetDriveName(tempDrive) + "]");
-                    dn.ImageIndex = getDriveType(tempDrive);
-                }
+                DirTreeNode dn = new DirTreeNode(tempDrive);
+                
                 //dn.Text = tempName + "(" + tempDrive + ")";
                 Nodes.Add(dn);
 
@@ -98,36 +70,7 @@ namespace Photo
 
             BeforeExpand += new TreeViewCancelEventHandler(prepare);
             AfterCollapse += new TreeViewEventHandler(clear);
-        }
-        public int getDriveType(string drive)
-        {
-            if ((GetDriveType(drive) & 5) == 5) return Cdrom;//cd
-            if ((GetDriveType(drive) & 3) == 3) return Dysk;//fixed
-            if ((GetDriveType(drive) & 2) == 2) return Dysk;//removable
-            if ((GetDriveType(drive) & 4) == 4) return Dyskietka;//remote disk
-            if ((GetDriveType(drive) & 6) == 6) return Dyskietka;//ram disk
-            return 0;
-        }
-
-        public string GetDriveName(string drive)
-        {
-            //receives volume name of drive
-            StringBuilder volname = new StringBuilder(256);
-            //receives serial number of drive,not in case of network drive(win95/98)
-            uint sn;
-            uint maxcomplen;//receives maximum component length
-            uint sysflags;//receives file system flags
-            StringBuilder sysname = new StringBuilder(256);//receives the file system name
-            bool retval;//return value
-
-            retval = GetVolumeInformation(drive, volname, 256, out sn, out maxcomplen,
-                                          out sysflags, sysname, 256);
-
-            if (retval == true) return volname.ToString();
-            else return "";
-        }
-        
-
+        }        
 
         public void Open(string path)
         {
@@ -196,6 +139,14 @@ namespace Photo
             EndUpdate();
         }
 
+        public void Delete()
+        {
+            BeginUpdate();           
+            Nodes.RemoveAt(0);
+            Nodes.Clear();
+            EndUpdate();
+        }
+
         public class DirTreeNode : TreeNode
         {
             string path;
@@ -205,11 +156,43 @@ namespace Photo
             public DirTreeNode(string s)
                 : base(s)
             {
+                if (s.CompareTo("A:\\") == 0 || s.CompareTo("B:\\") == 0)
+                {
+                    //dn = new DirTreeNode(tempDrive, tempDrive + " [Floppy]");
+                    if (GetDriveName(s) != "")
+                    {
+                        Text = s + " [" + GetDriveName(s) + "]";
+                        ImageIndex = Dyskietka_z;
+                        SelectedImageIndex = Dyskietka_z;
+                    }
+                    else
+                    {
+                        Text = s + " [Floppy]";
+                        ImageIndex = Dyskietka;
+                        SelectedImageIndex = Dyskietka;
+                    }                    
+                }
+                else
+                {
+                    Text = s + " [" + GetDriveName(s) + "]";
+                    //dn = new DirTreeNode(tempDrive, tempDrive + " [" + GetDriveName(tempDrive) + "]");
+                    if (GetDriveName(s) != "" && getDriveType(s) == Cdrom)
+                    {
+                        ImageIndex = Cdrom_z;
+                        SelectedImageIndex = Cdrom_z;
+                    }
+                    else
+                    {
+                        ImageIndex = getDriveType(s);
+                        SelectedImageIndex = getDriveType(s);
+                    }
+                }
+
                 path = s.ToLower();
                 setLeaf(true);
-                type = Dysk;
-                ImageIndex = type;
-                SelectedImageIndex = type;
+                //type = Dysk;
+                //ImageIndex = type;
+                //SelectedImageIndex = type;
             }
             public DirTreeNode(string s, string label)
                 : this(s)
@@ -234,6 +217,63 @@ namespace Photo
                 {
                 }
             }
+
+            const int Dysk = 0;
+            const int FOLDER = 1;
+            const int Dyskietka = 2;
+            const int Cdrom = 3;
+            const int Cdrom_z = 4;
+            const int Dyskietka_z = 5;
+
+            //private IWyszukiwanie W;
+
+            
+
+
+            [DllImport("kernel32.dll")]
+            public static extern long GetDriveType(string driveLetter);
+            [DllImport("Kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            extern static bool GetVolumeInformation(
+                                    string RootPathName,
+                                    StringBuilder VolumeNameBuffer,
+                                    int VolumeNameSize,
+                                    out uint VolumeSerialNumber,
+                                    out uint MaximumComponentLength,
+                                    out uint FileSystemFlags,
+                                    StringBuilder FileSystemNameBuffer,
+                                    int nFileSystemNameSize);
+
+
+
+            public int getDriveType(string drive)
+            {
+                if ((GetDriveType(drive) & 5) == 5) return Cdrom;//cd
+                if ((GetDriveType(drive) & 3) == 3) return Dysk;//fixed
+                if ((GetDriveType(drive) & 2) == 2) return Dysk;//removable
+                if ((GetDriveType(drive) & 4) == 4) return Dyskietka;//remote disk
+                if ((GetDriveType(drive) & 6) == 6) return Dyskietka;//ram disk
+                return 0;
+            }
+
+            public string GetDriveName(string drive)
+            {
+                //receives volume name of drive
+                StringBuilder volname = new StringBuilder(256);
+                //receives serial number of drive,not in case of network drive(win95/98)
+                uint sn;
+                uint maxcomplen;//receives maximum component length
+                uint sysflags;//receives file system flags
+                StringBuilder sysname = new StringBuilder(256);//receives the file system name
+                bool retval;//return value
+
+                retval = GetVolumeInformation(drive, volname, 256, out sn, out maxcomplen,
+                                              out sysflags, sysname, 256);
+
+                if (retval == true) return volname.ToString();
+                else return "";
+            }
+        
+
 
             internal void populate()
             {

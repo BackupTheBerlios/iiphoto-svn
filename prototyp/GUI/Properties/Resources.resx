@@ -121,11 +121,17 @@
   <data name="Cdrom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\cdrom.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Cdrom_z" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\cdrom_z.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Dysk" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\dysk.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Dyskietka" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\dyskietka.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dyskietka_z" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\dyskietka_z.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\folder.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
