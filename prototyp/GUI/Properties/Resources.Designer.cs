@@ -108,5 +108,19 @@ namespace Photo.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Icon W_lewo {
+            get {
+                object obj = ResourceManager.GetObject("W_lewo", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Icon W_prawo {
+            get {
+                object obj = ResourceManager.GetObject("W_prawo", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }
