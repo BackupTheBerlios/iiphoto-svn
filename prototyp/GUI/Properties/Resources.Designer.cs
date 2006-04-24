@@ -88,13 +88,6 @@ namespace Photo.Properties {
             }
         }
         
-        internal static System.Drawing.Icon hd {
-            get {
-                object obj = ResourceManager.GetObject("hd", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap nozyce {
             get {
                 object obj = ResourceManager.GetObject("nozyce", resourceCulture);

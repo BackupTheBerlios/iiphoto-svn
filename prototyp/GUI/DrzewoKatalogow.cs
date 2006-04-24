@@ -208,55 +208,116 @@ namespace Photo
                 string[] files = Directory.GetFiles(e.Node.FullPath, "*.jpg");
                 string[] files2 = Directory.GetFiles(e.Node.FullPath, "*.jpeg");
                 string[] files3 = Directory.GetFiles(e.Node.FullPath, "*.tif");
-                //string[] files4 = Directory.GetFiles(e.Node.FullPath, "*.tiff");
+                string[] files4 = Directory.GetFiles(e.Node.FullPath, "*.tiff");
 
-                List<Zdjecie> zdjecia = new List<Zdjecie>(files.Length + files2.Length + files3.Length);
+                string[] f1 = new string[files.Length];
+                string[] f2 = new string[files2.Length];
+                string[] f3 = new string[files3.Length];
+                string[] f4 = new string[files4.Length];
+
+
                 int i = 0;
-                int ile = 0;
+
+                int z_f1 = 0;
                 for (i = 0; i < files.Length; i++)
+                {
+                    if (files[i].ToLower().LastIndexOf(".jpg") == (files[i].Length - 4))
+                    {                        
+                        f1[z_f1] = files[i];                        
+                        z_f1++;
+                    }
+                }
+                int z_f2 = 0;
+                for (i = 0; i < files2.Length; i++)
+                {
+                    //string str = files2[i].ToLower();
+                    if (files2[i].ToLower().LastIndexOf(".jpeg") == (files2[i].Length - 5))
+                    {
+                        f2[z_f2] = files2[i];
+                        z_f2++;
+                    }
+                }
+                int z_f3 = 0;
+                for (i = 0; i < files3.Length; i++)
+                {
+                    if (files3[i].ToLower().LastIndexOf(".tif") == (files3[i].Length - 4))
+                    {
+                        f3[z_f3] = files3[i];
+                        z_f3++;
+                    }
+                }
+
+                int z_f4 = 0;
+                for (i = 0; i < files4.Length; i++)
+                {
+                    if (files4[i].ToLower().LastIndexOf(".tiff") == (files4[i].Length - 5))
+                    {
+                        f4[z_f4] = files4[i];
+                        z_f4++;
+                    }
+                }
+
+
+                List<Zdjecie> zdjecia = new List<Zdjecie>(z_f1 + z_f2 + z_f3 + z_f4);
+                
+                int ile = 0;
+                for (i = 0; i < z_f1; i++)
                 {
                     try
                     {
-                        Zdjecie z = new Zdjecie(files[i]);
+                        Zdjecie z = new Zdjecie(f1[i]);
                         zdjecia.Add(z);
                     }
                     catch (ArgumentException)
                     {
-                        MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
+                        //MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
+                        MessageBox.Show("Plik: \"" + files[i].Substring(files[i].LastIndexOf("\\")+1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", files[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 ile = i;
-                for (i = 0; i < files2.Length; i++)
+                for (i = 0; i < z_f2; i++)
                 {
                     try
                     {
-                        Zdjecie z = new Zdjecie(files2[i]);
+                        Zdjecie z = new Zdjecie(f2[i]);
                         zdjecia.Add(z);
                     }
                     catch (ArgumentException)
                     {
-                        MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
+                        //MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
+
+                        MessageBox.Show("Plik: \"" + files2[i].Substring(files2[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", files2[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     }
                 }
                 ile += i;
-                for (i = 0; i < files3.Length; i++)
+                for (i = 0; i < z_f3; i++)
                 {
                     try
                     {
-                        Zdjecie z = new Zdjecie(files3[i]);
+                        Zdjecie z = new Zdjecie(f3[i]);
                         zdjecia.Add(z);
                     }
                     catch (ArgumentException)
                     {
-                        MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
+                        //MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
+                        MessageBox.Show("Plik: \"" + files3[i].Substring(files3[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", files3[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
-                /*ile += i;
-                for (i = 0; i < files4.Length; i++)
+                ile += i;
+                for (i = 0; i < z_f4; i++)
                 {
-                    zdjecia[ile + i] = new Zdjecie(files4[i]);
-                }*/
+                    try
+                    {
+                        Zdjecie z = new Zdjecie(f4[i]);
+                        zdjecia.Add(z);
+                    }
+                    catch (ArgumentException)
+                    {
+                        //MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
+                        MessageBox.Show("Plik: \"" + files4[i].Substring(files4[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", files4[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
                 if (ZakonczonoWyszukiwanie != null)
                     ZakonczonoWyszukiwanie(zdjecia.ToArray());
             }
