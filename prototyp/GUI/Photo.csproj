@@ -177,6 +177,7 @@
   <ItemGroup>
     <Content Include="icons\Cdrom.png" />
     <Content Include="icons\Cdrom_z.jpg" />
+    <Content Include="icons\Cdrom_z2.jpg" />
     <Content Include="icons\Dysk.png" />
     <Content Include="icons\Dyskietka.png" />
     <Content Include="icons\Dyskietka_z.png" />
