@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Photo
 {
-    public class Zdjecie : IZdjecie
+    public class Zdjecie : IZdjecie, IDisposable
     {
         Bitmap miniatura;
         string path;
@@ -82,6 +82,15 @@ namespace Photo
         }
 
         public event ZmodyfikowanoZdjecieDelegate ZmodyfikowanoZdjecie;
+
+        #endregion
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            this.miniatura.Dispose();
+        }
 
         #endregion
     }
