@@ -40,15 +40,16 @@ namespace Photo
 
         [DllImport("kernel32.dll")]
         public static extern long GetDriveType(string driveLetter);
-        [DllImport("kernel32.dll")]
-        public static extern long GetVolumeInformation(string strPathName,
-                                                       StringBuilder strVolumeNameBuffer,
-                                                       long lngVolumeNameSize,
-                                                       long lngVolumeSerialNumber,
-                                                       long lngMaximumComponentLength,
-                                                       long lngFileSystemFlags,
-                                                       StringBuilder strFileSystemNameBuffer,
-                                                       long lngFileSystemNameSize);
+        [DllImport("Kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        extern static bool GetVolumeInformation(
+                                string RootPathName,
+                                StringBuilder VolumeNameBuffer,
+                                int VolumeNameSize,
+                                out uint VolumeSerialNumber,
+                                out uint MaximumComponentLength,
+                                out uint FileSystemFlags,
+                                StringBuilder FileSystemNameBuffer,
+                                int nFileSystemNameSize);
 
 
         public void Fill()
@@ -69,13 +70,18 @@ namespace Photo
                 availableDrives.Add(tempInfo);
                 */
                 //string tempName = GetDriveName(tempDrive);
-                DirTreeNode dn = new DirTreeNode(tempDrive);
 
+                DirTreeNode dn;
                 if (tempDrive.CompareTo("A:\\") == 0 || tempDrive.CompareTo("B:\\") == 0)
                 {
+                    dn = new DirTreeNode(tempDrive, tempDrive + " [Floppy]");
                     dn.ImageIndex = Dyskietka;
                 }
-                else dn.ImageIndex = getDriveType(tempDrive);                
+                else
+                {
+                    dn = new DirTreeNode(tempDrive, tempDrive + " [" + GetDriveName(tempDrive) + "]");
+                    dn.ImageIndex = getDriveType(tempDrive);
+                }
                 //dn.Text = tempName + "(" + tempDrive + ")";
                 Nodes.Add(dn);
 
@@ -108,16 +114,16 @@ namespace Photo
             //receives volume name of drive
             StringBuilder volname = new StringBuilder(256);
             //receives serial number of drive,not in case of network drive(win95/98)
-            long sn = new long();
-            long maxcomplen = new long();//receives maximum component length
-            long sysflags = new long();//receives file system flags
+            uint sn;
+            uint maxcomplen;//receives maximum component length
+            uint sysflags;//receives file system flags
             StringBuilder sysname = new StringBuilder(256);//receives the file system name
-            long retval = new long();//return value
+            bool retval;//return value
 
-            retval = GetVolumeInformation(drive, volname, 256, sn, maxcomplen,
-                                          sysflags, sysname, 256);
+            retval = GetVolumeInformation(drive, volname, 256, out sn, out maxcomplen,
+                                          out sysflags, sysname, 256);
 
-            if (retval != 0) return volname.ToString();
+            if (retval == true) return volname.ToString();
             else return "";
         }
         
@@ -204,6 +210,11 @@ namespace Photo
                 type = Dysk;
                 ImageIndex = type;
                 SelectedImageIndex = type;
+            }
+            public DirTreeNode(string s, string label)
+                : this(s)
+            {
+                Text = label;
             }
             public DirTreeNode(string s, int aType)
                 : base(new FileInfo(s).Name)
@@ -293,10 +304,10 @@ namespace Photo
 
             try
             {
-                string[] files = Directory.GetFiles(e.Node.FullPath, "*.jpg");
-                string[] files2 = Directory.GetFiles(e.Node.FullPath, "*.jpeg");
-                string[] files3 = Directory.GetFiles(e.Node.FullPath, "*.tif");
-                string[] files4 = Directory.GetFiles(e.Node.FullPath, "*.tiff");
+                string[] files = Directory.GetFiles(((DirTreeNode)e.Node).Path, "*.jpg");
+                string[] files2 = Directory.GetFiles(((DirTreeNode)e.Node).Path, "*.jpeg");
+                string[] files3 = Directory.GetFiles(((DirTreeNode)e.Node).Path, "*.tif");
+                string[] files4 = Directory.GetFiles(((DirTreeNode)e.Node).Path, "*.tiff");
 
                 string[] f1 = new string[files.Length];
                 string[] f2 = new string[files2.Length];
@@ -431,6 +442,17 @@ namespace Photo
                 
                 
             }
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // FileTree
+            // 
+            this.LabelEdit = true;
+            this.ResumeLayout(false);
+
         }
     }
 }
