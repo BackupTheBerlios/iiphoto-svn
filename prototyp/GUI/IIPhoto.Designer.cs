@@ -35,16 +35,16 @@ namespace Photo
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.toolStripOperacje = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.Alfa = new System.Windows.Forms.ToolStripButton();
             this.Omega = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.fileTree1 = new Photo.FileTree();
             this.wyszukiwarkaControl1 = new Photo.WyszukiwarkaControl();
             this.listaAlbumowControl = new Photo.ListaAlbumowControl();
             this.przegladarkaZdjec = new Photo.PrzegladarkaZdjec();
             this.informacjeControl = new Photo.InformacjeControl();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -144,9 +144,24 @@ namespace Photo
             this.toolStripOperacje.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripOperacje.Location = new System.Drawing.Point(3, 0);
             this.toolStripOperacje.Name = "toolStripOperacje";
-            this.toolStripOperacje.Size = new System.Drawing.Size(264, 25);
+            this.toolStripOperacje.Size = new System.Drawing.Size(262, 25);
             this.toolStripOperacje.TabIndex = 1;
             this.toolStripOperacje.Text = "toolStrip1";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(81, 22);
+            this.toolStripButton1.Text = "Widok Miniatur";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // Alfa
             // 
@@ -171,16 +186,6 @@ namespace Photo
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(81, 22);
-            this.toolStripButton1.Text = "Widok Miniatur";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
             // fileTree1
             // 
             this.fileTree1.BackColor = System.Drawing.Color.Beige;
@@ -188,6 +193,7 @@ namespace Photo
             this.fileTree1.ImageIndex = 0;
             this.fileTree1.Location = new System.Drawing.Point(0, 226);
             this.fileTree1.Name = "fileTree1";
+            this.fileTree1.RightToLeftLayout = true;
             this.fileTree1.SelectedImageIndex = 0;
             this.fileTree1.Size = new System.Drawing.Size(210, 289);
             this.fileTree1.TabIndex = 2;
@@ -223,11 +229,6 @@ namespace Photo
             this.informacjeControl.Name = "informacjeControl";
             this.informacjeControl.Size = new System.Drawing.Size(98, 192);
             this.informacjeControl.TabIndex = 0;
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // IIPhoto
             // 

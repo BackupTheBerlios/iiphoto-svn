@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 using System.IO;
 using System.Collections;
 using Photo;
@@ -24,7 +25,7 @@ namespace Photo
         const int Dyskietka = 2;
         const int Cdrom = 3;        
 
-        private IWyszukiwanie W;
+        //private IWyszukiwanie W;
 
         public void GenerateImage()
         {
@@ -35,26 +36,93 @@ namespace Photo
             list.Images.Add(Properties.Resources.Cdrom);            
             ImageList = list;
         }
+
+
+        [DllImport("kernel32.dll")]
+        public static extern long GetDriveType(string driveLetter);
+        [DllImport("kernel32.dll")]
+        public static extern long GetVolumeInformation(string strPathName,
+                                                       StringBuilder strVolumeNameBuffer,
+                                                       long lngVolumeNameSize,
+                                                       long lngVolumeSerialNumber,
+                                                       long lngMaximumComponentLength,
+                                                       long lngFileSystemFlags,
+                                                       StringBuilder strFileSystemNameBuffer,
+                                                       long lngFileSystemNameSize);
+
+
         public void Fill()
         {
             BeginUpdate();
             string[] drives = Directory.GetLogicalDrives();
 
+            //string[] tempString = Directory.GetLogicalDrives();
+
+            //DriveInfo tempInfo = new DriveInfo("", 0, "My Computer");
+            //availableDrives.Add(tempInfo);
+
+            foreach (string tempDrive in drives)
+            {
+               /* int tempType = getDriveType(tempDrive);
+                string tempName = GetDriveName(tempDrive);
+                tempInfo = new DriveInfo(tempDrive, tempType, tempName);
+                availableDrives.Add(tempInfo);
+                */
+                //string tempName = GetDriveName(tempDrive);
+                DirTreeNode dn = new DirTreeNode(tempDrive);
+
+                if (tempDrive.CompareTo("A:\\") == 0 || tempDrive.CompareTo("B:\\") == 0)
+                {
+                    dn.ImageIndex = Dyskietka;
+                }
+                else dn.ImageIndex = getDriveType(tempDrive);                
+                //dn.Text = tempName + "(" + tempDrive + ")";
+                Nodes.Add(dn);
+
+            }
+
             //Directory.g
 
-            for (int i = 0; i < drives.Length; i++)
-            {
+            //for (int i = 0; i < drives.Length; i++)
+            //{
                 //drives[i].GetType
-                DirTreeNode dn = new DirTreeNode(drives[i]);
-                dn.ImageIndex = Dysk;
-
-                Nodes.Add(dn);
-            }
+                
+            //}
             EndUpdate();
 
             BeforeExpand += new TreeViewCancelEventHandler(prepare);
             AfterCollapse += new TreeViewEventHandler(clear);
         }
+        public int getDriveType(string drive)
+        {
+            if ((GetDriveType(drive) & 5) == 5) return Cdrom;//cd
+            if ((GetDriveType(drive) & 3) == 3) return Dysk;//fixed
+            if ((GetDriveType(drive) & 2) == 2) return Dysk;//removable
+            if ((GetDriveType(drive) & 4) == 4) return Dyskietka;//remote disk
+            if ((GetDriveType(drive) & 6) == 6) return Dyskietka;//ram disk
+            return 0;
+        }
+
+        public string GetDriveName(string drive)
+        {
+            //receives volume name of drive
+            StringBuilder volname = new StringBuilder(256);
+            //receives serial number of drive,not in case of network drive(win95/98)
+            long sn = new long();
+            long maxcomplen = new long();//receives maximum component length
+            long sysflags = new long();//receives file system flags
+            StringBuilder sysname = new StringBuilder(256);//receives the file system name
+            long retval = new long();//return value
+
+            retval = GetVolumeInformation(drive, volname, 256, sn, maxcomplen,
+                                          sysflags, sysname, 256);
+
+            if (retval != 0) return volname.ToString();
+            else return "";
+        }
+        
+
+
         public void Open(string path)
         {
             TreeNodeCollection nodes = Nodes;
@@ -100,6 +168,16 @@ namespace Photo
                 MessageBox.Show(ex.Message);
                 //tn.Nodes.Add(new TreeNode());
                 //tn.Nodes.Clear();
+                tn.Collapse();
+                //tn.Parent.Collapse();
+                //tn.Nodes.Clear();
+                tn.Collapse();
+                e.Node.Remove();
+                //tn.
+                //Nodes.Add(tn);
+                Nodes.Insert(tn.Index, tn);
+
+                
                 EndUpdate();
 
             }
@@ -199,9 +277,19 @@ namespace Photo
 
         #endregion
 
+
+        protected override void OnBeforeSelect(TreeViewCancelEventArgs e)
+        {
+            base.OnBeforeSelect(e);
+            //MessageBox.Show("numer: " + e.Node.SelectedImageIndex);
+
+        }
+
         protected override void OnAfterSelect(TreeViewEventArgs e)
         {
             base.OnAfterSelect(e);
+
+            //e.Node.;
 
             try
             {
@@ -320,10 +408,28 @@ namespace Photo
                 }
                 if (ZakonczonoWyszukiwanie != null)
                     ZakonczonoWyszukiwanie(zdjecia.ToArray());
+
+                this.Refresh();
             }
             catch (Exception)
             {
                 MessageBox.Show("Odmowa dostêpu", e.Node.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (e.Node.Text.Length == 3)
+                {
+                    if (e.Node.Text.CompareTo("A:\\") == 0 || e.Node.Text.CompareTo("B:\\") == 0 )
+                    {
+
+                    }
+                    MessageBox.Show("numer: "+e.Node.SelectedImageIndex);
+                    //e.Node.ImageIndex = getDriveType(e.Node.Text);
+
+                    this.Refresh();
+                    //this.
+
+
+                }
+                
+                
             }
         }
     }
