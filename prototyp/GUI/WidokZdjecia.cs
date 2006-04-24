@@ -95,33 +95,6 @@ namespace Photo
             }
         }*/
 
-        public void Rotate(int x)
-        {
-            this.pictureBoxImage.RotateFlip(RotateFlipType.Rotate90FlipNone);
-        }
-
-        public void toGrayScale()
-        {
-            this.data = this.pictureBoxImage.LockBits(new Rectangle(0, 0, this.pictureBoxImage.Width, this.pictureBoxImage.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            unsafe
-            {
-                byte tempC;
-                byte* imgPtr = (byte*)(data.Scan0);
-                for (int i = 0; i < data.Height; i++)
-                {
-                    for (int j = 0; j < data.Width; j++)
-                    {
-                        tempC = (byte)(((int)*(imgPtr) + (int)*(imgPtr + 1) + (int)*(imgPtr + 2)) / 3);
-                        *(imgPtr++) = tempC;
-                        *(imgPtr++) = tempC;
-                        *(imgPtr++) = tempC;
-                    }
-                }
-            }
-            this.pictureBoxImage.UnlockBits(data);
-            this.Refresh();
-        }
-
         private Color MyGetPixel(int x, int y)
         {
             unsafe

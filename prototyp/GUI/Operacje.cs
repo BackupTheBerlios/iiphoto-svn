@@ -161,4 +161,77 @@ namespace Photo
 
         #endregion
     }
+
+    class Grayscale : IOperacja
+    {
+        #region IOperacja Members
+
+        private int kodOperacji;
+
+        public string NazwaOperacji
+        {
+            get { return "Grayscale"; }
+        }
+
+        public int KodOperacji
+        {
+            get
+            {
+                return kodOperacji;
+            }
+            set
+            {
+                kodOperacji = value;
+            }
+        }
+
+        public Image Ikona
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public string Autor
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public string Wersja
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public string Kontakt
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public Stack<object> PodajArgumenty()
+        {
+            return new Stack<object>();
+        }
+
+        public void Wykonaj(Bitmap Bitmap, Stack<object> Argumenty)
+        {
+            BitmapData data;
+            data = Bitmap.LockBits(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            unsafe
+            {
+                byte tempC;
+                byte* imgPtr = (byte*)(data.Scan0);
+                for (int i = 0; i < data.Height; i++)
+                {
+                    for (int j = 0; j < data.Width; j++)
+                    {
+                        tempC = (byte)(((int)*(imgPtr) + (int)*(imgPtr + 1) + (int)*(imgPtr + 2)) / 3);
+                        *(imgPtr++) = tempC;
+                        *(imgPtr++) = tempC;
+                        *(imgPtr++) = tempC;
+                    }
+                }
+            }
+            Bitmap.UnlockBits(data);
+        }
+
+        #endregion
+    }
 }
