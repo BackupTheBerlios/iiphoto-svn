@@ -44,27 +44,27 @@ namespace Photo
         {
             if (this.pictureBoxImage != null)
             {
-                int x, y;
-                if (this.Width < pictureBoxImage.Width)
+                int px, py;
+                if (this.Width > pictureBoxImage.Width)
                 {
-                    x = 0;
+                    px = (this.Width - pictureBoxImage.Width) / 2;
                 }
                 else
                 {
-                    x = ((this.Width - pictureBoxImage.Width) / 2);
+                    px = 5;
                 }
-                if (this.Height < pictureBoxImage.Height)
+
+                if (this.Height > pictureBoxImage.Height)
                 {
-                    y = 0;
+                    py = (this.Height - pictureBoxImage.Height) / 2;
+                } else {
+                    py = 5;
                 }
-                else
-                {
-                    y = ((this.Height - pictureBoxImage.Height) / 2);
-                }
-                this.pictureBox1.Width = pictureBoxImage.Width;
-                this.pictureBox1.Height = pictureBoxImage.Height;
-                this.pictureBox1.Location = new Point(x + 3, y + 3);
+                this.pictureBox1.Padding = new Padding(px, py, 5, 5);
+                this.pictureBox1.Width = pictureBoxImage.Width + px + 5;
+                this.pictureBox1.Height = pictureBoxImage.Height + py + 5;
             }
+            this.Refresh();
         }
 
         /*public void Zoom(double zoom) {

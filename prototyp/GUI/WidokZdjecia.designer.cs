@@ -38,8 +38,10 @@ namespace Photo
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(30, 0, 0, 0);
             this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Padding = new System.Windows.Forms.Padding(5);
             this.pictureBox1.Size = new System.Drawing.Size(100, 50);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -47,14 +49,16 @@ namespace Photo
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.onMouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.onMouseUp);
             // 
-            // ImageView
+            // WidokZdjecia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.pictureBox1);
-            this.Name = "ImageView";
+            this.Margin = new System.Windows.Forms.Padding(0);
+            this.Name = "WidokZdjecia";
+            this.Padding = new System.Windows.Forms.Padding(30, 3, 3, 3);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
