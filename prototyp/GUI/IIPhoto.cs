@@ -61,7 +61,7 @@ namespace Photo
 
             fileTree1.Delete();
             fileTree1.Fill();
-            //fileTree1.Nodes.re
+            
         }
     }
 }
