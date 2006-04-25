@@ -34,11 +34,11 @@ namespace Photo
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.fileTree1 = new Photo.FileTree();
-            this.wyszukiwarkaControl1 = new Photo.WyszukiwarkaControl();
-            this.listaAlbumowControl = new Photo.ListaAlbumowControl();
-            this.przegladarkaZdjec = new Photo.PrzegladarkaZdjec();
-            this.informacjeControl = new Photo.InformacjeControl();
+            this.fileTree1 = new FileTree();
+            this.wyszukiwarkaControl1 = new WyszukiwarkaControl();
+            this.listaAlbumowControl = new ListaAlbumowControl();
+            this.przegladarkaZdjec = new PrzegladarkaZdjec();
+            this.informacjeControl = new InformacjeControl();
             this.toolStripOperacje = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
