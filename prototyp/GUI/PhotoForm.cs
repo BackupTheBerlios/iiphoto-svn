@@ -95,5 +95,10 @@ namespace Photo
         {
             //drzewoOpakowane1.fileTree1.Refresh();// = false;
         }
+
+        private void splitContainer2_Panel1_Resize(object sender, EventArgs e)
+        {
+
+        }
     }
 }

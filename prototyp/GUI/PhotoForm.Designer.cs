@@ -113,6 +113,8 @@ namespace Photo
             this.splitContainer2.Panel1.Controls.Add(this.drzewoOpakowane1);
             this.splitContainer2.Panel1.Controls.Add(this.wyszukiwarkaControl1);
             this.splitContainer2.Panel1.Controls.Add(this.listaAlbumowControl);
+            this.splitContainer2.Panel1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.splitContainer2.Panel1.Resize += new System.EventHandler(this.splitContainer2_Panel1_Resize);
             // 
             // splitContainer2.Panel2
             // 
