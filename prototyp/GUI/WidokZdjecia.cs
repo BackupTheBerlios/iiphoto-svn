@@ -15,6 +15,8 @@ namespace Photo
         public WidokZdjecia()
         {
             InitializeComponent();
+            padX = 0;
+            padY = 0;
         }
 
         public void setImage(Zdjecie zdjecie)
@@ -44,25 +46,24 @@ namespace Photo
         {
             if (this.pictureBoxImage != null)
             {
-                int px, py;
-                if (this.Width > pictureBoxImage.Width + 10)
+                if (this.Width > pictureBoxImage.Width)
                 {
-                    px = (this.Width - pictureBoxImage.Width) / 2;
+                    padX = (this.Width - pictureBoxImage.Width) / 2;
                 }
                 else
                 {
-                    px = 5;
+                    padX = 0;
                 }
 
-                if (this.Height > pictureBoxImage.Height + 10)
+                if (this.Height > pictureBoxImage.Height)
                 {
-                    py = (this.Height - pictureBoxImage.Height) / 2;
+                    padY = (this.Height - pictureBoxImage.Height) / 2;
                 } else {
-                    py = 5;
+                    padY = 0;
                 }
-                this.pictureBox1.Padding = new Padding(px, py, 5, 5);
-                this.pictureBox1.Width = pictureBoxImage.Width + px + 5;
-                this.pictureBox1.Height = pictureBoxImage.Height + py + 5;
+                this.pictureBox1.Padding = new Padding(padX, padY, 0, 0);
+                this.pictureBox1.Width = pictureBoxImage.Width + padX;
+                this.pictureBox1.Height = pictureBoxImage.Height + padY;
             }
         }
 
@@ -214,7 +215,7 @@ namespace Photo
             if (e.Button == MouseButtons.Left)
             {
                 isDrag = true;
-                this.lmStartingPoint = new Point(e.X, e.Y);
+                this.lmStartingPoint = new Point(e.X - padX, e.Y - padY);
                 this.Refresh();
             }
             else if (e.Button == MouseButtons.Right)
@@ -246,17 +247,17 @@ namespace Photo
                     int maxX, maxY;
 
                     if (e.X >= this.pictureBox1.Width)
-                        maxX = this.pictureBox1.Width - 1;
-                    else if (e.X < 0)
+                        maxX = this.pictureBox1.Width - 1 - padX;
+                    else if (e.X - padX < 0)
                         maxX = 0;
                     else
-                        maxX = e.X;
+                        maxX = e.X - padX;
                     if (e.Y >= this.pictureBox1.Height)
-                        maxY = this.pictureBox1.Height - 1;
-                    else if (e.Y < 0)
+                        maxY = this.pictureBox1.Height - 1 - padY;
+                    else if (e.Y - padY < 0)
                         maxY = 0;
                     else
-                        maxY = e.Y;
+                        maxY = e.Y - padY;
 
                     //if (moving == true)
                     this.DrawMyRectangle(selectedRectangle);

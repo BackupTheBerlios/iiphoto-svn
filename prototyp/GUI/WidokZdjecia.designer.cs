@@ -73,6 +73,7 @@ namespace Photo
         private Point lmStartingPoint;
         private Rectangle selectedRectangle;
         private BitmapData data;
+        private int padX, padY;
 
     }
 }
