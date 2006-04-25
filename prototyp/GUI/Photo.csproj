@@ -66,6 +66,12 @@
     <Compile Include="DrzewoKatalogow.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DrzewoOpakowane.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DrzewoOpakowane.Designer.cs">
+      <DependentUpon>DrzewoOpakowane.cs</DependentUpon>
+    </Compile>
     <Compile Include="EdytorZdjeciaControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -100,6 +106,10 @@
     <EmbeddedResource Include="DrzewoKatalogow.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DrzewoKatalogow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DrzewoOpakowane.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DrzewoOpakowane.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EdytorZdjeciaControl.resx">
       <SubType>Designer</SubType>

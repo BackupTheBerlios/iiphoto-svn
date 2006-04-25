@@ -24,7 +24,10 @@ namespace Photo
 
             /* Inicjalizacja kontrolki DrzewoKatalogow.
              */
-            fileTree1.Fill();
+
+            drzewoOpakowane1.fileTree1.Fill();
+
+            //fileTree1.Fill();
 
             /* Inicjalizacja operacji graficznych.
              */
@@ -40,17 +43,17 @@ namespace Photo
 
             /* Delegowanie RozpoczetoWyszukiwanieDelegate.
              */
-            fileTree1.RozpoczetoWyszukiwanie +=
+            drzewoOpakowane1.fileTree1.RozpoczetoWyszukiwanie +=
                 new RozpoczetoWyszukiwanieDelegate(statusStrip.RozpoczetoWyszukiwanie);
 
             /* Delegowanie ZnalezionoZdjecieDelegate.
              */
-            fileTree1.ZnalezionoZdjecie += 
+            drzewoOpakowane1.fileTree1.ZnalezionoZdjecie += 
                 new ZnalezionoZdjecieDelegate(przegladarkaZdjec.Dodaj);
 
             /* Delegowanie ZakonczonoWyszukiwanieDelegate.
              */
-            fileTree1.ZakonczonoWyszukiwanie +=
+            drzewoOpakowane1.fileTree1.ZakonczonoWyszukiwanie +=
                 new ZakonczonoWyszukiwanieDelegate(statusStrip.ZakonczonoWyszukiwanie);
             listaAlbumowControl.ZakonczonoWyszukiwanie +=
                 new ZakonczonoWyszukiwanieDelegate(przegladarkaZdjec.Wypelnij);
@@ -83,9 +86,14 @@ namespace Photo
         private void button1_Click(object sender, EventArgs e)
         {
 
-            fileTree1.Delete();
-            fileTree1.Fill();
+            //fileTree1.Delete();
+            //fileTree1.Fill();
             
+        }
+
+        private void przegladarkaZdjec_Resize(object sender, EventArgs e)
+        {
+            //drzewoOpakowane1.fileTree1.Refresh();// = false;
         }
     }
 }
