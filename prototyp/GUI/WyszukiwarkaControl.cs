@@ -34,6 +34,7 @@ namespace Photo
         #region Wyszukiwacz Members
 
         public event ZakonczonoWyszukiwanieDelegate ZakonczonoWyszukiwanie;
+        public event RozpoczetoWyszukiwanieDelegate RozpoczetoWyszukiwanie;
 
         public IWyszukiwanie Wyszukaj()
         {

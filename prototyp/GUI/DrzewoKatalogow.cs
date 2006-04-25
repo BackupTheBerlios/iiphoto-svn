@@ -331,6 +331,7 @@ namespace Photo
         }
 
         public event ZakonczonoWyszukiwanieDelegate ZakonczonoWyszukiwanie;
+        public event RozpoczetoWyszukiwanieDelegate RozpoczetoWyszukiwanie;
 
         #endregion
 
@@ -346,14 +347,49 @@ namespace Photo
         {
             base.OnAfterSelect(e);
 
+            if (RozpoczetoWyszukiwanie != null)
+                RozpoczetoWyszukiwanie(null);
+
+            BackgroundWorker bw = new BackgroundWorker();
+            bw.DoWork += new DoWorkEventHandler(bw_DoWork);
+            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
+            bw.RunWorkerAsync(e.Node);
+
+            DirTreeNode dn = new DirTreeNode("napis");
+
+            if (e.Node.Text.IndexOf("A:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
+            {
+                e.Node.Text = "A:\\ " + "[" + dn.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
+                e.Node.ImageIndex = 5;
+                e.Node.SelectedImageIndex = 5;
+            }
+            else if (e.Node.Text.IndexOf("B:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
+            {
+                e.Node.Text = "B:\\ " + "[" + dn.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
+                e.Node.ImageIndex = 5;
+                e.Node.SelectedImageIndex = 5;
+            }
+        }
+
+        void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (ZakonczonoWyszukiwanie != null)
+                ZakonczonoWyszukiwanie((IZdjecie[])e.Result);                
+
+                this.Refresh();
+        }
+
+        void bw_DoWork(object sender, DoWorkEventArgs args)
+        {
+            DirTreeNode Node = (DirTreeNode)args.Argument;
             //e.Node.;
 
             try
             {
-                string[] files = Directory.GetFiles(((DirTreeNode)e.Node).Path, "*.jpg");
-                string[] files2 = Directory.GetFiles(((DirTreeNode)e.Node).Path, "*.jpeg");
-                string[] files3 = Directory.GetFiles(((DirTreeNode)e.Node).Path, "*.tif");
-                string[] files4 = Directory.GetFiles(((DirTreeNode)e.Node).Path, "*.tiff");
+                string[] files = Directory.GetFiles(Node.Path, "*.jpg");
+                string[] files2 = Directory.GetFiles(Node.Path, "*.jpeg");
+                string[] files3 = Directory.GetFiles(Node.Path, "*.tif");
+                string[] files4 = Directory.GetFiles(Node.Path, "*.tiff");
 
                 string[] f1 = new string[files.Length];
                 string[] f2 = new string[files2.Length];
@@ -463,30 +499,12 @@ namespace Photo
                         MessageBox.Show("Plik: \"" + files4[i].Substring(files4[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", files4[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
-                if (ZakonczonoWyszukiwanie != null)
-                    ZakonczonoWyszukiwanie(zdjecia.ToArray());
 
-
-                DirTreeNode dn = new DirTreeNode("napis");
-
-                if (e.Node.Text.IndexOf("A:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
-                {
-                    e.Node.Text = "A:\\ " + "[" + dn.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
-                    e.Node.ImageIndex = 5;
-                    e.Node.SelectedImageIndex = 5;
-                }
-                else if (e.Node.Text.IndexOf("B:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
-                {
-                    e.Node.Text = "B:\\ " + "[" + dn.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
-                    e.Node.ImageIndex = 5;
-                    e.Node.SelectedImageIndex = 5;
-                }
-
-                this.Refresh();
+                args.Result = zdjecia.ToArray();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                MessageBox.Show("Odmowa dostêpu", e.Node.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message + " - Odmowa dostêpu", Node.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 /*if (e.Node.Text.Length == 3)
                 {
                     if (e.Node.Text.CompareTo("A:\\") == 0 || e.Node.Text.CompareTo("B:\\") == 0 )

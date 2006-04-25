@@ -78,11 +78,11 @@
     <Compile Include="InformacjeControl.Designer.cs">
       <DependentUpon>InformacjeControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="IIPhoto.cs">
+    <Compile Include="PhotoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IIPhoto.Designer.cs">
-      <DependentUpon>IIPhoto.cs</DependentUpon>
+    <Compile Include="PhotoForm.Designer.cs">
+      <DependentUpon>PhotoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfejsy.cs" />
     <Compile Include="ListaAlbumowControl.cs">
@@ -92,6 +92,9 @@
       <DependentUpon>ListaAlbumowControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Operacje.cs" />
+    <Compile Include="PasekStanuControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DrzewoKatalogow.resx">
@@ -106,9 +109,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>InformacjeControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="IIPhoto.resx">
+    <EmbeddedResource Include="PhotoForm.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>IIPhoto.cs</DependentUpon>
+      <DependentUpon>PhotoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ListaAlbumowControl.resx">
       <SubType>Designer</SubType>
