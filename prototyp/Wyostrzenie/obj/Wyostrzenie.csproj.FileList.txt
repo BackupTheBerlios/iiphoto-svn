@@ -1,9 +1,0 @@
-obj\Debug\ResolveAssemblyReference.cache
-obj\Debug\Wyostrzenie.Properties.Resources.resources
-obj\Debug\Wyostrzenie.csproj.GenerateResource.Cache
-bin\Debug\Wyostrzenie.dll
-bin\Debug\Wyostrzenie.pdb
-bin\Debug\GUI.exe
-bin\Debug\GUI.pdb
-obj\Debug\Wyostrzenie.dll
-obj\Debug\Wyostrzenie.pdb
