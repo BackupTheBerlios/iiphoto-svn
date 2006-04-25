@@ -225,7 +225,7 @@ namespace Photo
             const int Cdrom_z = 4;
             const int Dyskietka_z = 5;
 
-            //private IWyszukiwanie W;
+            //private IWyszukiwanie Wsad;
 
             
 

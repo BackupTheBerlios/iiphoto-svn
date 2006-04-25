@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
+//sdad
 namespace Photo.Properties {
     using System;
     

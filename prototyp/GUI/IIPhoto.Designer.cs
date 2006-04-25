@@ -68,7 +68,7 @@ namespace Photo
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "statusStrip1";
             // 
-            // toolStripContainer1
+            // toolStripContainer1fdsa
             // 
             // 
             // toolStripContainer1.BottomToolStripPanel
