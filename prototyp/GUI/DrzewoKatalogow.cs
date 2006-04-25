@@ -32,7 +32,7 @@ namespace Photo
             list.Images.Add(Properties.Resources.Dyskietka_z);
             ImageList = list;
         }
-        
+
         public void Fill()
         {
             BeginUpdate();
@@ -45,15 +45,15 @@ namespace Photo
 
             foreach (string tempDrive in drives)
             {
-               /* int tempType = getDriveType(tempDrive);
-                string tempName = GetDriveName(tempDrive);
-                tempInfo = new DriveInfo(tempDrive, tempType, tempName);
-                availableDrives.Add(tempInfo);
-                */
+                /* int tempType = getDriveType(tempDrive);
+                 string tempName = GetDriveName(tempDrive);
+                 tempInfo = new DriveInfo(tempDrive, tempType, tempName);
+                 availableDrives.Add(tempInfo);
+                 */
                 //string tempName = GetDriveName(tempDrive);
 
                 DirTreeNode dn = new DirTreeNode(tempDrive);
-                
+
                 //dn.Text = tempName + "(" + tempDrive + ")";
                 Nodes.Add(dn);
 
@@ -63,20 +63,22 @@ namespace Photo
 
             //for (int i = 0; i < drives.Length; i++)
             //{
-                //drives[i].GetType
-                
+            //drives[i].GetType
+
             //}
             EndUpdate();
 
             BeforeExpand += new TreeViewCancelEventHandler(prepare);
             AfterCollapse += new TreeViewEventHandler(clear);
-        }        
+        }
 
         public void Open(string path)
         {
             TreeNodeCollection nodes = Nodes;
             DirTreeNode subnode = null;
             int i, n;
+
+
 
             path = path.ToLower();
             nodes = Nodes;
@@ -126,7 +128,7 @@ namespace Photo
                 //Nodes.Add(tn);
                 Nodes.Insert(tn.Index, tn);
 
-                
+
                 EndUpdate();
 
             }
@@ -141,7 +143,7 @@ namespace Photo
 
         public void Delete()
         {
-            BeginUpdate();           
+            BeginUpdate();
             Nodes.RemoveAt(0);
             Nodes.Clear();
             EndUpdate();
@@ -159,18 +161,19 @@ namespace Photo
                 if (s.CompareTo("A:\\") == 0 || s.CompareTo("B:\\") == 0)
                 {
                     //dn = new DirTreeNode(tempDrive, tempDrive + " [Floppy]");
-                    if (GetDriveName(s) != "")
-                    {
-                        Text = s + " [" + GetDriveName(s) + "]";
-                        ImageIndex = Dyskietka_z;
-                        SelectedImageIndex = Dyskietka_z;
-                    }
-                    else
-                    {
-                        Text = s + " [Floppy]";
-                        ImageIndex = Dyskietka;
-                        SelectedImageIndex = Dyskietka;
-                    }                    
+                    // if (GetDriveName(s) != "")
+                    //{
+                    // Text = s + " [Floppy]";
+                    //Text = s + " [" + GetDriveName(s) + "]";
+                    // ImageIndex = Dyskietka_z;
+                    // SelectedImageIndex = Dyskietka_z;
+                    // }
+                    // else
+                    // {
+                    Text = s + " [Floppy]";
+                    ImageIndex = Dyskietka;
+                    SelectedImageIndex = Dyskietka;
+                    // }                    
                 }
                 else
                 {
@@ -227,7 +230,7 @@ namespace Photo
 
             //private IWyszukiwanie Wsad;
 
-            
+
 
 
             [DllImport("kernel32.dll")]
@@ -272,8 +275,11 @@ namespace Photo
                 if (retval == true) return volname.ToString();
                 else return "";
             }
-        
 
+            public string Etykieta(string drive)
+            {
+                return GetDriveName(drive);
+            }
 
             internal void populate()
             {
@@ -361,8 +367,8 @@ namespace Photo
                 for (i = 0; i < files.Length; i++)
                 {
                     if (files[i].ToLower().LastIndexOf(".jpg") == (files[i].Length - 4))
-                    {                        
-                        f1[z_f1] = files[i];                        
+                    {
+                        f1[z_f1] = files[i];
                         z_f1++;
                     }
                 }
@@ -398,7 +404,7 @@ namespace Photo
 
 
                 List<Zdjecie> zdjecia = new List<Zdjecie>(z_f1 + z_f2 + z_f3 + z_f4);
-                
+
                 int ile = 0;
                 for (i = 0; i < z_f1; i++)
                 {
@@ -410,7 +416,7 @@ namespace Photo
                     catch (ArgumentException)
                     {
                         //MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
-                        MessageBox.Show("Plik: \"" + files[i].Substring(files[i].LastIndexOf("\\")+1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", files[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Plik: \"" + files[i].Substring(files[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", files[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 ile = i;
@@ -460,12 +466,28 @@ namespace Photo
                 if (ZakonczonoWyszukiwanie != null)
                     ZakonczonoWyszukiwanie(zdjecia.ToArray());
 
+
+                DirTreeNode dn = new DirTreeNode("napis");
+
+                if (e.Node.Text.IndexOf("A:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
+                {
+                    e.Node.Text = "A:\\ " + "[" + dn.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
+                    e.Node.ImageIndex = 5;
+                    e.Node.SelectedImageIndex = 5;
+                }
+                else if (e.Node.Text.IndexOf("B:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
+                {
+                    e.Node.Text = "B:\\ " + "[" + dn.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
+                    e.Node.ImageIndex = 5;
+                    e.Node.SelectedImageIndex = 5;
+                }
+
                 this.Refresh();
             }
             catch (Exception)
             {
                 MessageBox.Show("Odmowa dostêpu", e.Node.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                if (e.Node.Text.Length == 3)
+                /*if (e.Node.Text.Length == 3)
                 {
                     if (e.Node.Text.CompareTo("A:\\") == 0 || e.Node.Text.CompareTo("B:\\") == 0 )
                     {
@@ -478,9 +500,34 @@ namespace Photo
                     //this.
 
 
-                }
-                
-                
+                }*/
+
+                DirTreeNode dd = new DirTreeNode("napis");
+
+                this.SelectedNode = dd;
+
+
+            }
+        }
+
+        protected override void OnAfterExpand(TreeViewEventArgs e)
+        {
+            base.OnAfterExpand(e);
+
+
+            DirTreeNode dn = new DirTreeNode("napis");
+
+            if (e.Node.Text.IndexOf("A:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
+            {
+                e.Node.Text = "A:\\ " + "[" + dn.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
+                e.Node.ImageIndex = 5;
+                e.Node.SelectedImageIndex = 5;
+            }
+            else if (e.Node.Text.IndexOf("B:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
+            {
+                e.Node.Text = "B:\\ " + "[" + dn.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
+                e.Node.ImageIndex = 5;
+                e.Node.SelectedImageIndex = 5;
             }
         }
 
