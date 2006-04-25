@@ -74,13 +74,6 @@ namespace Photo.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap Cdrom_z2 {
-            get {
-                object obj = ResourceManager.GetObject("Cdrom_z2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap Dysk {
             get {
                 object obj = ResourceManager.GetObject("Dysk", resourceCulture);
