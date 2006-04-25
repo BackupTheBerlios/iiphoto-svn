@@ -26,6 +26,7 @@ namespace Photo
 
         public event ZakonczonoWyszukiwanieDelegate ZakonczonoWyszukiwanie;
         public event RozpoczetoWyszukiwanieDelegate RozpoczetoWyszukiwanie;
+        public event ZnalezionoZdjecieDelegate ZnalezionoZdjecie;
 
         public IWyszukiwanie Wyszukaj()
         {

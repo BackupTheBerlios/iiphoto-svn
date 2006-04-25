@@ -228,6 +228,7 @@ namespace Photo
     /// <param name="zdjecia">Lista zdjêæ bed¹ca wynikiem wyszukiwania.</param>
     public delegate void ZakonczonoWyszukiwanieDelegate(IZdjecie[] zdjecia);
     public delegate void RozpoczetoWyszukiwanieDelegate(IWyszukiwanie wyszukiwanie);
+    public delegate void ZnalezionoZdjecieDelegate(IZdjecie zdjecie);
 
     /// <summary>
     /// Interfejs dla obiektu wyszukuj¹cego zdjêcia.
@@ -241,6 +242,7 @@ namespace Photo
         IWyszukiwanie Wyszukaj();
         event ZakonczonoWyszukiwanieDelegate ZakonczonoWyszukiwanie;
         event RozpoczetoWyszukiwanieDelegate RozpoczetoWyszukiwanie;
+        event ZnalezionoZdjecieDelegate ZnalezionoZdjecie;
     }
 
     /// <summary>

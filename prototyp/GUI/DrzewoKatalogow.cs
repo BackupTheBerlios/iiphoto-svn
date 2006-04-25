@@ -331,6 +331,7 @@ namespace Photo
         }
 
         public event ZakonczonoWyszukiwanieDelegate ZakonczonoWyszukiwanie;
+        public event ZnalezionoZdjecieDelegate ZnalezionoZdjecie;
         public event RozpoczetoWyszukiwanieDelegate RozpoczetoWyszukiwanie;
 
         #endregion
@@ -351,7 +352,9 @@ namespace Photo
                 RozpoczetoWyszukiwanie(null);
 
             BackgroundWorker bw = new BackgroundWorker();
+            bw.WorkerReportsProgress = true;
             bw.DoWork += new DoWorkEventHandler(bw_DoWork);
+            bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
             bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
             bw.RunWorkerAsync(e.Node);
 
@@ -371,18 +374,32 @@ namespace Photo
             }
         }
 
+        void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            if (ZnalezionoZdjecie != null)
+                ZnalezionoZdjecie((Zdjecie)e.UserState);
+        }
+
         void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (ZakonczonoWyszukiwanie != null)
-                ZakonczonoWyszukiwanie((IZdjecie[])e.Result);                
-
-                this.Refresh();
+            {
+                ZakonczonoWyszukiwanie((IZdjecie[])e.Result);
+            }
+            
+            this.Refresh();
         }
 
         void bw_DoWork(object sender, DoWorkEventArgs args)
         {
             DirTreeNode Node = (DirTreeNode)args.Argument;
-            //e.Node.;
+            BackgroundWorker bw = sender as BackgroundWorker;
+            args.Result = ZnajdzPlikiWKatalogu(bw, Node);
+        }
+
+        private Zdjecie[] ZnajdzPlikiWKatalogu(BackgroundWorker bw, DirTreeNode Node)
+        {
+            List<Zdjecie> zdjecia = new List<Zdjecie>();
 
             try
             {
@@ -438,8 +455,7 @@ namespace Photo
                     }
                 }
 
-
-                List<Zdjecie> zdjecia = new List<Zdjecie>(z_f1 + z_f2 + z_f3 + z_f4);
+                zdjecia = new List<Zdjecie>(z_f1 + z_f2 + z_f3 + z_f4);
 
                 int ile = 0;
                 for (i = 0; i < z_f1; i++)
@@ -447,6 +463,7 @@ namespace Photo
                     try
                     {
                         Zdjecie z = new Zdjecie(f1[i]);
+                        bw.ReportProgress(0, z);
                         zdjecia.Add(z);
                     }
                     catch (ArgumentException)
@@ -461,6 +478,7 @@ namespace Photo
                     try
                     {
                         Zdjecie z = new Zdjecie(f2[i]);
+                        bw.ReportProgress(0, z);
                         zdjecia.Add(z);
                     }
                     catch (ArgumentException)
@@ -477,6 +495,7 @@ namespace Photo
                     try
                     {
                         Zdjecie z = new Zdjecie(f3[i]);
+                        bw.ReportProgress(0, z);
                         zdjecia.Add(z);
                     }
                     catch (ArgumentException)
@@ -491,6 +510,7 @@ namespace Photo
                     try
                     {
                         Zdjecie z = new Zdjecie(f4[i]);
+                        bw.ReportProgress(0, z);
                         zdjecia.Add(z);
                     }
                     catch (ArgumentException)
@@ -499,8 +519,6 @@ namespace Photo
                         MessageBox.Show("Plik: \"" + files4[i].Substring(files4[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", files4[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
-
-                args.Result = zdjecia.ToArray();
             }
             catch (Exception e)
             {
@@ -526,6 +544,8 @@ namespace Photo
 
 
             }
+
+            return zdjecia.ToArray();
         }
 
         protected override void OnAfterExpand(TreeViewEventArgs e)
