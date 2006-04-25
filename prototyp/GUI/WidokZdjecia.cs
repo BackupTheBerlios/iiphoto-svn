@@ -45,7 +45,7 @@ namespace Photo
             if (this.pictureBoxImage != null)
             {
                 int px, py;
-                if (this.Width > pictureBoxImage.Width)
+                if (this.Width > pictureBoxImage.Width + 10)
                 {
                     px = (this.Width - pictureBoxImage.Width) / 2;
                 }
@@ -54,7 +54,7 @@ namespace Photo
                     px = 5;
                 }
 
-                if (this.Height > pictureBoxImage.Height)
+                if (this.Height > pictureBoxImage.Height + 10)
                 {
                     py = (this.Height - pictureBoxImage.Height) / 2;
                 } else {
@@ -64,7 +64,6 @@ namespace Photo
                 this.pictureBox1.Width = pictureBoxImage.Width + px + 5;
                 this.pictureBox1.Height = pictureBoxImage.Height + py + 5;
             }
-            this.Refresh();
         }
 
         /*public void Zoom(double zoom) {
