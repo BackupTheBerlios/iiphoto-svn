@@ -4,27 +4,33 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Photo
 {
     public class WidokMiniatur : System.Windows.Forms.ListView, IOpakowanieZdjec, IKontekst
     {
-        private int defaultImageSize;
-        private List<IZdjecie> miniatury;
-        private double zoom;
+        private int defaultImageSize = 120;
+        private List<IZdjecie> miniatury = new List<IZdjecie>();
+        private double zoom = 1.0;
         private bool Edycja;
+        private Semaphore sem_dodawania = new Semaphore(0, 1);
 
         public WidokMiniatur()
         {
-            miniatury = new List<IZdjecie>();
+            LargeImageList = new ImageList();
+            LargeImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            LargeImageList.Tag = "100%";
+            LargeImageList.TransparentColor = System.Drawing.Color.Transparent;
+            LargeImageList.ImageSize = new Size((int)(zoom * this.defaultImageSize), (int)(zoom * this.defaultImageSize));
+
+            sem_dodawania.Release();
             //Activate double buffering
 
             //Enable the OnNotifyMessage event so we get a chance to filter out 
             // Windows messages before they get to the form's WndProc
-            this.defaultImageSize = 120;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
             this.SetStyle(ControlStyles.EnableNotifyMessage, true);
-            zoom = 1.0;
         }
         public WidokMiniatur(int imgSize)
             : this()
@@ -55,14 +61,12 @@ namespace Photo
             ImageList newImageList = new ImageList();
             ListViewItem listViewItem;
 
-            newImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            newImageList.Tag = "100%";
-            newImageList.TransparentColor = System.Drawing.Color.Transparent;
-            newImageList.ImageSize = new Size((int)(zoom * this.defaultImageSize), (int)(zoom * this.defaultImageSize));
-
-            int maxSize = newImageList.ImageSize.Width;
+            int maxSize = LargeImageList.ImageSize.Width;
             int scaledH, scaledW, posX, posY;
+
+            LargeImageList.Images.Clear();
             this.Items.Clear();
+
             for (int i = 0; i < miniatury.Count; i++)
             {
                 z = (Zdjecie)miniatury[i];
@@ -91,13 +95,10 @@ namespace Photo
                 }
                 MyGraphics.DrawImage(z.Miniatura, MyRectan);
                 newBitmap.Tag = z;
-                newImageList.Images.Add(newBitmap);
-                listViewItem = this.Items.Add(new ListViewItem(z.Filename));
+                LargeImageList.Images.Add(newBitmap);
+                listViewItem = this.Items.Add(new ListViewItem(z.NazwaPliku));
                 listViewItem.ImageIndex = i;
             }
-
-            // Create an new ImageList for the ListView control
-            this.LargeImageList = newImageList;
 
             // Update the ListView control
             this.Refresh();
@@ -117,7 +118,42 @@ namespace Photo
 
         public void Dodaj(IZdjecie zdjecie)
         {
+            sem_dodawania.WaitOne();
             miniatury.Add(zdjecie);
+            int maxSize = LargeImageList.ImageSize.Width;
+            int scaledH, scaledW, posX, posY;
+            Bitmap newBitmap = new Bitmap(maxSize, maxSize);
+            Graphics MyGraphics = Graphics.FromImage(newBitmap);
+
+            if (zdjecie.Miniatura.Height > zdjecie.Miniatura.Width)
+            {
+                scaledH = maxSize;
+                scaledW = (int)Math.Round(
+                    (double)(zdjecie.Miniatura.Width * scaledH) / zdjecie.Miniatura.Height);
+                posX = (maxSize - scaledW) / 2;
+                posY = 0;
+            }
+            else
+            {
+                scaledW = maxSize;
+                scaledH = (int)Math.Round(
+                    (double)(zdjecie.Miniatura.Height * scaledW) / zdjecie.Miniatura.Width);
+                posX = 0;
+                posY = (maxSize - scaledH) / 2;
+            }
+
+            Rectangle MyRectan = new Rectangle(posX, posY, scaledW, scaledH);
+            using (Pen p = new Pen(Brushes.LightGray))
+            {
+                MyGraphics.DrawRectangle(p, 0, 0, maxSize - 1, maxSize - 1);
+            }
+            MyGraphics.DrawImage(zdjecie.Miniatura, MyRectan);
+            newBitmap.Tag = zdjecie;
+            LargeImageList.Images.Add(newBitmap);
+            ListViewItem listViewItem = new ListViewItem(zdjecie.NazwaPliku);
+            listViewItem.ImageIndex = LargeImageList.Images.Count - 1;
+            this.Items.Add(listViewItem);
+            sem_dodawania.Release();
         }
 
         public void Usun(IZdjecie zdjecie)
@@ -179,6 +215,7 @@ namespace Photo
 
         public void Wypelnij(IZdjecie[] zdjecia)
         {
+            sem_dodawania.WaitOne();
             miniatury.Clear();
             miniatury.AddRange(zdjecia);
             foreach (Zdjecie z in zdjecia)
@@ -189,6 +226,7 @@ namespace Photo
                 }
             }
             ShowImages();
+            sem_dodawania.Release();
         }
 
         #endregion

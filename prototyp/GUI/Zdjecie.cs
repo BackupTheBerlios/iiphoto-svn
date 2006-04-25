@@ -31,7 +31,7 @@ namespace Photo
             miniatura = new Bitmap(path);
         }
 
-        public string Filename
+        public string NazwaPliku
         {
             get
             {

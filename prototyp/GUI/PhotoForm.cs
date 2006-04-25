@@ -56,8 +56,8 @@ namespace Photo
                 new ZakonczonoWyszukiwanieDelegate(przegladarkaZdjec.Wypelnij);
             wyszukiwarkaControl1.ZakonczonoWyszukiwanie +=
                 new ZakonczonoWyszukiwanieDelegate(przegladarkaZdjec.Wypelnij);
-            fileTree1.ZakonczonoWyszukiwanie +=
-                new ZakonczonoWyszukiwanieDelegate(przegladarkaZdjec.Wypelnij);
+            //fileTree1.ZakonczonoWyszukiwanie +=
+                //new ZakonczonoWyszukiwanieDelegate(przegladarkaZdjec.Wypelnij);
 
             /* Delegowanie WybranoZdjecieDelegate
              */

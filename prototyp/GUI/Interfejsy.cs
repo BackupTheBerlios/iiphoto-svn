@@ -189,6 +189,15 @@ namespace Photo
         {
             get;
         }
+        Bitmap Miniatura
+        {
+            get;
+            set;
+        }
+        string NazwaPliku
+        {
+            get;
+        }
         /// <summary>
         /// Zdarzenie informuj¹ce o modyfikacji zdjêcia.
         /// </summary>
