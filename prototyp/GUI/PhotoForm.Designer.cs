@@ -96,7 +96,7 @@ namespace Photo
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitContainer1.Panel2.Controls.Add(this.informacjeControl);
             this.splitContainer1.Size = new System.Drawing.Size(1016, 515);
-            this.splitContainer1.SplitterDistance = 914;
+            this.splitContainer1.SplitterDistance = 879;
             this.splitContainer1.TabIndex = 2;
             // 
             // splitContainer2
@@ -120,7 +120,7 @@ namespace Photo
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.splitContainer2.Panel2.Controls.Add(this.przegladarkaZdjec);
-            this.splitContainer2.Size = new System.Drawing.Size(914, 515);
+            this.splitContainer2.Size = new System.Drawing.Size(879, 515);
             this.splitContainer2.SplitterDistance = 210;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -136,7 +136,7 @@ namespace Photo
             this.toolStripOperacje.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripOperacje.Location = new System.Drawing.Point(3, 0);
             this.toolStripOperacje.Name = "toolStripOperacje";
-            this.toolStripOperacje.Size = new System.Drawing.Size(262, 25);
+            this.toolStripOperacje.Size = new System.Drawing.Size(264, 25);
             this.toolStripOperacje.TabIndex = 1;
             this.toolStripOperacje.Text = "toolStrip1";
             // 
@@ -216,16 +216,16 @@ namespace Photo
             this.przegladarkaZdjec.Dock = System.Windows.Forms.DockStyle.Fill;
             this.przegladarkaZdjec.Location = new System.Drawing.Point(0, 0);
             this.przegladarkaZdjec.Name = "przegladarkaZdjec";
-            this.przegladarkaZdjec.Size = new System.Drawing.Size(700, 515);
+            this.przegladarkaZdjec.Size = new System.Drawing.Size(665, 515);
             this.przegladarkaZdjec.TabIndex = 0;
             this.przegladarkaZdjec.Resize += new System.EventHandler(this.przegladarkaZdjec_Resize);
             // 
             // informacjeControl
             // 
-            this.informacjeControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.informacjeControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.informacjeControl.Location = new System.Drawing.Point(0, 0);
             this.informacjeControl.Name = "informacjeControl";
-            this.informacjeControl.Size = new System.Drawing.Size(98, 192);
+            this.informacjeControl.Size = new System.Drawing.Size(133, 515);
             this.informacjeControl.TabIndex = 0;
             // 
             // PhotoForm
