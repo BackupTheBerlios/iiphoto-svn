@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Text;
 
 namespace Photo
@@ -82,6 +83,43 @@ namespace Photo
         }
 
         public event ZmodyfikowanoZdjecieDelegate ZmodyfikowanoZdjecie;
+
+        #endregion
+
+        #region Meta
+
+        public void SetIIPhotoProperty(string value)
+        {
+            System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
+            PropertyItem propItem = miniatura.PropertyItems[0];
+            propItem.Id = PropertyTags.IIPhotoTag;
+            propItem.Type = 2;
+            propItem.Value = encoding.GetBytes(value);
+            propItem.Len = propItem.Value.Length;
+            miniatura.SetPropertyItem(propItem);
+        }
+
+        public string GetProperty(int propID)
+        {
+            PropertyItem i;
+            try
+            {
+                string val;
+                i = miniatura.GetPropertyItem(propID);
+                switch (i.Type)
+                {
+                    case 1: val = Encoding.Unicode.GetString(i.Value); break;
+                    case 2: val = Encoding.ASCII.GetString(i.Value); break;
+                    case 3: val = BitConverter.ToUInt16(i.Value, 0).ToString(); break;
+                    default: val = "Value not supported"; break;
+                }
+                return val;
+            }
+            catch
+            {
+                return "";
+            }
+        }
 
         #endregion
 
