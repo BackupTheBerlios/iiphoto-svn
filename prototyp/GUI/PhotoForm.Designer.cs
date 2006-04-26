@@ -38,12 +38,12 @@ namespace Photo
             this.Alfa = new System.Windows.Forms.ToolStripButton();
             this.Omega = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.statusStrip = new Photo.PasekStanuControl();
-            this.drzewoOpakowane1 = new Photo.DrzewoOpakowane();
-            this.wyszukiwarkaControl1 = new Photo.WyszukiwarkaControl();
-            this.listaAlbumowControl = new Photo.ListaAlbumowControl();
-            this.przegladarkaZdjec = new Photo.PrzegladarkaZdjec();
-            this.informacjeControl = new Photo.InformacjeControl();
+            this.statusStrip = new PasekStanuControl();
+            this.drzewoOpakowane1 = new DrzewoOpakowane();
+            this.wyszukiwarkaControl1 = new WyszukiwarkaControl();
+            this.listaAlbumowControl = new ListaAlbumowControl();
+            this.przegladarkaZdjec = new PrzegladarkaZdjec();
+            this.informacjeControl = new InformacjeControl();
             this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
