@@ -39,12 +39,13 @@ namespace Photo
             // 
             // groupBox1
             // 
+            this.groupBox1.AutoSize = true;
             this.groupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox1.Controls.Add(this.Tags);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(278, 193);
+            this.groupBox1.Size = new System.Drawing.Size(278, 270);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Podstawowe informacje";
@@ -56,7 +57,7 @@ namespace Photo
             this.Tags.Location = new System.Drawing.Point(3, 16);
             this.Tags.MultiSelect = false;
             this.Tags.Name = "Tags";
-            this.Tags.Size = new System.Drawing.Size(272, 174);
+            this.Tags.Size = new System.Drawing.Size(272, 251);
             this.Tags.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.Tags.TabIndex = 0;
             this.Tags.UseCompatibleStateImageBehavior = false;
@@ -64,11 +65,12 @@ namespace Photo
             // 
             // groupBox2
             // 
+            this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBox2.Controls.Add(this.Exif);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(0, 193);
+            this.groupBox2.Location = new System.Drawing.Point(0, 270);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(278, 271);
+            this.groupBox2.Size = new System.Drawing.Size(278, 194);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Exif";
@@ -76,9 +78,10 @@ namespace Photo
             // Exif
             // 
             this.Exif.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Exif.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Exif.Location = new System.Drawing.Point(3, 16);
             this.Exif.Name = "Exif";
-            this.Exif.Size = new System.Drawing.Size(272, 252);
+            this.Exif.Size = new System.Drawing.Size(272, 175);
             this.Exif.TabIndex = 0;
             this.Exif.UseCompatibleStateImageBehavior = false;
             this.Exif.View = System.Windows.Forms.View.Details;
@@ -86,7 +89,7 @@ namespace Photo
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.splitter1.Location = new System.Drawing.Point(0, 190);
+            this.splitter1.Location = new System.Drawing.Point(0, 267);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(278, 3);
             this.splitter1.TabIndex = 2;
@@ -104,6 +107,7 @@ namespace Photo
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

@@ -15,10 +15,12 @@ namespace Photo
             InitializeComponent();
 
             Tags.Columns.Add("Nazwa");
-            Tags.Columns.Add("Wartosc");
+            Tags.Columns.Add("Wartoœæ");
+            Exif.Columns.Add("Nazwa");
+            Exif.Columns.Add("Wartoœæ");
 
-            Tags.Items.Add(new ListViewItem(new string[] { "Format", "JPG" }));
-            Tags.Items.Add(new ListViewItem(new string[] { "Rozdzielczosc", "800x600" }));
+            Tags.Items.Add(new ListViewItem(new string[] { "Brak informacji"}));
+            Exif.Items.Add(new ListViewItem(new string[] { "Brak informacji" }));
         }
 
         public void Zaladuj(IZdjecie zdjecie)
