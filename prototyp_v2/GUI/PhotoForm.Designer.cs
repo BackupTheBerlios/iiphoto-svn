@@ -30,6 +30,9 @@ namespace Photo
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PhotoForm));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.splitter2 = new System.Windows.Forms.Splitter();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.toolStripOperacje = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -38,22 +41,19 @@ namespace Photo
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.splitter2 = new System.Windows.Forms.Splitter();
             this.przegladarkaZdjec = new Photo.PrzegladarkaZdjec();
             this.informacjeControl1 = new Photo.InformacjeControl();
             this.drzewoOpakowane1 = new Photo.DrzewoOpakowane();
             this.wyszukiwarkaControl1 = new Photo.WyszukiwarkaControl();
             this.listaAlbumowControl = new Photo.ListaAlbumowControl();
             this.statusStrip = new Photo.PasekStanuControl();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.toolStripOperacje.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripContainer1
@@ -69,13 +69,41 @@ namespace Photo
             this.toolStripContainer1.ContentPanel.Controls.Add(this.statusStrip);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.toolStripOperacje);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.menuStrip1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1016, 562);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1043, 608);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(1016, 562);
+            this.toolStripContainer1.Size = new System.Drawing.Size(1043, 608);
             this.toolStripContainer1.TabIndex = 3;
             this.toolStripContainer1.Text = "toolStripContainer1";
+            // 
+            // splitter2
+            // 
+            this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.splitter2.Location = new System.Drawing.Point(904, 49);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(1, 537);
+            this.splitter2.TabIndex = 7;
+            this.splitter2.TabStop = false;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(200, 49);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(1, 537);
+            this.splitter1.TabIndex = 5;
+            this.splitter1.TabStop = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.drzewoOpakowane1);
+            this.panel1.Controls.Add(this.wyszukiwarkaControl1);
+            this.panel1.Controls.Add(this.listaAlbumowControl);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 49);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 537);
+            this.panel1.TabIndex = 4;
             // 
             // toolStripOperacje
             // 
@@ -88,7 +116,7 @@ namespace Photo
             this.toolStripOperacje.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripOperacje.Location = new System.Drawing.Point(0, 24);
             this.toolStripOperacje.Name = "toolStripOperacje";
-            this.toolStripOperacje.Size = new System.Drawing.Size(1016, 25);
+            this.toolStripOperacje.Size = new System.Drawing.Size(1043, 25);
             this.toolStripOperacje.TabIndex = 1;
             this.toolStripOperacje.Text = "toolStrip1";
             // 
@@ -134,10 +162,10 @@ namespace Photo
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1016, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1043, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -147,48 +175,20 @@ namespace Photo
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.drzewoOpakowane1);
-            this.panel1.Controls.Add(this.wyszukiwarkaControl1);
-            this.panel1.Controls.Add(this.listaAlbumowControl);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 49);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 491);
-            this.panel1.TabIndex = 4;
-            // 
-            // splitter1
-            // 
-            this.splitter1.Location = new System.Drawing.Point(200, 49);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(1, 491);
-            this.splitter1.TabIndex = 5;
-            this.splitter1.TabStop = false;
-            // 
-            // splitter2
-            // 
-            this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter2.Location = new System.Drawing.Point(877, 49);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(1, 491);
-            this.splitter2.TabIndex = 7;
-            this.splitter2.TabStop = false;
-            // 
             // przegladarkaZdjec
             // 
             this.przegladarkaZdjec.Dock = System.Windows.Forms.DockStyle.Fill;
             this.przegladarkaZdjec.Location = new System.Drawing.Point(201, 49);
             this.przegladarkaZdjec.Name = "przegladarkaZdjec";
-            this.przegladarkaZdjec.Size = new System.Drawing.Size(676, 491);
+            this.przegladarkaZdjec.Size = new System.Drawing.Size(703, 537);
             this.przegladarkaZdjec.TabIndex = 8;
             // 
             // informacjeControl1
             // 
             this.informacjeControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.informacjeControl1.Location = new System.Drawing.Point(878, 49);
+            this.informacjeControl1.Location = new System.Drawing.Point(905, 49);
             this.informacjeControl1.Name = "informacjeControl1";
-            this.informacjeControl1.Size = new System.Drawing.Size(138, 491);
+            this.informacjeControl1.Size = new System.Drawing.Size(138, 537);
             this.informacjeControl1.TabIndex = 6;
             // 
             // drzewoOpakowane1
@@ -196,7 +196,7 @@ namespace Photo
             this.drzewoOpakowane1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.drzewoOpakowane1.Location = new System.Drawing.Point(0, 226);
             this.drzewoOpakowane1.Name = "drzewoOpakowane1";
-            this.drzewoOpakowane1.Size = new System.Drawing.Size(200, 265);
+            this.drzewoOpakowane1.Size = new System.Drawing.Size(200, 311);
             this.drzewoOpakowane1.TabIndex = 2;
             // 
             // wyszukiwarkaControl1
@@ -217,31 +217,31 @@ namespace Photo
             // 
             // statusStrip
             // 
-            this.statusStrip.Location = new System.Drawing.Point(0, 540);
+            this.statusStrip.Location = new System.Drawing.Point(0, 586);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1016, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1043, 22);
             this.statusStrip.TabIndex = 2;
-            this.statusStrip.Text = "statusStrip1";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.helpToolStripMenuItem});
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.statusStrip.Text = "statusStrip";
             // 
             // helpToolStripMenuItem
             // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Text = "About...";
             // 
             // PhotoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1016, 562);
+            this.ClientSize = new System.Drawing.Size(1043, 608);
             this.Controls.Add(this.toolStripContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -251,11 +251,11 @@ namespace Photo
             this.toolStripContainer1.ContentPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.toolStripOperacje.ResumeLayout(false);
             this.toolStripOperacje.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -280,8 +280,8 @@ namespace Photo
         private WyszukiwarkaControl wyszukiwarkaControl1;
         private ListaAlbumowControl listaAlbumowControl;
         private DrzewoOpakowane drzewoOpakowane1;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 
     }
 }

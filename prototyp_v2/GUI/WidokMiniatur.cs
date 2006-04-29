@@ -158,7 +158,7 @@ namespace Photo
 
         public void Usun(IZdjecie zdjecie)
         {
-            throw new Exception("The method or operation is not implemented.");
+            miniatury.Remove(zdjecie);
         }
 
         public void Oproznij()

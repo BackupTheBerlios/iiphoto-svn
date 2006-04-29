@@ -64,6 +64,8 @@ namespace Photo
 
             /* Delegowanie WybranoZdjecieDelegate
              */
+            przegladarkaZdjec.WybranoZdjecie +=
+                new WybranoZdjecieDelegate(informacjeControl1.Zaladuj);
             //listaOpakowanControl.WybranoZdjecie +=
             //new WybranoZdjecieDelegate(informacjeControl.Zaladuj);
         }

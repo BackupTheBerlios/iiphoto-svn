@@ -26,6 +26,14 @@ namespace Photo
             }
         }
 
+        public Bitmap Duze
+        {
+            get
+            {
+                return miniatura;
+            }
+        }
+
         public Zdjecie(string Path)
         {
             path = Path;
@@ -52,6 +60,19 @@ namespace Photo
             }
         }
 
+        public string FormatPliku
+        {
+            get
+            {
+                if (this.Duze.RawFormat.Equals(ImageFormat.Jpeg))
+                    return "Jpeg";
+                else if (this.Duze.RawFormat.Equals(ImageFormat.Tiff))
+                    return "Tiff";
+                else
+                    return "";
+            }
+        }
+
         #region Zdjecie Members
 
         public void DodajOperacje(PolecenieOperacji polecenie)
@@ -75,11 +96,6 @@ namespace Photo
         public void UsunWszystkieOperacje()
         {
             operacje.Clear();
-        }
-
-        public Bitmap Duze
-        {
-            get { throw new Exception("The method or operation is not implemented."); }
         }
 
         public event ZmodyfikowanoZdjecieDelegate ZmodyfikowanoZdjecie;

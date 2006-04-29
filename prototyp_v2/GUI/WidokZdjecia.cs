@@ -208,6 +208,7 @@ namespace Photo
         {
             base.OnResize(e);
             this.checkImagePosition();
+            Refresh();
         }
 
         private void onMouseDown(object sender, MouseEventArgs e)

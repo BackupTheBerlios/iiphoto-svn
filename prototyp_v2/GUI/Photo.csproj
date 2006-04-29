@@ -180,7 +180,10 @@
     <Compile Include="Zdjecie.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="OgolnyDiagramKlas.cd" />
+    <None Include="OgolnyDiagramKlas.cd">
+      <SubType>
+      </SubType>
+    </None>
     <None Include="GUI_TemporaryKey.pfx" />
     <None Include="icons\nozyce.png" />
     <BaseApplicationManifest Include="Properties\app.manifest" />

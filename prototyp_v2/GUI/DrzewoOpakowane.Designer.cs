@@ -40,7 +40,7 @@ namespace Photo
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button1.Location = new System.Drawing.Point(0, 0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(166, 20);
+            this.button1.Size = new System.Drawing.Size(166, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "Odœwie¿";
             this.button1.UseVisualStyleBackColor = true;
@@ -50,9 +50,9 @@ namespace Photo
             // 
             this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 244);
+            this.panel1.Location = new System.Drawing.Point(0, 241);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(166, 20);
+            this.panel1.Size = new System.Drawing.Size(166, 23);
             this.panel1.TabIndex = 1;
             // 
             // fileTree1
@@ -63,7 +63,7 @@ namespace Photo
             this.fileTree1.Location = new System.Drawing.Point(0, 0);
             this.fileTree1.Name = "fileTree1";
             this.fileTree1.SelectedImageIndex = 0;
-            this.fileTree1.Size = new System.Drawing.Size(166, 244);
+            this.fileTree1.Size = new System.Drawing.Size(166, 241);
             this.fileTree1.TabIndex = 0;
             // 
             // DrzewoOpakowane
