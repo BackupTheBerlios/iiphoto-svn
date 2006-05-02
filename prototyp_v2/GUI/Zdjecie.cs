@@ -118,23 +118,24 @@ namespace Photo
         public string GetProperty(int propID)
         {
             PropertyItem i;
-            try
+            string val;
+              
+            foreach(int id in miniatura.PropertyIdList)
             {
-                string val;
-                i = miniatura.GetPropertyItem(propID);
-                switch (i.Type)
+                if (id == propID)
                 {
-                    case 1: val = Encoding.Unicode.GetString(i.Value); break;
-                    case 2: val = Encoding.ASCII.GetString(i.Value); break;
-                    case 3: val = BitConverter.ToUInt16(i.Value, 0).ToString(); break;
-                    default: val = "Value not supported"; break;
+                    i = miniatura.GetPropertyItem(propID);
+                    switch (i.Type)
+                    {
+                        case 1: val = Encoding.Unicode.GetString(i.Value); break;
+                        case 2: val = Encoding.ASCII.GetString(i.Value); break;
+                        case 3: val = BitConverter.ToUInt16(i.Value, 0).ToString(); break;
+                        default: val = "Value not supported"; break;
+                    }
+                    return val;
                 }
-                return val;
             }
-            catch
-            {
-                return "";
-            }
+            return "";
         }
 
         #endregion
