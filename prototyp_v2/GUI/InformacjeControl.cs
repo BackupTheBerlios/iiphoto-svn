@@ -42,10 +42,15 @@ namespace Photo
 
         private void fillExif(Zdjecie zdjecie)
         {
-            Exif.Items.Add(new ListViewItem(new string[] { "Brak", zdjecie.GetProperty(PropertyTags.EquipMake)}));
-            Exif.Items.Add(new ListViewItem(new string[] { "Brak", zdjecie.GetProperty(PropertyTags.EquipModel)}));
-            Exif.Items.Add(new ListViewItem(new string[] { "Brak", zdjecie.GetProperty(PropertyTags.Orientation)}));
-            Exif.Items.Add(new ListViewItem(new string[] { "Brak", zdjecie.GetProperty(PropertyTags.ExifFlash)}));
+            Dictionary<string, int> d = PropertyTags.defaultExifIds;
+            string propertyValue;
+
+            foreach (KeyValuePair<string,int> kv in d)
+            {
+                propertyValue = zdjecie.GetProperty(kv.Value);
+                if (!propertyValue.Equals(""))
+                    Exif.Items.Add(new ListViewItem(new string[] { kv.Key, propertyValue }));
+            }
         }
 
         private void fillTags(Zdjecie zdjecie)

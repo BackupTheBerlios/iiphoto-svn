@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Photo
 {
-    class PropertyTags
+    static class PropertyTags
     {
         public const int GpsVer = 0;
         public const int GpsLatitudeRef = 1;
@@ -230,6 +230,21 @@ namespace Photo
         public const int ExifSceneType = 41729;
         public const int ExifCfaPattern = 41730;
 
-        private PropertyTags() { }
+        private static Dictionary<string,int> defaultExifIdsDictionary;
+
+        public static Dictionary<string, int> defaultExifIds
+        {
+            get
+            {
+                if (defaultExifIdsDictionary == null)
+                {
+                    defaultExifIdsDictionary = new Dictionary<string, int>();
+                    defaultExifIds.Add("Orientation", Orientation);
+                    defaultExifIds.Add("ExposureTime", ExifExposureTime);
+                    defaultExifIds.Add("Flash", ExifFlash);
+                }
+                return defaultExifIdsDictionary;
+            }
+        }
     }
 }
