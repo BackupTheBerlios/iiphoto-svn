@@ -132,7 +132,7 @@ namespace Photo
                         case 3: val = BitConverter.ToUInt16(i.Value, 0).ToString(); break;
                         default: val = "Value not supported"; break;
                     }
-                    return val;
+                    return PropertyTags.ParseProp(propID, val);
                 }
             }
             return "";

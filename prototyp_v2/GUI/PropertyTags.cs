@@ -239,12 +239,39 @@ namespace Photo
                 if (defaultExifIdsDictionary == null)
                 {
                     defaultExifIdsDictionary = new Dictionary<string, int>();
-                    defaultExifIds.Add("Orientation", Orientation);
-                    defaultExifIds.Add("ExposureTime", ExifExposureTime);
-                    defaultExifIds.Add("Flash", ExifFlash);
+                    defaultExifIdsDictionary.Add("Make", EquipMake);
+                    defaultExifIdsDictionary.Add("Model", EquipModel);
+                    defaultExifIdsDictionary.Add("Orientation", Orientation);
+                    defaultExifIdsDictionary.Add("ExposureTime", ExifExposureTime);
+                    defaultExifIdsDictionary.Add("Flash", ExifFlash);
+                    defaultExifIdsDictionary.Add("ShutterSpeed", ExifShutterSpeed);
+                    defaultExifIdsDictionary.Add("Brightness", ExifBrightness);
+                    defaultExifIdsDictionary.Add("ISO", ExifISOSpeed);
+                    defaultExifIdsDictionary.Add("Aperture", ExifAperture);
+                    defaultExifIdsDictionary.Add("Comment", ExifUserComment);
+                    defaultExifIdsDictionary.Add("Compression", Compression);
+                    defaultExifIdsDictionary.Add("IIPhotoTag", IIPhotoTag);
+
                 }
                 return defaultExifIdsDictionary;
             }
+        }
+
+        internal static string ParseProp(int propID, string val)
+        {
+            switch (propID)
+            {
+                case ExifFlash: if (val.Equals("1"))
+                    {
+                        val = "Fired";
+                    }
+                    else
+                    {
+                        val = "Not Fired";
+                    }
+                    break;
+            }
+            return val;
         }
     }
 }
