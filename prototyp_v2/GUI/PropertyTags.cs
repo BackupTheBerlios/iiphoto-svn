@@ -232,27 +232,34 @@ namespace Photo
 
         private static Dictionary<string,int> defaultExifIdsDictionary;
 
+        static PropertyTags()
+        {
+            defaultExifIdsDictionary = new Dictionary<string, int>();
+
+            // Standardowe wartosci EXIF do wyswietlenia
+            // Najpierw String ktory zostanie wyswietlony, a nastepnie 
+            // Tag ktory zostanie pobrany ze zdjecia
+            defaultExifIdsDictionary.Add("Make", EquipMake);
+            defaultExifIdsDictionary.Add("Model", EquipModel);
+            defaultExifIdsDictionary.Add("Orientation", Orientation);
+            defaultExifIdsDictionary.Add("Exposure Time", ExifExposureTime);
+            defaultExifIdsDictionary.Add("Flash", ExifFlash);
+            defaultExifIdsDictionary.Add("Shutter Speed", ExifShutterSpeed);
+            defaultExifIdsDictionary.Add("Brightness", ExifBrightness);
+            defaultExifIdsDictionary.Add("ISO", ExifISOSpeed);
+            defaultExifIdsDictionary.Add("Aperture", ExifAperture);
+            defaultExifIdsDictionary.Add("Focal Length", ExifFocalLength);
+            defaultExifIdsDictionary.Add("Comment", ExifUserComment);
+            defaultExifIdsDictionary.Add("Color Space", ExifColorSpace);
+            defaultExifIdsDictionary.Add("Compression", Compression);
+            defaultExifIdsDictionary.Add("Date & Time", DateTime);
+            defaultExifIdsDictionary.Add("IIPhotoTag", IIPhotoTag);
+        }
+
         public static Dictionary<string, int> defaultExifIds
         {
             get
             {
-                if (defaultExifIdsDictionary == null)
-                {
-                    defaultExifIdsDictionary = new Dictionary<string, int>();
-                    defaultExifIdsDictionary.Add("Make", EquipMake);
-                    defaultExifIdsDictionary.Add("Model", EquipModel);
-                    defaultExifIdsDictionary.Add("Orientation", Orientation);
-                    defaultExifIdsDictionary.Add("ExposureTime", ExifExposureTime);
-                    defaultExifIdsDictionary.Add("Flash", ExifFlash);
-                    defaultExifIdsDictionary.Add("ShutterSpeed", ExifShutterSpeed);
-                    defaultExifIdsDictionary.Add("Brightness", ExifBrightness);
-                    defaultExifIdsDictionary.Add("ISO", ExifISOSpeed);
-                    defaultExifIdsDictionary.Add("Aperture", ExifAperture);
-                    defaultExifIdsDictionary.Add("Comment", ExifUserComment);
-                    defaultExifIdsDictionary.Add("Compression", Compression);
-                    defaultExifIdsDictionary.Add("IIPhotoTag", IIPhotoTag);
-
-                }
                 return defaultExifIdsDictionary;
             }
         }
@@ -268,6 +275,38 @@ namespace Photo
                     else
                     {
                         val = "Not Fired";
+                    }
+                    break;
+                case Orientation:
+                    switch (val)
+                    {
+                        case "1":
+                            val = "Normal";
+                            break;
+                        case "2":
+                            val = "Flip Horizontal";
+                            break;
+                        case "3":
+                            val = "Clockwise 180°";
+                            break;
+                        case "4":
+                            val = "Flip Vertical";
+                            break;
+                        case "5":
+                            val = "Flip Horizontal & Clockwise 90°";
+                            break;
+                        case "6":
+                            val = "Clockwise 90°";
+                            break;
+                        case "7":
+                            val = "Flip Horizontal & Counter Clockwise 90°";
+                            break;
+                        case "8":
+                            val = "Counter Clockwise 90°";
+                            break;
+                        default:
+                            val = "Error";
+                            break;
                     }
                     break;
             }

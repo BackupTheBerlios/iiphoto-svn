@@ -10,6 +10,7 @@ namespace Photo
     {
         Bitmap miniatura;
         string path;
+        int Orientation;
 
         List<PolecenieOperacji> operacje = new List<PolecenieOperacji>();
 
@@ -38,6 +39,7 @@ namespace Photo
         {
             path = Path;
             miniatura = new Bitmap(path);
+            UseOrientationTag();
         }
 
         public string NazwaPliku
@@ -136,6 +138,43 @@ namespace Photo
                 }
             }
             return "";
+        }
+
+        public void UseOrientationTag()
+        {
+            int Orientation;
+            foreach (int id in miniatura.PropertyIdList)
+            {
+                if (id == PropertyTags.Orientation)
+                {
+
+                    Orientation = BitConverter.ToUInt16(miniatura.GetPropertyItem(id).Value, 0);
+                    switch (Orientation)
+                    {
+                        case 2:
+                            this.Miniatura.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                            break;
+                        case 3:
+                            this.Miniatura.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            break;
+                        case 4:
+                            this.Miniatura.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                            break;
+                        case 5:
+                            this.Miniatura.RotateFlip(RotateFlipType.Rotate90FlipY);
+                            break;
+                        case 6:
+                            this.Miniatura.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                            break;
+                        case 7:
+                            this.Miniatura.RotateFlip(RotateFlipType.Rotate270FlipY);
+                            break;
+                        case 8:
+                            this.Miniatura.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                            break;
+                    }
+                }
+            }
         }
 
         #endregion
