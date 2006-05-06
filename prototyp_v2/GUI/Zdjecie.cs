@@ -147,7 +147,6 @@ namespace Photo
             {
                 if (id == PropertyTags.Orientation)
                 {
-
                     Orientation = BitConverter.ToUInt16(miniatura.GetPropertyItem(id).Value, 0);
                     switch (Orientation)
                     {
