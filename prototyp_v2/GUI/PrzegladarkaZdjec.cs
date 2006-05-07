@@ -14,7 +14,8 @@ namespace Photo
         public PrzegladarkaZdjec()
         {
             InitializeComponent();
-            SetThumbnailView();
+            SetImageView();
+            //SetThumbnailView(); inaczej po uruchomieniu zle dopasowuje zdjecie do rozmiarow - moze ktos wymysli czemu
         }
         public void SetThumbnailView()
         {
@@ -112,6 +113,8 @@ namespace Photo
         public void Dodaj(IZdjecie zdjecie)
         {
             AktywneOpakowanie.Dodaj(zdjecie);
+            if (imageView1.Visible == true)
+                SetThumbnailView();
         }
 
         public void Usun(IZdjecie zdjecie)

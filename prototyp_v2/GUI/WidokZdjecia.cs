@@ -23,8 +23,8 @@ namespace Photo
         {
             this.zdjecie = zdjecie;
             this.zdjecieZapas = zdjecie;
-            this.pictureBoxImage = this.zdjecie.Miniatura;
-            this.checkImagePosition();
+            this.pictureBoxImage = FitToPage();
+            //this.checkImagePosition();
             this.lmStartingPoint = new Point();
             this.selectedRectangle = new Rectangle(0, 0, 0, 0);
             //this.clearRect = false;
@@ -65,6 +65,30 @@ namespace Photo
                 this.pictureBox1.Width = pictureBoxImage.Width + padX;
                 this.pictureBox1.Height = pictureBoxImage.Height + padY;
             }
+        }
+
+        public Bitmap FitToPage()
+        {
+            int scaledH, scaledW;
+
+            if (zdjecie.Duze.Height > zdjecie.Duze.Width)
+            {
+                scaledH = this.Height;
+                scaledW = (int)Math.Round((double)(zdjecie.Duze.Width * scaledH) / zdjecie.Duze.Height);
+            }
+            else
+            {
+                scaledW = this.Width;
+                scaledH = (int)Math.Round((double)(zdjecie.Duze.Height * scaledW) / zdjecie.Duze.Width);
+            }
+
+            Bitmap newBitmap = new Bitmap(scaledW, scaledH);
+            Graphics MyGraphics = Graphics.FromImage(newBitmap);
+
+            Rectangle MyRectan = new Rectangle(0, 0, scaledW, scaledH);
+            MyGraphics.DrawImage(zdjecie.Duze, MyRectan);
+            MyGraphics.Dispose();
+            return newBitmap;
         }
 
         /*public void Zoom(double zoom) {
