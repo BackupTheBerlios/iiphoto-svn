@@ -132,6 +132,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PrzegladarkaZdjec.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PrzegladarkaZdjec.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WidokZdjecia.resx">
       <SubType>Designer</SubType>
       <DependentUpon>WidokZdjecia.cs</DependentUpon>

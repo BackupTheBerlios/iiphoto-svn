@@ -40,8 +40,6 @@ namespace Photo
             this.listaAlbumowControl = new Photo.ListaAlbumowControl();
             this.statusStrip = new Photo.PasekStanuControl();
             this.toolStripOperacje = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.Alfa = new System.Windows.Forms.ToolStripButton();
             this.Omega = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -69,7 +67,7 @@ namespace Photo
             this.toolStripContainer1.ContentPanel.Controls.Add(this.statusStrip);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.toolStripOperacje);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.menuStrip1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1043, 608);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1043, 583);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
@@ -82,7 +80,7 @@ namespace Photo
             this.przegladarkaZdjec.Dock = System.Windows.Forms.DockStyle.Fill;
             this.przegladarkaZdjec.Location = new System.Drawing.Point(201, 49);
             this.przegladarkaZdjec.Name = "przegladarkaZdjec";
-            this.przegladarkaZdjec.Size = new System.Drawing.Size(703, 537);
+            this.przegladarkaZdjec.Size = new System.Drawing.Size(703, 512);
             this.przegladarkaZdjec.TabIndex = 8;
             // 
             // splitter2
@@ -90,7 +88,7 @@ namespace Photo
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitter2.Location = new System.Drawing.Point(904, 49);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(1, 537);
+            this.splitter2.Size = new System.Drawing.Size(1, 512);
             this.splitter2.TabIndex = 7;
             this.splitter2.TabStop = false;
             // 
@@ -99,14 +97,14 @@ namespace Photo
             this.informacjeControl1.Dock = System.Windows.Forms.DockStyle.Right;
             this.informacjeControl1.Location = new System.Drawing.Point(905, 49);
             this.informacjeControl1.Name = "informacjeControl1";
-            this.informacjeControl1.Size = new System.Drawing.Size(138, 537);
+            this.informacjeControl1.Size = new System.Drawing.Size(138, 512);
             this.informacjeControl1.TabIndex = 6;
             // 
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(200, 49);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(1, 537);
+            this.splitter1.Size = new System.Drawing.Size(1, 512);
             this.splitter1.TabIndex = 5;
             this.splitter1.TabStop = false;
             // 
@@ -118,7 +116,7 @@ namespace Photo
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 49);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 537);
+            this.panel1.Size = new System.Drawing.Size(200, 512);
             this.panel1.TabIndex = 4;
             // 
             // drzewoOpakowane1
@@ -126,7 +124,7 @@ namespace Photo
             this.drzewoOpakowane1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.drzewoOpakowane1.Location = new System.Drawing.Point(0, 226);
             this.drzewoOpakowane1.Name = "drzewoOpakowane1";
-            this.drzewoOpakowane1.Size = new System.Drawing.Size(200, 311);
+            this.drzewoOpakowane1.Size = new System.Drawing.Size(200, 286);
             this.drzewoOpakowane1.TabIndex = 2;
             // 
             // wyszukiwarkaControl1
@@ -147,7 +145,7 @@ namespace Photo
             // 
             // statusStrip
             // 
-            this.statusStrip.Location = new System.Drawing.Point(0, 586);
+            this.statusStrip.Location = new System.Drawing.Point(0, 561);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(1043, 22);
             this.statusStrip.TabIndex = 2;
@@ -156,8 +154,6 @@ namespace Photo
             // toolStripOperacje
             // 
             this.toolStripOperacje.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripSeparator2,
             this.Alfa,
             this.Omega,
             this.toolStripSeparator1});
@@ -167,21 +163,6 @@ namespace Photo
             this.toolStripOperacje.Size = new System.Drawing.Size(1043, 25);
             this.toolStripOperacje.TabIndex = 1;
             this.toolStripOperacje.Text = "toolStrip1";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(81, 22);
-            this.toolStripButton1.Text = "Widok Miniatur";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // Alfa
             // 
@@ -268,8 +249,6 @@ namespace Photo
         private System.Windows.Forms.ToolStripButton Alfa;
         private System.Windows.Forms.ToolStripButton Omega;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private PrzegladarkaZdjec przegladarkaZdjec;

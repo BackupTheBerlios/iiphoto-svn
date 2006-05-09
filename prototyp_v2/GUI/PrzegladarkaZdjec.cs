@@ -14,48 +14,44 @@ namespace Photo
         public PrzegladarkaZdjec()
         {
             InitializeComponent();
-            SetImageView();
-            //SetThumbnailView(); inaczej po uruchomieniu zle dopasowuje zdjecie do rozmiarow - moze ktos wymysli czemu
         }
         public void SetThumbnailView()
         {
-            if (thumbnailView1.Visible == false)
+            if (panele.SelectedTab == zdjecie1)
             {
                 // zamykanie dytora
             }
-            thumbnailView1.Visible = true;
-            imageView1.Visible = false;
+            panele.SelectedTab = miniatury1;
         }
         public void SetImageView()
         {
-            imageView1.Visible = true;
-            thumbnailView1.Visible = false;
+            panele.SelectedTab = zdjecie1;
         }
         public WidokMiniatur Thumbnailview
         {
             get
             {
-                return thumbnailView1;
+                return widokMiniatur1;
             }
         }
         public WidokZdjecia Imageview
         {
             get
             {
-                return imageView1;
+                return widokZdjecia1;
             }
         }
         IOpakowanieZdjec AktywneOpakowanie
         {
             get
             {
-                if (imageView1.Visible == true)
+                if (panele.SelectedTab == miniatury1)
                 {
-                    return thumbnailView1;
+                    return widokMiniatur1;
                 }
                 else
                 {
-                    return thumbnailView1;
+                    return widokMiniatur1;
                 }
             }
         }
@@ -91,8 +87,8 @@ namespace Photo
         private void mouseDoubleClick(object sender, MouseEventArgs e)
         {
             ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
-            Zdjecie z = (Zdjecie)thumbnailView1[listViewItem.ImageIndex];
-            this.imageView1.setImage(z);
+            Zdjecie z = (Zdjecie)widokMiniatur1[listViewItem.ImageIndex];
+            this.widokZdjecia1.setImage(z);
             this.SetImageView();
             if (WybranoZdjecie != null)
                 WybranoZdjecie(z);
@@ -113,8 +109,8 @@ namespace Photo
         public void Dodaj(IZdjecie zdjecie)
         {
             AktywneOpakowanie.Dodaj(zdjecie);
-            if (imageView1.Visible == true)
-                SetThumbnailView();
+            /*if (widokZdjecia1.Visible == true)
+                SetThumbnailView();*/
         }
 
         public void Usun(IZdjecie zdjecie)

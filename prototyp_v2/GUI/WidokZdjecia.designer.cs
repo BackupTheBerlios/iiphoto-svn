@@ -56,6 +56,7 @@ namespace Photo
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.pictureBox1);
+            this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "WidokZdjecia";
             this.Padding = new System.Windows.Forms.Padding(30, 3, 3, 3);
