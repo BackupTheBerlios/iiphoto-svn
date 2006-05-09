@@ -11,6 +11,7 @@ namespace Photo
         Bitmap miniatura;
         string path;
         int Orientation;
+        string format;
 
         List<PolecenieOperacji> operacje = new List<PolecenieOperacji>();
 
@@ -39,6 +40,7 @@ namespace Photo
         {
             path = Path;
             miniatura = new Bitmap(path);
+            format = sprawdzFormatPliku();
             UseOrientationTag();
         }
 
@@ -62,16 +64,21 @@ namespace Photo
             }
         }
 
+        public string sprawdzFormatPliku()
+        {
+            if (this.Duze.RawFormat.Equals(ImageFormat.Jpeg))
+                return "Jpeg";
+            else if (this.Duze.RawFormat.Equals(ImageFormat.Tiff))
+                return "Tiff";
+            else
+                return "";
+        }
+
         public string FormatPliku
         {
             get
             {
-                if (this.Duze.RawFormat.Equals(ImageFormat.Jpeg))
-                    return "Jpeg";
-                else if (this.Duze.RawFormat.Equals(ImageFormat.Tiff))
-                    return "Tiff";
-                else
-                    return "";
+                return format;
             }
         }
 
@@ -142,7 +149,6 @@ namespace Photo
 
         public void UseOrientationTag()
         {
-            int Orientation;
             foreach (int id in miniatura.PropertyIdList)
             {
                 if (id == PropertyTags.Orientation)

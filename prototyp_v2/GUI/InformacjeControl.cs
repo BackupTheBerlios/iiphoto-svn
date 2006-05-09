@@ -20,8 +20,8 @@ namespace Photo
             Exif.Columns.Add("Nazwa");
             Exif.Columns.Add("Wartoœæ");
 
-            Tags.Items.Add(new ListViewItem(new string[] { "Brak","informacji"}));
-            Exif.Items.Add(new ListViewItem(new string[] { "Brak","informacji"}));
+            /*Tags.Items.Add(new ListViewItem(new string[] { "Brak","informacji"}));
+            Exif.Items.Add(new ListViewItem(new string[] { "Brak","informacji"}));*/
         }
 
         public void Zaladuj(IZdjecie zdjecie)
