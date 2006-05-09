@@ -13,13 +13,20 @@ using Photo;
 namespace Photo
 {
     public class FileTree : TreeView, IWyszukiwacz
-    {
+    {        
         public FileTree()
         {
             GenerateImage();
             //Fill();
             this.BackColor = Color.Beige;
         }
+
+        public const int Dysk = 0;
+        public const int FOLDER = 1;
+        public const int Dyskietka = 2;
+        public const int Cdrom = 3;
+        public const int Cdrom_z = 4;
+        public const int Dyskietka_z = 5;
 
         public void GenerateImage()
         {
@@ -221,12 +228,7 @@ namespace Photo
                 }
             }
 
-            const int Dysk = 0;
-            const int FOLDER = 1;
-            const int Dyskietka = 2;
-            const int Cdrom = 3;
-            const int Cdrom_z = 4;
-            const int Dyskietka_z = 5;
+            
 
             //private IWyszukiwanie Wsad;
 
@@ -258,7 +260,9 @@ namespace Photo
                 return 0;
             }
 
-            public string GetDriveName(string drive)
+
+
+            public static string GetDriveName(string drive)
             {
                 //receives volume name of drive
                 StringBuilder volname = new StringBuilder(256);
@@ -276,7 +280,7 @@ namespace Photo
                 else return "";
             }
 
-            public string Etykieta(string drive)
+            public static string Etykieta(string drive)
             {
                 return GetDriveName(drive);
             }
@@ -358,19 +362,19 @@ namespace Photo
             bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
             bw.RunWorkerAsync(e.Node);
 
-            DirTreeNode dn = new DirTreeNode("napis");
+            //DirTreeNode dn = new DirTreeNode("napis");
 
             if (e.Node.Text.IndexOf("A:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
             {
-                e.Node.Text = "A:\\ " + "[" + dn.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
-                e.Node.ImageIndex = 5;
-                e.Node.SelectedImageIndex = 5;
+                e.Node.Text = "A:\\ " + "[" + DirTreeNode.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
+                e.Node.ImageIndex = Dyskietka_z;
+                e.Node.SelectedImageIndex = Dyskietka_z;
             }
             else if (e.Node.Text.IndexOf("B:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
             {
-                e.Node.Text = "B:\\ " + "[" + dn.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
-                e.Node.ImageIndex = 5;
-                e.Node.SelectedImageIndex = 5;
+                e.Node.Text = "B:\\ " + "[" + DirTreeNode.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
+                e.Node.ImageIndex = Dyskietka_z;
+                e.Node.SelectedImageIndex = Dyskietka_z;
             }
         }
 
@@ -400,143 +404,46 @@ namespace Photo
         private Zdjecie[] ZnajdzPlikiWKatalogu(BackgroundWorker bw, DirTreeNode Node)
         {
             List<Zdjecie> zdjecia = new List<Zdjecie>();
+            List<string> pliki = new List<string>();
 
             try
             {
-                string[] files = Directory.GetFiles(Node.Path, "*.jpg");
-                string[] files2 = Directory.GetFiles(Node.Path, "*.jpeg");
-                string[] files3 = Directory.GetFiles(Node.Path, "*.tif");
-                string[] files4 = Directory.GetFiles(Node.Path, "*.tiff");
+                pliki.AddRange(Directory.GetFiles(Node.Path, "*.jpg"));
+                pliki.AddRange(Directory.GetFiles(Node.Path, "*.jpeg"));
+                pliki.AddRange(Directory.GetFiles(Node.Path, "*.tif"));
+                pliki.AddRange(Directory.GetFiles(Node.Path, "*.tiff"));
 
-                string[] f1 = new string[files.Length];
-                string[] f2 = new string[files2.Length];
-                string[] f3 = new string[files3.Length];
-                string[] f4 = new string[files4.Length];
+                pliki.Sort();
 
-
-                int i = 0;
-
-                int z_f1 = 0;
-                for (i = 0; i < files.Length; i++)
-                {
-                    if (files[i].ToLower().LastIndexOf(".jpg") == (files[i].Length - 4))
-                    {
-                        f1[z_f1] = files[i];
-                        z_f1++;
-                    }
-                }
-                int z_f2 = 0;
-                for (i = 0; i < files2.Length; i++)
-                {
-                    //string str = files2[i].ToLower();
-                    if (files2[i].ToLower().LastIndexOf(".jpeg") == (files2[i].Length - 5))
-                    {
-                        f2[z_f2] = files2[i];
-                        z_f2++;
-                    }
-                }
-                int z_f3 = 0;
-                for (i = 0; i < files3.Length; i++)
-                {
-                    if (files3[i].ToLower().LastIndexOf(".tif") == (files3[i].Length - 4))
-                    {
-                        f3[z_f3] = files3[i];
-                        z_f3++;
-                    }
-                }
-
-                int z_f4 = 0;
-                for (i = 0; i < files4.Length; i++)
-                {
-                    if (files4[i].ToLower().LastIndexOf(".tiff") == (files4[i].Length - 5))
-                    {
-                        f4[z_f4] = files4[i];
-                        z_f4++;
-                    }
-                }
-
-                zdjecia = new List<Zdjecie>(z_f1 + z_f2 + z_f3 + z_f4);
-
-                int ile = 0;
-                for (i = 0; i < z_f1; i++)
+                for (int i = 0; i < pliki.Count; i++)
                 {
                     try
                     {
-                        Zdjecie z = new Zdjecie(f1[i]);
-                        bw.ReportProgress(0, z);
-                        zdjecia.Add(z);
+                        if ((pliki[i].ToLower().LastIndexOf(".jpg") != -1 && pliki[i].ToLower().LastIndexOf(".jpg") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".jpeg") != -1 && pliki[i].ToLower().LastIndexOf(".jpeg") == (pliki[i].Length - 5)) || (pliki[i].ToLower().LastIndexOf(".tif") != -1 && pliki[i].ToLower().LastIndexOf(".tif") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".tiff") != -1 && pliki[i].ToLower().LastIndexOf(".tiff") == (pliki[i].Length - 5)))                        
+                        {
+                            Zdjecie z = new Zdjecie(pliki[i]);
+                            bw.ReportProgress(0, z);
+                            zdjecia.Add(z);
+                        }                        
                     }
                     catch (ArgumentException)
                     {
                         //MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
-                        MessageBox.Show("Plik: \"" + files[i].Substring(files[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", files[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-                ile = i;
-                for (i = 0; i < z_f2; i++)
-                {
-                    try
-                    {
-                        Zdjecie z = new Zdjecie(f2[i]);
-                        bw.ReportProgress(0, z);
-                        zdjecia.Add(z);
-                    }
-                    catch (ArgumentException)
-                    {
-                        //MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
-
-                        MessageBox.Show("Plik: \"" + files2[i].Substring(files2[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", files2[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-                    }
-                }
-                ile += i;
-                for (i = 0; i < z_f3; i++)
-                {
-                    try
-                    {
-                        Zdjecie z = new Zdjecie(f3[i]);
-                        bw.ReportProgress(0, z);
-                        zdjecia.Add(z);
-                    }
-                    catch (ArgumentException)
-                    {
-                        //MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
-                        MessageBox.Show("Plik: \"" + files3[i].Substring(files3[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", files3[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-                ile += i;
-                for (i = 0; i < z_f4; i++)
-                {
-                    try
-                    {
-                        Zdjecie z = new Zdjecie(f4[i]);
-                        bw.ReportProgress(0, z);
-                        zdjecia.Add(z);
-                    }
-                    catch (ArgumentException)
-                    {
-                        //MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
-                        MessageBox.Show("Plik: \"" + files4[i].Substring(files4[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", files4[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Plik: \"" + pliki[i].Substring(pliki[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", pliki[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message + " - Odmowa dostêpu", Node.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                /*if (e.Node.Text.Length == 3)
+                if (Node.Text.Length == 3)
                 {
-                    if (e.Node.Text.CompareTo("A:\\") == 0 || e.Node.Text.CompareTo("B:\\") == 0 )
+                    if (Node.Text.CompareTo("A:\\") == 0 || Node.Text.CompareTo("B:\\") == 0 )
                     {
-
+                        Node.ImageIndex = Dyskietka;
+                        Node.SelectedImageIndex = Dyskietka;
                     }
-                    MessageBox.Show("numer: "+e.Node.SelectedImageIndex);
-                    //e.Node.ImageIndex = getDriveType(e.Node.Text);
-
-                    this.Refresh();
-                    //this.
-
-
-                }*/
+                }
 
                 DirTreeNode dd = new DirTreeNode("napis");
 
@@ -544,28 +451,26 @@ namespace Photo
 
 
             }
-
             return zdjecia.ToArray();
+           
         }
 
         protected override void OnAfterExpand(TreeViewEventArgs e)
         {
             base.OnAfterExpand(e);
-
-
-            DirTreeNode dn = new DirTreeNode("napis");
+            
 
             if (e.Node.Text.IndexOf("A:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
             {
-                e.Node.Text = "A:\\ " + "[" + dn.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
-                e.Node.ImageIndex = 5;
-                e.Node.SelectedImageIndex = 5;
+                e.Node.Text = "A:\\ " + "[" + DirTreeNode.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
+                e.Node.ImageIndex = Dyskietka_z;
+                e.Node.SelectedImageIndex = Dyskietka_z;
             }
             else if (e.Node.Text.IndexOf("B:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
             {
-                e.Node.Text = "B:\\ " + "[" + dn.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
-                e.Node.ImageIndex = 5;
-                e.Node.SelectedImageIndex = 5;
+                e.Node.Text = "B:\\ " + "[" + DirTreeNode.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
+                e.Node.ImageIndex = Dyskietka_z;
+                e.Node.SelectedImageIndex = Dyskietka_z;
             }
         }
 
