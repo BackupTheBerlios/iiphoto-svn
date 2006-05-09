@@ -5,11 +5,11 @@ using System.IO;
 
 namespace Photo
 {
-    public class Config
+    public static class Config
     {
-        string katalogDanychIIPhoto;
+        static string katalogDanychIIPhoto;
 
-        public Config()
+        static Config()
         {
             katalogDanychIIPhoto = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\IIPhoto";
             if (!Directory.Exists(katalogDanychIIPhoto))
@@ -18,5 +18,11 @@ namespace Photo
             }
         }
 
+        public static string katalogDanych {
+            get
+            {
+                return katalogDanychIIPhoto;
+            }
+        }
     }
 }

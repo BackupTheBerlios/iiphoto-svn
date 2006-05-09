@@ -11,13 +11,10 @@ namespace Photo
     public partial class PhotoForm : Form
     {
         private Operacje operacje;
-        private Config config;
 
-        public PhotoForm(Config c)
+        public PhotoForm()
         {
             InitializeComponent();
-
-            config = c;
 
             /* Inicjalizacja okna g³ównego.
              */
