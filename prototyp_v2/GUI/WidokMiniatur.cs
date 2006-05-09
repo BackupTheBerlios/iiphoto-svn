@@ -10,9 +10,9 @@ namespace Photo
 {
     public class WidokMiniatur : System.Windows.Forms.ListView, IOpakowanieZdjec, IKontekst
     {
-        private int defaultImageSize = 120;
+        private int defaultImageSize;
         private List<IZdjecie> miniatury = new List<IZdjecie>();
-        private double zoom = 1.0;
+        private double zoom;
         private bool Edycja;
         private Semaphore sem_dodawania = new Semaphore(0, 1);
 
@@ -22,6 +22,8 @@ namespace Photo
             LargeImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             LargeImageList.Tag = "100%";
             LargeImageList.TransparentColor = System.Drawing.Color.Transparent;
+            defaultImageSize = 120;
+            zoom = 1.0;
             LargeImageList.ImageSize = new Size((int)(zoom * this.defaultImageSize), (int)(zoom * this.defaultImageSize));
 
             sem_dodawania.Release();
@@ -36,6 +38,7 @@ namespace Photo
             : this()
         {
             this.defaultImageSize = imgSize;
+            LargeImageList.ImageSize = new Size((int)(zoom * this.defaultImageSize), (int)(zoom * this.defaultImageSize));
         }
 
         protected override void OnNotifyMessage(Message m)
