@@ -9,6 +9,8 @@ namespace Photo
     {
         static string katalogDanychIIPhoto;
 
+        public static string plikBazyDanych = "iiphoto.db3";
+
         static Config()
         {
             katalogDanychIIPhoto = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\IIPhoto";
