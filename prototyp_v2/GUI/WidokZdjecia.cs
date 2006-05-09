@@ -241,6 +241,10 @@ namespace Photo
             {
                 isDrag = true;
                 this.lmStartingPoint = new Point(e.X - padX, e.Y - padY);
+                if (lmStartingPoint.X < 0)
+                    isDrag = false;
+                if (lmStartingPoint.Y < 0)
+                    isDrag = false;
                 this.Refresh();
             }
             else if (e.Button == MouseButtons.Right)
