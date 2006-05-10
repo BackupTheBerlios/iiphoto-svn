@@ -14,8 +14,7 @@ namespace Photo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (Config.katalogDanych.Equals(""))
-                return;
+            new Config();
             Application.Run(new PhotoForm());
         }
     }

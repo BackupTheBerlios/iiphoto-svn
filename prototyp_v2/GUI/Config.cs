@@ -5,14 +5,15 @@ using System.IO;
 
 namespace Photo
 {
-    public static class Config
+    public class Config
     {
-        static string katalogDanychIIPhoto;
+        string katalogDanychIIPhoto;
 
-        public static string plikBazyDanych = "iiphoto.db3";
+        string plikBazyDanych;
 
-        static Config()
+        public Config()
         {
+            plikBazyDanych = "iiphoto.db3";
             katalogDanychIIPhoto = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\IIPhoto";
             if (!Directory.Exists(katalogDanychIIPhoto))
             {
@@ -20,10 +21,19 @@ namespace Photo
             }
         }
 
-        public static string katalogDanych {
+        public string katalogDanych 
+        {
             get
             {
                 return katalogDanychIIPhoto;
+            }
+        }
+
+        public string plikBazy
+        {
+            get
+            {
+                return plikBazyDanych;
             }
         }
     }

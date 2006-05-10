@@ -18,7 +18,7 @@ namespace Photo
             DBfile = path;
         }
 
-        public void CreateDB()
+        public void StworzBD()
         {
             if (System.IO.File.Exists(DBfile) == false)
             {
@@ -26,19 +26,19 @@ namespace Photo
             }
         }
 
-        public void Connect()
+        public void Polacz()
         {
-            this.CreateDB();
+            this.StworzBD();
             this.conn = new SQLiteConnection("Data Source=" + DBfile + ";Version=3;");
             conn.Open();
         }
 
-        public void Close()
+        public void Rozlacz()
         {
             conn.Close();
         }
 
-        public void FastInserts(string tableName, string parameters, string[,] fields)
+        public void SzybkieInserty(string tableName, string parameters, string[,] fields)
         {
             using (SQLiteTransaction dbTrans = conn.BeginTransaction())
             {
@@ -67,7 +67,7 @@ namespace Photo
             }
         }
 
-        public SQLiteDataAdapter GetAdapter(string query, bool forEdit)
+        public SQLiteDataAdapter PobierzAdapter(string query, bool forEdit)
         {
             SQLiteDataAdapter sqladapt = new SQLiteDataAdapter(query, conn);
             DataSet dataSet = new DataSet("Dane");
@@ -78,7 +78,7 @@ namespace Photo
             return sqladapt;
         }
 
-        public DataSet GetData(SQLiteDataAdapter ad)
+        public DataSet PobierzDane(SQLiteDataAdapter ad)
         {
             DataSet dataSet = new DataSet("Dane");
             ad.Fill(dataSet);
@@ -93,7 +93,7 @@ namespace Photo
             return dataSet;
         }
 
-        public void ExecuteQuery(string query)
+        public void WykonajQuery(string query)
         {
             SQLiteCommand cmd = conn.CreateCommand();
             cmd.CommandText = query;
