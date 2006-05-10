@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
+using System.IO;
 
 namespace Photo
 {
@@ -180,6 +181,15 @@ namespace Photo
                     }
                 }
             }
+        }
+
+        public static PropertyItem[] GetExifProperties(string fileName)
+        {
+            using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            using (Image image = Image.FromStream(stream,
+                /* useEmbeddedColorManagement = */ true,
+                /* validateImageData = */ false))
+                return image.PropertyItems;
         }
 
         #endregion
