@@ -102,5 +102,10 @@ namespace Photo
         {
 
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("About IIPhoto");
+        }
     }
 }

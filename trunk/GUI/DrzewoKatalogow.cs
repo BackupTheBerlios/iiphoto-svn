@@ -14,18 +14,21 @@ namespace Photo
 {
     public class FileTree : TreeView, IWyszukiwacz
     {        
+        private const int Dysk = 0;
+        private const int FOLDER = 1;
+        private const int Dyskietka = 2;
+        private const int Cdrom = 3;
+        private const int Cdrom_z = 4;
+        private const int Dyskietka_z = 5;
+
+        private ContextMenuStrip Context;
+
         public FileTree()
         {
-            GenerateImage();            
+            GenerateImage();
             this.BackColor = Color.Beige;
-        }       
-
-        public const int Dysk = 0;
-        public const int FOLDER = 1;
-        public const int Dyskietka = 2;
-        public const int Cdrom = 3;
-        public const int Cdrom_z = 4;
-        public const int Dyskietka_z = 5;
+            Context = new ContextMenuStrip();
+        }   
 
         public void GenerateImage()
         {
@@ -456,57 +459,29 @@ namespace Photo
             //e.Equals = 
         }
 
-        public override ContextMenu ContextMenu
-        {
-            get
-            {
-                return base.ContextMenu;
-            }
-            set
-            {
-                base.ContextMenu = value;                
-            }
-        }
-
         protected override void OnNodeMouseClick(TreeNodeMouseClickEventArgs e)
         {
             base.OnNodeMouseClick(e);
 
             if (e.Button == MouseButtons.Right)
             {
-                //List<MenuItem> = new List<MenuItem>;
+                Context.Items.Clear();
+                Context.Items.Add(((DirTreeNode)e.Node).Path, null, new EventHandler(DodajDoKolekcji));
 
-                MenuItem[] lista = new MenuItem[5];
-
-                lista[0] = new MenuItem(e.Node.Text);
-                lista[4] = new MenuItem("dodaj");
-                lista[1] = new MenuItem("dodaj2");
-                lista[2] = new MenuItem("dodaj3");
-                lista[3] = new MenuItem("dodaj4");
-
-                /*lista.Add( new MenuItem("dodaj"));
-                lista.Add( new MenuItem("dodaj2"));
-                lista.Add( new MenuItem("dodaj3"));
-                lista.Add( new MenuItem("dodaj4"));*/
-
-                ContextMenu m = new ContextMenu(lista);
-
-                m.Show(this, new Point(e.X, e.Y));
-
-                //menu_kon_dla_drzewka mm = new menu_kon_dla_drzewka();
-                
-                //this.ContextMenuStrip.Show(this, new Point(e.X, e.Y));                
+                Context.Show(this, new Point(e.X, e.Y));             
             }
         }
+
+        private void DodajDoKolekcji(object sender, System.EventArgs e)
+        {
+            ToolStripItem mn = (ToolStripItem)sender;
+            MessageBox.Show("Dodaje zawartosc katalogu " + mn.Text + " do kolekcji!");
+        } 
 
         protected override void OnMouseClick(MouseEventArgs e)
         {   
 
-
-           
         }
-
-        //protected override do
 
         private void InitializeComponent()
         {
