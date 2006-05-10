@@ -18,7 +18,7 @@ namespace Photo
         {
             GenerateImage();            
             this.BackColor = Color.Beige;
-        }
+        }       
 
         public const int Dysk = 0;
         public const int FOLDER = 1;
@@ -120,6 +120,8 @@ namespace Photo
             Nodes.Clear();
             EndUpdate();
         }
+
+        
 
         public class DirTreeNode : TreeNode
         {
@@ -440,6 +442,61 @@ namespace Photo
                 e.Node.SelectedImageIndex = Dyskietka_z;
             }
         }
+
+        protected override void OnClick(EventArgs e)
+        {
+            base.OnClick(e);
+
+            //e.Equals = 
+        }
+
+        protected override void OnMouseClick(MouseEventArgs e)
+        {
+            //base.OnMouseClick(e);
+
+            //MessageBox.Show("cos");
+
+            if (e.Button == MouseButtons.Right)
+            {
+                //MessageBox.Show("cosinnego");
+
+                //menu_kon_dla_drzewka m = new menu_kon_dla_drzewka();
+                //m.Visible = true;
+
+                //List<MenuItem> = new List<MenuItem>;
+
+                MenuItem[] lista = new MenuItem[4];
+
+                lista[0] = new MenuItem("dodaj");
+                lista[1] = new MenuItem("dodaj2");
+                lista[2] = new MenuItem("dodaj3");
+                lista[3] = new MenuItem("dodaj4");
+
+                /*lista.Add( new MenuItem("dodaj"));
+                lista.Add( new MenuItem("dodaj2"));
+                lista.Add( new MenuItem("dodaj3"));
+                lista.Add( new MenuItem("dodaj4"));*/
+
+                ContextMenu m = new ContextMenu(lista);
+
+                m.Show(this, new Point(e.X, e.Y));
+
+                //menu_kon_dla_drzewka mm = new menu_kon_dla_drzewka();
+
+                //cont
+
+                //this.ContextMenuStrip.Show(this, new Point(e.X, e.Y));
+
+                //mm.
+
+                //cont
+                
+
+
+            }
+        }
+
+        //protected override do
 
         private void InitializeComponent()
         {
