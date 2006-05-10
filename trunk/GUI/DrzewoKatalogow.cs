@@ -466,16 +466,19 @@ namespace Photo
             if (e.Button == MouseButtons.Right)
             {
                 Context.Items.Clear();
-                Context.Items.Add(((DirTreeNode)e.Node).Path, null, new EventHandler(DodajDoKolekcji));
+                ToolStripItem toolStripItem = Context.Items.Add("Dodaj zawartosc katalogu " + ((DirTreeNode)e.Node).Path + " do kolekcji");
+                toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
+                toolStripItem.Click += new EventHandler(DodajDoKolekcji);
 
                 Context.Show(this, new Point(e.X, e.Y));             
             }
         }
 
-        private void DodajDoKolekcji(object sender, System.EventArgs e)
+
+        private void DodajDoKolekcji(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;
-            MessageBox.Show("Dodaje zawartosc katalogu " + mn.Text + " do kolekcji!");
+            MessageBox.Show("Dodaje zawartosc katalogu " + mn.ToolTipText + " do kolekcji!");
         } 
 
         protected override void OnMouseClick(MouseEventArgs e)
