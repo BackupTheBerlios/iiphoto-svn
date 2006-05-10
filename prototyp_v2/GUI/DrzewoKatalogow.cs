@@ -456,24 +456,30 @@ namespace Photo
             //e.Equals = 
         }
 
-        protected override void OnMouseClick(MouseEventArgs e)
+        public override ContextMenu ContextMenu
         {
-            //base.OnMouseClick(e);
+            get
+            {
+                return base.ContextMenu;
+            }
+            set
+            {
+                base.ContextMenu = value;                
+            }
+        }
 
-            //MessageBox.Show("cos");
+        protected override void OnNodeMouseClick(TreeNodeMouseClickEventArgs e)
+        {
+            base.OnNodeMouseClick(e);
 
             if (e.Button == MouseButtons.Right)
             {
-                //MessageBox.Show("cosinnego");
-
-                //menu_kon_dla_drzewka m = new menu_kon_dla_drzewka();
-                //m.Visible = true;
-
                 //List<MenuItem> = new List<MenuItem>;
 
-                MenuItem[] lista = new MenuItem[4];
+                MenuItem[] lista = new MenuItem[5];
 
-                lista[0] = new MenuItem("dodaj");
+                lista[0] = new MenuItem(e.Node.Text);
+                lista[4] = new MenuItem("dodaj");
                 lista[1] = new MenuItem("dodaj2");
                 lista[2] = new MenuItem("dodaj3");
                 lista[3] = new MenuItem("dodaj4");
@@ -488,18 +494,16 @@ namespace Photo
                 m.Show(this, new Point(e.X, e.Y));
 
                 //menu_kon_dla_drzewka mm = new menu_kon_dla_drzewka();
-
-                //cont
-
-                //this.ContextMenuStrip.Show(this, new Point(e.X, e.Y));
-
-                //mm.
-
-                //cont
                 
-
-
+                //this.ContextMenuStrip.Show(this, new Point(e.X, e.Y));                
             }
+        }
+
+        protected override void OnMouseClick(MouseEventArgs e)
+        {   
+
+
+           
         }
 
         //protected override do
