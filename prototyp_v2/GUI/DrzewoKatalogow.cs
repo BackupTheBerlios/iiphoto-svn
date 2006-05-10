@@ -47,7 +47,13 @@ namespace Photo
             foreach (string tempDrive in drives)
             {
                 DirTreeNode dn = new DirTreeNode(tempDrive);
-                Nodes.Add(dn);
+                Nodes.Add(dn);              
+
+                if (tempDrive.IndexOf("C:\\") != -1)
+                {                    
+                    this.SelectedNode = dn;
+                    this.Select(true, true);
+                }                
             }
 
             EndUpdate();
