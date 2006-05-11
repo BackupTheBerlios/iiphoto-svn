@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
     <Compile Include="Db.cs" />
     <Compile Include="DrzewoKatalogow.cs">
       <SubType>Component</SubType>
@@ -186,7 +187,6 @@
     <Compile Include="Zdjecie.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="OgolnyDiagramKlas.cd">
       <SubType>
       </SubType>
