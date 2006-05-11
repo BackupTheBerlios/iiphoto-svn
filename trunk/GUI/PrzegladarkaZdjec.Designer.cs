@@ -42,25 +42,25 @@ namespace Photo
             this.zdjecie1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // panele
             // 
             this.panele.Controls.Add(this.miniatury1);
             this.panele.Controls.Add(this.zdjecie1);
             this.panele.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panele.Location = new System.Drawing.Point(0, 0);
             this.panele.Margin = new System.Windows.Forms.Padding(1);
-            this.panele.Name = "tabControl1";
+            this.panele.Name = "panele";
             this.panele.Padding = new System.Drawing.Point(8, 3);
             this.panele.SelectedIndex = 0;
             this.panele.Size = new System.Drawing.Size(743, 457);
             this.panele.TabIndex = 2;
             // 
-            // tabPage1
+            // miniatury1
             // 
             this.miniatury1.Controls.Add(this.widokMiniatur1);
             this.miniatury1.Location = new System.Drawing.Point(4, 22);
             this.miniatury1.Margin = new System.Windows.Forms.Padding(1);
-            this.miniatury1.Name = "tabPage1";
+            this.miniatury1.Name = "miniatury1";
             this.miniatury1.Padding = new System.Windows.Forms.Padding(1);
             this.miniatury1.Size = new System.Drawing.Size(735, 431);
             this.miniatury1.TabIndex = 0;
@@ -75,14 +75,15 @@ namespace Photo
             this.widokMiniatur1.Size = new System.Drawing.Size(733, 429);
             this.widokMiniatur1.TabIndex = 0;
             this.widokMiniatur1.UseCompatibleStateImageBehavior = false;
-            this.widokMiniatur1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.mouseDoubleClick);
+            this.widokMiniatur1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.widokMiniatur_DoubleClick);
+            this.widokMiniatur1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.widokMiniatur_Click);
             // 
-            // tabPage2
+            // zdjecie1
             // 
             this.zdjecie1.Controls.Add(this.widokZdjecia1);
             this.zdjecie1.Location = new System.Drawing.Point(4, 22);
             this.zdjecie1.Margin = new System.Windows.Forms.Padding(1);
-            this.zdjecie1.Name = "tabPage2";
+            this.zdjecie1.Name = "zdjecie1";
             this.zdjecie1.Padding = new System.Windows.Forms.Padding(1);
             this.zdjecie1.Size = new System.Drawing.Size(735, 431);
             this.zdjecie1.TabIndex = 1;
@@ -123,6 +124,7 @@ namespace Photo
         private TabControl panele;
         private TabPage miniatury1;
         private TabPage zdjecie1;
+        private ContextMenuStrip Context;
 
         public event WybranoZdjecieDelegate WybranoZdjecie;
 

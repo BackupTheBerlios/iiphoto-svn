@@ -14,6 +14,7 @@ namespace Photo
         public PrzegladarkaZdjec()
         {
             InitializeComponent();
+            Context = new ContextMenuStrip();
         }
         public void SetThumbnailView()
         {
@@ -56,6 +57,19 @@ namespace Photo
             }
         }
 
+        public Zdjecie[] ZaznaczoneZdjecia
+        {
+            get
+            {
+                List<Zdjecie> zdjecia = new List<Zdjecie>();
+                foreach (ListViewItem listViewItem in widokMiniatur1.SelectedItems)
+                {
+                    zdjecia.Add((Zdjecie)widokMiniatur1[listViewItem.ImageIndex]);
+                }
+                return zdjecia.ToArray();
+            }
+        }
+
         /*public void Zoom(double zoom)
         {
             if (imageView1.Visible == true)
@@ -84,7 +98,7 @@ namespace Photo
             }
         }*/
 
-        private void mouseDoubleClick(object sender, MouseEventArgs e)
+        private void widokMiniatur_DoubleClick(object sender, MouseEventArgs e)
         {
             ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
             Zdjecie z = (Zdjecie)widokMiniatur1[listViewItem.ImageIndex];
@@ -155,5 +169,34 @@ namespace Photo
         }
 
         #endregion
+
+        private void widokMiniatur_Click(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                Context.Items.Clear();
+
+                ToolStripItem toolStripItem = Context.Items.Add("Dodaj zaznaczenie do kolekcji");
+                toolStripItem.Click += new EventHandler(DodajZaznaczenieDoKolekcji);
+
+                Context.Show(this.widokMiniatur1, new Point(e.X, e.Y));      
+            }
+        }
+
+        private void DodajZaznaczenieDoKolekcji(object sender, EventArgs e)
+        {
+            string temp = "";
+            Zdjecie[] zdjecia = ZaznaczoneZdjecia;
+            if (zdjecia.Length != 0)
+            {
+                for (int i = 0; i < zdjecia.Length; i++)
+                {
+                    temp += zdjecia[i].Path + " ";
+                }
+                MessageBox.Show("Dodaje zdjecia: " + temp + " do kolekcji!");
+            }
+        } 
     }
 }
+
+
