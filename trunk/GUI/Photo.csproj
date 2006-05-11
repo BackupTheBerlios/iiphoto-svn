@@ -187,6 +187,7 @@
     <Compile Include="Zdjecie.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="IIPhoto.config" />
     <None Include="OgolnyDiagramKlas.cd">
       <SubType>
       </SubType>

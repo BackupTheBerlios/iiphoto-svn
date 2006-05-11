@@ -15,6 +15,7 @@ namespace Photo
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Console.WriteLine("Testowo wypisz nazwe pliku bazy: {0}", Properties.Settings.Default.plikBazyDanych);
+            new Config();
             Application.Run(new PhotoForm());
         }
     }
