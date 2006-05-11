@@ -20,6 +20,6 @@ namespace Photo
             }
         }
 
-        public static plikBazy = "iiphoto.db3";
+        public static string plikBazy = "iiphoto.db3";
     }
 }
