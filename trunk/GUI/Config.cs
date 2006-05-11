@@ -5,35 +5,18 @@ using System.IO;
 
 namespace Photo
 {
-    public class Config
+    public static class Config
     {
-        string katalogDanychIIPhoto;
-
-        string plikBazyDanych;
-
-        public Config()
-        {
-            plikBazyDanych = "iiphoto.db3";
-            katalogDanychIIPhoto = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\IIPhoto";
-            if (!Directory.Exists(katalogDanychIIPhoto))
-            {
-                DirectoryInfo di = Directory.CreateDirectory(katalogDanychIIPhoto);
-            }
-        }
-
-        public string katalogDanych 
+        public static string katalogAplikacji
         {
             get
             {
-                return katalogDanychIIPhoto;
-            }
-        }
-
-        public string plikBazy
-        {
-            get
-            {
-                return plikBazyDanych;
+                string katalog = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\IIPhoto";
+                if (!Directory.Exists(katalog))
+                {
+                    DirectoryInfo di = Directory.CreateDirectory(katalog);
+                }
+                return katalog;
             }
         }
     }

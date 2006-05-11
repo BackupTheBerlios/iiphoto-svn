@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-//sddasd
+
 namespace Photo.Properties {
     
     
@@ -20,6 +20,18 @@ namespace Photo.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("iiphoto.db3")]
+        public string plikBazyDanych {
+            get {
+                return ((string)(this["plikBazyDanych"]));
+            }
+            set {
+                this["plikBazyDanych"] = value;
             }
         }
     }
