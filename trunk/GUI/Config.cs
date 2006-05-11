@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Photo
 {
-    public static class Config
+    public class Config
     {
         public static string katalogAplikacji
         {
