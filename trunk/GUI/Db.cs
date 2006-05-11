@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace Photo
 {
-    class Db
+    public class Db
     {
         private string DBfile;
         private SQLiteConnection conn;

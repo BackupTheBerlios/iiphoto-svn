@@ -14,7 +14,7 @@ namespace Photo
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            new Config();
+            Console.WriteLine("{0}", Properties.Settings.Default.plikBazyDanych);
             Application.Run(new PhotoForm());
         }
     }
