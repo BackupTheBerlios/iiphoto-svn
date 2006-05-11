@@ -19,5 +19,7 @@ namespace Photo
                 return katalog;
             }
         }
+
+        public static plikBazy = "iiphoto.db3";
     }
 }
