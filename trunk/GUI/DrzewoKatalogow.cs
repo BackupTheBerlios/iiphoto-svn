@@ -8,7 +8,8 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Collections;
-using Photo;
+using System.Data.SQLite;
+using System.Data.SqlClient;
 
 namespace Photo
 {
@@ -379,6 +380,161 @@ namespace Photo
         {
             List<Zdjecie> zdjecia = new List<Zdjecie>();
             List<string> pliki = new List<string>();
+
+
+            Db baza = new Db(Config.plikBazy);
+
+            baza.Polacz();
+
+            try
+            {
+                baza.StworzBD();
+                /**/
+                baza.Insert("CD", "\'123\',\'moje\'");
+                baza.Insert("CD", "\'234\',\'moje\'");
+                baza.Insert("CD", "\'2133\',\'mo34e\'");
+                baza.Insert("CD", "\'134\',\'m34e\'");
+
+
+                // baza.Insert("Zdjecie", "\'123\',\'moje\'");
+
+                //baza.WykonajQuery("delete from Zdjecie");
+
+                baza.Insert_czesci("Zdjecie", "sciezka,data_dodania,data_wykonania,komentarz,autor,nazwa_pliku,orientacja,cd", "\'c:\\ala\',current_date,\'1912-07-11\',\'koment\',\'aut\',\'plik222.txt\',2,\'123\'");
+                //"+new DateTime(1912,7,12)+"
+
+                /**/
+                baza.Insert_czesci("Tag", "nazwa,album", "\'tag1\',1");
+                baza.Insert_czesci("Tag", "nazwa,album", "\'tag2\',0");
+                baza.Insert_czesci("Tag", "nazwa,album", "\'tag3\',1");
+                baza.Insert_czesci("Tag", "nazwa,album", "\'tag4\',0");
+                baza.Insert_czesci("Tag", "nazwa,album", "\'tag5\',0");
+
+
+                baza.Insert("TagZdjecia", "1,1");
+                baza.Insert("TagZdjecia", "2,3");
+                baza.Insert("TagZdjecia", "2,1");
+                baza.Insert("TagZdjecia", "2,4");
+                baza.Insert("TagZdjecia", "4,1");
+
+                //new date
+
+                //baza.Delete_zawartosci_tabeli("CD");
+
+                DataSet dataSet = baza.Select("select * from CD;");
+
+                string cd;
+
+                foreach (DataTable t in dataSet.Tables)
+                {
+                    //Console.WriteLine("Tabela {0} zawiera {1} wiersze", t.TableName, t.Rows.Count);
+                    cd = "Tabela " + t.TableName + " zawiera " + t.Rows.Count + " wiersze";
+                    //MessageBox.Show("Tabela " + t.TableName + " zawiera " + t.Rows.Count + " wiersze");
+                    foreach (DataRow r in t.Rows)
+                    {
+                        //Console.Write("-> ");
+                        foreach (DataColumn c in t.Columns)
+                            cd += c.ColumnName + "=" + r[c.ColumnName];
+                        //MessageBox.Show(c.ColumnName+"="+r[c.ColumnName]);
+                        //Console.Write("{0}={1}, ", c.ColumnName, r[c.ColumnName]);
+
+                        //Console.WriteLine();
+                    }
+
+                    //PrzegladarkaZdjec.
+
+                    //Form1 ff = new Form1();
+
+                    Label napis = new Label();
+
+                    napis.Text = cd;
+
+                    MessageBox.Show(cd);
+
+                    //ff.l
+
+                    //ff.Container.Add(napis);
+
+
+                    //ff.Visible = true;
+                    //ff.Show();
+                }
+
+
+
+                dataSet = baza.Select("select * from Zdjecie;");
+
+                string zdj;
+
+                foreach (DataTable t in dataSet.Tables)
+                {
+                    zdj = "Tabela " + t.TableName + " zawiera " + t.Rows.Count + " wiersze";
+                    foreach (DataRow r in t.Rows)
+                    {
+                        foreach (DataColumn c in t.Columns)
+                            zdj += c.ColumnName + "=" + r[c.ColumnName];
+                    }
+
+                    MessageBox.Show(zdj);
+                }
+
+                dataSet = baza.Select("select * from Zdjecie where cd in (select serial from CD);");
+
+                string wyn;
+
+                foreach (DataTable t in dataSet.Tables)
+                {
+                    wyn = "Tabela " + t.TableName + " zawiera " + t.Rows.Count + " wiersze ";
+                    foreach (DataRow r in t.Rows)
+                    {
+                        foreach (DataColumn c in t.Columns)
+                            wyn += c.ColumnName + "=" + r[c.ColumnName] + " ";
+                    }
+
+                    MessageBox.Show(wyn);
+                }
+
+                dataSet = baza.Select("select * from Tag;");
+
+                string tag;
+
+                foreach (DataTable t in dataSet.Tables)
+                {
+                    tag = "Tabela " + t.TableName + " zawiera " + t.Rows.Count + " wiersze ";
+                    foreach (DataRow r in t.Rows)
+                    {
+                        foreach (DataColumn c in t.Columns)
+                            tag += c.ColumnName + "=" + r[c.ColumnName] + " ";
+                    }
+
+                    MessageBox.Show(tag);
+                }
+
+                dataSet = baza.Select("select * from TagZdjecia;");
+
+                string tagz;
+
+                foreach (DataTable t in dataSet.Tables)
+                {
+                    tagz = "Tabela " + t.TableName + " zawiera " + t.Rows.Count + " wiersze ";
+                    foreach (DataRow r in t.Rows)
+                    {
+                        foreach (DataColumn c in t.Columns)
+                            tagz += c.ColumnName + "=" + r[c.ColumnName] + " ";
+                    }
+
+                    MessageBox.Show(tagz);
+                }
+
+
+            }
+            catch (SQLiteException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            baza.Rozlacz();
+
 
             try
             {
