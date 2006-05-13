@@ -85,7 +85,7 @@ namespace Photo
 
         public Bitmap stworzMiniaturke()
         {
-
+            return null;
         }
 
         #region Zdjecie Members
