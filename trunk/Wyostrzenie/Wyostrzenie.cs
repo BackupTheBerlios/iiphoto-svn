@@ -79,5 +79,15 @@ namespace Wyostrzenie
         }
 
         #endregion
+
+        #region IOperacja Members
+
+
+        public bool CzyNaToolbar()
+        {
+            return false;
+        }
+
+        #endregion
     }
 }
