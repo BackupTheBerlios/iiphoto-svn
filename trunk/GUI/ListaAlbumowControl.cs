@@ -22,20 +22,49 @@ namespace Photo
 
             try
             {
-                DataSet dataSet = baza.Select("select nazwa from Tag where album=1;");
+                TreeNode albumy = new TreeNode("Albumy");
+                TreeNode tagi = new TreeNode("Tagi");
+
+                //baza.Delete("Tag", "album=1");
+
+
+                DataSet dataSet = baza.Select("select nazwa from Tag where album=1;");                
+
+                foreach (DataTable t in dataSet.Tables)
+                {
+                    if (t.Rows.Count == 0)
+                    {
+                        //albumy.Checked = true;
+                        //albumy.e
+                        //albumy.
+                    }
+
+                    foreach (DataRow r in t.Rows)
+                    {
+                        foreach (DataColumn c in t.Columns)
+                        {
+                            albumy.Nodes.Add(new TreeNode(""+r[c.ColumnName]));
+                        }
+                    }
+                }
+
+                dataSet = baza.Select("select nazwa from Tag where album=0;");
 
                 foreach (DataTable t in dataSet.Tables)
                 {
                     foreach (DataRow r in t.Rows)
                     {
                         foreach (DataColumn c in t.Columns)
-                        {
-                            //this.listBox1.Items.Add(r[c.ColumnName]);
-                            this.treeView1.Nodes.Add(new TreeNode(""+r[c.ColumnName]));
-
+                        {                            
+                            tagi.Nodes.Add(new TreeNode("" + r[c.ColumnName]));
                         }
                     }
                 }
+
+
+                this.treeView1.Nodes.Add(albumy);
+                this.treeView1.Nodes.Add(tagi);
+
             }
             catch (SqlException ex)
             {
