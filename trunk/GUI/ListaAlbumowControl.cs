@@ -13,12 +13,27 @@ namespace Photo
     public partial class ListaAlbumowControl : UserControl, IWyszukiwacz
     {
         private ContextMenuStrip Context;
+        private TreeNode albumy, tagi;
 
         public ListaAlbumowControl()
         {
             InitializeComponent();
             Context = new ContextMenuStrip();
 
+            Wypelnij();
+
+            
+        }
+
+        private void Usun_wszystkie()
+        {
+            treeView1.BeginUpdate();
+            treeView1.Nodes.Clear();
+            treeView1.EndUpdate();
+        }
+
+        private void Wypelnij()
+        {
             Db baza = new Db();
 
             baza.Polacz();
@@ -27,13 +42,15 @@ namespace Photo
             {
                 //baza.Insert_czesci("Tag", "nazwa,album", "\'miejsca\',1");
 
-                TreeNode albumy = new TreeNode("Albumy");
-                TreeNode tagi = new TreeNode("Tagi");
+                TreeNode alb = new TreeNode("Albumy");
+                TreeNode ta = new TreeNode("Tagi");
+                albumy = alb;
+                tagi = ta;
 
                 //baza.Delete("Tag", "album=1");
 
 
-                DataSet dataSet = baza.Select("select nazwa from Tag where album=1;");                
+                DataSet dataSet = baza.Select("select nazwa from Tag where album=1;");
 
                 foreach (DataTable t in dataSet.Tables)
                 {
@@ -48,7 +65,7 @@ namespace Photo
                     {
                         foreach (DataColumn c in t.Columns)
                         {
-                            albumy.Nodes.Add(new TreeNode(""+r[c.ColumnName]));
+                            alb.Nodes.Add(new TreeNode("" + r[c.ColumnName]));
                         }
                     }
                 }
@@ -60,15 +77,15 @@ namespace Photo
                     foreach (DataRow r in t.Rows)
                     {
                         foreach (DataColumn c in t.Columns)
-                        {                            
-                            tagi.Nodes.Add(new TreeNode("" + r[c.ColumnName]));
+                        {
+                            ta.Nodes.Add(new TreeNode("" + r[c.ColumnName]));
                         }
                     }
                 }
 
 
-                this.treeView1.Nodes.Add(albumy);
-                this.treeView1.Nodes.Add(tagi);
+                this.treeView1.Nodes.Add(alb);
+                this.treeView1.Nodes.Add(ta);
 
             }
             catch (SqlException ex)
@@ -81,6 +98,7 @@ namespace Photo
 
         private void button1_Click(object sender, EventArgs e)
         {
+            dodaj_a();
             IZdjecie[] zdjecia = Wyszukaj().PodajWynik();
             if (ZakonczonoWyszukiwanie != null)
                 ZakonczonoWyszukiwanie(zdjecia);
@@ -112,45 +130,9 @@ namespace Photo
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
-
-            
-        }
-
-        private void listBox1_SelectedValueChanged(object sender, EventArgs e)
-        {
-            //MessageBox.Show("cos");
-        }
-
-        private void cos()
-        {
-        }
-
-        private void listBox1_MouseClick(object sender, MouseEventArgs e)
-        {
-            MessageBox.Show(""+e.Button);
-
             
 
-            if (e.Button == MouseButtons.Left)
-            {
-                MessageBox.Show("lewy");
-            }
-            else if (e.Button == MouseButtons.Right)
-            {
-                MessageBox.Show("prawy");
-            }
-
             
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_MouseCaptureChanged(object sender, EventArgs e)
-        {
-           
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -158,20 +140,54 @@ namespace Photo
 
         }
 
-        private void treeView1_MouseClick(object sender, MouseEventArgs e)
+        public void dodaj_a()
         {
+            bool al = false, t = false;
+            
+            if (albumy.IsExpanded == true)
+            {
+                //albumy.Expand();
+                al = true;
+            }
+            if (tagi.IsExpanded == true)
+            {
+                tagi.Expand();
+                t = true;
+            }
 
+            Usun_wszystkie();
+            Wypelnij();
+
+            if (al)
+            {
+                albumy.Expand();
+            }
+            if (t)
+            {
+                tagi.Expand();
+            }
         }
-        private void DodajAlbum(object sender, EventArgs e)
+
+        private void ZarzadzajAlbumem(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;
+            //MessageBox.Show(mn.Text);
+
+            //tu chcial bym miec wybor czy dodaje czy usuwam album
+
+
+            Dodaj_Album da = new Dodaj_Album();
+            da.Show();
             //MessageBox.Show("Dodaje zawartosc katalogu " + mn.ToolTipText + " do kolekcji!");
         }
 
-        private void DodajTag(object sender, EventArgs e)
+        private void ZarzadzajTagiem(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;
             //MessageBox.Show("Dodaje zawartosc katalogu " + mn.ToolTipText + " do kolekcji!");
+
+            Dodaj_Tag dt = new Dodaj_Tag();
+            dt.Show();
         } 
 
 
@@ -183,10 +199,14 @@ namespace Photo
                 if (e.Node.FullPath.IndexOf("Albumy") == 0)
                 {
 
-                    Context.Items.Clear();
+                    Context.Items.Clear();                    
+                    
                     ToolStripItem toolStripItem = Context.Items.Add("Dodaj Album");
+                    Context.Items.Add("Usun Album");
+
                     // toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
-                    toolStripItem.Click += new EventHandler(DodajAlbum);
+                    toolStripItem.Click += new EventHandler(ZarzadzajAlbumem);
+                    
 
                     Context.Show(this, new Point(e.X, e.Y));
                 }
@@ -194,27 +214,19 @@ namespace Photo
                 {
                     Context.Items.Clear();
                     ToolStripItem toolStripItem = Context.Items.Add("Dodaj Tag");
+                    Context.Items.Add("Usun Tag");
+
                     // toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
-                    toolStripItem.Click += new EventHandler(DodajTag);
+                    toolStripItem.Click += new EventHandler(ZarzadzajTagiem);
 
                     Context.Show(this, new Point(e.X, e.Y));
                 }
-            }
-
-            /*MessageBox.Show("" + e.Button);
-
-
-
-            if (e.Button == MouseButtons.Left)
-            {
-                MessageBox.Show("lewy");
-            }
-            else if (e.Button == MouseButtons.Right)
-            {
-                MessageBox.Show("prawy");
-            }*/
+            }            
         }
 
-        
+        private void treeView1_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }        
     }
 }
