@@ -378,10 +378,17 @@ namespace Photo
 
         private Zdjecie[] ZnajdzPlikiWKatalogu(BackgroundWorker bw, DirTreeNode Node)
         {
+            //bw.
+
             List<Zdjecie> zdjecia = new List<Zdjecie>();
             List<string> pliki = new List<string>();
+            List<string> katalogi = new List<string>();
+
+            //katalogi.AddRange(Directory.GetDirectories);
+            //przegladarkaZdjec.DodajKatalogi(katalogi.ToArray);
 
 
+            
             Db baza = new Db();
 
             baza.Polacz();
@@ -403,7 +410,8 @@ namespace Photo
                 //"+new DateTime(1912,7,12)+"
 
                 /**/
-                /*baza.Insert_czesci("Tag", "nazwa,album", "\'tag1\',1");
+                /*                 
+                baza.Insert_czesci("Tag", "nazwa,album", "\'tag1\',1");
                 baza.Insert_czesci("Tag", "nazwa,album", "\'tag2\',0");
                 baza.Insert_czesci("Tag", "nazwa,album", "\'tag3\',1");
                 baza.Insert_czesci("Tag", "nazwa,album", "\'tag4\',0");
