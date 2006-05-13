@@ -232,6 +232,7 @@ namespace Photo
         public const int ExifCfaPattern = 41730;
 
         private static Dictionary<int, string> defaultExifIdsDictionary;
+        private static Dictionary<int, string> defaultExifDoBazyDictionary;
 
         static PropertyTags()
         {
@@ -255,6 +256,12 @@ namespace Photo
             defaultExifIdsDictionary.Add(Compression, "Compression");
             defaultExifIdsDictionary.Add(DateTime, "Date & Time");
             defaultExifIdsDictionary.Add(IIPhotoTag, "IIPhotoTag");
+
+            defaultExifDoBazyDictionary.Add(DateTime, "data");
+            defaultExifDoBazyDictionary.Add(ExifUserComment, "komentarz");
+            defaultExifDoBazyDictionary.Add(Orientation, "orientacja");
+            defaultExifDoBazyDictionary.Add(Author, "autor");
+
         }
 
         public static Dictionary<int, string> defaultExifIds
@@ -262,6 +269,14 @@ namespace Photo
             get
             {
                 return defaultExifIdsDictionary;
+            }
+        }
+
+        public static Dictionary<int, string> defaultExifDoBazy
+        {
+            get 
+            {
+                return defaultExifDoBazyDictionary;
             }
         }
 

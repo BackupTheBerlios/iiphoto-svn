@@ -200,6 +200,24 @@ namespace Photo
                 return image.PropertyItems;
         }
 
+        public static Dictionary<string, string> PobierzExifDoBazy(string fileName)
+        {
+            PropertyItem[] propertyItems = Zdjecie.PobierzDaneExif(fileName);
+            Dictionary<int, string> defaults = PropertyTags.defaultExifDoBazy;
+            Dictionary<string, string> d = new Dictionary<string,string>();
+            string propertyValue;
+
+            foreach (PropertyItem pItem in propertyItems)
+            {
+                if (defaults.ContainsKey(pItem.Id))
+                {
+                    propertyValue = PropertyTags.ParseProp(pItem);
+                    d.Add(defaults[pItem.Id], propertyValue);
+                }
+            }
+            return d;
+        }
+
         #endregion
 
         #region IDisposable Members
