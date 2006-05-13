@@ -54,7 +54,7 @@ namespace Photo
                 }
                 else
                 {
-                    return widokMiniatur1;
+                    return widokZdjecia1;
                 }
             }
         }
@@ -90,11 +90,11 @@ namespace Photo
         private void widokMiniatur_DoubleClick(object sender, MouseEventArgs e)
         {
             ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
-            Zdjecie z = (Zdjecie)widokMiniatur1[listViewItem.ImageIndex];
-            this.widokZdjecia1.setImage(z);
+            Zdjecie[] z = new Zdjecie[] { (Zdjecie)widokMiniatur1[listViewItem.ImageIndex] };
+            this.widokZdjecia1.Wypelnij(z);
             this.SetImageView();
             if (WybranoZdjecie != null)
-                WybranoZdjecie(z);
+                WybranoZdjecie(z[0]);
         }
 
         #region IOpakowanieZdjec Members

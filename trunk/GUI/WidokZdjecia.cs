@@ -10,16 +10,17 @@ using System.Drawing.Imaging;
 
 namespace Photo
 {
-    public partial class WidokZdjecia : UserControl
+    public partial class WidokZdjecia : UserControl, IOpakowanieZdjec
     {
         public WidokZdjecia()
         {
             InitializeComponent();
             padX = 0;
             padY = 0;
+            Edycja = false;
         }
 
-        public void setImage(Zdjecie zdjecie)
+        /*public void setImage(Zdjecie zdjecie)
         {
             this.zdjecie = zdjecie;
             this.zdjecieZapas = zdjecie;
@@ -28,7 +29,7 @@ namespace Photo
             this.lmStartingPoint = new Point();
             this.selectedRectangle = new Rectangle(0, 0, 0, 0);
             //this.clearRect = false;
-        }
+        }*/
 
         public ZdjecieInfo pobierzInfoZdjecia
         {
@@ -40,10 +41,9 @@ namespace Photo
 
         public bool czyZaladowaneZdjecie
         {
-            get
-            {
+            get {
                 return zdjecie != null;
-            }
+                }
         }
 
         private Bitmap pictureBoxImage
@@ -316,5 +316,94 @@ namespace Photo
                 }
             }
         }
+
+        #region IOpakowanieZdjec Members
+
+        public IZdjecie this[int numer]
+        {
+            get { return zdjecie; }
+        }
+
+        public int Ilosc
+        {
+            get 
+            {
+                if (zdjecie != null)
+                    return 1;
+                else
+                    return 0;
+            }
+        }
+
+        public void Dodaj(IZdjecie zdjecie)
+        {
+            if (Ilosc != 0)
+                return;
+            else
+                Wypelnij(new IZdjecie[] { zdjecie });
+        }
+
+        public void Usun(IZdjecie zdjecie)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public void Oproznij()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public IZdjecie[] WybraneZdjecia
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public void RozpocznijEdycje()
+        {
+            Edycja = true;
+        }
+
+        public void ZakonczEdycje()
+        {
+            Edycja = false;
+            zdjecie.WykonajOperacje();
+            zdjecie.UsunWszystkieOperacje();
+            Wypelnij(new Zdjecie[] { zdjecie });
+        }
+
+        public void DodajOperacje(PolecenieOperacji operacja)
+        {
+            if (Edycja == false)
+            {
+                RozpocznijEdycje();
+                zdjecie.DodajOperacje(operacja);
+            }
+            else
+                zdjecie.DodajOperacje(operacja);
+        }
+
+        public void UsunWszystkieOperacje()
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
+
+        public event WybranoZdjecieDelegate WybranoZdjecie;
+
+        public void Wypelnij(IZdjecie[] zdjecia)
+        {
+            if (zdjecia.Length != 0)
+            {
+                this.zdjecie = (Zdjecie)zdjecia[0];
+                this.zdjecieZapas = (Zdjecie)zdjecia[0];
+                this.pictureBoxImage = FitToPage();
+                //this.checkImagePosition();
+                this.lmStartingPoint = new Point();
+                this.selectedRectangle = new Rectangle(0, 0, 0, 0);
+                this.Refresh();
+                //this.clearRect = false;
+            }
+        }
+
+        #endregion
     }
 }

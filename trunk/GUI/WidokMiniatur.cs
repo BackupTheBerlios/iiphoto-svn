@@ -38,6 +38,7 @@ namespace Photo
 
             katalog = Properties.Resources.katalog;
             katalog_do_gory = Properties.Resources.katalog_do_gory;
+            Edycja = false;
 
         }
         public WidokMiniatur(int imgSize)
@@ -212,7 +213,7 @@ namespace Photo
             if (Edycja == false)
             {
                 RozpocznijEdycje();
-                foreach (IZdjecie zdjecie in miniatury)
+                foreach (IZdjecie zdjecie in WybraneZdjecia)
                 {
                     zdjecie.DodajOperacje(operacja);
                 }
@@ -220,7 +221,7 @@ namespace Photo
             }
             else
             {
-                foreach (IZdjecie zdjecie in miniatury)
+                foreach (IZdjecie zdjecie in WybraneZdjecia)
                 {
                     zdjecie.DodajOperacje(operacja);
                 }
