@@ -87,6 +87,7 @@
     <Compile Include="InformacjeControl.Designer.cs">
       <DependentUpon>InformacjeControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Katalog.cs" />
     <Compile Include="PhotoForm.cs">
       <SubType>Form</SubType>
     </Compile>
