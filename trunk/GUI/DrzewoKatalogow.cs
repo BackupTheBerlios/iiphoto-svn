@@ -382,13 +382,12 @@ namespace Photo
             List<string> pliki = new List<string>();
 
 
-            Db baza = new Db(Config.plikBazy);
+            Db baza = new Db();
 
             baza.Polacz();
 
             try
             {
-                baza.StworzBD();
                 /**/
                 baza.Insert("CD", "\'123\',\'moje\'");
                 baza.Insert("CD", "\'234\',\'moje\'");

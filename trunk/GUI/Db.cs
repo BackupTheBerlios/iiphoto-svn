@@ -19,75 +19,77 @@ namespace Photo
         private string DBfile;
         private SQLiteConnection conn;
 
-        public Db(string path)
+        public Db()
         {
-            DBfile = path;
-        }
+            DBfile = Config.katalogAplikacji + "\\" + Config.plikBazy;
 
-        public void StworzBD()
-        {
             if (System.IO.File.Exists(DBfile) == false)
             {
                 SQLiteConnection.CreateFile(DBfile);
+                this.Polacz();
+                this.UtworzTabele();
+                this.Rozlacz();
+            }
+        }
 
-                try
-                {                                       
-                    //SQLiteTransaction dd = conn.BeginTransaction()
-                    //MessageBox.Show("przed utworzono cd");
+        private void UtworzTabele()
+        {
+            try
+            {
+                //SQLiteTransaction dd = conn.BeginTransaction()
+                //MessageBox.Show("przed utworzono cd");
 
-                    using (SQLiteTransaction dbTrans = conn.BeginTransaction())
-                    {                     
-                        WykonajQuery("create table CD" +
-                                     "(" +
-                                          "serial varchar(50) primary key," +
-                                          "nazwa varchar(100)" +
-                                     ");");
-
-                        WykonajQuery("create table Zdjecie" +
-                                     "(" +
-                                          "id_zdjecia integer primary key autoincrement," +
-                                          "sciezka varchar(200)," +
-                                          "data_dodania date," +
-                                          "data_wykonania date," +
-                                          "komentarz varchar(250)," +
-                                          "autor varchar(30)," +
-                                          "nazwa_pliku varchar(50)," +
-                                          "orientacja integer," +
-                                          "cd varchar(50) references CD(serial) on delete cascade on update cascade" +
-                                     ");");
-
-
-                        WykonajQuery("create table Tag" +
-                                     "(" +
-                                          "id_tagu integer primary key autoincrement," +
-                                          "nazwa varchar(100) ," +
-                                          "album integer" +
-                                     ");");
-
-                        WykonajQuery("create table TagZdjecia" +
-                                     "(" +
-                                          "id_zdjecia integer references Zdjecie(id_zdjecia)," +
-                                          "id_tagu integer references Tag(id_tagu)" +
-                                     ");");
-
-                        //*/
-                        MessageBox.Show("utworzono baze");
-
-                        dbTrans.Commit();
-
-                    }                    
-                }
-                catch (Exception e)
+                using (SQLiteTransaction dbTrans = conn.BeginTransaction())
                 {
-                    MessageBox.Show(e.Message);                    
+                    WykonajQuery("create table CD" +
+                                 "(" +
+                                      "serial varchar(50) primary key," +
+                                      "nazwa varchar(100)" +
+                                 ");");
+
+                    WykonajQuery("create table Zdjecie" +
+                                 "(" +
+                                      "id_zdjecia integer primary key autoincrement," +
+                                      "sciezka varchar(200)," +
+                                      "data_dodania date," +
+                                      "data_wykonania date," +
+                                      "komentarz varchar(250)," +
+                                      "autor varchar(30)," +
+                                      "nazwa_pliku varchar(50)," +
+                                      "orientacja integer," +
+                                      "cd varchar(50) references CD(serial) on delete cascade on update cascade" +
+                                 ");");
+
+
+                    WykonajQuery("create table Tag" +
+                                 "(" +
+                                      "id_tagu integer primary key autoincrement," +
+                                      "nazwa varchar(100) ," +
+                                      "album integer" +
+                                 ");");
+
+                    WykonajQuery("create table TagZdjecia" +
+                                 "(" +
+                                      "id_zdjecia integer references Zdjecie(id_zdjecia)," +
+                                      "id_tagu integer references Tag(id_tagu)" +
+                                 ");");
+
+                    //*/
+                    MessageBox.Show("utworzono baze");
+
+                    dbTrans.Commit();
+
                 }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
             }
         }
 
         public void Polacz()
         {
-            this.StworzBD();
-            this.conn = new SQLiteConnection("Data Source=" + DBfile + ";Version=3;");
+            this.conn = new SQLiteConnection("Data Source=" + DBfile + ";Version=3;");    
             conn.Open();
         }
 
