@@ -182,7 +182,7 @@ namespace Photo
                 {
                     cmd.CommandText = "insert into " + tableName + "(" + pola + ") values(" + parameters + ");";
 
-                    MessageBox.Show("insert into " + tableName + "(" + pola + ") values(" + parameters + ");");
+                    //MessageBox.Show("insert into " + tableName + "(" + pola + ") values(" + parameters + ");");
 
                     cmd.ExecuteNonQuery();
 
