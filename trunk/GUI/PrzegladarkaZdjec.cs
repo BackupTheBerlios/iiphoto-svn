@@ -162,7 +162,7 @@ namespace Photo
 
         #endregion
 
-        public void DodajKatalogi(string[] katalogi)
+        public void DodajKatalogi(Katalog[] katalogi)
         {
             MessageBox.Show("Dodaje katalogi");
         }
