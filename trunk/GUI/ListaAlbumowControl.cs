@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SQLite;
+using System.Data.SqlClient;
 
 namespace Photo
 {
@@ -12,7 +14,36 @@ namespace Photo
     {
         public ListaAlbumowControl()
         {
-            InitializeComponent();
+            InitializeComponent();           
+
+            Db baza = new Db();
+
+            baza.Polacz();
+
+            try
+            {
+                DataSet dataSet = baza.Select("select nazwa from Tag where album=1;");                
+
+                foreach (DataTable t in dataSet.Tables)
+                {                       
+                    foreach (DataRow r in t.Rows)
+                    {                        
+                        foreach (DataColumn c in t.Columns)
+                        {                    
+                            this.listBox1.Items.Add(r[c.ColumnName]);
+
+                        }
+                    }                    
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            baza.Rozlacz();
+            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -21,6 +52,8 @@ namespace Photo
             if (ZakonczonoWyszukiwanie != null)
                 ZakonczonoWyszukiwanie(zdjecia);
         }
+
+        //protected override ons
 
         #region IWyszukiwacz Members
 
@@ -41,5 +74,45 @@ namespace Photo
         }
 
         #endregion
+
+        protected override void OnClick(EventArgs e)
+        {
+            base.OnClick(e);
+
+            
+        }
+
+        private void listBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            //MessageBox.Show("cos");
+        }
+
+        private void listBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show(""+e.Button);
+
+            
+
+            if (e.Button == MouseButtons.Left)
+            {
+                MessageBox.Show("lewy");
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                MessageBox.Show("prawy");
+            }
+
+            
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_MouseCaptureChanged(object sender, EventArgs e)
+        {
+           
+        }
     }
 }
