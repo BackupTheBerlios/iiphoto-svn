@@ -248,6 +248,8 @@ namespace Photo
 
                 //string
 
+                //MessageBox.Show(Path);
+
                 string[] files = Directory.GetDirectories(Path);
                 Array.Sort(files);
 
@@ -382,9 +384,23 @@ namespace Photo
 
             List<Zdjecie> zdjecia = new List<Zdjecie>();
             List<string> pliki = new List<string>();
-            List<string> katalogi = new List<string>();
+            List<string> katal_tab = new List<string>();
+            List<Katalog> katalogi = new List<Katalog>();
 
-            //katalogi.AddRange(Directory.GetDirectories);
+            if(Node.FullPath.LastIndexOf("\\") > 5)
+            {
+                MessageBox.Show(Node.Parent.Text);
+
+                katal_tab.AddRange(Directory.GetDirectories(Node.Path));
+
+                foreach (string t in katal_tab)
+                {
+                    MessageBox.Show(t);
+                }
+
+            }
+            //katalogi.Add(new Katalog(katal_tab.));
+
             //przegladarkaZdjec.DodajKatalogi(katalogi.ToArray);
 
 
@@ -434,37 +450,17 @@ namespace Photo
 
                 foreach (DataTable t in dataSet.Tables)
                 {
-                    //Console.WriteLine("Tabela {0} zawiera {1} wiersze", t.TableName, t.Rows.Count);
+                    
                     cd = "Tabela " + t.TableName + " zawiera " + t.Rows.Count + " wiersze";
-                    //MessageBox.Show("Tabela " + t.TableName + " zawiera " + t.Rows.Count + " wiersze");
+                    
                     foreach (DataRow r in t.Rows)
-                    {
-                        //Console.Write("-> ");
+                    {                        
                         foreach (DataColumn c in t.Columns)
-                            cd += c.ColumnName + "=" + r[c.ColumnName];
-                        //MessageBox.Show(c.ColumnName+"="+r[c.ColumnName]);
-                        //Console.Write("{0}={1}, ", c.ColumnName, r[c.ColumnName]);
-
-                        //Console.WriteLine();
+                            cd += c.ColumnName + "=" + r[c.ColumnName];                        
                     }
 
-                    //PrzegladarkaZdjec.
-
-                    //Form1 ff = new Form1();
-
-                    Label napis = new Label();
-
-                    napis.Text = cd;
-
-                    MessageBox.Show(cd);
-
-                    //ff.l
-
-                    //ff.Container.Add(napis);
-
-
-                    //ff.Visible = true;
-                    //ff.Show();
+                   
+                    //MessageBox.Show(cd);
                 }
 
 
@@ -498,7 +494,7 @@ namespace Photo
                             wyn += c.ColumnName + "=" + r[c.ColumnName] + " ";
                     }
 
-                    MessageBox.Show(wyn);
+                    //MessageBox.Show(wyn);
                 }
 
                 dataSet = baza.Select("select * from Tag;");
@@ -530,7 +526,7 @@ namespace Photo
                             tagz += c.ColumnName + "=" + r[c.ColumnName] + " ";
                     }
 
-                    MessageBox.Show(tagz);
+                    //MessageBox.Show(tagz);
                 }
 
 
