@@ -23,10 +23,15 @@ namespace Photo
                 // zamykanie dytora
             }
             panele.SelectedTab = miniatury1Tab;
+
         }
         public void SetImageView()
         {
             panele.SelectedTab = zdjecie1Tab;
+            ZdjecieInfo info = widokZdjecia1.pobierzInfoZdjecia;
+            if (ZaznaczonoZdjecie != null)
+                ZaznaczonoZdjecie(info);
+
         }
         public WidokMiniatur Thumbnailview
         {

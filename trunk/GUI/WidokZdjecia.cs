@@ -30,6 +30,14 @@ namespace Photo
             //this.clearRect = false;
         }
 
+        public ZdjecieInfo pobierzInfoZdjecia
+        {
+            get
+            {
+                return new ZdjecieInfo(zdjecie.DaneExif, zdjecie.NazwaPliku, zdjecie.Path, new Size(zdjecie.Duze.Width, zdjecie.Duze.Height), zdjecie.FormatPliku);
+            }
+        }
+
         private Bitmap pictureBoxImage
         {
             get

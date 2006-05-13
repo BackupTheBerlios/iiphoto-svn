@@ -237,6 +237,7 @@ namespace Photo
         static PropertyTags()
         {
             defaultExifIdsDictionary = new Dictionary<int, string>();
+            defaultExifDoBazyDictionary = new Dictionary<int, string>();
 
             // Standardowe wartosci EXIF do wyswietlenia
             // Najpierw String ktory zostanie wyswietlony, a nastepnie 
@@ -261,7 +262,6 @@ namespace Photo
             defaultExifDoBazyDictionary.Add(ExifUserComment, "komentarz");
             defaultExifDoBazyDictionary.Add(Orientation, "orientacja");
             defaultExifDoBazyDictionary.Add(Author, "autor");
-
         }
 
         public static Dictionary<int, string> defaultExifIds
