@@ -380,26 +380,43 @@ namespace Photo
 
         private Zdjecie[] ZnajdzPlikiWKatalogu(BackgroundWorker bw, DirTreeNode Node)
         {
-            //bw.
-
             List<Zdjecie> zdjecia = new List<Zdjecie>();
             List<string> pliki = new List<string>();
             List<string> katal_tab = new List<string>();
             List<Katalog> katalogi = new List<Katalog>();
 
-            if(Node.FullPath.LastIndexOf("\\") > 5)
+            if(Node.FullPath.LastIndexOf("\\") > 4)
             {
-                MessageBox.Show(Node.Parent.Text);
+                MessageBox.Show(Node.Path);
+
+                string s1 = "";
+                char[] s2 = new char[Node.Path.Length];
 
                 katal_tab.AddRange(Directory.GetDirectories(Node.Path));
 
-                foreach (string t in katal_tab)
+                Node.Path.CopyTo(0,s2,0,Node.Path.LastIndexOf("\\"));
+
+                for (int i = 0; i < s2.Length; i++)
                 {
-                    MessageBox.Show(t);
+                    s1 += s2[i];
                 }
 
+                if (s2.Length == 2)
+                {
+                    katalogi.Add(new Katalog(s1 + "\\", true));
+                }
+                else
+                {
+                    katalogi.Add(new Katalog(s1, true));
+                }                
+
+                foreach (string t in katal_tab)
+                {                 
+                    katalogi.Add(new Katalog(t,false));
+                }
             }
-            //katalogi.Add(new Katalog(katal_tab.));
+            
+            
 
             //przegladarkaZdjec.DodajKatalogi(katalogi.ToArray);
 
