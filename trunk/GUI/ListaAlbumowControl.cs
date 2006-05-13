@@ -16,32 +16,7 @@ namespace Photo
         {
             InitializeComponent();           
 
-            Db baza = new Db();
-
-            baza.Polacz();
-
-            try
-            {
-                DataSet dataSet = baza.Select("select nazwa from Tag where album=1;");                
-
-                foreach (DataTable t in dataSet.Tables)
-                {                       
-                    foreach (DataRow r in t.Rows)
-                    {                        
-                        foreach (DataColumn c in t.Columns)
-                        {                    
-                            this.listBox1.Items.Add(r[c.ColumnName]);
-
-                        }
-                    }                    
-                }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            baza.Rozlacz();
+           
             
 
         }
@@ -64,13 +39,14 @@ namespace Photo
         public IWyszukiwanie Wyszukaj()
         {
             Wyszukiwanie wynik = new Wyszukiwanie();
-            if (listBox1.SelectedIndex == 0)
+            /*if (listBox1.SelectedIndex == 0)
                 wynik.And("..\\..\\img\\album1.bmp");
             if (listBox1.SelectedIndex == 1)
                 wynik.And("..\\..\\img\\album2.bmp");
-            if (listBox1.SelectedIndex == 2)
+            if (listBox1.SelectedIndex == 2)*/
                 wynik.And("..\\..\\img\\album3.bmp");
             return wynik;
+            
         }
 
         #endregion
@@ -113,6 +89,11 @@ namespace Photo
         private void listBox1_MouseCaptureChanged(object sender, EventArgs e)
         {
            
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
         }
     }
 }

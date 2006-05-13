@@ -29,7 +29,7 @@ namespace Photo
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
             // button1
@@ -43,24 +43,20 @@ namespace Photo
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // listBox1
+            // treeView1
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(0, 0);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(150, 121);
-            this.listBox1.TabIndex = 1;
-            this.listBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseClick);
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            this.listBox1.SelectedValueChanged += new System.EventHandler(this.listBox1_SelectedValueChanged);
-            this.listBox1.MouseCaptureChanged += new System.EventHandler(this.listBox1_MouseCaptureChanged);
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(150, 121);
+            this.treeView1.TabIndex = 1;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // ListaAlbumowControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.treeView1);
             this.Controls.Add(this.button1);
             this.Name = "ListaAlbumowControl";
             this.Size = new System.Drawing.Size(150, 144);
@@ -71,6 +67,6 @@ namespace Photo
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }
