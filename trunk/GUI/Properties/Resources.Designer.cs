@@ -109,6 +109,13 @@ namespace Photo.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap katalog_do_gory {
+            get {
+                object obj = ResourceManager.GetObject("katalog_do_gory", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap nozyce {
             get {
                 object obj = ResourceManager.GetObject("nozyce", resourceCulture);

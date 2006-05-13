@@ -377,6 +377,7 @@ namespace Photo
             {
                 RozpocznijEdycje();
                 zdjecie.DodajOperacje(operacja);
+                ZakonczEdycje();
             }
             else
                 zdjecie.DodajOperacje(operacja);
