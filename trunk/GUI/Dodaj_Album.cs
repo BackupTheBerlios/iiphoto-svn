@@ -34,12 +34,18 @@ namespace Photo
                     baza.Insert_czesci("Tag", "nazwa,album", "\'" + nazwa + "\',1");
 
                 }
-                catch (SQLiteException ex)
+                catch (SQLiteException)
                 {
                     MessageBox.Show("Taka Nazwa Albumu juz instnieje");
                 }
 
                 baza.Rozlacz();
+
+                this.Dispose();
+
+                
+
+                //ListaAlbumowControl.dodaj_a();
             }
         }
     }
