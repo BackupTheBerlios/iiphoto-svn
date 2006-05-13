@@ -73,21 +73,31 @@ namespace Photo
             operacje.Add(new XOR());
         }
 
-        public void WrzucNaToolBar(ToolStrip tool)
+        public void WrzucDoGui(ToolStrip tool, ToolStripMenuItem filtry)
         {
             foreach (IOperacja operacja in operacje)
             {
-                ToolStripButton button = new ToolStripButton(operacja.NazwaOperacji, operacja.Ikona);
-                button.Tag = operacja;
-                button.Click += new EventHandler(button_Click);
-                tool.Items.Add(button);
+                if (operacja.CzyNaToolbar() == true)
+                {
+                    ToolStripButton button = new ToolStripButton(operacja.NazwaOperacji, operacja.Ikona);
+                    button.Tag = operacja;
+                    button.Click += new EventHandler(button_Click);
+                    tool.Items.Add(button);
+                }
+                else
+                {
+                    ToolStripMenuItem menuItem = new ToolStripMenuItem(operacja.NazwaOperacji, operacja.Ikona);
+                    menuItem.Tag = operacja;
+                    menuItem.Click += new EventHandler(button_Click);
+                    filtry.DropDownItems.Add(menuItem);
+                }
             }
         }
 
         void button_Click(object sender, EventArgs e)
         {
-            ToolStripButton button = (ToolStripButton)sender;
-            IOperacja operacja = (IOperacja)button.Tag;
+            ToolStripItem item = (ToolStripItem)sender;
+            IOperacja operacja = (IOperacja)item.Tag;
             PolecenieOperacji polecenie = new PolecenieOperacji(operacja, operacja.PodajArgumenty().ToArray());
             ZazadanieOperacji(polecenie);
         }
@@ -157,6 +167,16 @@ namespace Photo
         public Stack<object> PodajArgumenty()
         {
             return new Stack<object>();
+        }
+
+        #endregion
+
+        #region IOperacja Members
+
+
+        public bool CzyNaToolbar()
+        {
+            return false;
         }
 
         #endregion
@@ -230,6 +250,16 @@ namespace Photo
                 }
             }
             Bitmap.UnlockBits(data);
+        }
+
+        #endregion
+
+        #region IOperacja Members
+
+
+        public bool CzyNaToolbar()
+        {
+            return false;
         }
 
         #endregion

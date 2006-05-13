@@ -34,7 +34,7 @@ namespace Photo
             operacje = new Operacje();
             operacje.WczytajWbudowane();
             operacje.WczytajPluginy();
-            operacje.WrzucNaToolBar(toolStripOperacje);
+            operacje.WrzucDoGui(toolStripOperacje, filtryToolStripMenuItem);
             operacje.ZazadanieOperacji += new ZazadanieOperacjiDelegate(przegladarkaZdjec.DodajOperacje);
 
             /* Inicjalizacja wyszukiwarki.
@@ -112,6 +112,11 @@ namespace Photo
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("About IIPhoto");
+        }
+
+        private void zakonczToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

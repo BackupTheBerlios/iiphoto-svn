@@ -41,12 +41,15 @@ namespace Photo
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filtryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.przegladarkaZdjec = new Photo.PrzegladarkaZdjec();
             this.informacjeControl1 = new Photo.InformacjeControl();
             this.drzewoOpakowane1 = new Photo.DrzewoOpakowane();
             this.wyszukiwarkaControl1 = new Photo.WyszukiwarkaControl();
             this.listaAlbumowControl = new Photo.ListaAlbumowControl();
             this.statusStrip = new Photo.PasekStanuControl();
+            this.programToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zakonczToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -142,7 +145,9 @@ namespace Photo
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.programToolStripMenuItem,
             this.fileToolStripMenuItem,
+            this.filtryToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -153,8 +158,8 @@ namespace Photo
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
-            this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(34, 20);
+            this.fileToolStripMenuItem.Text = "Plik";
             // 
             // helpToolStripMenuItem
             // 
@@ -167,9 +172,15 @@ namespace Photo
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // akcjeToolStripMenuItem
+            // 
+            this.filtryToolStripMenuItem.Name = "akcjeToolStripMenuItem";
+            this.filtryToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.filtryToolStripMenuItem.Text = "Filtry";
             // 
             // przegladarkaZdjec
             // 
@@ -219,6 +230,21 @@ namespace Photo
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "statusStrip";
             // 
+            // programToolStripMenuItem
+            // 
+            this.programToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zakonczToolStripMenuItem});
+            this.programToolStripMenuItem.Name = "programToolStripMenuItem";
+            this.programToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.programToolStripMenuItem.Text = "Program";
+            // 
+            // zakonczToolStripMenuItem
+            // 
+            this.zakonczToolStripMenuItem.Name = "zakonczToolStripMenuItem";
+            this.zakonczToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.zakonczToolStripMenuItem.Text = "Zakoncz";
+            this.zakonczToolStripMenuItem.Click += new System.EventHandler(this.zakonczToolStripMenuItem_Click);
+            // 
             // PhotoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -262,6 +288,9 @@ namespace Photo
         private DrzewoOpakowane drzewoOpakowane1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem filtryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem programToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zakonczToolStripMenuItem;
 
     }
 }
