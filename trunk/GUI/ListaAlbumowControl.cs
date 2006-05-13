@@ -98,7 +98,7 @@ namespace Photo
 
         private void button1_Click(object sender, EventArgs e)
         {
-            dodaj_a();
+            odswiez();
             IZdjecie[] zdjecia = Wyszukaj().PodajWynik();
             if (ZakonczonoWyszukiwanie != null)
                 ZakonczonoWyszukiwanie(zdjecia);
@@ -130,17 +130,14 @@ namespace Photo
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
-            
-
-            
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-
+            MessageBox.Show("zczytanie z bazy i wyswietlenie zawartosci pozycji " + e.Node.Text);
         }
 
-        public void dodaj_a()
+        public void odswiez()
         {
             bool al = false, t = false;
             
@@ -227,6 +224,46 @@ namespace Photo
         private void treeView1_MouseClick(object sender, MouseEventArgs e)
         {
 
+        }
+
+        private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            //MessageBox.Show("check");
+
+            if (e.Node.Text == "Albumy")
+            {
+                if (e.Node.Checked == true)
+                {
+                    foreach (TreeNode t in e.Node.Nodes)
+                    {
+                        t.Checked = true;
+                    }
+                }
+                else
+                {
+                    foreach (TreeNode t in e.Node.Nodes)
+                    {
+                        t.Checked = false;
+                    }
+                }
+            }
+            if (e.Node.Text == "Tagi")
+            {             
+                if (e.Node.Checked == true)
+                {
+                    foreach (TreeNode t in e.Node.Nodes)
+                    {
+                        t.Checked = true;
+                    }
+                }
+                else
+                {
+                    foreach (TreeNode t in e.Node.Nodes)
+                    {
+                        t.Checked = false;
+                    }
+                }
+            }
         }        
     }
 }
