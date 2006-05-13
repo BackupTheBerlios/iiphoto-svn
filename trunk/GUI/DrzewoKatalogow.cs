@@ -388,22 +388,22 @@ namespace Photo
 
             try
             {
-                /**/
+                /*
                 baza.Insert("CD", "\'123\',\'moje\'");
                 baza.Insert("CD", "\'234\',\'moje\'");
                 baza.Insert("CD", "\'2133\',\'mo34e\'");
                 baza.Insert("CD", "\'134\',\'m34e\'");
-
+        */
 
                 // baza.Insert("Zdjecie", "\'123\',\'moje\'");
 
                 //baza.WykonajQuery("delete from Zdjecie");
 
-                baza.Insert_czesci("Zdjecie", "sciezka,data_dodania,data_wykonania,komentarz,autor,nazwa_pliku,orientacja,cd", "\'c:\\ala\',current_date,\'1912-07-11\',\'koment\',\'aut\',\'plik222.txt\',2,\'123\'");
+                //baza.Insert_czesci("Zdjecie", "sciezka,data_dodania,data_wykonania,komentarz,autor,nazwa_pliku,orientacja,cd", "\'c:\\ala\',current_date,\'1912-07-11\',\'koment\',\'aut\',\'plik222.txt\',2,\'123\'");
                 //"+new DateTime(1912,7,12)+"
 
                 /**/
-                baza.Insert_czesci("Tag", "nazwa,album", "\'tag1\',1");
+                /*baza.Insert_czesci("Tag", "nazwa,album", "\'tag1\',1");
                 baza.Insert_czesci("Tag", "nazwa,album", "\'tag2\',0");
                 baza.Insert_czesci("Tag", "nazwa,album", "\'tag3\',1");
                 baza.Insert_czesci("Tag", "nazwa,album", "\'tag4\',0");
@@ -415,7 +415,7 @@ namespace Photo
                 baza.Insert("TagZdjecia", "2,1");
                 baza.Insert("TagZdjecia", "2,4");
                 baza.Insert("TagZdjecia", "4,1");
-
+*/
                 //new date
 
                 //baza.Delete_zawartosci_tabeli("CD");
