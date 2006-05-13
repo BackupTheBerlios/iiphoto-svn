@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-//sdad
+
 namespace Photo.Properties {
     using System;
     
@@ -99,6 +99,13 @@ namespace Photo.Properties {
             get {
                 object obj = ResourceManager.GetObject("folder", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap katalog {
+            get {
+                object obj = ResourceManager.GetObject("katalog", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
