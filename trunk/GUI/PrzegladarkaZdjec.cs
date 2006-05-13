@@ -28,11 +28,8 @@ namespace Photo
         public void SetImageView()
         {
             panele.SelectedTab = zdjecie1Tab;
-            ZdjecieInfo info = widokZdjecia1.pobierzInfoZdjecia;
-            if (ZaznaczonoZdjecie != null)
-                ZaznaczonoZdjecie(info);
-
         }
+
         public WidokMiniatur Thumbnailview
         {
             get
@@ -198,6 +195,16 @@ namespace Photo
             if (zdjecia.Length == 1)
             {
                 ZdjecieInfo info = new ZdjecieInfo(Zdjecie.PobierzDaneExif(zdjecia[0].Path), zdjecia[0].NazwaPliku, zdjecia[0].Path, new Size(zdjecia[0].Duze.Width, zdjecia[0].Duze.Height), zdjecia[0].FormatPliku);
+                if (ZaznaczonoZdjecie != null)
+                    ZaznaczonoZdjecie(info);
+            }
+        }
+
+        private void panele_onSelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (((TabControl)sender).SelectedTab == zdjecie1Tab)
+            {
+                ZdjecieInfo info = widokZdjecia1.pobierzInfoZdjecia;
                 if (ZaznaczonoZdjecie != null)
                     ZaznaczonoZdjecie(info);
             }
