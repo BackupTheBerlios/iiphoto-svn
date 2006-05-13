@@ -495,7 +495,7 @@ namespace Photo
                             zdj += c.ColumnName + "=" + r[c.ColumnName];
                     }
 
-                    MessageBox.Show(zdj);
+                    //MessageBox.Show(zdj);
                 }
 
                 dataSet = baza.Select("select * from Zdjecie where cd in (select serial from CD);");
@@ -527,7 +527,7 @@ namespace Photo
                             tag += c.ColumnName + "=" + r[c.ColumnName] + " ";
                     }
 
-                    MessageBox.Show(tag);
+                    //MessageBox.Show(tag);
                 }
 
                 dataSet = baza.Select("select * from TagZdjecia;");
@@ -649,6 +649,8 @@ namespace Photo
                 Context.Show(this, new Point(e.X, e.Y));             
             }
         }
+
+        //protected override onn
 
 
         private void DodajDoKolekcji(object sender, EventArgs e)
