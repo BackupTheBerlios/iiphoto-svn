@@ -14,11 +14,35 @@ namespace Photo
     {
         public ListaAlbumowControl()
         {
-            InitializeComponent();           
+            InitializeComponent();
 
-           
-            
+            Db baza = new Db();
 
+            baza.Polacz();
+
+            try
+            {
+                DataSet dataSet = baza.Select("select nazwa from Tag where album=1;");
+
+                foreach (DataTable t in dataSet.Tables)
+                {
+                    foreach (DataRow r in t.Rows)
+                    {
+                        foreach (DataColumn c in t.Columns)
+                        {
+                            //this.listBox1.Items.Add(r[c.ColumnName]);
+                            this.treeView1.Nodes.Add(new TreeNode(""+r[c.ColumnName]));
+
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            baza.Rozlacz();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -63,6 +87,10 @@ namespace Photo
             //MessageBox.Show("cos");
         }
 
+        private void cos()
+        {
+        }
+
         private void listBox1_MouseClick(object sender, MouseEventArgs e)
         {
             MessageBox.Show(""+e.Button);
@@ -95,5 +123,28 @@ namespace Photo
         {
 
         }
+
+        private void treeView1_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            MessageBox.Show("" + e.Button);
+
+
+
+            if (e.Button == MouseButtons.Left)
+            {
+                MessageBox.Show("lewy");
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                MessageBox.Show("prawy");
+            }
+        }
+
+        
     }
 }
