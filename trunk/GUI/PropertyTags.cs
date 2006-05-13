@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Drawing.Imaging;
 
 namespace Photo
 {
@@ -230,33 +231,33 @@ namespace Photo
         public const int ExifSceneType = 41729;
         public const int ExifCfaPattern = 41730;
 
-        private static Dictionary<string,int> defaultExifIdsDictionary;
+        private static Dictionary<int, string> defaultExifIdsDictionary;
 
         static PropertyTags()
         {
-            defaultExifIdsDictionary = new Dictionary<string, int>();
+            defaultExifIdsDictionary = new Dictionary<int, string>();
 
             // Standardowe wartosci EXIF do wyswietlenia
             // Najpierw String ktory zostanie wyswietlony, a nastepnie 
             // Tag ktory zostanie pobrany ze zdjecia
-            defaultExifIdsDictionary.Add("Make", EquipMake);
-            defaultExifIdsDictionary.Add("Model", EquipModel);
-            defaultExifIdsDictionary.Add("Orientation", Orientation);
-            defaultExifIdsDictionary.Add("Exposure Time", ExifExposureTime);
-            defaultExifIdsDictionary.Add("Flash", ExifFlash);
-            defaultExifIdsDictionary.Add("Shutter Speed", ExifShutterSpeed);
-            defaultExifIdsDictionary.Add("Brightness", ExifBrightness);
-            defaultExifIdsDictionary.Add("ISO", ExifISOSpeed);
-            defaultExifIdsDictionary.Add("Aperture", ExifAperture);
-            defaultExifIdsDictionary.Add("Focal Length", ExifFocalLength);
-            defaultExifIdsDictionary.Add("Comment", ExifUserComment);
-            defaultExifIdsDictionary.Add("Color Space", ExifColorSpace);
-            defaultExifIdsDictionary.Add("Compression", Compression);
-            defaultExifIdsDictionary.Add("Date & Time", DateTime);
-            defaultExifIdsDictionary.Add("IIPhotoTag", IIPhotoTag);
+            defaultExifIdsDictionary.Add(EquipMake, "Make");
+            defaultExifIdsDictionary.Add(EquipModel, "Model");
+            defaultExifIdsDictionary.Add(Orientation, "Orientation");
+            defaultExifIdsDictionary.Add(ExifExposureTime, "Exposure Time");
+            defaultExifIdsDictionary.Add(ExifFlash, "Flash");
+            defaultExifIdsDictionary.Add(ExifShutterSpeed, "Shutter Speed");
+            defaultExifIdsDictionary.Add(ExifBrightness, "Brightness");
+            defaultExifIdsDictionary.Add(ExifISOSpeed, "ISO");
+            defaultExifIdsDictionary.Add(ExifAperture, "Aperture");
+            defaultExifIdsDictionary.Add(ExifFocalLength, "Focal Length");
+            defaultExifIdsDictionary.Add(ExifUserComment, "Comment");
+            defaultExifIdsDictionary.Add(ExifColorSpace, "Color Space");
+            defaultExifIdsDictionary.Add(Compression, "Compression");
+            defaultExifIdsDictionary.Add(DateTime, "Date & Time");
+            defaultExifIdsDictionary.Add(IIPhotoTag, "IIPhotoTag");
         }
 
-        public static Dictionary<string, int> defaultExifIds
+        public static Dictionary<int, string> defaultExifIds
         {
             get
             {
@@ -264,9 +265,17 @@ namespace Photo
             }
         }
 
-        internal static string ParseProp(int propID, string val)
+        internal static string ParseProp(PropertyItem propItem/* int propID, string val*/)
         {
-            switch (propID)
+            string val;
+            switch (propItem.Type)
+            {
+                case 1: val = Encoding.Unicode.GetString(propItem.Value); break;
+                case 2: val = Encoding.ASCII.GetString(propItem.Value); break;
+                case 3: val = BitConverter.ToUInt16(propItem.Value, 0).ToString(); break;
+                default: val = "Value not supported"; break;
+            }
+            switch (propItem.Id)
             {
                 case ExifFlash: if (val.Equals("1"))
                     {

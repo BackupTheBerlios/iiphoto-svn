@@ -125,7 +125,7 @@ namespace Photo
             miniatura.SetPropertyItem(propItem);
         }
 
-        public string GetProperty(int propID)
+        /*public string GetProperty(int propID)
         {
             PropertyItem i;
             string val;
@@ -146,6 +146,14 @@ namespace Photo
                 }
             }
             return "";
+        }*/
+
+        public PropertyItem[] DaneExif
+        {
+            get
+            {
+                return this.Duze.PropertyItems;
+            }
         }
 
         public void UseOrientationTag()
@@ -183,7 +191,7 @@ namespace Photo
             }
         }
 
-        public static PropertyItem[] GetExifProperties(string fileName)
+        public static PropertyItem[] PobierzDaneExif(string fileName)
         {
             using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
             using (Image image = Image.FromStream(stream,

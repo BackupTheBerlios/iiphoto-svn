@@ -68,6 +68,12 @@ namespace Photo
                 new WybranoZdjecieDelegate(informacjeControl1.Zaladuj);
             //listaOpakowanControl.WybranoZdjecie +=
             //new WybranoZdjecieDelegate(informacjeControl.Zaladuj);
+
+            /* Delegowanie ZaznaczonoZdjecieDelegate
+             */
+            przegladarkaZdjec.ZaznaczonoZdjecie +=
+                new ZaznaczonoZdjecieDelegate(informacjeControl1.Zaladuj);
+
         }
 
         private void Alfa_Click(object sender, EventArgs e)

@@ -19,19 +19,27 @@ namespace Photo
             Tags.Columns.Add("Wartoœæ");
             Exif.Columns.Add("Nazwa");
             Exif.Columns.Add("Wartoœæ");
+        }
 
-            /*Tags.Items.Add(new ListViewItem(new string[] { "Brak","informacji"}));
-            Exif.Items.Add(new ListViewItem(new string[] { "Brak","informacji"}));*/
+        public void Zaladuj(ZdjecieInfo info)
+        {
+            Wyswietl(info);
         }
 
         public void Zaladuj(IZdjecie zdjecie)
         {
+            ZdjecieInfo info = new ZdjecieInfo(((Zdjecie)zdjecie).DaneExif, zdjecie.NazwaPliku, ((Zdjecie)zdjecie).Path, new Size(zdjecie.Duze.Width, zdjecie.Duze.Height), ((Zdjecie)zdjecie).FormatPliku);
+            Wyswietl(info);
+        }
+
+        private void Wyswietl(ZdjecieInfo info)
+        {
             Tags.Items.Clear();
             Exif.Items.Clear();
-            if (zdjecie != null)
+            if (info != null)
             {
-                fillTags((Zdjecie)zdjecie);
-                fillExif((Zdjecie)zdjecie);
+                fillTags(info);
+                fillExif(info.propertyItems);
             }
             else
             {
@@ -40,26 +48,28 @@ namespace Photo
             }
         }
 
-        private void fillExif(Zdjecie zdjecie)
+        private void fillExif(PropertyItem[] propertyItems)
         {
-            Dictionary<string, int> d = PropertyTags.defaultExifIds;
+            Dictionary<int, string> d = PropertyTags.defaultExifIds;
             string propertyValue;
 
-            foreach (KeyValuePair<string,int> kv in d)
-            {
-                propertyValue = zdjecie.GetProperty(kv.Value);
-                if (!propertyValue.Equals(""))
-                    Exif.Items.Add(new ListViewItem(new string[] { kv.Key, propertyValue }));
+            foreach(PropertyItem pItem in propertyItems) {
+                if (d.ContainsKey(pItem.Id)) 
+                {
+                    propertyValue = PropertyTags.ParseProp(pItem);
+                    if (!propertyValue.Equals(""))
+                        Exif.Items.Add(new ListViewItem(new string[] { d[pItem.Id], propertyValue }));
+                }
             }
         }
 
-        private void fillTags(Zdjecie zdjecie)
+        private void fillTags(ZdjecieInfo info)
         {
-            Tags.Items.Add(new ListViewItem(new string[] { "Lokalizacja", zdjecie.Path.Substring(0, zdjecie.Path.LastIndexOf('\\') + 1) }));
-            Tags.Items.Add(new ListViewItem(new string[] { "Nazwa", zdjecie.NazwaPliku }));
-            Tags.Items.Add(new ListViewItem(new string[] { "Szerokoœæ", zdjecie.Duze.Width.ToString() }));
-            Tags.Items.Add(new ListViewItem(new string[] { "Wysokoœæ", zdjecie.Duze.Height.ToString() }));
-            Tags.Items.Add(new ListViewItem(new string[] { "Format", zdjecie.FormatPliku}));
+            Tags.Items.Add(new ListViewItem(new string[] { "Lokalizacja", info.Sciezka.Substring(0, info.Sciezka.LastIndexOf('\\') + 1) }));
+            Tags.Items.Add(new ListViewItem(new string[] { "Nazwa", info.NazwaPliku }));
+            Tags.Items.Add(new ListViewItem(new string[] { "Szerokoœæ", info.Rozmiar.Width.ToString() }));
+            Tags.Items.Add(new ListViewItem(new string[] { "Wysokoœæ", info.Rozmiar.Height.ToString() }));
+            Tags.Items.Add(new ListViewItem(new string[] { "Format", info.Format}));
         }
 
     }

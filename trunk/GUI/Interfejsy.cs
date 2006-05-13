@@ -74,6 +74,12 @@ namespace Photo
     public delegate void WybranoZdjecieDelegate(IZdjecie zdjecie);
 
     /// <summary>
+    /// Delegat informuj¹cy o zaznaczeniu zdjêcia z pewnego zbioru.
+    /// </summary>
+    /// <param name="zdjecie">Wybrany obiekt.</param>
+    public delegate void ZaznaczonoZdjecieDelegate(ZdjecieInfo info);
+
+    /// <summary>
     /// Interfejs który przechowuje zbiór zdjêæ (elementów implementuj¹cych interfejs IZdjecie).
     /// Powinien znaæ podzbiór zdjêæ wybranych przez u¿ytkownika.
     /// Posiada stan Edycja. Jeœli stan Edycja jest aktywny opakowanie zbiera polecenia operacji 
@@ -117,7 +123,10 @@ namespace Photo
         /// Zwraca zdjêcia wybrane przez u¿ytkownika.
         /// </summary>
         /// <returns></returns>
-        IZdjecie[] WybraneZdjecia();
+        IZdjecie[] WybraneZdjecia
+        {
+            get;
+        }
         /// <summary>
         /// Rozpoczyna edycjê (stan Edycja staje sie aktywny).
         /// Jeœli stan Edycja by³ aktywny ju¿ wczeœniej - nie wykonuje nic.

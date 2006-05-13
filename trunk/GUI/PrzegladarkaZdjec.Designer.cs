@@ -33,19 +33,19 @@ namespace Photo
         {
             this.components = new System.ComponentModel.Container();
             this.panele = new System.Windows.Forms.TabControl();
-            this.miniatury1 = new System.Windows.Forms.TabPage();
+            this.miniatury1Tab = new System.Windows.Forms.TabPage();
             this.widokMiniatur1 = new Photo.WidokMiniatur();
-            this.zdjecie1 = new System.Windows.Forms.TabPage();
+            this.zdjecie1Tab = new System.Windows.Forms.TabPage();
             this.widokZdjecia1 = new Photo.WidokZdjecia();
             this.panele.SuspendLayout();
-            this.miniatury1.SuspendLayout();
-            this.zdjecie1.SuspendLayout();
+            this.miniatury1Tab.SuspendLayout();
+            this.zdjecie1Tab.SuspendLayout();
             this.SuspendLayout();
             // 
             // panele
             // 
-            this.panele.Controls.Add(this.miniatury1);
-            this.panele.Controls.Add(this.zdjecie1);
+            this.panele.Controls.Add(this.miniatury1Tab);
+            this.panele.Controls.Add(this.zdjecie1Tab);
             this.panele.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panele.Location = new System.Drawing.Point(0, 0);
             this.panele.Margin = new System.Windows.Forms.Padding(1);
@@ -57,15 +57,15 @@ namespace Photo
             // 
             // miniatury1
             // 
-            this.miniatury1.Controls.Add(this.widokMiniatur1);
-            this.miniatury1.Location = new System.Drawing.Point(4, 22);
-            this.miniatury1.Margin = new System.Windows.Forms.Padding(1);
-            this.miniatury1.Name = "miniatury1";
-            this.miniatury1.Padding = new System.Windows.Forms.Padding(1);
-            this.miniatury1.Size = new System.Drawing.Size(735, 431);
-            this.miniatury1.TabIndex = 0;
-            this.miniatury1.Text = "Widok Miniatur";
-            this.miniatury1.UseVisualStyleBackColor = true;
+            this.miniatury1Tab.Controls.Add(this.widokMiniatur1);
+            this.miniatury1Tab.Location = new System.Drawing.Point(4, 22);
+            this.miniatury1Tab.Margin = new System.Windows.Forms.Padding(1);
+            this.miniatury1Tab.Name = "miniatury1";
+            this.miniatury1Tab.Padding = new System.Windows.Forms.Padding(1);
+            this.miniatury1Tab.Size = new System.Drawing.Size(735, 431);
+            this.miniatury1Tab.TabIndex = 0;
+            this.miniatury1Tab.Text = "Widok Miniatur";
+            this.miniatury1Tab.UseVisualStyleBackColor = true;
             // 
             // widokMiniatur1
             // 
@@ -77,18 +77,19 @@ namespace Photo
             this.widokMiniatur1.UseCompatibleStateImageBehavior = false;
             this.widokMiniatur1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.widokMiniatur_DoubleClick);
             this.widokMiniatur1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.widokMiniatur_Click);
+            this.widokMiniatur1.SelectedIndexChanged += new System.EventHandler(this.widokMiniatur_selectedIndexChanged);
             // 
             // zdjecie1
             // 
-            this.zdjecie1.Controls.Add(this.widokZdjecia1);
-            this.zdjecie1.Location = new System.Drawing.Point(4, 22);
-            this.zdjecie1.Margin = new System.Windows.Forms.Padding(1);
-            this.zdjecie1.Name = "zdjecie1";
-            this.zdjecie1.Padding = new System.Windows.Forms.Padding(1);
-            this.zdjecie1.Size = new System.Drawing.Size(735, 431);
-            this.zdjecie1.TabIndex = 1;
-            this.zdjecie1.Text = "Widok Zdjecia";
-            this.zdjecie1.UseVisualStyleBackColor = true;
+            this.zdjecie1Tab.Controls.Add(this.widokZdjecia1);
+            this.zdjecie1Tab.Location = new System.Drawing.Point(4, 22);
+            this.zdjecie1Tab.Margin = new System.Windows.Forms.Padding(1);
+            this.zdjecie1Tab.Name = "zdjecie1";
+            this.zdjecie1Tab.Padding = new System.Windows.Forms.Padding(1);
+            this.zdjecie1Tab.Size = new System.Drawing.Size(735, 431);
+            this.zdjecie1Tab.TabIndex = 1;
+            this.zdjecie1Tab.Text = "Widok Zdjecia";
+            this.zdjecie1Tab.UseVisualStyleBackColor = true;
             // 
             // widokZdjecia1
             // 
@@ -111,8 +112,8 @@ namespace Photo
             this.Name = "PrzegladarkaZdjec";
             this.Size = new System.Drawing.Size(743, 457);
             this.panele.ResumeLayout(false);
-            this.miniatury1.ResumeLayout(false);
-            this.zdjecie1.ResumeLayout(false);
+            this.miniatury1Tab.ResumeLayout(false);
+            this.zdjecie1Tab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -122,11 +123,12 @@ namespace Photo
         private WidokZdjecia widokZdjecia1;
         private WidokMiniatur widokMiniatur1;
         private TabControl panele;
-        private TabPage miniatury1;
-        private TabPage zdjecie1;
+        private TabPage miniatury1Tab;
+        private TabPage zdjecie1Tab;
         private ContextMenuStrip Context;
 
         public event WybranoZdjecieDelegate WybranoZdjecie;
+        public event ZaznaczonoZdjecieDelegate ZaznaczonoZdjecie;
 
     }
 }

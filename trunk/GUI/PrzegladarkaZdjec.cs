@@ -18,15 +18,15 @@ namespace Photo
         }
         public void SetThumbnailView()
         {
-            if (panele.SelectedTab == zdjecie1)
+            if (panele.SelectedTab == zdjecie1Tab)
             {
                 // zamykanie dytora
             }
-            panele.SelectedTab = miniatury1;
+            panele.SelectedTab = miniatury1Tab;
         }
         public void SetImageView()
         {
-            panele.SelectedTab = zdjecie1;
+            panele.SelectedTab = zdjecie1Tab;
         }
         public WidokMiniatur Thumbnailview
         {
@@ -46,7 +46,7 @@ namespace Photo
         {
             get
             {
-                if (panele.SelectedTab == miniatury1)
+                if (panele.SelectedTab == miniatury1Tab)
                 {
                     return widokMiniatur1;
                 }
@@ -54,19 +54,6 @@ namespace Photo
                 {
                     return widokMiniatur1;
                 }
-            }
-        }
-
-        public Zdjecie[] ZaznaczoneZdjecia
-        {
-            get
-            {
-                List<Zdjecie> zdjecia = new List<Zdjecie>();
-                foreach (ListViewItem listViewItem in widokMiniatur1.SelectedItems)
-                {
-                    zdjecia.Add((Zdjecie)widokMiniatur1[listViewItem.ImageIndex]);
-                }
-                return zdjecia.ToArray();
             }
         }
 
@@ -137,9 +124,12 @@ namespace Photo
             AktywneOpakowanie.Oproznij();
         }
 
-        public IZdjecie[] WybraneZdjecia()
+        public IZdjecie[] WybraneZdjecia
         {
-            return AktywneOpakowanie.WybraneZdjecia();
+            get
+            {
+                return AktywneOpakowanie.WybraneZdjecia;
+            }
         }
 
         public void RozpocznijEdycje()
@@ -186,7 +176,7 @@ namespace Photo
         private void DodajZaznaczenieDoKolekcji(object sender, EventArgs e)
         {
             string temp = "";
-            Zdjecie[] zdjecia = ZaznaczoneZdjecia;
+            Zdjecie[] zdjecia = (Zdjecie[])widokMiniatur1.WybraneZdjecia;
             if (zdjecia.Length != 0)
             {
                 for (int i = 0; i < zdjecia.Length; i++)
@@ -195,7 +185,18 @@ namespace Photo
                 }
                 MessageBox.Show("Dodaje zdjecia: " + temp + " do kolekcji!");
             }
-        } 
+        }
+
+        private void widokMiniatur_selectedIndexChanged(object sender, EventArgs e)
+        {
+            Zdjecie[] zdjecia = (Zdjecie[])((WidokMiniatur)sender).WybraneZdjecia;
+            if (zdjecia.Length == 1)
+            {
+                ZdjecieInfo info = new ZdjecieInfo(Zdjecie.PobierzDaneExif(zdjecia[0].Path), zdjecia[0].NazwaPliku, zdjecia[0].Path, new Size(zdjecia[0].Duze.Width, zdjecia[0].Duze.Height), zdjecia[0].FormatPliku);
+                if (ZaznaczonoZdjecie != null)
+                    ZaznaczonoZdjecie(info);
+            }
+        }
     }
 }
 

@@ -121,6 +121,10 @@ namespace Photo
 
         public void Dodaj(IZdjecie zdjecie)
         {
+            if (!((Zdjecie)zdjecie).FormatPliku.Equals("Jpeg") && !((Zdjecie)zdjecie).FormatPliku.Equals("Tiff"))
+            {
+                return;
+            }
             sem_dodawania.WaitOne();
             miniatury.Add(zdjecie);
             int maxSize = LargeImageList.ImageSize.Width;
@@ -169,9 +173,17 @@ namespace Photo
             miniatury.Clear();
         }
 
-        public IZdjecie[] WybraneZdjecia()
+        public IZdjecie[] WybraneZdjecia
         {
-            throw new Exception("The method or operation is not implemented.");
+            get
+            {
+                Zdjecie[] zdjecia = new Zdjecie[SelectedItems.Count];
+                for (int i = 0; i < SelectedItems.Count; i++)
+                {
+                    zdjecia[i] = (Zdjecie)this[SelectedItems[i].ImageIndex];
+                }
+                return zdjecia;
+            }
         }
 
         public void RozpocznijEdycje()
@@ -218,7 +230,9 @@ namespace Photo
 
         public void Wypelnij(IZdjecie[] zdjecia)
         {
-            sem_dodawania.WaitOne();
+            /* Niepotrzebne
+             * 
+             * sem_dodawania.WaitOne();
             miniatury.Clear();
             miniatury.AddRange(zdjecia);
             foreach (Zdjecie z in zdjecia)
@@ -229,7 +243,7 @@ namespace Photo
                 }
             }
             ShowImages();
-            sem_dodawania.Release();
+            sem_dodawania.Release();*/
         }
 
         #endregion
