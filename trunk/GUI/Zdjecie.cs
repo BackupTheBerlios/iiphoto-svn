@@ -83,6 +83,11 @@ namespace Photo
             }
         }
 
+        public Bitmap stworzMiniaturke()
+        {
+
+        }
+
         #region Zdjecie Members
 
         public void DodajOperacje(PolecenieOperacji polecenie)
@@ -124,29 +129,6 @@ namespace Photo
             propItem.Len = propItem.Value.Length;
             miniatura.SetPropertyItem(propItem);
         }
-
-        /*public string GetProperty(int propID)
-        {
-            PropertyItem i;
-            string val;
-              
-            foreach(int id in miniatura.PropertyIdList)
-            {
-                if (id == propID)
-                {
-                    i = miniatura.GetPropertyItem(propID);
-                    switch (i.Type)
-                    {
-                        case 1: val = Encoding.Unicode.GetString(i.Value); break;
-                        case 2: val = Encoding.ASCII.GetString(i.Value); break;
-                        case 3: val = BitConverter.ToUInt16(i.Value, 0).ToString(); break;
-                        default: val = "Value not supported"; break;
-                    }
-                    return PropertyTags.ParseProp(propID, val);
-                }
-            }
-            return "";
-        }*/
 
         public PropertyItem[] DaneExif
         {

@@ -162,6 +162,11 @@ namespace Photo
 
         #endregion
 
+        public void DodajKatalogi(string[] katalogi)
+        {
+            MessageBox.Show("Dodaje katalogi");
+        }
+
         private void widokMiniatur_Click(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
