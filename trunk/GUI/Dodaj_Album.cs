@@ -21,7 +21,7 @@ namespace Photo
         {
             string nazwa;
 
-            if (textBox1 != "")
+            if (textBox1.Text != "")
             {
                 nazwa = textBox1.Text;
 
