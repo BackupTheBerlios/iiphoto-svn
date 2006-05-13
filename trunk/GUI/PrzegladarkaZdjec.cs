@@ -164,7 +164,7 @@ namespace Photo
 
         public void DodajKatalogi(Katalog[] katalogi)
         {
-            MessageBox.Show("Dodaje katalogi");
+            widokMiniatur1.DodajKatalogi(katalogi);
         }
 
         private void widokMiniatur_Click(object sender, MouseEventArgs e)

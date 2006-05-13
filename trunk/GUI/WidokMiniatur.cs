@@ -15,6 +15,8 @@ namespace Photo
         private double zoom;
         private bool Edycja;
         private Semaphore sem_dodawania = new Semaphore(0, 1);
+        private Bitmap katalog;
+        private Bitmap katalog_do_gory;
 
         public WidokMiniatur()
         {
@@ -33,6 +35,10 @@ namespace Photo
             // Windows messages before they get to the form's WndProc
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
             this.SetStyle(ControlStyles.EnableNotifyMessage, true);
+
+            katalog = Properties.Resources.katalog;
+            katalog_do_gory = Properties.Resources.katalog_do_gory;
+
         }
         public WidokMiniatur(int imgSize)
             : this()
@@ -266,5 +272,19 @@ namespace Photo
         }
 
         #endregion
+
+        internal void DodajKatalogi(Katalog[] katalogi)
+        {
+            for (int i = 0; i < katalogi.Length; i++)
+            {
+                if (katalogi[i].CzyDoGory == true)
+                    LargeImageList.Images.Add(katalog_do_gory);
+                else
+                    LargeImageList.Images.Add(katalog);
+                ListViewItem listViewItem = new ListViewItem(katalogi[i].Path);
+                listViewItem.ImageIndex = LargeImageList.Images.Count - 1;
+                this.Items.Add(listViewItem);
+            }
+        }
     }
 }
