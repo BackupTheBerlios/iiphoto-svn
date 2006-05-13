@@ -12,9 +12,12 @@ namespace Photo
 {
     public partial class ListaAlbumowControl : UserControl, IWyszukiwacz
     {
+        private ContextMenuStrip Context;
+
         public ListaAlbumowControl()
         {
             InitializeComponent();
+            Context = new ContextMenuStrip();
 
             Db baza = new Db();
 
@@ -22,6 +25,8 @@ namespace Photo
 
             try
             {
+                //baza.Insert_czesci("Tag", "nazwa,album", "\'miejsca\',1");
+
                 TreeNode albumy = new TreeNode("Albumy");
                 TreeNode tagi = new TreeNode("Tagi");
 
@@ -157,10 +162,46 @@ namespace Photo
         {
 
         }
+        private void DodajAlbum(object sender, EventArgs e)
+        {
+            ToolStripItem mn = (ToolStripItem)sender;
+            //MessageBox.Show("Dodaje zawartosc katalogu " + mn.ToolTipText + " do kolekcji!");
+        }
+
+        private void DodajTag(object sender, EventArgs e)
+        {
+            ToolStripItem mn = (ToolStripItem)sender;
+            //MessageBox.Show("Dodaje zawartosc katalogu " + mn.ToolTipText + " do kolekcji!");
+        } 
+
 
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            MessageBox.Show("" + e.Button);
+
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.Node.FullPath.IndexOf("Albumy") == 0)
+                {
+
+                    Context.Items.Clear();
+                    ToolStripItem toolStripItem = Context.Items.Add("Dodaj Album");
+                    // toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
+                    toolStripItem.Click += new EventHandler(DodajAlbum);
+
+                    Context.Show(this, new Point(e.X, e.Y));
+                }
+                else
+                {
+                    Context.Items.Clear();
+                    ToolStripItem toolStripItem = Context.Items.Add("Dodaj Tag");
+                    // toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
+                    toolStripItem.Click += new EventHandler(DodajTag);
+
+                    Context.Show(this, new Point(e.X, e.Y));
+                }
+            }
+
+            /*MessageBox.Show("" + e.Button);
 
 
 
@@ -171,7 +212,7 @@ namespace Photo
             else if (e.Button == MouseButtons.Right)
             {
                 MessageBox.Show("prawy");
-            }
+            }*/
         }
 
         
