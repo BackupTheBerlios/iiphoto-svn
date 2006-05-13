@@ -38,6 +38,14 @@ namespace Photo
             }
         }
 
+        public bool czyZaladowaneZdjecie
+        {
+            get
+            {
+                return zdjecie != null;
+            }
+        }
+
         private Bitmap pictureBoxImage
         {
             get

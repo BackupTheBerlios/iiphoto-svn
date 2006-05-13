@@ -207,7 +207,7 @@ namespace Photo
 
         private void panele_onSelectedIndexChanged(object sender, EventArgs e)
         {
-            if (((TabControl)sender).SelectedTab == zdjecie1Tab)
+            if (((TabControl)sender).SelectedTab == zdjecie1Tab && widokZdjecia1.czyZaladowaneZdjecie)
             {
                 ZdjecieInfo info = widokZdjecia1.pobierzInfoZdjecia;
                 if (ZaznaczonoZdjecie != null)
