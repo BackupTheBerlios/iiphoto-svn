@@ -165,27 +165,63 @@ namespace Photo
             }
         }
 
-        private void ZarzadzajAlbumem(object sender, EventArgs e)
+        private void DodajAlbum(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;
-            //MessageBox.Show(mn.Text);
-
-            //tu chcial bym miec wybor czy dodaje czy usuwam album
-
-
+            
             Dodaj_Album da = new Dodaj_Album();
-            da.Show();
-            //MessageBox.Show("Dodaje zawartosc katalogu " + mn.ToolTipText + " do kolekcji!");
+            da.Show();            
         }
 
-        private void ZarzadzajTagiem(object sender, EventArgs e)
+        private void UsunAlbum(object sender, EventArgs e)
         {
-            ToolStripItem mn = (ToolStripItem)sender;
-            //MessageBox.Show("Dodaje zawartosc katalogu " + mn.ToolTipText + " do kolekcji!");
+            ToolStripItem mn = (ToolStripItem)sender;          
+
+            Db baza = new Db();
+
+            baza.Polacz();
+
+            try
+            {
+                baza.Delete("Tag", "nazwa=\'" + mn.ToolTipText + "\' and album=1");
+            }
+            catch (SqlException)
+            {
+
+            }
+            baza.Rozlacz();
+
+            odswiez();
+        }
+
+        private void DodajTag(object sender, EventArgs e)
+        {
+            ToolStripItem mn = (ToolStripItem)sender;            
 
             Dodaj_Tag dt = new Dodaj_Tag();
             dt.Show();
-        } 
+        }
+
+        private void UsunTag(object sender, EventArgs e)
+        {
+            ToolStripItem mn = (ToolStripItem)sender;            
+
+            Db baza = new Db();
+
+            baza.Polacz();
+
+            try
+            {
+                baza.Delete("Tag", "nazwa=\'" + mn.ToolTipText + "\' and album=0");
+            }
+            catch (SqlException)
+            {
+
+            }
+            baza.Rozlacz();
+
+            odswiez();
+        }
 
 
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -199,22 +235,21 @@ namespace Photo
                     Context.Items.Clear();                    
                     
                     ToolStripItem toolStripItem = Context.Items.Add("Dodaj Album");
-                    Context.Items.Add("Usun Album");
-
-                    // toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
-                    toolStripItem.Click += new EventHandler(ZarzadzajAlbumem);
-                    
-
+                    toolStripItem.Click += new EventHandler(DodajAlbum);
+                    toolStripItem = Context.Items.Add("Usun Album");
+                    toolStripItem.ToolTipText = e.Node.Text;
+                    toolStripItem.Click += new EventHandler(UsunAlbum);
+                   
                     Context.Show(this, new Point(e.X, e.Y));
                 }
                 else
                 {
                     Context.Items.Clear();
                     ToolStripItem toolStripItem = Context.Items.Add("Dodaj Tag");
-                    Context.Items.Add("Usun Tag");
-
-                    // toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
-                    toolStripItem.Click += new EventHandler(ZarzadzajTagiem);
+                    toolStripItem.Click += new EventHandler(DodajTag);
+                    toolStripItem = Context.Items.Add("Usun Tag");
+                    toolStripItem.ToolTipText = e.Node.Text;                    
+                    toolStripItem.Click += new EventHandler(UsunTag);
 
                     Context.Show(this, new Point(e.X, e.Y));
                 }
