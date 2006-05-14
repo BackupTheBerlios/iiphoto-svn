@@ -93,6 +93,7 @@
     <Compile Include="EdytorZdjeciaControl.Designer.cs">
       <DependentUpon>EdytorZdjeciaControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Filters.cs" />
     <Compile Include="InformacjeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

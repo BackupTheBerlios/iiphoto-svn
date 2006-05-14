@@ -71,6 +71,7 @@ namespace Photo
         public void WczytajWbudowane()
         {
             operacje.Add(new XOR());
+            operacje.Add(new Grayscale());
         }
 
         public void WrzucDoGui(ToolStrip tool, ToolStripMenuItem filtry)
@@ -207,7 +208,7 @@ namespace Photo
 
         public Image Ikona
         {
-            get { throw new Exception("The method or operation is not implemented."); }
+            get { return null; }
         }
 
         public string Autor
@@ -232,24 +233,7 @@ namespace Photo
 
         public void Wykonaj(Bitmap Bitmap, Stack<object> Argumenty)
         {
-            BitmapData data;
-            data = Bitmap.LockBits(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-            unsafe
-            {
-                byte tempC;
-                byte* imgPtr = (byte*)(data.Scan0);
-                for (int i = 0; i < data.Height; i++)
-                {
-                    for (int j = 0; j < data.Width; j++)
-                    {
-                        tempC = (byte)(((int)*(imgPtr) + (int)*(imgPtr + 1) + (int)*(imgPtr + 2)) / 3);
-                        *(imgPtr++) = tempC;
-                        *(imgPtr++) = tempC;
-                        *(imgPtr++) = tempC;
-                    }
-                }
-            }
-            Bitmap.UnlockBits(data);
+            BitmapFilter.GrayScale(Bitmap);
         }
 
         #endregion
