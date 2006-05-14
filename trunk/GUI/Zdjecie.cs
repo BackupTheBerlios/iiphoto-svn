@@ -157,17 +157,26 @@ namespace Photo
             }
         }
 
-        public static void UstawIIPhotoTag(string fileName)
+        public static void UstawIIPhotoTag(string fileName, string value)
         {
-            using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite))
             {
                 using (Image image = Image.FromStream(stream,
                     /* useEmbeddedColorManagement = */ true,
                     /* validateImageData = */ false))
                 {
-                    //return image.PropertyItems;
+                    System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
+                    PropertyItem propItem = image.PropertyItems[0];
+                    propItem.Id = PropertyTags.IIPhotoTag;
+                    propItem.Type = 2;
+                    propItem.Value = encoding.GetBytes(value);
+                    propItem.Len = propItem.Value.Length;
+                    image.SetPropertyItem(propItem);
+                    image.Save(Config.katalogAplikacji + "\\temp.jpg", image.RawFormat);
                 }
             }
+            File.Delete(fileName);
+            File.Move(Config.katalogAplikacji + "\\temp.jpg", fileName);
         }
 
         public void UseOrientationTag()

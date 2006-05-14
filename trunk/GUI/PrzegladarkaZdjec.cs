@@ -246,6 +246,13 @@ namespace Photo
             {
                 MessageBox.Show("obrot zdjec w lewo");
             }
+            else if (e.KeyChar == (char)Keys.I)//do testow
+            {
+                ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
+                Zdjecie z = (Zdjecie)widokMiniatur1[listViewItem.ImageIndex];
+                Zdjecie.UstawIIPhotoTag(z.Path, "test!!!");
+                MessageBox.Show("Dodaje iiphototag do " + z.Path);
+            }
         }
     }
 }
