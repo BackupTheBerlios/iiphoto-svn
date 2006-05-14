@@ -144,6 +144,7 @@ namespace Photo
             int scaledH, scaledW, posX, posY;
             Bitmap newBitmap = new Bitmap(maxSize, maxSize);
             Graphics MyGraphics = Graphics.FromImage(newBitmap);
+            MyGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
             if (zdjecie.Miniatura.Height > zdjecie.Miniatura.Width)
             {
