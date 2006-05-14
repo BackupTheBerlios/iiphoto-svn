@@ -169,7 +169,7 @@ namespace Photo
         {
             ToolStripItem mn = (ToolStripItem)sender;
             
-            Dodaj_Album da = new Dodaj_Album();
+            Dodaj_Album da = new Dodaj_Album(this);
             da.Show();            
         }
 
@@ -198,7 +198,7 @@ namespace Photo
         {
             ToolStripItem mn = (ToolStripItem)sender;            
 
-            Dodaj_Tag dt = new Dodaj_Tag();
+            Dodaj_Tag dt = new Dodaj_Tag(this);
             dt.Show();
         }
 

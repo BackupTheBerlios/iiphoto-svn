@@ -119,7 +119,7 @@ namespace Photo
 
         #region Meta
 
-        public void SetIIPhotoProperty(string value)
+ /*       public void UstawIIPhotoProperty(string value)
         {
             System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
             PropertyItem propItem = miniatura.PropertyItems[0];
@@ -128,13 +128,45 @@ namespace Photo
             propItem.Value = encoding.GetBytes(value);
             propItem.Len = propItem.Value.Length;
             miniatura.SetPropertyItem(propItem);
-        }
+        }*/
 
-        public PropertyItem[] DaneExif
+        public string IIPhotoTag
         {
             get
             {
-                return this.Duze.PropertyItems;
+                PropertyItem item;
+                try
+                {
+                    item = Duze.GetPropertyItem(PropertyTags.IIPhotoTag);
+                }
+                catch
+                {
+                    return "";
+                }
+                return PropertyTags.ParseProp(item);
+            }
+            set
+            {
+                System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
+                PropertyItem propItem = Duze.PropertyItems[0];
+                propItem.Id = PropertyTags.IIPhotoTag;
+                propItem.Type = 2;
+                propItem.Value = encoding.GetBytes(value);
+                propItem.Len = propItem.Value.Length;
+                Duze.SetPropertyItem(propItem);
+            }
+        }
+
+        public static void UstawIIPhotoTag(string fileName)
+        {
+            using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            {
+                using (Image image = Image.FromStream(stream,
+                    /* useEmbeddedColorManagement = */ true,
+                    /* validateImageData = */ false))
+                {
+                    //return image.PropertyItems;
+                }
             }
         }
 
@@ -176,10 +208,18 @@ namespace Photo
         public static PropertyItem[] PobierzDaneExif(string fileName)
         {
             using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
-            using (Image image = Image.FromStream(stream,
-                /* useEmbeddedColorManagement = */ true,
-                /* validateImageData = */ false))
-                return image.PropertyItems;
+            {
+                using (Image image = Image.FromStream(stream,
+                    /* useEmbeddedColorManagement = */ true,
+                    /* validateImageData = */ false))
+                {
+                    return image.PropertyItems;
+                }
+            }
+        }
+        public PropertyItem[] PobierzDaneExif()
+        {
+            return Duze.PropertyItems;
         }
 
         public static Dictionary<string, string> PobierzExifDoBazy(string fileName)

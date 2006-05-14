@@ -35,7 +35,7 @@ namespace Photo
         {
             get
             {
-                return new ZdjecieInfo(zdjecie.DaneExif, zdjecie.NazwaPliku, zdjecie.Path, new Size(zdjecie.Duze.Width, zdjecie.Duze.Height), zdjecie.FormatPliku);
+                return new ZdjecieInfo(zdjecie.PobierzDaneExif(), zdjecie.NazwaPliku, zdjecie.Path, new Size(zdjecie.Duze.Width, zdjecie.Duze.Height), zdjecie.FormatPliku);
             }
         }
 

@@ -12,9 +12,12 @@ namespace Photo
 {
     public partial class Dodaj_Tag : Form
     {
-        public Dodaj_Tag()
+        private ListaAlbumowControl listaAlbumow;
+
+        public Dodaj_Tag(ListaAlbumowControl la)
         {
             InitializeComponent();
+            listaAlbumow = la;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -40,6 +43,8 @@ namespace Photo
                 }
 
                 baza.Rozlacz();
+
+                listaAlbumow.odswiez();
 
                 this.Dispose();             
             }
