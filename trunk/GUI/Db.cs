@@ -64,8 +64,9 @@ namespace Photo
                     WykonajQuery("create table Tag" +
                                  "(" +
                                       "id_tagu integer primary key autoincrement," +
-                                      "nazwa varchar(100) unique," +
-                                      "album integer" +
+                                      "nazwa varchar(100)," +
+                                      "album integer," +
+                                      "unique(nazwa,album)" +
                                  ");");
 
                     WykonajQuery("create table TagZdjecia" +
@@ -75,7 +76,7 @@ namespace Photo
                                  ");");
 
                     //*/
-                    MessageBox.Show("utworzono baze");
+                    //MessageBox.Show("utworzono baze");
 
                     dbTrans.Commit();
 
