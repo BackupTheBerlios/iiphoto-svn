@@ -214,6 +214,19 @@ namespace Photo
                     ZaznaczonoZdjecie(info);
             }
         }
+
+        private void widokMiniatur1_keyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
+                Zdjecie[] z = new Zdjecie[] { (Zdjecie)widokMiniatur1[listViewItem.ImageIndex] };
+                this.widokZdjecia1.Wypelnij(z);
+                this.SetImageView();
+                if (WybranoZdjecie != null)
+                    WybranoZdjecie(z[0]);
+            }
+        }
     }
 }
 

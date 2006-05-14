@@ -60,28 +60,13 @@ namespace Wyostrzenie
 
         public void Wykonaj(System.Drawing.Bitmap Bitmap, System.Collections.Generic.Stack<object> Argumenty)
         {
-            Rectangle rect = new Rectangle(new Point(0,0), Bitmap.Size);
-            BitmapData bd = Bitmap.LockBits(rect, ImageLockMode.ReadWrite, Bitmap.PixelFormat);
-            int bytes = bd.Width * bd.Height * 3;
-            byte[] rgbValues = new byte[bytes];
-            System.Runtime.InteropServices.Marshal.Copy(bd.Scan0, rgbValues, 0, bytes);
-            for (int i = 0; i < bytes; i++)
-            {
-                rgbValues[i] = (byte)((int)rgbValues[i] & 0x7f);
-            }
-            System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, bd.Scan0, bytes);
-            Bitmap.UnlockBits(bd);
+            Photo.BitmapFilter.Sharpen(Bitmap, 5);
         }
 
         public Stack<object> PodajArgumenty()
         {
             return new Stack<object>();
         }
-
-        #endregion
-
-        #region IOperacja Members
-
 
         public bool CzyNaToolbar()
         {
