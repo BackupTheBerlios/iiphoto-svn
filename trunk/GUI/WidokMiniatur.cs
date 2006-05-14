@@ -18,6 +18,12 @@ namespace Photo
         private Bitmap katalog;
         private Bitmap katalog_do_gory;
 
+        public enum listViewTag
+        {
+            katalog,
+            zdjecie
+        }
+
         public WidokMiniatur()
         {
             LargeImageList = new ImageList();
@@ -166,6 +172,7 @@ namespace Photo
             LargeImageList.Images.Add(newBitmap);
             ListViewItem listViewItem = new ListViewItem(zdjecie.NazwaPliku);
             listViewItem.ImageIndex = LargeImageList.Images.Count - 1;
+            listViewItem.Tag = WidokMiniatur.listViewTag.zdjecie;
             this.Items.Add(listViewItem);
             sem_dodawania.Release();
         }

@@ -87,16 +87,6 @@ namespace Photo
             }
         }*/
 
-        private void widokMiniatur_DoubleClick(object sender, MouseEventArgs e)
-        {
-            ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
-            Zdjecie[] z = new Zdjecie[] { (Zdjecie)widokMiniatur1[listViewItem.ImageIndex] };
-            this.widokZdjecia1.Wypelnij(z);
-            this.SetImageView();
-            if (WybranoZdjecie != null)
-                WybranoZdjecie(z[0]);
-        }
-
         #region IOpakowanieZdjec Members
 
         public IZdjecie this[int numer]
@@ -215,16 +205,34 @@ namespace Photo
             }
         }
 
-        private void widokMiniatur1_keyPress(object sender, KeyPressEventArgs e)
+        private void wybranoItem(ListViewItem listViewItem)
         {
-            if (e.KeyChar == (char)Keys.Enter)
+            if ((WidokMiniatur.listViewTag)listViewItem.Tag == WidokMiniatur.listViewTag.zdjecie)
             {
-                ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
                 Zdjecie[] z = new Zdjecie[] { (Zdjecie)widokMiniatur1[listViewItem.ImageIndex] };
                 this.widokZdjecia1.Wypelnij(z);
                 this.SetImageView();
                 if (WybranoZdjecie != null)
                     WybranoZdjecie(z[0]);
+            }
+            else
+            {
+                //wejdz do katalogu
+            }
+        }
+
+        private void widokMiniatur_DoubleClick(object sender, MouseEventArgs e)
+        {
+            ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
+            wybranoItem(listViewItem);
+        }
+
+        private void widokMiniatur1_keyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
+                wybranoItem(listViewItem);
             }
         }
     }
