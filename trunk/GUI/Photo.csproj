@@ -234,6 +234,7 @@
     <Content Include="icons\folder.ico" />
     <Content Include="icons\W_lewo.ico" />
     <Content Include="icons\W_prawo.ico" />
+    <None Include="Resources\Grayscale.png" />
     <None Include="Resources\katalog_do_gory.png" />
     <None Include="Resources\katalog.png" />
   </ItemGroup>

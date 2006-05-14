@@ -208,7 +208,7 @@ namespace Photo
 
         public Image Ikona
         {
-            get { return null; }
+            get { return Properties.Resources.Grayscale; }
         }
 
         public string Autor

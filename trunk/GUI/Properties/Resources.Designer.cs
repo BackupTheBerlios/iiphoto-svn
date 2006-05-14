@@ -102,6 +102,13 @@ namespace Photo.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Grayscale {
+            get {
+                object obj = ResourceManager.GetObject("Grayscale", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap katalog {
             get {
                 object obj = ResourceManager.GetObject("katalog", resourceCulture);

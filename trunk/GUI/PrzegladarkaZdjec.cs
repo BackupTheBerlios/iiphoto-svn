@@ -234,6 +234,18 @@ namespace Photo
                 ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
                 wybranoItem(listViewItem);
             }
+            else if (e.KeyChar == (char)Keys.Back)
+            {
+                MessageBox.Show("katalog do gory");
+            }
+            else if (e.KeyChar == (char)Keys.R)
+            {
+                MessageBox.Show("obrot zdjec w prawo");
+            }
+            else if (e.KeyChar == (char)Keys.L)
+            {
+                MessageBox.Show("obrot zdjec w lewo");
+            }
         }
     }
 }
