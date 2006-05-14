@@ -73,6 +73,10 @@ namespace Photo
             int i, n;
 
             path = path.ToLower();
+            Nodes.Clear();
+
+            MessageBox.Show("open");
+
             nodes = Nodes;
             while (nodes != null)
             {
@@ -102,13 +106,13 @@ namespace Photo
             DirTreeNode tn = (DirTreeNode)e.Node;
             try
             {
-                tn.populate();
+                tn.populate(tn);
                 EndUpdate();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + " - Odmowa dostêpu", e.Node.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                
+                //e.Node.                
                 e.Node.Remove();                
                 Nodes.Insert(tn.Index, tn);
                                 
@@ -242,8 +246,13 @@ namespace Photo
                 return GetDriveName(drive);
             }
 
-            internal void populate()
+            internal void populate(DirTreeNode tn)
             {
+                DirTreeNode dnn = new DirTreeNode(tn.Text);
+                int gdzie = tn.Index;
+                    
+                    //(DirTreeNode)tn;
+
                 ArrayList folder = new ArrayList();
 
                 //string
@@ -253,8 +262,11 @@ namespace Photo
                 string[] files = Directory.GetDirectories(Path);
                 Array.Sort(files);
 
-                if (files.Length == 0 && type == Dysk)
-                    return;
+                /*if (files.Length == 0 && type == Dysk)
+                {
+
+                    //return;    
+                }*/
 
                 for (int i = 0; i < files.Length; i++)
                 {
@@ -300,7 +312,6 @@ namespace Photo
         {
             base.OnBeforeSelect(e);
             //MessageBox.Show("numer: " + e.Node.SelectedImageIndex);
-
         }
 
         protected override void OnAfterSelect(TreeViewEventArgs e)
@@ -447,10 +458,58 @@ namespace Photo
             baza.Rozlacz();
         }
 
-        private Zdjecie[] ZnajdzPlikiWKatalogu(BackgroundWorker bw, DirTreeNode Node)
+        private Zdjecie[] WybierzPlikiZdjec(BackgroundWorker bw, DirTreeNode Node)
         {
             List<Zdjecie> zdjecia = new List<Zdjecie>();
             List<string> pliki = new List<string>();
+
+            try
+            {
+                pliki.AddRange(Directory.GetFiles(Node.Path, "*.jpg"));
+                pliki.AddRange(Directory.GetFiles(Node.Path, "*.jpeg"));
+                pliki.AddRange(Directory.GetFiles(Node.Path, "*.tif"));
+                pliki.AddRange(Directory.GetFiles(Node.Path, "*.tiff"));
+
+                pliki.Sort();
+
+                for (int i = 0; i < pliki.Count; i++)
+                {
+                    try
+                    {
+                        if ((pliki[i].ToLower().LastIndexOf(".jpg") != -1 && pliki[i].ToLower().LastIndexOf(".jpg") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".jpeg") != -1 && pliki[i].ToLower().LastIndexOf(".jpeg") == (pliki[i].Length - 5)) || (pliki[i].ToLower().LastIndexOf(".tif") != -1 && pliki[i].ToLower().LastIndexOf(".tif") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".tiff") != -1 && pliki[i].ToLower().LastIndexOf(".tiff") == (pliki[i].Length - 5)))
+                        {
+                            Zdjecie z = new Zdjecie(pliki[i]);
+                            bw.ReportProgress(0, z);
+                            zdjecia.Add(z);
+                        }
+                    }
+                    catch (ArgumentException)
+                    {
+                        //MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
+                        MessageBox.Show("Plik: \"" + pliki[i].Substring(pliki[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", pliki[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+
+                if (zdjecia.Count != 0)
+                {
+                    dodaj_do_albumu(zdjecia, Node.Path);
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + " - Odmowa dostêpu", Node.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                DirTreeNode dd = new DirTreeNode("napis");
+
+                this.SelectedNode = dd;
+            }
+            return zdjecia.ToArray();
+        }
+
+        private Zdjecie[] ZnajdzPlikiWKatalogu(BackgroundWorker bw, DirTreeNode Node)
+        {
+            
             List<string> katal_tab = new List<string>();
             List<Katalog> katalogi = new List<Katalog>();
 
@@ -484,205 +543,65 @@ namespace Photo
                     katalogi.Add(new Katalog(t,false));
                 }
             }
-            
-            
-
-            //przegladarkaZdjec.DodajKatalogi(katalogi.ToArray);
 
 
-            
             Db baza = new Db();
 
-            baza.Polacz();
+            string m1 = "tagzdjecia:   ", m2 = "tag:   ", m3 = "zdjecie:   ";
 
+            baza.Polacz();
             try
             {
-                /*
-                baza.Insert("CD", "\'123\',\'moje\'");
-                baza.Insert("CD", "\'234\',\'moje\'");
-                baza.Insert("CD", "\'2133\',\'mo34e\'");
-                baza.Insert("CD", "\'134\',\'m34e\'");
-        */
+                DataSet ds = baza.Select("select * from TagZdjecia");
 
-                // baza.Insert("Zdjecie", "\'123\',\'moje\'");
-
-                //baza.WykonajQuery("delete from Zdjecie");
-
-                //baza.Insert_czesci("Zdjecie", "sciezka,data_dodania,data_wykonania,komentarz,autor,nazwa_pliku,orientacja,cd", "\'c:\\ala\',current_date,\'1912-07-11\',\'koment\',\'aut\',\'plik222.txt\',2,\'123\'");
-                //"+new DateTime(1912,7,12)+"
-
-                /**/
-                /*                 
-                baza.Insert_czesci("Tag", "nazwa,album", "\'tag1\',1");
-                baza.Insert_czesci("Tag", "nazwa,album", "\'tag2\',0");
-                baza.Insert_czesci("Tag", "nazwa,album", "\'tag3\',1");
-                baza.Insert_czesci("Tag", "nazwa,album", "\'tag4\',0");
-                baza.Insert_czesci("Tag", "nazwa,album", "\'tag5\',0");
-
-
-                baza.Insert("TagZdjecia", "1,1");
-                baza.Insert("TagZdjecia", "2,3");
-                baza.Insert("TagZdjecia", "2,1");
-                baza.Insert("TagZdjecia", "2,4");
-                baza.Insert("TagZdjecia", "4,1");
-*/
-                //new date
-
-                //baza.Delete_zawartosci_tabeli("CD");
-
-                DataSet dataSet = baza.Select("select * from CD;");
-
-                string cd;
-
-                foreach (DataTable t in dataSet.Tables)
+                foreach (DataTable t in ds.Tables)
                 {
-                    
-                    cd = "Tabela " + t.TableName + " zawiera " + t.Rows.Count + " wiersze";
-                    
-                    foreach (DataRow r in t.Rows)
-                    {                        
-                        foreach (DataColumn c in t.Columns)
-                            cd += c.ColumnName + "=" + r[c.ColumnName];                        
-                    }
-
-                   
-                    //MessageBox.Show(cd);
-                }
-
-
-
-                dataSet = baza.Select("select * from Zdjecie;");
-
-                string zdj;
-
-                foreach (DataTable t in dataSet.Tables)
-                {
-                    zdj = "Tabela " + t.TableName + " zawiera " + t.Rows.Count + " wiersze";
                     foreach (DataRow r in t.Rows)
                     {
                         foreach (DataColumn c in t.Columns)
-                            zdj += c.ColumnName + "=" + r[c.ColumnName];
+                            m1 += c.ColumnName + "=" + r[c.ColumnName] + "  !!  ";
+                        
                     }
-
-                    //MessageBox.Show(zdj);
                 }
 
-                dataSet = baza.Select("select * from Zdjecie where cd in (select serial from CD);");
+                ds = baza.Select("select * from Tag");
 
-                string wyn;
-
-                foreach (DataTable t in dataSet.Tables)
+                foreach (DataTable t in ds.Tables)
                 {
-                    wyn = "Tabela " + t.TableName + " zawiera " + t.Rows.Count + " wiersze ";
                     foreach (DataRow r in t.Rows)
                     {
                         foreach (DataColumn c in t.Columns)
-                            wyn += c.ColumnName + "=" + r[c.ColumnName] + " ";
-                    }
+                            m2 += c.ColumnName + "=" + r[c.ColumnName] + "  !!  ";
 
-                    //MessageBox.Show(wyn);
+                    }
                 }
 
-                dataSet = baza.Select("select * from Tag;");
+                ds = baza.Select("select * from Zdjecie");
 
-                string tag;
-
-                foreach (DataTable t in dataSet.Tables)
+                foreach (DataTable t in ds.Tables)
                 {
-                    tag = "Tabela " + t.TableName + " zawiera " + t.Rows.Count + " wiersze ";
                     foreach (DataRow r in t.Rows)
                     {
                         foreach (DataColumn c in t.Columns)
-                            tag += c.ColumnName + "=" + r[c.ColumnName] + " ";
-                    }
+                            m3 += c.ColumnName + "=" + r[c.ColumnName] + "  !!  ";
 
-                    //MessageBox.Show(tag);
+                    }
                 }
 
-                dataSet = baza.Select("select * from TagZdjecia;");
-
-                string tagz;
-
-                foreach (DataTable t in dataSet.Tables)
-                {
-                    tagz = "Tabela " + t.TableName + " zawiera " + t.Rows.Count + " wiersze ";
-                    foreach (DataRow r in t.Rows)
-                    {
-                        foreach (DataColumn c in t.Columns)
-                            tagz += c.ColumnName + "=" + r[c.ColumnName] + " ";
-                    }
-
-                    //MessageBox.Show(tagz);
-                }
-
-
+                //MessageBox.Show(m1);
+                //MessageBox.Show(m2);
+                //MessageBox.Show(m3);
             }
-            catch (SQLiteException e)
+            catch (SqlException)
             {
-                MessageBox.Show(e.Message);
+
             }
+
 
             baza.Rozlacz();
 
 
-            try
-            {
-                pliki.AddRange(Directory.GetFiles(Node.Path, "*.jpg"));
-                pliki.AddRange(Directory.GetFiles(Node.Path, "*.jpeg"));
-                pliki.AddRange(Directory.GetFiles(Node.Path, "*.tif"));
-                pliki.AddRange(Directory.GetFiles(Node.Path, "*.tiff"));
-
-                pliki.Sort();
-
-                for (int i = 0; i < pliki.Count; i++)
-                {
-                    try
-                    {
-                        if ((pliki[i].ToLower().LastIndexOf(".jpg") != -1 && pliki[i].ToLower().LastIndexOf(".jpg") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".jpeg") != -1 && pliki[i].ToLower().LastIndexOf(".jpeg") == (pliki[i].Length - 5)) || (pliki[i].ToLower().LastIndexOf(".tif") != -1 && pliki[i].ToLower().LastIndexOf(".tif") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".tiff") != -1 && pliki[i].ToLower().LastIndexOf(".tiff") == (pliki[i].Length - 5)))                        
-                        {
-                            Zdjecie z = new Zdjecie(pliki[i]);
-                            bw.ReportProgress(0, z);
-                            zdjecia.Add(z);
-
-                            //z.
-                        }                        
-                    }
-                    catch (ArgumentException)
-                    {
-                        //MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
-                        MessageBox.Show("Plik: \"" + pliki[i].Substring(pliki[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", pliki[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-
-                if (zdjecia.Count != 0)
-                {
-                    dodaj_do_albumu(zdjecia, Node.Path);
-                }
-
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message + " - Odmowa dostêpu", Node.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
-
-                /*if (Node.Text.Length == 3)
-                {
-                    if (Node.Text.CompareTo("A:\\") == 0 || Node.Text.CompareTo("B:\\") == 0 )
-                    {
-                        Node.ImageIndex = Dyskietka;
-                        Node.SelectedImageIndex = Dyskietka;
-                    }
-                }
-*/
-                DirTreeNode dd = new DirTreeNode("napis");
-
-                this.SelectedNode = dd;
-                //this.SelectedNode = null;
-
-
-            }
-            return zdjecia.ToArray();
+            return WybierzPlikiZdjec(bw,Node);
            
         }
 
@@ -695,13 +614,13 @@ namespace Photo
             {
                 e.Node.Text = "A:\\ " + "[" + DirTreeNode.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
                 e.Node.ImageIndex = Dyskietka_z;
-                e.Node.SelectedImageIndex = Dyskietka_z;
+                e.Node.SelectedImageIndex = Dyskietka_z;                
             }
             else if (e.Node.Text.IndexOf("B:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
             {
                 e.Node.Text = "B:\\ " + "[" + DirTreeNode.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
                 e.Node.ImageIndex = Dyskietka_z;
-                e.Node.SelectedImageIndex = Dyskietka_z;
+                e.Node.SelectedImageIndex = Dyskietka_z;                
             }
         }
 
@@ -733,7 +652,9 @@ namespace Photo
         private void DodajDoKolekcji(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;
-            MessageBox.Show("Dodaje zawartosc katalogu " + mn.ToolTipText + " do kolekcji!");
+            //MessageBox.Show("Dodaje zawartosc katalogu " + mn.ToolTipText + " do kolekcji!");
+            Dodaj_do_kolekcji ddk = new Dodaj_do_kolekcji(mn.ToolTipText);
+            ddk.Show();
         } 
 
         protected override void OnMouseClick(MouseEventArgs e)

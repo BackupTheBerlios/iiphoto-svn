@@ -142,8 +142,7 @@ namespace Photo
             bool al = false, t = false;
             
             if (albumy.IsExpanded == true)
-            {
-                //albumy.Expand();
+            {                
                 al = true;
             }
             if (tagi.IsExpanded == true)
