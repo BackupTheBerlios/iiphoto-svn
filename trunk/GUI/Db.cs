@@ -64,7 +64,7 @@ namespace Photo
                     WykonajQuery("create table Tag" +
                                  "(" +
                                       "id_tagu integer primary key autoincrement," +
-                                      "nazwa varchar(100) ," +
+                                      "nazwa varchar(100) unique," +
                                       "album integer" +
                                  ");");
 
