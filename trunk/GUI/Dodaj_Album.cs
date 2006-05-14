@@ -45,6 +45,8 @@ namespace Photo
 
                 
 
+                
+
                 //ListaAlbumowControl.dodaj_a();
             }
         }

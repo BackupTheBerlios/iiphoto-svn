@@ -378,6 +378,75 @@ namespace Photo
             args.Result = ZnajdzPlikiWKatalogu(bw, Node);
         }
 
+        private void dodaj_do_albumu(List<Zdjecie> lista, string sciezka)
+        {
+            Db baza = new Db();
+            bool stan = true;
+            int i=-1;
+
+            if(lista.Count != 0)
+                i = 0;
+
+            baza.Polacz();
+
+            try
+            {
+                DataSet ds = baza.Select("select nazwa_pliku from Zdjecie where sciezka=\'"+sciezka+"\' order by nazwa_pliku");
+
+                foreach (DataTable t in ds.Tables)
+                {                    
+                    if (t.Rows.Count != lista.Count)
+                    {
+                        stan = false;
+                    }
+                    else
+                    {
+                        foreach (DataRow r in t.Rows)
+                        {
+                            if (i > -1 && i < lista.Count)
+                            {
+                                if (lista[i].NazwaPliku != ""+r[0])
+                                {
+                                    stan = false;
+                                    break;
+                                }
+                                i++;
+                            }
+                        }
+                    }
+
+                    if (stan == false)
+                    {
+                        if (t.Rows.Count == 0)
+                        {
+                            //dodaj do bazy
+                            MessageBox.Show("dodaj do bazy");
+
+                            foreach (Zdjecie zd in lista)
+                            {
+                                baza.Insert_czesci("Zdjecie", "sciezka,nazwa_pliku", "\'" + sciezka + "\',\'" + zd.NazwaPliku + "\'");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("poszukaj zdjec");
+                            //zawartosc bazy opisujace ten katalog nie zawiera wszyskich zdjec lub zawiera wiecej zdjec
+                        }
+                    }       
+                    else
+                    {
+                        MessageBox.Show("jest ok");
+                    }
+                }               
+            }
+            catch (SqlException)
+            {
+                MessageBox.Show("blad prawdopodobnie w bazie");
+            }
+
+            baza.Rozlacz();
+        }
+
         private Zdjecie[] ZnajdzPlikiWKatalogu(BackgroundWorker bw, DirTreeNode Node)
         {
             List<Zdjecie> zdjecia = new List<Zdjecie>();
@@ -574,6 +643,8 @@ namespace Photo
                             Zdjecie z = new Zdjecie(pliki[i]);
                             bw.ReportProgress(0, z);
                             zdjecia.Add(z);
+
+                            //z.
                         }                        
                     }
                     catch (ArgumentException)
@@ -582,6 +653,12 @@ namespace Photo
                         MessageBox.Show("Plik: \"" + pliki[i].Substring(pliki[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", pliki[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+
+                if (zdjecia.Count != 0)
+                {
+                    dodaj_do_albumu(zdjecia, Node.Path);
+                }
+
             }
             catch (Exception e)
             {
