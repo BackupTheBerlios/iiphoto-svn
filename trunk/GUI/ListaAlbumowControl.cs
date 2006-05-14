@@ -50,7 +50,7 @@ namespace Photo
                 //baza.Delete("Tag", "album=1");
 
 
-                DataSet dataSet = baza.Select("select nazwa from Tag where album=1;");
+                DataSet dataSet = baza.Select("select nazwa from Tag where album=1 order by nazwa asc;");
 
                 foreach (DataTable t in dataSet.Tables)
                 {
@@ -70,7 +70,7 @@ namespace Photo
                     }
                 }
 
-                dataSet = baza.Select("select nazwa from Tag where album=0;");
+                dataSet = baza.Select("select nazwa from Tag where album=0 order by nazwa asc;");
 
                 foreach (DataTable t in dataSet.Tables)
                 {
