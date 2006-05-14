@@ -12,10 +12,13 @@ namespace Photo
 {
     public partial class Dodaj_Album : Form
     {
+        public ListaAlbumowControl an;
+
         public Dodaj_Album()
         {
             InitializeComponent();
-        }
+            an = (ListaAlbumowControl)this.Parent;
+        }        
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -41,13 +44,9 @@ namespace Photo
 
                 baza.Rozlacz();
 
-                this.Dispose();
+                //an.odswiez();
 
-                
-
-                
-
-                //ListaAlbumowControl.dodaj_a();
+                this.Dispose();                                
             }
         }
     }
