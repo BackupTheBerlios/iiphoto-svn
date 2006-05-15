@@ -5,6 +5,9 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using System.IO;
+using System.Collections;
 using System.Data.SQLite;
 using System.Data.SqlClient;
 
@@ -114,18 +117,105 @@ namespace Photo
 
         public IWyszukiwanie Wyszukaj()
         {
-            Wyszukiwanie wynik = new Wyszukiwanie();
-            /*if (listBox1.SelectedIndex == 0)
+           /* Wyszukiwanie wynik = new Wyszukiwanie();
+            List<Zdjecie> lista = new List<Zdjecie>();
+            //Zdjecie zd1 = new Zdjecie(
+            lista.Add(new Zdjecie("c:\\IM000271.jpg"));
+            lista.Add(new Zdjecie("c:\\IM000271t.jpg"));
+                /*if (listBox1.SelectedIndex == 0)
                 wynik.And("..\\..\\img\\album1.bmp");
             if (listBox1.SelectedIndex == 1)
                 wynik.And("..\\..\\img\\album2.bmp");
             if (listBox1.SelectedIndex == 2)*/
-                wynik.And("..\\..\\img\\album3.bmp");
-            return wynik;
+             //   wynik.And("..\\..\\img\\album3.bmp");
+               // return (IZdjecie[])lista.ToArray;
+                //wynik;
+
+            throw new Exception("The method or operation is not implemented.");
             
         }
 
         #endregion
+
+
+        /*
+         if (RozpoczetoWyszukiwanie != null)
+                RozpoczetoWyszukiwanie(null);
+
+            BackgroundWorker bw = new BackgroundWorker();
+            bw.WorkerReportsProgress = true;
+            bw.DoWork += new DoWorkEventHandler(bw_DoWork);
+            bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
+            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
+            bw.RunWorkerAsync(e.Node);
+         */
+
+        void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            if (ZnalezionoZdjecie != null)
+                ZnalezionoZdjecie((Zdjecie)e.UserState);
+        }
+
+        void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (ZakonczonoWyszukiwanie != null)
+            {
+                ZakonczonoWyszukiwanie((IZdjecie[])e.Result);
+            }
+
+            this.Refresh();
+        }
+
+        void bw_DoWork(object sender, DoWorkEventArgs args)
+        {
+            TreeNode Node = (TreeNode)args.Argument;
+            BackgroundWorker bw = sender as BackgroundWorker;
+            args.Result = PokazPlikiZAlbumu(bw, Node);
+        }
+
+
+
+        private Zdjecie[] PokazPlikiZAlbumu(BackgroundWorker bw, TreeNode Node)
+        {
+            Db baza = new Db();
+
+            List<string> pliki = new List<string>();
+            List<Zdjecie> lista = new List<Zdjecie>();
+
+            
+            pliki.AddRange(Directory.GetFiles("c:\\", "*.jpg"));
+
+            Zdjecie z;
+
+            foreach (string zd in pliki)
+            {
+                z = new Zdjecie(zd);
+                //MessageBox.Show(z.Path);
+                bw.ReportProgress(0, z);
+                lista.Add(z);
+                //MessageBox.Show(zd);
+            }
+
+            
+            //lista.Add(new Zdjecie("c:\\IM000271.jpg"));
+            //lista.Add(new Zdjecie("c:\\IM000271t.jpg"));
+
+            //MessageBox.Show("c:\\IM000271.jpg");
+
+            baza.Polacz();
+
+            try
+            {
+
+            }
+            catch (SqlException)
+            {
+
+            }
+            baza.Rozlacz();
+
+            return lista.ToArray();
+        }
 
         protected override void OnClick(EventArgs e)
         {
@@ -134,6 +224,17 @@ namespace Photo
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+
+            if (RozpoczetoWyszukiwanie != null)
+                RozpoczetoWyszukiwanie(null);
+
+            BackgroundWorker bw = new BackgroundWorker();
+            bw.WorkerReportsProgress = true;
+            bw.DoWork += new DoWorkEventHandler(bw_DoWork);
+            bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
+            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
+            bw.RunWorkerAsync(e.Node);
+
             MessageBox.Show("zczytanie z bazy i wyswietlenie zawartosci pozycji " + e.Node.Text);
         }
 
