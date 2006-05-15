@@ -66,22 +66,22 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="Db.cs" />
-    <Compile Include="Dodaj_Album.cs">
+    <Compile Include="DialogBoxes\Dodaj_Album.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dodaj_Album.Designer.cs">
+    <Compile Include="DialogBoxes\Dodaj_Album.Designer.cs">
       <DependentUpon>Dodaj_Album.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dodaj_do_kolekcji.cs">
+    <Compile Include="DialogBoxes\Dodaj_do_kolekcji.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dodaj_do_kolekcji.Designer.cs">
+    <Compile Include="DialogBoxes\Dodaj_do_kolekcji.Designer.cs">
       <DependentUpon>Dodaj_do_kolekcji.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dodaj_Tag.cs">
+    <Compile Include="DialogBoxes\Dodaj_Tag.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dodaj_Tag.Designer.cs">
+    <Compile Include="DialogBoxes\Dodaj_Tag.Designer.cs">
       <DependentUpon>Dodaj_Tag.cs</DependentUpon>
     </Compile>
     <Compile Include="DrzewoKatalogow.cs">
@@ -126,15 +126,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Dodaj_Album.resx">
+    <EmbeddedResource Include="DialogBoxes\Dodaj_Album.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Dodaj_Album.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dodaj_do_kolekcji.resx">
+    <EmbeddedResource Include="DialogBoxes\Dodaj_do_kolekcji.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Dodaj_do_kolekcji.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dodaj_Tag.resx">
+    <EmbeddedResource Include="DialogBoxes\Dodaj_Tag.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Dodaj_Tag.cs</DependentUpon>
     </EmbeddedResource>
