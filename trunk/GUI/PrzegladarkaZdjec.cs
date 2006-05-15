@@ -248,10 +248,17 @@ namespace Photo
             }
             else if (e.KeyChar == (char)Keys.I)//do testow
             {
-                ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
-                Zdjecie z = (Zdjecie)widokMiniatur1[listViewItem.ImageIndex];
-                Zdjecie.UstawIIPhotoTag(z.Path, "test!!!");
-                MessageBox.Show("Dodaje iiphototag do " + z.Path);
+                try
+                {
+                    ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
+                    Zdjecie z = (Zdjecie)widokMiniatur1[listViewItem.ImageIndex];
+                    Zdjecie.UstawIIPhotoTag(z.Path, "test!!!");
+                    MessageBox.Show("Dodaje iiphototag do " + z.Path);
+                }
+                catch
+                {
+                    MessageBox.Show("Nie mozna dodac tagu IIPhoto do zdjecia " + z.Path);
+                }
             }
         }
     }

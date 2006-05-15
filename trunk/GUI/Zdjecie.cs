@@ -159,7 +159,8 @@ namespace Photo
 
         public static void UstawIIPhotoTag(string fileName, string value)
         {
-            using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.ReadWrite))
+            string path = fileName.Substring(0, fileName.LastIndexOf('\\') + 1);
+            using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
             {
                 using (Image image = Image.FromStream(stream,
                     /* useEmbeddedColorManagement = */ true,
@@ -172,11 +173,11 @@ namespace Photo
                     propItem.Value = encoding.GetBytes(value);
                     propItem.Len = propItem.Value.Length;
                     image.SetPropertyItem(propItem);
-                    image.Save(Config.katalogAplikacji + "\\temp.jpg", image.RawFormat);
+                    image.Save(path + "\\img.tmp", image.RawFormat);
                 }
             }
             File.Delete(fileName);
-            File.Move(Config.katalogAplikacji + "\\temp.jpg", fileName);
+            File.Move(path + "\\img.tmp", fileName);
         }
 
         public void UseOrientationTag()
