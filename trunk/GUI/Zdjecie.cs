@@ -83,9 +83,22 @@ namespace Photo
             }
         }
 
-        public Bitmap stworzMiniaturke()
+        public Image stworzMiniaturke(int maxSize)
         {
-            return null;
+            int scaledH, scaledW;
+            if (Duze.Height > Duze.Width)
+            {
+                scaledH = maxSize;
+                scaledW = (int)Math.Round(
+                    (double)(Duze.Width * scaledH) / Duze.Height);
+            }
+            else
+            {
+                scaledW = maxSize;
+                scaledH = (int)Math.Round(
+                    (double)(Duze.Height * scaledW) / Duze.Width);
+            }
+            return Duze.GetThumbnailImage(scaledW, scaledH, new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback), System.IntPtr.Zero);
         }
 
         public static Image stworzMiniaturke(string fileName, int maxSize)
