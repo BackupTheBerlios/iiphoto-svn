@@ -246,6 +246,13 @@ namespace Photo
             {
                 MessageBox.Show("obrot zdjec w lewo");
             }
+            else if (e.KeyChar == (char)Keys.T)//do testow
+            {
+                Zdjecie z;
+                ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
+                z = (Zdjecie)widokMiniatur1[listViewItem.ImageIndex];
+                Zdjecie.stworzMiniaturke(z.Path, 120).Save(z.Path + "g");
+            }
             else if (e.KeyChar == (char)Keys.I)//do testow
             {
                 Zdjecie z;

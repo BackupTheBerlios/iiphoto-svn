@@ -88,6 +88,40 @@ namespace Photo
             return null;
         }
 
+        public static Image stworzMiniaturke(string fileName, int maxSize)
+        {
+            Image i;
+            string path = fileName.Substring(0, fileName.LastIndexOf('\\') + 1);
+            using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            {
+                using (Image image = Image.FromStream(stream,
+                    /* useEmbeddedColorManagement = */ true,
+                    /* validateImageData = */ false))
+                {
+                    int scaledH, scaledW;
+                    if (image.Height > image.Width)
+                    {
+                        scaledH = maxSize;
+                        scaledW = (int)Math.Round(
+                            (double)(image.Width * scaledH) / image.Height);
+                    }
+                    else
+                    {
+                        scaledW = maxSize;
+                        scaledH = (int)Math.Round(
+                            (double)(image.Height * scaledW) / image.Width);
+                    }
+                    i = image.GetThumbnailImage(scaledW, scaledH, new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback), System.IntPtr.Zero);
+                }
+            }
+            return i;
+        }
+
+        public static bool ThumbnailCallback()
+        {
+            return true;
+        }
+
         #region Zdjecie Members
 
         public void DodajOperacje(PolecenieOperacji polecenie)
