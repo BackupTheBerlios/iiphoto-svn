@@ -235,7 +235,7 @@ namespace Photo
             bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
             bw.RunWorkerAsync(e.Node);
 
-            MessageBox.Show("zczytanie z bazy i wyswietlenie zawartosci pozycji " + e.Node.Text);
+            //MessageBox.Show("zczytanie z bazy i wyswietlenie zawartosci pozycji " + e.Node.Text);
         }
 
         public void odswiez()

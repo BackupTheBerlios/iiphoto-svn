@@ -55,8 +55,24 @@ namespace Photo
              */
             drzewoOpakowane1.fileTree1.ZakonczonoWyszukiwanie +=
                 new ZakonczonoWyszukiwanieDelegate(statusStrip.ZakonczonoWyszukiwanie);
-            listaAlbumowControl.ZakonczonoWyszukiwanie +=
-                new ZakonczonoWyszukiwanieDelegate(przegladarkaZdjec.Wypelnij);
+
+            /* Delegowanie RozpoczetoWyszukiwanieDelegate.
+             */
+            listaAlbumowControl.RozpoczetoWyszukiwanie +=            
+                new RozpoczetoWyszukiwanieDelegate(statusStrip.RozpoczetoWyszukiwanie);
+
+            /* Delegowanie ZnalezionoZdjecieDelegate.
+             */
+            listaAlbumowControl.ZnalezionoZdjecie +=            
+                new ZnalezionoZdjecieDelegate(przegladarkaZdjec.Dodaj);
+
+            /* Delegowanie ZakonczonoWyszukiwanieDelegate.
+             */
+            listaAlbumowControl.ZakonczonoWyszukiwanie +=            
+                new ZakonczonoWyszukiwanieDelegate(statusStrip.ZakonczonoWyszukiwanie);
+
+            //listaAlbumowControl.ZakonczonoWyszukiwanie +=
+              //  new ZakonczonoWyszukiwanieDelegate(przegladarkaZdjec.Wypelnij);
             wyszukiwarkaControl1.ZakonczonoWyszukiwanie +=
                 new ZakonczonoWyszukiwanieDelegate(przegladarkaZdjec.Wypelnij);
             //fileTree1.ZakonczonoWyszukiwanie +=

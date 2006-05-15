@@ -485,7 +485,9 @@ namespace Photo
                 pliki.AddRange(Directory.GetFiles(Node.Path, "*.jpg"));
                 pliki.AddRange(Directory.GetFiles(Node.Path, "*.jpeg"));
                 pliki.AddRange(Directory.GetFiles(Node.Path, "*.tif"));
-                pliki.AddRange(Directory.GetFiles(Node.Path, "*.tiff"));
+                //pliki.AddRange(Directory.GetFiles(Node.Path, "*.tiff"));
+
+                MessageBox.Show(Node.Path);
 
                 pliki.Sort();
 
@@ -495,6 +497,8 @@ namespace Photo
                     {
                         if ((pliki[i].ToLower().LastIndexOf(".jpg") != -1 && pliki[i].ToLower().LastIndexOf(".jpg") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".jpeg") != -1 && pliki[i].ToLower().LastIndexOf(".jpeg") == (pliki[i].Length - 5)) || (pliki[i].ToLower().LastIndexOf(".tif") != -1 && pliki[i].ToLower().LastIndexOf(".tif") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".tiff") != -1 && pliki[i].ToLower().LastIndexOf(".tiff") == (pliki[i].Length - 5)))
                         {
+                            //if(pliki[i].ToLower().LastIndexOf(".tif") == (pliki[i].Length - 5))
+                              //  continue;
                             Zdjecie z = new Zdjecie(pliki[i]);
                             bw.ReportProgress(0, z);
                             zdjecia.Add(z);
@@ -526,7 +530,12 @@ namespace Photo
 
         private Zdjecie[] ZnajdzPlikiWKatalogu(BackgroundWorker bw, DirTreeNode Node)
         {
-            
+            List<Zdjecie> lista = new List<Zdjecie>();
+            //lista.Add(new Zdjecie("c:\\IM000271.jpg"));
+            //lista.Add(new Zdjecie("c:\\IM000271t.jpg"));
+
+            //return lista.ToArray();
+
             List<string> katal_tab = new List<string>();
             List<Katalog> katalogi = new List<Katalog>();
 
