@@ -394,11 +394,10 @@ namespace Photo
                 this.zdjecie = (Zdjecie)zdjecia[0];
                 this.zdjecieZapas = (Zdjecie)zdjecia[0];
                 this.pictureBoxImage = FitToPage();
-                //this.checkImagePosition();
+                this.checkImagePosition();
                 this.lmStartingPoint = new Point();
                 this.selectedRectangle = new Rectangle(0, 0, 0, 0);
                 this.Refresh();
-                //this.clearRect = false;
             }
         }
 
