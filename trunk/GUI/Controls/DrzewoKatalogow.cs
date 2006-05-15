@@ -487,7 +487,7 @@ namespace Photo
                 pliki.AddRange(Directory.GetFiles(Node.Path, "*.tif"));
                 //pliki.AddRange(Directory.GetFiles(Node.Path, "*.tiff"));
 
-                MessageBox.Show(Node.Path);
+                //MessageBox.Show(Node.Path);
 
                 pliki.Sort();
 
@@ -541,7 +541,7 @@ namespace Photo
 
             if(Node.FullPath.LastIndexOf("\\") > 4)
             {
-                MessageBox.Show(Node.Path);
+                //MessageBox.Show(Node.Path);
 
                 string s1 = "";
                 char[] s2 = new char[Node.Path.Length];
