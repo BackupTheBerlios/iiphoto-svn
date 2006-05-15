@@ -101,9 +101,9 @@ namespace Photo
 
         public void Dodaj(IZdjecie zdjecie)
         {
-            AktywneOpakowanie.Dodaj(zdjecie);
-            /*if (widokZdjecia1.Visible == true)
-                SetThumbnailView();*/
+            widokMiniatur1.Dodaj(zdjecie);
+            if (AktywneOpakowanie != widokMiniatur1)
+                SetThumbnailView();
         }
 
         public void Usun(IZdjecie zdjecie)
