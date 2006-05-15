@@ -337,10 +337,7 @@ namespace Photo
 
         public void Dodaj(IZdjecie zdjecie)
         {
-            if (Ilosc != 0)
-                return;
-            else
-                Wypelnij(new IZdjecie[] { zdjecie });
+            Wypelnij(new IZdjecie[] { zdjecie });
         }
 
         public void Usun(IZdjecie zdjecie)
@@ -385,7 +382,7 @@ namespace Photo
 
         public void UsunWszystkieOperacje()
         {
-            throw new Exception("The method or operation is not implemented.");
+            zdjecie.UsunWszystkieOperacje();
         }
 
         public event WybranoZdjecieDelegate WybranoZdjecie;
