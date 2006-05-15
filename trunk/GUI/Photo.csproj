@@ -93,12 +93,6 @@
     <Compile Include="DrzewoOpakowane.Designer.cs">
       <DependentUpon>DrzewoOpakowane.cs</DependentUpon>
     </Compile>
-    <Compile Include="EdytorZdjeciaControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="EdytorZdjeciaControl.Designer.cs">
-      <DependentUpon>EdytorZdjeciaControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Filters.cs" />
     <Compile Include="InformacjeControl.cs">
       <SubType>UserControl</SubType>
@@ -145,10 +139,6 @@
     <EmbeddedResource Include="DrzewoOpakowane.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DrzewoOpakowane.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EdytorZdjeciaControl.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>EdytorZdjeciaControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InformacjeControl.resx">
       <SubType>Designer</SubType>
