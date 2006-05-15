@@ -48,6 +48,23 @@ namespace Photo
             BeginUpdate();
             string[] drives = Directory.GetLogicalDrives();
 
+            //MessageBox.Show(Config.katalogAplikacji);
+
+            //DirTreeNode kat_Aplikacji = new DirTreeNode(Config.katalogAplikacji);
+            //kat_Aplikacji.Text = "Dane Aplikacji";
+            //Nodes.Add(kat_Aplikacji);
+            DirTreeNode kat_MDokumenty = new DirTreeNode(Config.katalogMojeDokumenty);
+            kat_MDokumenty.Text = "Moje Dokumenty";
+            Nodes.Add(kat_MDokumenty);
+
+            DirTreeNode kat_MObrazy = new DirTreeNode(Config.katalogMojeObrazy);
+            kat_MObrazy.Text = "Moje Obrazy";
+            Nodes.Add(kat_MObrazy);
+
+            DirTreeNode kat_Pulpit = new DirTreeNode(Config.katalogPulpit);
+            kat_Pulpit.Text = "Pulpit";
+            Nodes.Add(kat_Pulpit);
+
             foreach (string tempDrive in drives)
             {
                 DirTreeNode dn = new DirTreeNode(tempDrive);
