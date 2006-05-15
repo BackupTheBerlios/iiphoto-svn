@@ -44,6 +44,14 @@ namespace Photo
             }
         }
 
+        public static int maxRozmiarMiniatury
+        {
+            get
+            {
+                return 120;
+            }
+        }
+
         public static string plikBazy = "iiphoto.db3";
     }
 }
