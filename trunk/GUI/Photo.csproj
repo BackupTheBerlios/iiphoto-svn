@@ -84,20 +84,20 @@
     <Compile Include="DialogBoxes\Dodaj_Tag.Designer.cs">
       <DependentUpon>Dodaj_Tag.cs</DependentUpon>
     </Compile>
-    <Compile Include="DrzewoKatalogow.cs">
+    <Compile Include="Controls\DrzewoKatalogow.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DrzewoOpakowane.cs">
+    <Compile Include="Controls\DrzewoOpakowane.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DrzewoOpakowane.Designer.cs">
+    <Compile Include="Controls\DrzewoOpakowane.Designer.cs">
       <DependentUpon>DrzewoOpakowane.cs</DependentUpon>
     </Compile>
     <Compile Include="Filters.cs" />
-    <Compile Include="InformacjeControl.cs">
+    <Compile Include="Controls\InformacjeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="InformacjeControl.Designer.cs">
+    <Compile Include="Controls\InformacjeControl.Designer.cs">
       <DependentUpon>InformacjeControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Katalog.cs" />
@@ -108,14 +108,14 @@
       <DependentUpon>PhotoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Interfejsy.cs" />
-    <Compile Include="ListaAlbumowControl.cs">
+    <Compile Include="Controls\ListaAlbumowControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ListaAlbumowControl.Designer.cs">
+    <Compile Include="Controls\ListaAlbumowControl.Designer.cs">
       <DependentUpon>ListaAlbumowControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Operacje.cs" />
-    <Compile Include="PasekStanuControl.cs">
+    <Compile Include="Controls\PasekStanuControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
@@ -132,15 +132,15 @@
       <SubType>Designer</SubType>
       <DependentUpon>Dodaj_Tag.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DrzewoKatalogow.resx">
+    <EmbeddedResource Include="Controls\DrzewoKatalogow.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DrzewoKatalogow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DrzewoOpakowane.resx">
+    <EmbeddedResource Include="Controls\DrzewoOpakowane.resx">
       <SubType>Designer</SubType>
       <DependentUpon>DrzewoOpakowane.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InformacjeControl.resx">
+    <EmbeddedResource Include="Controls\InformacjeControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>InformacjeControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,7 +148,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>PhotoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ListaAlbumowControl.resx">
+    <EmbeddedResource Include="Controls\ListaAlbumowControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ListaAlbumowControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,15 +157,14 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PrzegladarkaZdjec.resx">
+    <EmbeddedResource Include="Controls\PrzegladarkaZdjec.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>PrzegladarkaZdjec.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WidokZdjecia.resx">
+    <EmbeddedResource Include="Controls\WidokZdjecia.resx">
       <SubType>Designer</SubType>
       <DependentUpon>WidokZdjecia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WyszukiwarkaControl.resx">
+    <EmbeddedResource Include="Controls\WyszukiwarkaControl.resx">
       <SubType>Designer</SubType>
       <DependentUpon>WyszukiwarkaControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -184,26 +183,26 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="PropertyTags.cs" />
-    <Compile Include="PrzegladarkaZdjec.cs">
+    <Compile Include="Controls\PrzegladarkaZdjec.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PrzegladarkaZdjec.Designer.cs">
+    <Compile Include="Controls\PrzegladarkaZdjec.Designer.cs">
       <DependentUpon>PrzegladarkaZdjec.cs</DependentUpon>
     </Compile>
-    <Compile Include="WidokMiniatur.cs">
+    <Compile Include="Controls\WidokMiniatur.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WidokZdjecia.cs">
+    <Compile Include="Controls\WidokZdjecia.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WidokZdjecia.designer.cs">
+    <Compile Include="Controls\WidokZdjecia.designer.cs">
       <DependentUpon>WidokZdjecia.cs</DependentUpon>
     </Compile>
     <Compile Include="Wyszukiwanie.cs" />
-    <Compile Include="WyszukiwarkaControl.cs">
+    <Compile Include="Controls\WyszukiwarkaControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WyszukiwarkaControl.Designer.cs">
+    <Compile Include="Controls\WyszukiwarkaControl.Designer.cs">
       <DependentUpon>WyszukiwarkaControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Zdjecie.cs" />
@@ -237,9 +236,6 @@
     <None Include="Resources\Grayscale.png" />
     <None Include="Resources\katalog_do_gory.png" />
     <None Include="Resources\katalog.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
