@@ -220,11 +220,11 @@ namespace Photo
                     propItem.Value = encoding.GetBytes(value);
                     propItem.Len = propItem.Value.Length;
                     image.SetPropertyItem(propItem);
-                    image.Save(path + "\\img.tmp", image.RawFormat);
+                    image.Save(path + "img.tmp", image.RawFormat);
                 }
             }
             File.Delete(fileName);
-            File.Move(path + "\\img.tmp", fileName);
+            File.Move(path + "img.tmp", fileName);
         }
 
         public void UseOrientationTag()
