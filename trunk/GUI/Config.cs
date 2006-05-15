@@ -52,6 +52,19 @@ namespace Photo
             }
         }
 
+        public static string katalogMiniatur
+        {
+            get
+            {
+                string katalog = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\IIPhoto\\thumbs";
+                if (!Directory.Exists(katalog))
+                {
+                    DirectoryInfo di = Directory.CreateDirectory(katalog);
+                }
+                return katalog;
+            }
+        }
+
         public static string plikBazy = "iiphoto.db3";
     }
 }
