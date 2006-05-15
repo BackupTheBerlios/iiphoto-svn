@@ -1,6 +1,6 @@
 namespace Photo
 {
-    partial class Dodaj_do_kolekcji
+    partial class Dodaj_katalog_do_bazy
     {
         /// <summary>
         /// Required designer variable.
@@ -61,7 +61,7 @@ namespace Photo
             this.label1.TabIndex = 3;
             this.label1.Text = "Wybierz Album";
             // 
-            // Dodaj_do_kolekcji
+            // Dodaj_katalog_do_bazy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -69,8 +69,8 @@ namespace Photo
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);
-            this.Name = "Dodaj_do_kolekcji";
-            this.Text = "Dodaj do kolekcji";
+            this.Name = "Dodaj_katalog_do_bazy";
+            this.Text = "Dodaj do Albumu";
             this.ResumeLayout(false);
             this.PerformLayout();
 

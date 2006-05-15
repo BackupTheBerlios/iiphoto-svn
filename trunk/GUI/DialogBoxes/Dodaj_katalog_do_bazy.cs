@@ -10,12 +10,12 @@ using System.Data.SqlClient;
 
 namespace Photo
 {
-    public partial class Dodaj_do_kolekcji : Form
+    public partial class Dodaj_katalog_do_bazy : Form
     {
 
         private string sciezka;
 
-        public Dodaj_do_kolekcji(string s)
+        public Dodaj_katalog_do_bazy(string s)
         {
             InitializeComponent();
 

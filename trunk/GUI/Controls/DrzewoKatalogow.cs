@@ -492,7 +492,7 @@ namespace Photo
 
                 if (zdjecia.Count != 0)
                 {
-                    dodaj_do_albumu(zdjecia, Node.Path);
+                    //dodaj_do_albumu(zdjecia, Node.Path);
                 }
 
             }
@@ -653,8 +653,11 @@ namespace Photo
         {
             ToolStripItem mn = (ToolStripItem)sender;
             //MessageBox.Show("Dodaje zawartosc katalogu " + mn.ToolTipText + " do kolekcji!");
-            Dodaj_do_kolekcji ddk = new Dodaj_do_kolekcji(mn.ToolTipText);
+            //Dodaj_do_kolekcji ddk = new Dodaj_do_kolekcji(mn.ToolTipText);
+            //ddk.Show();
+            Dodaj_katalog_do_bazy ddk = new Dodaj_katalog_do_bazy(mn.ToolTipText);
             ddk.Show();
+
         } 
 
         protected override void OnMouseClick(MouseEventArgs e)
