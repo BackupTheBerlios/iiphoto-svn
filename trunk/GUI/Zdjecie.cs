@@ -13,8 +13,18 @@ namespace Photo
         string path;
         int Orientation;
         string format;
+        public Rectangle Zaznaczenie;
 
         List<PolecenieOperacji> operacje = new List<PolecenieOperacji>();
+
+        public Zdjecie(string Path)
+        {
+            path = Path;
+            miniatura = new Bitmap(path);
+            format = sprawdzFormatPliku();
+            UseOrientationTag();
+            Zaznaczenie = new Rectangle(5, 5, Duze.Width-5, Duze.Height-5);
+        }
 
         public Bitmap Miniatura
         {
@@ -35,14 +45,10 @@ namespace Photo
             {
                 return miniatura;
             }
-        }
-
-        public Zdjecie(string Path)
-        {
-            path = Path;
-            miniatura = new Bitmap(path);
-            format = sprawdzFormatPliku();
-            UseOrientationTag();
+            set
+            {
+                miniatura = value;
+            }
         }
 
         public string NazwaPliku
@@ -148,7 +154,7 @@ namespace Photo
             {
                 foreach (PolecenieOperacji polecenie in operacje)
                 {
-                    polecenie.Wykonaj(miniatura);
+                    polecenie.Wykonaj(this);
                 }
                 if (ZmodyfikowanoZdjecie != null)
                     ZmodyfikowanoZdjecie(null, this, RodzajModyfikacjiZdjecia.Zawartosc);

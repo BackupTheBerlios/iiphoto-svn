@@ -76,6 +76,7 @@ namespace Photo
         private Rectangle selectedRectangle;
         private BitmapData data;
         private int padX, padY;
+        private double WidthRatio, HeightRatio;
 
     }
 }

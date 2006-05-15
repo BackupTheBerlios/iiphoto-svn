@@ -58,9 +58,9 @@ namespace Wyostrzenie
             get { throw new System.Exception("The method or operation is not implemented."); }
         }
 
-        public void Wykonaj(System.Drawing.Bitmap Bitmap, System.Collections.Generic.Stack<object> Argumenty)
+        public void Wykonaj(Photo.Zdjecie z, System.Collections.Generic.Stack<object> Argumenty)
         {
-            Photo.BitmapFilter.Sharpen(Bitmap, 5);
+            Photo.BitmapFilter.Sharpen(z.Duze, 10);
         }
 
         public Stack<object> PodajArgumenty()

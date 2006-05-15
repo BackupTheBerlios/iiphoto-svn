@@ -41,9 +41,9 @@ namespace Photo
         /// Powoduje wykonanie operacji opisanej przez to polecenie na bitmapie.
         /// </summary>
         /// <param name="bitmap">Bitmapa na której wykonywana jest operacja.</param>
-        public void Wykonaj(Bitmap bitmap)
+        public void Wykonaj(Zdjecie z)
         {
-            Operacja.Wykonaj(bitmap, Argumenty);
+            Operacja.Wykonaj(z, Argumenty);
         }
     }
 
@@ -72,6 +72,7 @@ namespace Photo
         {
             operacje.Add(new XOR());
             operacje.Add(new Grayscale());
+            operacje.Add(new Crop());
         }
 
         public void WrzucDoGui(ToolStrip tool, ToolStripMenuItem filtry)
@@ -150,10 +151,10 @@ namespace Photo
             get { throw new System.Exception("The method or operation is not implemented."); }
         }
 
-        public void Wykonaj(System.Drawing.Bitmap Bitmap, System.Collections.Generic.Stack<object> Argumenty)
+        public void Wykonaj(Zdjecie z, System.Collections.Generic.Stack<object> Argumenty)
         {
-            Rectangle rect = new Rectangle(new Point(0, 0), Bitmap.Size);
-            BitmapData bd = Bitmap.LockBits(rect, ImageLockMode.ReadWrite, Bitmap.PixelFormat);
+            Rectangle rect = new Rectangle(new Point(0, 0), z.Duze.Size);
+            BitmapData bd = z.Duze.LockBits(rect, ImageLockMode.ReadWrite, z.Duze.PixelFormat);
             int bytes = bd.Width * bd.Height * 3;
             byte[] rgbValues = new byte[bytes];
             System.Runtime.InteropServices.Marshal.Copy(bd.Scan0, rgbValues, 0, bytes);
@@ -162,7 +163,7 @@ namespace Photo
                 rgbValues[i] = (byte)((int)rgbValues[i] ^ 0xff);
             }
             System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, bd.Scan0, bytes);
-            Bitmap.UnlockBits(bd);
+            z.Duze.UnlockBits(bd);
         }
 
         public Stack<object> PodajArgumenty()
@@ -231,15 +232,88 @@ namespace Photo
             return new Stack<object>();
         }
 
-        public void Wykonaj(Bitmap Bitmap, Stack<object> Argumenty)
+        public void Wykonaj(Zdjecie z, Stack<object> Argumenty)
         {
-            BitmapFilter.GrayScale(Bitmap);
+            BitmapFilter.GrayScale(z.Duze);
+        }
+
+        public bool CzyNaToolbar()
+        {
+            return false;
         }
 
         #endregion
+    }
 
+    class Crop : IOperacja
+    {
         #region IOperacja Members
 
+        private int kodOperacji;
+
+        public string NazwaOperacji
+        {
+            get { return "Crop"; }
+        }
+
+        public int KodOperacji
+        {
+            get
+            {
+                return kodOperacji;
+            }
+            set
+            {
+                kodOperacji = value;
+            }
+        }
+
+        public Image Ikona
+        {
+            get { return null; }
+        }
+
+        public string Autor
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public string Wersja
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public string Kontakt
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public Stack<object> PodajArgumenty()
+        {
+            return new Stack<object>();
+        }
+
+        public void Wykonaj(Zdjecie z, Stack<object> Argumenty)
+        {
+            if (z.Zaznaczenie.Width != 0 && z.Zaznaczenie.Height != 0)
+            {
+                if (z.Zaznaczenie.Width < 0)
+                {
+                    z.Zaznaczenie.X += z.Zaznaczenie.Width;
+                    z.Zaznaczenie.Width *= -1;
+                }
+                if (z.Zaznaczenie.Height < 0)
+                {
+                    z.Zaznaczenie.Y += z.Zaznaczenie.Height;
+                    z.Zaznaczenie.Height *= -1;
+                }
+                Bitmap cropped = new Bitmap(Math.Abs(z.Zaznaczenie.Width), Math.Abs(z.Zaznaczenie.Height), z.Duze.PixelFormat);
+                Graphics g = Graphics.FromImage(cropped);
+                g.DrawImage(z.Duze, new Rectangle(0, 0, cropped.Width, cropped.Height), z.Zaznaczenie, GraphicsUnit.Pixel);
+                g.Dispose();
+                z.Duze = cropped;
+            }
+        }
 
         public bool CzyNaToolbar()
         {

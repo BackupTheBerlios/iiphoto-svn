@@ -64,7 +64,7 @@ namespace Photo
         /// </summary>
         /// <param name="Bitmap">Bitmapa na której ma zostaæ wykonana operacja.</param>
         /// <param name="Argumenty">Argumenty dla operacji. Na dnie stosu le¿y argument pierwszy.</param>
-        void Wykonaj(Bitmap Bitmap, Stack<object> Argumenty);
+        void Wykonaj(Zdjecie z, Stack<object> Argumenty);
 
         bool CzyNaToolbar();
     }

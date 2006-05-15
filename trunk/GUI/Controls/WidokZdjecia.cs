@@ -18,6 +18,8 @@ namespace Photo
             padX = 0;
             padY = 0;
             Edycja = false;
+            WidthRatio = 1.0;
+            HeightRatio = 1.0;
         }
 
         /*public void setImage(Zdjecie zdjecie)
@@ -85,7 +87,7 @@ namespace Photo
 
         public Bitmap FitToPage()
         {
-            int scaledH, scaledW;
+            /*int scaledH, scaledW;
 
             if (zdjecie.Duze.Height > zdjecie.Duze.Width)
             {
@@ -100,11 +102,15 @@ namespace Photo
 
             Bitmap newBitmap = new Bitmap(scaledW, scaledH);
             Graphics MyGraphics = Graphics.FromImage(newBitmap);
+            MyGraphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
             Rectangle MyRectan = new Rectangle(0, 0, scaledW, scaledH);
             MyGraphics.DrawImage(zdjecie.Duze, MyRectan);
             MyGraphics.Dispose();
-            return newBitmap;
+            WidthRatio = zdjecie.Duze.Width / scaledW;
+            HeightRatio = zdjecie.Duze.Height / scaledH;
+            return newBitmap;*/
+            return zdjecie.Duze;
         }
 
         /*public void Zoom(double zoom) {
@@ -275,6 +281,7 @@ namespace Photo
             isDrag = false;
             if (e.Button == MouseButtons.Left)
             {
+                this.zdjecie.Zaznaczenie = new Rectangle((int)(selectedRectangle.X * WidthRatio), (int)(selectedRectangle.Y * HeightRatio), (int)(selectedRectangle.Width * WidthRatio), (int)(selectedRectangle.Height * HeightRatio));
                 this.Refresh();
             }
             else if (e.Button == MouseButtons.Right)
