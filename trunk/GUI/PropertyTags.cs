@@ -252,11 +252,13 @@ namespace Photo
             defaultExifIdsDictionary.Add(ExifISOSpeed, "ISO");
             defaultExifIdsDictionary.Add(ExifAperture, "Aperture");
             defaultExifIdsDictionary.Add(ExifFocalLength, "Focal Length");
-            defaultExifIdsDictionary.Add(ExifUserComment, "Comment");
+            defaultExifIdsDictionary.Add(ExifUserComment, "ExifComment");
+            defaultExifIdsDictionary.Add(Comments, "Comments");
             defaultExifIdsDictionary.Add(ExifColorSpace, "Color Space");
             defaultExifIdsDictionary.Add(Compression, "Compression");
             defaultExifIdsDictionary.Add(DateTime, "Date & Time");
             defaultExifIdsDictionary.Add(IIPhotoTag, "IIPhotoTag");
+            defaultExifIdsDictionary.Add(Author, "Autor");
 
             defaultExifDoBazyDictionary.Add(DateTime, "data_wykonania");
             defaultExifDoBazyDictionary.Add(Comments, "komentarz");
