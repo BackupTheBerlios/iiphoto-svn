@@ -297,7 +297,7 @@ namespace Photo
                 if (defaults.ContainsKey(pItem.Id))
                 {
                     propertyValue = PropertyTags.ParseProp(pItem);
-                    if (!d.ContainsKey(pItem.Id) && !propertyValue.Equals(""))
+                    if (!d.ContainsKey(defaults[pItem.Id]) && !propertyValue.Equals(""))
                     {
                         d.Add(defaults[pItem.Id], propertyValue);
                     }
