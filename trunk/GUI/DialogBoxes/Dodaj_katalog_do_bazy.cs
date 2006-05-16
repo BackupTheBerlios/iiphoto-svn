@@ -14,10 +14,13 @@ namespace Photo
     {
 
         private string sciezka;
+        private FileTree drzewo;
 
-        public Dodaj_katalog_do_bazy(string s)
+        public Dodaj_katalog_do_bazy(string s, FileTree tr)
         {
             InitializeComponent();
+
+            drzewo = tr;            
 
             this.button1.Enabled = false;
             sciezka = s;
@@ -106,7 +109,19 @@ namespace Photo
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
+        {            
+            List<string> lista = drzewo.Przefiltruj(sciezka);
+            /*List<Zdjecie> lista = new List<Zdjecie>();
+
+            foreach (string s in lista_sciezek)
+            {
+                Zdjecie z = new Zdjecie(s);
+                lista.Add(z);
+            }*/
+
+            //drzewo.dodaj_kolekcje_do_bazy(lista);
+            drzewo.d_d_a(sciezka);
+
             dodaj_do_albumu();
 
             this.Dispose();

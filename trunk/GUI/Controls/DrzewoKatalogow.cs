@@ -406,7 +406,7 @@ namespace Photo
             args.Result = ZnajdzPlikiWKatalogu(bw, Node);
         }
 
-        private void d_d_a(string sciezka)
+        internal void d_d_a(string sciezka)
         {
             
 
@@ -541,7 +541,7 @@ namespace Photo
             baza.Rozlacz();
         }
 
-        private List<string> Przefiltruj(string sciezka)
+        internal List<string> Przefiltruj(string sciezka)
         {            
             List<string> pliki = new List<string>();
             List<string> pliki_przefiltrowane = new List<string>();
@@ -785,7 +785,7 @@ namespace Photo
             }
         }
 
-        private void dodaj_kolekcje_do_bazy(List<string> lista)
+        internal void dodaj_kolekcje_do_bazy(List<string> lista)
         {
             Db baza = new Db();
             Int64 max = 0;
@@ -819,6 +819,8 @@ namespace Photo
 
                 Dictionary<string, string> tablica;
                 //string[][] tablica;
+                string autor = "", komentarz = "", data_wykonania = "", orientacja = "", sciezka = "", nazwa_pliku = "";
+                int orient = -1;
 
                 foreach(string n in lista)
                 {
@@ -827,59 +829,66 @@ namespace Photo
 
                         tablica = Zdjecie.PobierzExifDoBazy(n);
 
-                        try
+                        if (tablica.ContainsKey("autor"))
                         {
-                            MessageBox.Show(tablica["autor"]);
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("autora nie ma");
+                            autor = tablica["autor"];
+                            //MessageBox.Show(autor);
                         }
 
-                        try
+                        if (tablica.ContainsKey("komentarz"))
                         {
-                            MessageBox.Show(tablica["comment"]);
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("comment nie ma");
+                            komentarz = tablica["komentarz"];
+                            //MessageBox.Show(komentarz);
                         }
 
-                        try
+                        if (tablica.ContainsKey("data_wykonania"))
                         {
-                            MessageBox.Show(tablica["komentarz"]);
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("komentarza nie ma");
+                            data_wykonania = tablica["data_wykonania"];
+                            //MessageBox.Show(data_wykonania);
                         }
 
-                        try
+                        if (tablica.ContainsKey("orientacja"))
                         {
-                            MessageBox.Show(tablica["data_wykonania"]);
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("data_wykonania nie ma");
-                        }
-
-                        try
-                        {
-                            MessageBox.Show(tablica["orientacja"]);
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("orientacja nie ma");
+                            orientacja = tablica["orientacja"];
+                            if (orientacja == "Normal")
+                                orient = 0;
+                            else
+                                orient = 1;
+                            //MessageBox.Show(orientacja);
+                            //MessageBox.Show("" + orient);
                         }
 
-                        try
+                        sciezka = n.Substring(0, n.LastIndexOf("\\"));
+                        if (sciezka.Length == 2)
+                            sciezka += "\\";
+
+                        nazwa_pliku = n.Substring(n.LastIndexOf("\\") + 1, n.Length - n.LastIndexOf("\\") - 1);
+
+                        //MessageBox.Show(sciezka);
+                        //MessageBox.Show(nazwa_pliku);
+
+                        Zdjecie z = new Zdjecie(n);
+
+                        //MessageBox.Show(z.IIPhotoTag);
+                        
+
+                        if (z.IIPhotoTag == "")
                         {
-                            MessageBox.Show(tablica["orientation"]);
+                            MessageBox.Show("dodaje tag");
+
+                            z.IIPhotoTag = "" + max;
+
+                            try
+                            {
+                                baza.Insert_czesci("zdjecie", "sciezka,data_dodania,data_wykonania,komentarz,autor,nazwa_pliku,orientacja", "'" + sciezka + "',current_date,null,'" + komentarz + "','" + autor + "','" + nazwa_pliku + "'," + orient);
+                            }
+                            catch (SqlException)
+                            {
+                                MessageBox.Show("bladsql");
+                            }
                         }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("orientation nie ma");
-                        }
+
+                        
 
                         /*foreach (KeyValuePair<string, string> s in tablica)
                         {
@@ -927,9 +936,9 @@ namespace Photo
             //MessageBox.Show("Dodaje zawartosc katalogu " + mn.ToolTipText + " do kolekcji!");
             //Dodaj_do_kolekcji ddk = new Dodaj_do_kolekcji(mn.ToolTipText);
             //ddk.Show();
-            //Dodaj_katalog_do_bazy ddk = new Dodaj_katalog_do_bazy(mn.ToolTipText,this);
-            //ddk.Show();
-            d_d_a(mn.ToolTipText);
+            Dodaj_katalog_do_bazy ddk = new Dodaj_katalog_do_bazy(mn.ToolTipText,this);
+            ddk.Show();
+            //d_d_a(mn.ToolTipText);
             
 
         } 

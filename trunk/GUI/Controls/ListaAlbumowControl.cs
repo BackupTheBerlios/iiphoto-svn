@@ -183,16 +183,13 @@ namespace Photo
             List<Zdjecie> lista = new List<Zdjecie>();
 
             
-            pliki.AddRange(Directory.GetFiles("c:\\", "*.jpg"));
+            //pliki.AddRange(Directory.GetFiles("c:\\", "*.jpg"));
 
             Zdjecie z;
 
             foreach (string zd in pliki)
             {
-                z = new Zdjecie(zd);
-                //MessageBox.Show(z.Path);
-                bw.ReportProgress(0, z);
-                lista.Add(z);
+               
                 //MessageBox.Show(zd);
             }
 
@@ -206,11 +203,33 @@ namespace Photo
 
             try
             {
+                if (Node.FullPath.Length > "Albumy".Length)
+                {
+                    //MessageBox.Show(Node.FullPath.Substring("Albumy".Length + 1, Node.FullPath.Length - ("Albumy".Length + 1)));
+                    DataSet ds = baza.Select("select sciezka,nazwa_pliku from zdjecie where id_zdjecia in (select id_zdjecia from TagZdjecia where id_tagu in (select id_tagu from Tag where album=1 and nazwa=\'" + Node.FullPath.Substring("Albumy".Length + 1, Node.FullPath.Length - ("Albumy".Length + 1)) + "\'))");
+
+                    MessageBox.Show("jest git");
+
+                    string pelna_sciezka = "";
+
+                    foreach (DataTable t in ds.Tables)
+                    {
+                        foreach (DataRow r in t.Rows)
+                        {
+                            pelna_sciezka = r[0] + "\\" + r[1];
+                            z = new Zdjecie(pelna_sciezka);
+                            //MessageBox.Show(z.Path);
+                            bw.ReportProgress(0, z);
+                            lista.Add(z);
+                        }
+                    }
+                }
+
 
             }
             catch (SqlException)
             {
-
+                MessageBox.Show("blad bazy");
             }
             baza.Rozlacz();
 
