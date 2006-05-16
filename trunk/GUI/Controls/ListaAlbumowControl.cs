@@ -304,9 +304,9 @@ namespace Photo
             {
                 baza.Delete("Tag", "nazwa=\'" + mn.ToolTipText + "\' and album=1");
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-
+                MessageBox.Show(ex.ToString() + ex.Message);
             }
             baza.Rozlacz();
 
@@ -333,9 +333,9 @@ namespace Photo
             {
                 baza.Delete("Tag", "nazwa=\'" + mn.ToolTipText + "\' and album=0");
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-
+                MessageBox.Show(ex.ToString() + ex.Message);
             }
             baza.Rozlacz();
 
@@ -373,11 +373,6 @@ namespace Photo
                     Context.Show(this, new Point(e.X, e.Y));
                 }
             }            
-        }
-
-        private void treeView1_MouseClick(object sender, MouseEventArgs e)
-        {
-
         }
 
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)

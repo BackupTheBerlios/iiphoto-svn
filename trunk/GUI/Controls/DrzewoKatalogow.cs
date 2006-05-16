@@ -150,9 +150,7 @@ namespace Photo
             //Nodes.RemoveAt(0);
             Nodes.Clear();
             EndUpdate();
-        }
-
-        
+        }        
 
         public class DirTreeNode : TreeNode
         {
@@ -207,8 +205,9 @@ namespace Photo
                     if (type == FOLDER && n.Length != 0)
                         setLeaf(true);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    MessageBox.Show(e.ToString() + e.Message);
                 }
             }
 
@@ -727,9 +726,9 @@ namespace Photo
                 //MessageBox.Show(m2);
                 //MessageBox.Show(m3);
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
-
+                MessageBox.Show(e.ToString() + e.Message);
             }
 
 
@@ -781,7 +780,11 @@ namespace Photo
                 toolStripItem.Click += new EventHandler(DodajDoAlbumu);
 
 
-                Context.Show(this, new Point(e.X, e.Y));             
+                Context.Show(this, new Point(e.X, e.Y));
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
+                MessageBox.Show("lalal");
             }
         }
 
@@ -798,24 +801,16 @@ namespace Photo
                 foreach (DataTable t in ds.Tables)
                 {                  
                     foreach (DataRow r in t.Rows)
-                    {
-                        try
-                        {
+                    {             
+                        if (!(r[0] is DBNull)) 
                             max = (Int64)r[0];
-                        }
-                        catch (Exception)
-                        {
-                            max = -1;
-                        }
+                        else 
+                            max = 0;
                     }                
                 }
                 //MessageBox.Show("" + max);
 
-                if (max == -1)
-                    max = 1;
-                else
-                    max++;
-
+                max++;
 
                 Dictionary<string, string> tablica;
                 //string[][] tablica;
@@ -867,16 +862,17 @@ namespace Photo
                         //MessageBox.Show(sciezka);
                         //MessageBox.Show(nazwa_pliku);
 
-                        Zdjecie z = new Zdjecie(n);
+                        //Zdjecie z = new Zdjecie(n);
 
                         //MessageBox.Show(z.IIPhotoTag);
                         
 
-                        if (z.IIPhotoTag == "")
+                        if (Zdjecie.ZwrocIIPhotoTag(n).Equals(""))
                         {
                             MessageBox.Show("dodaje tag");
 
-                            z.IIPhotoTag = "" + max;
+                            //z.IIPhotoTag = "" + max;
+                            Zdjecie.UstawIIPhotoTag(n, max.ToString());
 
                             try
                             {
@@ -898,16 +894,18 @@ namespace Photo
                         //MessageBox.Show("" + tablica["data_wykonania"]);
 
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
-
+                        MessageBox.Show(e.ToString());
                     }
+
+                    max++;
                 }
 
             }
-            catch (SqlException)
+            catch (SqlException e) 
             {
-
+                MessageBox.Show(e.ToString());
             }
 
 
@@ -939,14 +937,7 @@ namespace Photo
             Dodaj_katalog_do_bazy ddk = new Dodaj_katalog_do_bazy(mn.ToolTipText,this);
             ddk.Show();
             //d_d_a(mn.ToolTipText);
-            
-
         } 
-
-        protected override void OnMouseClick(MouseEventArgs e)
-        {   
-
-        }
 
         private void InitializeComponent()
         {

@@ -252,7 +252,7 @@ namespace Photo
             defaultExifIdsDictionary.Add(ExifISOSpeed, "ISO");
             defaultExifIdsDictionary.Add(ExifAperture, "Aperture");
             defaultExifIdsDictionary.Add(ExifFocalLength, "Focal Length");
-            defaultExifIdsDictionary.Add(ExifUserComment, "ExifComment");
+            //defaultExifIdsDictionary.Add(ExifUserComment, "ExifComment");
             defaultExifIdsDictionary.Add(Comments, "Comments");
             defaultExifIdsDictionary.Add(ExifColorSpace, "Color Space");
             defaultExifIdsDictionary.Add(Compression, "Compression");
@@ -287,8 +287,8 @@ namespace Photo
             string val;
             switch (propItem.Type)
             {
-                case 1: val = Encoding.Unicode.GetString(propItem.Value); break;
-                case 2: val = Encoding.ASCII.GetString(propItem.Value); break;
+                case 1: val = Encoding.Unicode.GetString(propItem.Value, 0, propItem.Len - 1); break;
+                case 2: val = Encoding.ASCII.GetString(propItem.Value, 0, propItem.Len - 1); break;
                 case 3: val = BitConverter.ToUInt16(propItem.Value, 0).ToString(); break;
                 default: val = "Value not supported"; break;
             }

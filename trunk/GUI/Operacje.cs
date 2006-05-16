@@ -355,7 +355,7 @@ namespace Photo
 
         public bool CzyNaToolbar()
         {
-            return false;
+            return true;
         }
 
         #endregion

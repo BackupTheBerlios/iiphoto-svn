@@ -189,6 +189,7 @@ namespace Photo
             {
                 PropertyItem item;
                 try
+                
                 {
                     item = Duze.GetPropertyItem(PropertyTags.IIPhotoTag);
                 }
@@ -232,6 +233,29 @@ namespace Photo
             File.Delete(fileName);
             File.Move(path + "img.tmp", fileName);
         }
+
+        public static string ZwrocIIPhotoTag(string fileName)
+        {
+            using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+            {
+                using (Image image = Image.FromStream(stream,
+                    /* useEmbeddedColorManagement = */ true,
+                    /* validateImageData = */ false))
+                {
+                    PropertyItem item;
+                    try
+                    {
+                        item = image.GetPropertyItem(PropertyTags.IIPhotoTag);
+                    }
+                    catch
+                    {
+                        return "";
+                    }
+                    return PropertyTags.ParseProp(item);
+                }
+            }
+        }
+
 
         public void UseOrientationTag()
         {

@@ -56,8 +56,9 @@ namespace Photo
                     this.comboBox1.Items.Add(t);
                 }
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
+                MessageBox.Show(e.ToString() + e.Message);
             }
             baza.Rozlacz();
         }
@@ -101,8 +102,9 @@ namespace Photo
                 }
 
             }
-            catch (SqlException)
+            catch (SqlException e)
             {
+                MessageBox.Show(e.ToString() + e.Message);
             }
             baza.Rozlacz();
 
