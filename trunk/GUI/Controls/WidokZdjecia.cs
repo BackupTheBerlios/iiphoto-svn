@@ -417,6 +417,7 @@ namespace Photo
                 this.checkImagePosition();
                 this.lmStartingPoint = new Point();
                 this.selectedRectangle = new Rectangle(0, 0, 0, 0);
+                zdjecie.Zaznaczenie = selectedRectangle;
                 this.Refresh();
             }
         }
