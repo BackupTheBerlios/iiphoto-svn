@@ -153,17 +153,31 @@ namespace Photo
 
         public void Wykonaj(Zdjecie z, System.Collections.Generic.Stack<object> Argumenty)
         {
-            Rectangle rect = new Rectangle(new Point(0, 0), z.Duze.Size);
-            BitmapData bd = z.Duze.LockBits(rect, ImageLockMode.ReadWrite, z.Duze.PixelFormat);
-            int bytes = bd.Width * bd.Height * 3;
-            byte[] rgbValues = new byte[bytes];
-            System.Runtime.InteropServices.Marshal.Copy(bd.Scan0, rgbValues, 0, bytes);
-            for (int i = 0; i < bytes; i++)
+            if (z.Zaznaczenie.IsEmpty)
             {
-                rgbValues[i] = (byte)((int)rgbValues[i] ^ 0xff);
+                BitmapFilter.Invert(z.Duze);
             }
-            System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, bd.Scan0, bytes);
-            z.Duze.UnlockBits(bd);
+            else
+            {
+                if (z.Zaznaczenie.Width < 0)
+                {
+                    z.Zaznaczenie.X += z.Zaznaczenie.Width;
+                    z.Zaznaczenie.Width *= -1;
+                }
+                if (z.Zaznaczenie.Height < 0)
+                {
+                    z.Zaznaczenie.Y += z.Zaznaczenie.Height;
+                    z.Zaznaczenie.Height *= -1;
+                }
+                Bitmap xored = new Bitmap(Math.Abs(z.Zaznaczenie.Width), Math.Abs(z.Zaznaczenie.Height), z.Duze.PixelFormat);
+                Graphics g = Graphics.FromImage(xored);
+                g.DrawImage(z.Duze, new Rectangle(0, 0, xored.Width, xored.Height), z.Zaznaczenie, GraphicsUnit.Pixel);
+                g.Dispose();
+                BitmapFilter.Invert(xored);
+                g = Graphics.FromImage(z.Duze);
+                g.DrawImage(xored, z.Zaznaczenie);
+                g.Dispose();
+            }
         }
 
         public Stack<object> PodajArgumenty()
@@ -234,7 +248,31 @@ namespace Photo
 
         public void Wykonaj(Zdjecie z, Stack<object> Argumenty)
         {
-            BitmapFilter.GrayScale(z.Duze);
+            if (z.Zaznaczenie.IsEmpty)
+            {
+                BitmapFilter.GrayScale(z.Duze);
+            }
+            else
+            {
+                if (z.Zaznaczenie.Width < 0)
+                {
+                    z.Zaznaczenie.X += z.Zaznaczenie.Width;
+                    z.Zaznaczenie.Width *= -1;
+                }
+                if (z.Zaznaczenie.Height < 0)
+                {
+                    z.Zaznaczenie.Y += z.Zaznaczenie.Height;
+                    z.Zaznaczenie.Height *= -1;
+                }
+                Bitmap grayed = new Bitmap(Math.Abs(z.Zaznaczenie.Width), Math.Abs(z.Zaznaczenie.Height), z.Duze.PixelFormat);
+                Graphics g = Graphics.FromImage(grayed);
+                g.DrawImage(z.Duze, new Rectangle(0, 0, grayed.Width, grayed.Height), z.Zaznaczenie, GraphicsUnit.Pixel);
+                g.Dispose();
+                BitmapFilter.GrayScale(grayed);
+                g = Graphics.FromImage(z.Duze);
+                g.DrawImage(grayed, z.Zaznaczenie);
+                g.Dispose();
+            }
         }
 
         public bool CzyNaToolbar()

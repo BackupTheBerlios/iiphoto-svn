@@ -30,26 +30,26 @@ namespace Photo
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PhotoForm));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.przegladarkaZdjec = new Photo.PrzegladarkaZdjec();
             this.splitter2 = new System.Windows.Forms.Splitter();
+            this.informacjeControl1 = new Photo.InformacjeControl();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.drzewoOpakowane1 = new Photo.DrzewoOpakowane();
+            this.wyszukiwarkaControl1 = new Photo.WyszukiwarkaControl();
+            this.listaAlbumowControl = new Photo.ListaAlbumowControl();
+            this.statusStrip = new Photo.PasekStanuControl();
             this.toolStripOperacje = new System.Windows.Forms.ToolStrip();
             this.Alfa = new System.Windows.Forms.ToolStripButton();
             this.Omega = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.filtryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.przegladarkaZdjec = new Photo.PrzegladarkaZdjec();
-            this.informacjeControl1 = new Photo.InformacjeControl();
-            this.drzewoOpakowane1 = new Photo.DrzewoOpakowane();
-            this.wyszukiwarkaControl1 = new Photo.WyszukiwarkaControl();
-            this.listaAlbumowControl = new Photo.ListaAlbumowControl();
-            this.statusStrip = new Photo.PasekStanuControl();
             this.programToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zakonczToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filtryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -78,6 +78,14 @@ namespace Photo
             this.toolStripContainer1.TabIndex = 3;
             this.toolStripContainer1.Text = "toolStripContainer1";
             // 
+            // przegladarkaZdjec
+            // 
+            this.przegladarkaZdjec.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.przegladarkaZdjec.Location = new System.Drawing.Point(201, 49);
+            this.przegladarkaZdjec.Name = "przegladarkaZdjec";
+            this.przegladarkaZdjec.Size = new System.Drawing.Size(703, 512);
+            this.przegladarkaZdjec.TabIndex = 8;
+            // 
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
@@ -86,6 +94,14 @@ namespace Photo
             this.splitter2.Size = new System.Drawing.Size(1, 512);
             this.splitter2.TabIndex = 7;
             this.splitter2.TabStop = false;
+            // 
+            // informacjeControl1
+            // 
+            this.informacjeControl1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.informacjeControl1.Location = new System.Drawing.Point(905, 49);
+            this.informacjeControl1.Name = "informacjeControl1";
+            this.informacjeControl1.Size = new System.Drawing.Size(138, 512);
+            this.informacjeControl1.TabIndex = 6;
             // 
             // splitter1
             // 
@@ -105,6 +121,38 @@ namespace Photo
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 512);
             this.panel1.TabIndex = 4;
+            // 
+            // drzewoOpakowane1
+            // 
+            this.drzewoOpakowane1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.drzewoOpakowane1.Location = new System.Drawing.Point(0, 226);
+            this.drzewoOpakowane1.Name = "drzewoOpakowane1";
+            this.drzewoOpakowane1.Size = new System.Drawing.Size(200, 286);
+            this.drzewoOpakowane1.TabIndex = 2;
+            // 
+            // wyszukiwarkaControl1
+            // 
+            this.wyszukiwarkaControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.wyszukiwarkaControl1.Location = new System.Drawing.Point(0, 144);
+            this.wyszukiwarkaControl1.Name = "wyszukiwarkaControl1";
+            this.wyszukiwarkaControl1.Size = new System.Drawing.Size(200, 82);
+            this.wyszukiwarkaControl1.TabIndex = 1;
+            // 
+            // listaAlbumowControl
+            // 
+            this.listaAlbumowControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.listaAlbumowControl.Location = new System.Drawing.Point(0, 0);
+            this.listaAlbumowControl.Name = "listaAlbumowControl";
+            this.listaAlbumowControl.Size = new System.Drawing.Size(200, 144);
+            this.listaAlbumowControl.TabIndex = 0;
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Location = new System.Drawing.Point(0, 561);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(1043, 22);
+            this.statusStrip.TabIndex = 2;
+            this.statusStrip.Text = "statusStrip";
             // 
             // toolStripOperacje
             // 
@@ -155,81 +203,6 @@ namespace Photo
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(34, 20);
-            this.fileToolStripMenuItem.Text = "Plik";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.aboutToolStripMenuItem.Text = "About...";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // akcjeToolStripMenuItem
-            // 
-            this.filtryToolStripMenuItem.Name = "akcjeToolStripMenuItem";
-            this.filtryToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
-            this.filtryToolStripMenuItem.Text = "Filtry";
-            // 
-            // przegladarkaZdjec
-            // 
-            this.przegladarkaZdjec.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.przegladarkaZdjec.Location = new System.Drawing.Point(201, 49);
-            this.przegladarkaZdjec.Name = "przegladarkaZdjec";
-            this.przegladarkaZdjec.Size = new System.Drawing.Size(703, 512);
-            this.przegladarkaZdjec.TabIndex = 8;
-            // 
-            // informacjeControl1
-            // 
-            this.informacjeControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.informacjeControl1.Location = new System.Drawing.Point(905, 49);
-            this.informacjeControl1.Name = "informacjeControl1";
-            this.informacjeControl1.Size = new System.Drawing.Size(138, 512);
-            this.informacjeControl1.TabIndex = 6;
-            // 
-            // drzewoOpakowane1
-            // 
-            this.drzewoOpakowane1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.drzewoOpakowane1.Location = new System.Drawing.Point(0, 226);
-            this.drzewoOpakowane1.Name = "drzewoOpakowane1";
-            this.drzewoOpakowane1.Size = new System.Drawing.Size(200, 286);
-            this.drzewoOpakowane1.TabIndex = 2;
-            // 
-            // wyszukiwarkaControl1
-            // 
-            this.wyszukiwarkaControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.wyszukiwarkaControl1.Location = new System.Drawing.Point(0, 144);
-            this.wyszukiwarkaControl1.Name = "wyszukiwarkaControl1";
-            this.wyszukiwarkaControl1.Size = new System.Drawing.Size(200, 82);
-            this.wyszukiwarkaControl1.TabIndex = 1;
-            // 
-            // listaAlbumowControl
-            // 
-            this.listaAlbumowControl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listaAlbumowControl.Location = new System.Drawing.Point(0, 0);
-            this.listaAlbumowControl.Name = "listaAlbumowControl";
-            this.listaAlbumowControl.Size = new System.Drawing.Size(200, 144);
-            this.listaAlbumowControl.TabIndex = 0;
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Location = new System.Drawing.Point(0, 561);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1043, 22);
-            this.statusStrip.TabIndex = 2;
-            this.statusStrip.Text = "statusStrip";
-            // 
             // programToolStripMenuItem
             // 
             this.programToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -241,9 +214,37 @@ namespace Photo
             // zakonczToolStripMenuItem
             // 
             this.zakonczToolStripMenuItem.Name = "zakonczToolStripMenuItem";
-            this.zakonczToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.zakonczToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.zakonczToolStripMenuItem.Text = "Zakoncz";
             this.zakonczToolStripMenuItem.Click += new System.EventHandler(this.zakonczToolStripMenuItem_Click);
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(34, 20);
+            this.fileToolStripMenuItem.Text = "Plik";
+            // 
+            // filtryToolStripMenuItem
+            // 
+            this.filtryToolStripMenuItem.Name = "filtryToolStripMenuItem";
+            this.filtryToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.filtryToolStripMenuItem.Text = "Filtry";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.helpToolStripMenuItem.Text = "Pomoc";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Text = "About...";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // PhotoForm
             // 

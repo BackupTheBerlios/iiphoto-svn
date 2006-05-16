@@ -23,7 +23,7 @@ namespace Photo
             miniatura = new Bitmap(path);
             format = sprawdzFormatPliku();
             UseOrientationTag();
-            Zaznaczenie = new Rectangle(5, 5, Duze.Width-5, Duze.Height-5);
+            Zaznaczenie = new Rectangle(0,0,0,0);
         }
 
         public Bitmap Miniatura

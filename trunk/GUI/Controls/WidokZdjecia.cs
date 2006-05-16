@@ -141,6 +141,11 @@ namespace Photo
             }
         }*/
 
+        public void RysujXorZaznaczenie()
+        {
+            this.DrawMyRectangle(selectedRectangle);
+        }
+
         private Color MyGetPixel(int x, int y)
         {
             unsafe
@@ -281,7 +286,9 @@ namespace Photo
             isDrag = false;
             if (e.Button == MouseButtons.Left)
             {
-                this.zdjecie.Zaznaczenie = new Rectangle((int)(selectedRectangle.X * WidthRatio), (int)(selectedRectangle.Y * HeightRatio), (int)(selectedRectangle.Width * WidthRatio), (int)(selectedRectangle.Height * HeightRatio));
+                //this.zdjecie.Zaznaczenie = new Rectangle((int)(selectedRectangle.X * WidthRatio), (int)(selectedRectangle.Y * HeightRatio), (int)(selectedRectangle.Width * WidthRatio), (int)(selectedRectangle.Height * HeightRatio));
+                zdjecie.Zaznaczenie = selectedRectangle;
+
                 this.Refresh();
             }
             else if (e.Button == MouseButtons.Right)
@@ -370,9 +377,13 @@ namespace Photo
         public void ZakonczEdycje()
         {
             Edycja = false;
+            RysujXorZaznaczenie();
             zdjecie.WykonajOperacje();
             zdjecie.UsunWszystkieOperacje();
+            if (pictureBox1.Image.Width == zdjecie.Duze.Width && pictureBox1.Image.Height == zdjecie.Duze.Height)
+                //RysujXorZaznaczenie();
             Wypelnij(new Zdjecie[] { zdjecie });
+            
         }
 
         public void DodajOperacje(PolecenieOperacji operacja)
