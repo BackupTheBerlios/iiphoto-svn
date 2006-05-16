@@ -381,7 +381,9 @@ namespace Photo
             zdjecie.WykonajOperacje();
             zdjecie.UsunWszystkieOperacje();
             if (pictureBox1.Image.Width == zdjecie.Duze.Width && pictureBox1.Image.Height == zdjecie.Duze.Height)
+            {
                 //RysujXorZaznaczenie();
+            }
             Wypelnij(new Zdjecie[] { zdjecie });
             
         }
