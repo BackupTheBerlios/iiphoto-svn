@@ -258,7 +258,7 @@ namespace Photo
             defaultExifIdsDictionary.Add(DateTime, "Date & Time");
             defaultExifIdsDictionary.Add(IIPhotoTag, "IIPhotoTag");
 
-            defaultExifDoBazyDictionary.Add(DateTime, "data");
+            defaultExifDoBazyDictionary.Add(DateTime, "data_wykonania");
             defaultExifDoBazyDictionary.Add(ExifUserComment, "komentarz");
             defaultExifDoBazyDictionary.Add(Orientation, "orientacja");
             defaultExifDoBazyDictionary.Add(Author, "autor");
