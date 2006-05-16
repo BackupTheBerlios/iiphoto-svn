@@ -406,6 +406,72 @@ namespace Photo
             args.Result = ZnajdzPlikiWKatalogu(bw, Node);
         }
 
+        private void d_d_a(string sciezka)
+        {
+            
+
+            List<Zdjecie> zdjecia = new List<Zdjecie>();
+            List<string> pliki = new List<string>();
+            List<string> pliki_przefiltrowane = new List<string>();
+
+            
+
+            try
+            {
+                pliki.AddRange(Directory.GetFiles(sciezka, "*.jpg"));
+                pliki.AddRange(Directory.GetFiles(sciezka, "*.jpeg"));
+                pliki.AddRange(Directory.GetFiles(sciezka, "*.tif"));
+                //pliki.AddRange(Directory.GetFiles(sciezka, "*.tiff"));
+
+                //MessageBox.Show(sciezka);
+
+                pliki.Sort();
+
+                MessageBox.Show("" + pliki.Count);
+                MessageBox.Show(sciezka);
+
+
+                for (int i = 0; i < pliki.Count; i++)
+                {
+                    try
+                    {
+                        if ((pliki[i].ToLower().LastIndexOf(".jpg") != -1 && pliki[i].ToLower().LastIndexOf(".jpg") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".jpeg") != -1 && pliki[i].ToLower().LastIndexOf(".jpeg") == (pliki[i].Length - 5)) || (pliki[i].ToLower().LastIndexOf(".tif") != -1 && pliki[i].ToLower().LastIndexOf(".tif") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".tiff") != -1 && pliki[i].ToLower().LastIndexOf(".tiff") == (pliki[i].Length - 5)))
+                        {
+                            //if(pliki[i].ToLower().LastIndexOf(".tif") == (pliki[i].Length - 5))
+                            //  continue;
+                            //Zdjecie z = new Zdjecie(pliki[i]);
+                            pliki_przefiltrowane.Add(pliki[i]);
+                            //bw.ReportProgress(0, z);
+                            //zdjecia.Add(z);
+                        }
+                    }
+                    catch (ArgumentException)
+                    {
+                        //MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
+                        MessageBox.Show("Plik: \"" + pliki[i].Substring(pliki[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", pliki[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                MessageBox.Show("" + zdjecia.Count);
+
+
+                if (pliki_przefiltrowane.Count != 0)
+                {
+                    //dodaj_do_albumu(zdjecia, sciezka);
+                    dodaj_kolekcje_do_bazy(pliki_przefiltrowane);
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + " - Odmowa dostêpu", sciezka, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                DirTreeNode dd = new DirTreeNode("napis");
+
+                this.SelectedNode = dd;
+            }
+            //return zdjecia.ToArray();
+        }
+
         private void dodaj_do_albumu(List<Zdjecie> lista, string sciezka)
         {
             Db baza = new Db();
@@ -474,6 +540,49 @@ namespace Photo
 
             baza.Rozlacz();
         }
+
+        private List<string> Przefiltruj(string sciezka)
+        {            
+            List<string> pliki = new List<string>();
+            List<string> pliki_przefiltrowane = new List<string>();
+                       
+
+            try
+            {
+                pliki.AddRange(Directory.GetFiles(sciezka, "*.jpg"));
+                pliki.AddRange(Directory.GetFiles(sciezka, "*.jpeg"));
+                pliki.AddRange(Directory.GetFiles(sciezka, "*.tif"));
+
+                pliki.Sort();
+
+                for (int i = 0; i < pliki.Count; i++)
+                {
+                    try
+                    {
+                        if ((pliki[i].ToLower().LastIndexOf(".jpg") != -1 && pliki[i].ToLower().LastIndexOf(".jpg") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".jpeg") != -1 && pliki[i].ToLower().LastIndexOf(".jpeg") == (pliki[i].Length - 5)) || (pliki[i].ToLower().LastIndexOf(".tif") != -1 && pliki[i].ToLower().LastIndexOf(".tif") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".tiff") != -1 && pliki[i].ToLower().LastIndexOf(".tiff") == (pliki[i].Length - 5)))
+                        {                            
+                            pliki_przefiltrowane.Add(pliki[i]);                         
+                        }
+                    }
+                    catch (ArgumentException)
+                    {                        
+                        MessageBox.Show("Plik: \"" + pliki[i].Substring(pliki[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", pliki[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + " - Odmowa dostêpu", sciezka, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                DirTreeNode dd = new DirTreeNode("napis");
+
+                this.SelectedNode = dd;
+            }
+
+            return pliki_przefiltrowane;
+
+        }
+           
 
         private Zdjecie[] WybierzPlikiZdjec(BackgroundWorker bw, DirTreeNode Node)
         {
@@ -667,22 +776,161 @@ namespace Photo
                 ToolStripItem toolStripItem = Context.Items.Add("Dodaj zawartosc katalogu " + ((DirTreeNode)e.Node).Path + " do kolekcji");
                 toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
                 toolStripItem.Click += new EventHandler(DodajDoKolekcji);
+                toolStripItem = Context.Items.Add("Dodaj zawartosc katalogu " + ((DirTreeNode)e.Node).Path + " do Albumu");
+                toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
+                toolStripItem.Click += new EventHandler(DodajDoAlbumu);
+
 
                 Context.Show(this, new Point(e.X, e.Y));             
             }
         }
 
-        //protected override onn
+        private void dodaj_kolekcje_do_bazy(List<string> lista)
+        {
+            Db baza = new Db();
+            Int64 max = 0;
+
+            baza.Polacz();
+            try
+            {
+                DataSet ds = baza.Select("select max(id_zdjecia) from Zdjecie");
+
+                foreach (DataTable t in ds.Tables)
+                {                  
+                    foreach (DataRow r in t.Rows)
+                    {
+                        try
+                        {
+                            max = (Int64)r[0];
+                        }
+                        catch (Exception)
+                        {
+                            max = -1;
+                        }
+                    }                
+                }
+                //MessageBox.Show("" + max);
+
+                if (max == -1)
+                    max = 1;
+                else
+                    max++;
 
 
-        private void DodajDoKolekcji(object sender, EventArgs e)
+                Dictionary<string, string> tablica;
+                //string[][] tablica;
+
+                foreach(string n in lista)
+                {
+                    try
+                    {
+
+                        tablica = Zdjecie.PobierzExifDoBazy(n);
+
+                        try
+                        {
+                            MessageBox.Show(tablica["autor"]);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("autora nie ma");
+                        }
+
+                        try
+                        {
+                            MessageBox.Show(tablica["comment"]);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("comment nie ma");
+                        }
+
+                        try
+                        {
+                            MessageBox.Show(tablica["komentarz"]);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("komentarza nie ma");
+                        }
+
+                        try
+                        {
+                            MessageBox.Show(tablica["data_wykonania"]);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("data_wykonania nie ma");
+                        }
+
+                        try
+                        {
+                            MessageBox.Show(tablica["orientacja"]);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("orientacja nie ma");
+                        }
+
+                        try
+                        {
+                            MessageBox.Show(tablica["orientation"]);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("orientation nie ma");
+                        }
+
+                        /*foreach (KeyValuePair<string, string> s in tablica)
+                        {
+                            MessageBox.Show((string)s.Key);
+                            MessageBox.Show((string)s.Value);
+                        }*/
+                        //MessageBox.Show("" + tablica["data_wykonania"]);
+
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+
+            }
+            catch (SqlException)
+            {
+
+            }
+
+
+            baza.Rozlacz();
+
+        }
+
+        internal void DodajDoKolekcji(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;
             //MessageBox.Show("Dodaje zawartosc katalogu " + mn.ToolTipText + " do kolekcji!");
             //Dodaj_do_kolekcji ddk = new Dodaj_do_kolekcji(mn.ToolTipText);
             //ddk.Show();
-            Dodaj_katalog_do_bazy ddk = new Dodaj_katalog_do_bazy(mn.ToolTipText);
-            ddk.Show();
+            //Dodaj_katalog_do_bazy ddk = new Dodaj_katalog_do_bazy(mn.ToolTipText,this);
+            //ddk.Show();
+
+            List<string> lista = Przefiltruj(mn.ToolTipText);
+
+            dodaj_kolekcje_do_bazy(lista);
+
+        }
+
+        internal void DodajDoAlbumu(object sender, EventArgs e)
+        {
+            ToolStripItem mn = (ToolStripItem)sender;
+            //MessageBox.Show("Dodaje zawartosc katalogu " + mn.ToolTipText + " do kolekcji!");
+            //Dodaj_do_kolekcji ddk = new Dodaj_do_kolekcji(mn.ToolTipText);
+            //ddk.Show();
+            //Dodaj_katalog_do_bazy ddk = new Dodaj_katalog_do_bazy(mn.ToolTipText,this);
+            //ddk.Show();
+            d_d_a(mn.ToolTipText);
+            
 
         } 
 
