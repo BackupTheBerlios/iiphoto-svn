@@ -332,6 +332,11 @@ namespace Photo
 
         #endregion
 
+        public void Zapisz()
+        {
+            Duze.Save(Path);
+        }
+
         #region IDisposable Members
 
         public void Dispose()

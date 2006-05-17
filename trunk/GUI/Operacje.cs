@@ -73,6 +73,9 @@ namespace Photo
             operacje.Add(new XOR());
             operacje.Add(new Grayscale());
             operacje.Add(new Crop());
+            operacje.Add(new Rotate(1));
+            operacje.Add(new Rotate(2));
+            operacje.Add(new Rotate(3));
         }
 
         public void WrzucDoGui(ToolStrip tool, ToolStripMenuItem filtry)
@@ -113,7 +116,7 @@ namespace Photo
 
         public string NazwaOperacji
         {
-            get { return "XOR"; }
+            get { return "Negatyw"; }
         }
 
         int IOperacja.KodOperacji
@@ -206,7 +209,7 @@ namespace Photo
 
         public string NazwaOperacji
         {
-            get { return "Grayscale"; }
+            get { return "Skala szaroœci"; }
         }
 
         public int KodOperacji
@@ -291,7 +294,7 @@ namespace Photo
 
         public string NazwaOperacji
         {
-            get { return "Crop"; }
+            get { return "Wytnij"; }
         }
 
         public int KodOperacji
@@ -308,7 +311,7 @@ namespace Photo
 
         public Image Ikona
         {
-            get { return null; }
+            get { return Properties.Resources.nozyce; }
         }
 
         public string Autor
@@ -356,6 +359,100 @@ namespace Photo
         public bool CzyNaToolbar()
         {
             return true;
+        }
+
+        #endregion
+    }
+    class Rotate : IOperacja
+    {
+        #region IOperacja Members
+
+        private int kodOperacji;
+
+        public Rotate(int k)
+        {
+            kodOperacji = k;
+        }
+
+        public string NazwaOperacji
+        {
+            get 
+            {
+                switch (KodOperacji)
+                {
+                    case 1: return "90° CW";
+                    case 2: return "90° CCW";
+                    case 3: return "180° CW";
+                    default: return "";
+                }
+            }
+        }
+
+        public int KodOperacji
+        {
+            get
+            {
+                return kodOperacji;
+            }
+            set
+            {
+                kodOperacji = value;
+            }
+        }
+
+        public Image Ikona
+        {
+            get
+            {
+                switch (KodOperacji)
+                {
+                    case 1: return Properties.Resources.W_lewo.ToBitmap();
+                    case 2: return Properties.Resources.W_prawo.ToBitmap();
+                    case 3: return null;
+                    default: return null;
+                }
+            }
+        }
+
+        public string Autor
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public string Wersja
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public string Kontakt
+        {
+            get { throw new Exception("The method or operation is not implemented."); }
+        }
+
+        public Stack<object> PodajArgumenty()
+        {
+            return new Stack<object>();
+        }
+
+        public void Wykonaj(Zdjecie z, Stack<object> Argumenty)
+        {
+            switch (KodOperacji)
+            {
+                case 1: z.Duze.RotateFlip(RotateFlipType.Rotate90FlipNone); break;
+                case 2: z.Duze.RotateFlip(RotateFlipType.Rotate270FlipNone); break;
+                case 3: z.Duze.RotateFlip(RotateFlipType.Rotate180FlipNone); break;
+            }
+        }
+
+        public bool CzyNaToolbar()
+        {
+            switch (KodOperacji)
+            {
+                case 1: return true;
+                case 2: return true;
+                case 3: return false;
+            }
+            return false;
         }
 
         #endregion
