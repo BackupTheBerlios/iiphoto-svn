@@ -74,6 +74,20 @@ namespace Photo.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Cdrom_z_2 {
+            get {
+                object obj = ResourceManager.GetObject("Cdrom_z_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Computer {
+            get {
+                object obj = ResourceManager.GetObject("Computer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Dysk {
             get {
                 object obj = ResourceManager.GetObject("Dysk", resourceCulture);
@@ -126,6 +140,27 @@ namespace Photo.Properties {
         internal static System.Drawing.Bitmap nozyce {
             get {
                 object obj = ResourceManager.GetObject("nozyce", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Pictures_2 {
+            get {
+                object obj = ResourceManager.GetObject("Pictures_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Pulpit {
+            get {
+                object obj = ResourceManager.GetObject("Pulpit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap User {
+            get {
+                object obj = ResourceManager.GetObject("User", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

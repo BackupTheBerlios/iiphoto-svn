@@ -227,10 +227,15 @@
   <ItemGroup>
     <Content Include="icons\Cdrom.png" />
     <Content Include="icons\Cdrom_z.jpg" />
+    <Content Include="icons\Cdrom_z_2.png" />
+    <Content Include="icons\Computer.png" />
     <Content Include="icons\Dysk.png" />
     <Content Include="icons\Dyskietka.png" />
     <Content Include="icons\Dyskietka_z.png" />
     <Content Include="icons\folder.ico" />
+    <Content Include="icons\Pictures_2.png" />
+    <Content Include="icons\Pulpit.png" />
+    <Content Include="icons\User.png" />
     <Content Include="icons\W_lewo.ico" />
     <Content Include="icons\W_prawo.ico" />
     <None Include="Resources\Grayscale.png" />

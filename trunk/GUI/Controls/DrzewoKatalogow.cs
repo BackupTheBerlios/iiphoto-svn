@@ -20,7 +20,16 @@ namespace Photo
         private const int Dyskietka = 2;
         private const int Cdrom = 3;
         private const int Cdrom_z = 4;
-        private const int Dyskietka_z = 5;
+        private const int Dyskietka_z = 5;      
+        private const int Pictures_2 = 6;
+        private const int Cdrom_z_2 = 7;
+        private const int Computer = 8;
+        private const int Pulpit = 9;
+        private const int User = 10;
+        
+        private bool czy_otwiera = false;
+
+        private DirTreeNode kat_MKomputer;
 
         private ContextMenuStrip Context;
 
@@ -39,43 +48,89 @@ namespace Photo
             list.Images.Add(Properties.Resources.Dyskietka);
             list.Images.Add(Properties.Resources.Cdrom);
             list.Images.Add(Properties.Resources.Cdrom_z);
-            list.Images.Add(Properties.Resources.Dyskietka_z);
+            list.Images.Add(Properties.Resources.Dyskietka_z);                    
+            list.Images.Add(Properties.Resources.Pictures_2);
+            list.Images.Add(Properties.Resources.Cdrom_z_2);
+            list.Images.Add(Properties.Resources.Computer);
+            list.Images.Add(Properties.Resources.Pulpit);   
+            list.Images.Add(Properties.Resources.User);
+            
+
+            
             ImageList = list;
         }
 
         public void Fill()
         {
             BeginUpdate();
-            string[] drives = Directory.GetLogicalDrives();
 
-            //MessageBox.Show(Config.katalogAplikacji);
+            DirTreeNode kat_Pulpit = new DirTreeNode(Config.katalogPulpit, Pulpit, true);
+            kat_Pulpit.Text = "Pulpit";
+            //kat_Pulpit.Path = Config.katalogPulpit;
 
-            //DirTreeNode kat_Aplikacji = new DirTreeNode(Config.katalogAplikacji);
-            //kat_Aplikacji.Text = "Dane Aplikacji";
-            //Nodes.Add(kat_Aplikacji);
-            DirTreeNode kat_MDokumenty = new DirTreeNode(Config.katalogMojeDokumenty);
-            kat_MDokumenty.Text = "Moje Dokumenty";
+            try
+            {
+                string[] n = Directory.GetDirectories(Config.katalogPulpit);
+
+                if (n.Length == 0)
+                    kat_Pulpit.Nodes.Clear();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString() + e.Message);
+            }
+
+            Nodes.Add(kat_Pulpit);
+
+            DirTreeNode kat_MDokumenty = new DirTreeNode(Config.katalogMojeDokumenty,User,true);
+            kat_MDokumenty.Text = "Moje Dokumenty";            
+
+            try
+            {
+                string[] n = Directory.GetDirectories(Config.katalogMojeDokumenty);
+
+                if (n.Length == 0)
+                    kat_MDokumenty.Nodes.Clear();
+                    
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString() + e.Message);
+            }
+
             Nodes.Add(kat_MDokumenty);
 
-            DirTreeNode kat_MObrazy = new DirTreeNode(Config.katalogMojeObrazy);
+            DirTreeNode kat_MObrazy = new DirTreeNode(Config.katalogMojeObrazy, Pictures_2, true);
             kat_MObrazy.Text = "Moje Obrazy";
-            Nodes.Add(kat_MObrazy);
 
-            DirTreeNode kat_Pulpit = new DirTreeNode(Config.katalogPulpit);
-            kat_Pulpit.Text = "Pulpit";
-            Nodes.Add(kat_Pulpit);
+            try
+            {
+                string[] n = Directory.GetDirectories(Config.katalogMojeObrazy);
+
+                if (n.Length == 0)
+                    kat_MObrazy.Nodes.Clear();
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString() + e.Message);
+            }
+
+            Nodes.Add(kat_MObrazy);            
+
+            kat_MKomputer = new DirTreeNode("Mój Komputer", Computer, true);
+            kat_MKomputer.Text = "Mój Komputer";
+            Nodes.Add(kat_MKomputer);
+
+            //kat_MKomputer.Nodes.Clear();
+
+            string[] drives = Directory.GetLogicalDrives();
 
             foreach (string tempDrive in drives)
             {
-                DirTreeNode dn = new DirTreeNode(tempDrive);
-                Nodes.Add(dn);              
-
-                if (tempDrive.IndexOf("C:\\") != -1)
-                {                    
-                    this.SelectedNode = dn;
-                    this.Select(true, true);
-                }                
-            }
+                DirTreeNode dn = new DirTreeNode(tempDrive);                
+                kat_MKomputer.Nodes.Add(dn);
+            }            
 
             EndUpdate();
 
@@ -89,7 +144,15 @@ namespace Photo
             DirTreeNode subnode = null;
             int i, n;
 
-            path = path.ToLower();
+            MessageBox.Show(path);
+
+            if(path.IndexOf("Mój Komputer") == 0)
+                path = path.ToLower().Substring("Mój Komputer".Length, path.Length - "Mój Komputer".Length);
+            else
+                path = path.ToLower();
+
+            MessageBox.Show(path);
+
             Nodes.Clear();
 
             MessageBox.Show("open");
@@ -131,7 +194,8 @@ namespace Photo
                 MessageBox.Show(ex.Message + " - Odmowa dostêpu", e.Node.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //e.Node.                
                 e.Node.Remove();                
-                Nodes.Insert(tn.Index, tn);
+                //Nodes.Insert(tn.Index, tn);
+                kat_MKomputer.Nodes.Insert(tn.Index, tn);
                                 
                 EndUpdate();
             }
@@ -173,8 +237,8 @@ namespace Photo
                     //dn = new DirTreeNode(tempDrive, tempDrive + " [" + GetDriveName(tempDrive) + "]");
                     if (GetDriveName(s) != "" && getDriveType(s) == Cdrom)
                     {
-                        ImageIndex = Cdrom_z;
-                        SelectedImageIndex = Cdrom_z;
+                        ImageIndex = Cdrom_z_2;
+                        SelectedImageIndex = Cdrom_z_2;
                     }
                     else
                     {
@@ -185,6 +249,42 @@ namespace Photo
 
                 path = s.ToLower();
                 setLeaf(true);                
+            }
+
+            public DirTreeNode(string s, int aType, bool z)
+                : base(s)
+            {
+
+                path = s.ToLower();
+                type = aType;
+                
+
+                if (s.CompareTo("A:\\") == 0 || s.CompareTo("B:\\") == 0)
+                {
+                    Text = s + " [Floppy]";
+                    ImageIndex = Dyskietka;
+                    SelectedImageIndex = Dyskietka;
+                }
+                else
+                {
+                    Text = s + " [" + GetDriveName(s) + "]";
+                    //dn = new DirTreeNode(tempDrive, tempDrive + " [" + GetDriveName(tempDrive) + "]");
+                    if (GetDriveName(s) != "" && getDriveType(s) == Cdrom)
+                    {
+                        ImageIndex = Cdrom_z_2;
+                        SelectedImageIndex = Cdrom_z_2;
+                    }
+                    else
+                    {
+                        ImageIndex = getDriveType(s);
+                        SelectedImageIndex = getDriveType(s);
+                    }
+                }
+                ImageIndex = type;
+                SelectedImageIndex = type;
+
+                path = s.ToLower();
+                setLeaf(true);
             }
             public DirTreeNode(string s, string label)
                 : this(s)
@@ -263,36 +363,43 @@ namespace Photo
             }
 
             internal void populate(DirTreeNode tn)
-            {
-                DirTreeNode dnn = new DirTreeNode(tn.Text);
-                int gdzie = tn.Index;
-                    
-                    //(DirTreeNode)tn;
+            {                
+                ArrayList folder = new ArrayList();;
 
-                ArrayList folder = new ArrayList();
-
-                //string
-
-                //MessageBox.Show(Path);
-
-                string[] files = Directory.GetDirectories(Path);
-                Array.Sort(files);
-
-                /*if (files.Length == 0 && type == Dysk)
+                if (tn.FullPath != "Mój Komputer")
                 {
 
-                    //return;    
-                }*/
+                    DirTreeNode dnn = new DirTreeNode(tn.Text);
+                    int gdzie = tn.Index;
 
-                for (int i = 0; i < files.Length; i++)
-                {
-                    folder.Add(new DirTreeNode(files[i], FOLDER));
+                    string[] files = Directory.GetDirectories(Path);
+                    Array.Sort(files);
+
+                    for (int i = 0; i < files.Length; i++)
+                    {
+                        folder.Add(new DirTreeNode(files[i], FOLDER));
+                    }
+
+                    Nodes.Clear();
+                    foreach (DirTreeNode dtn in folder)
+                    {
+                        Nodes.Add(dtn);
+                    }
                 }
-
-                Nodes.Clear();
-                foreach (DirTreeNode dtn in folder)
+                else
                 {
-                    Nodes.Add(dtn);
+                    string[] drives = Directory.GetLogicalDrives();
+
+                    foreach (string tempDrive in drives)
+                    {
+                        DirTreeNode dn = new DirTreeNode(tempDrive);
+                        folder.Add(dn);                        
+                    }
+                    Nodes.Clear();
+                    foreach (DirTreeNode dtn in folder)
+                    {
+                        Nodes.Add(dtn);
+                    }
                 }
             }
 
@@ -327,59 +434,14 @@ namespace Photo
         protected override void OnBeforeSelect(TreeViewCancelEventArgs e)
         {
             base.OnBeforeSelect(e);
+            czy_otwiera = false;
             //MessageBox.Show("numer: " + e.Node.SelectedImageIndex);
         }
 
         protected override void OnAfterSelect(TreeViewEventArgs e)
         {
             base.OnAfterSelect(e);
-
-            if (RozpoczetoWyszukiwanie != null)
-                RozpoczetoWyszukiwanie(null);
-
-            BackgroundWorker bw = new BackgroundWorker();
-            bw.WorkerReportsProgress = true;
-            bw.DoWork += new DoWorkEventHandler(bw_DoWork);
-            bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
-            bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
-            bw.RunWorkerAsync(e.Node);
-
-            //DirTreeNode dn = new DirTreeNode("napis");            
-
-            string etykieta;
-
-            if (e.Node.Text.IndexOf("A:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
-            {
-                etykieta = DirTreeNode.Etykieta(e.Node.Text.Substring(0, 3));
-                if (etykieta != "")
-                {
-                    e.Node.Text = "A:\\" + " [" + etykieta + "]";
-                    e.Node.ImageIndex = Dyskietka_z;
-                    e.Node.SelectedImageIndex = Dyskietka_z;
-                }
-                else
-                {
-                    e.Node.Text = "A:\\" + " [Floppy]";
-                    e.Node.ImageIndex = Dyskietka;
-                    e.Node.SelectedImageIndex = Dyskietka;
-                }
-            }
-            else if (e.Node.Text.IndexOf("B:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
-            {
-                etykieta = DirTreeNode.Etykieta(e.Node.Text.Substring(0, 3));
-                if (etykieta != "")
-                {
-                    e.Node.Text = "B:\\" + " [" + etykieta + "]";
-                    e.Node.ImageIndex = Dyskietka_z;
-                    e.Node.SelectedImageIndex = Dyskietka_z;
-                }
-                else
-                {
-                    e.Node.Text = "B:\\" + " [Floppy]";
-                    e.Node.ImageIndex = Dyskietka;
-                    e.Node.SelectedImageIndex = Dyskietka;
-                }
-            }
+            //czy_otwiera = true;
         }
 
         void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -587,16 +649,15 @@ namespace Photo
         {
             List<Zdjecie> zdjecia = new List<Zdjecie>();
             List<string> pliki = new List<string>();
+            string path;
 
             try
-            {
+            {                
                 pliki.AddRange(Directory.GetFiles(Node.Path, "*.jpg"));
                 pliki.AddRange(Directory.GetFiles(Node.Path, "*.jpeg"));
                 pliki.AddRange(Directory.GetFiles(Node.Path, "*.tif"));
-                //pliki.AddRange(Directory.GetFiles(Node.Path, "*.tiff"));
-
-                //MessageBox.Show(Node.Path);
-
+            
+                
                 pliki.Sort();
 
                 for (int i = 0; i < pliki.Count; i++)
@@ -605,8 +666,6 @@ namespace Photo
                     {
                         if ((pliki[i].ToLower().LastIndexOf(".jpg") != -1 && pliki[i].ToLower().LastIndexOf(".jpg") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".jpeg") != -1 && pliki[i].ToLower().LastIndexOf(".jpeg") == (pliki[i].Length - 5)) || (pliki[i].ToLower().LastIndexOf(".tif") != -1 && pliki[i].ToLower().LastIndexOf(".tif") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".tiff") != -1 && pliki[i].ToLower().LastIndexOf(".tiff") == (pliki[i].Length - 5)))
                         {
-                            //if(pliki[i].ToLower().LastIndexOf(".tif") == (pliki[i].Length - 5))
-                              //  continue;
                             Zdjecie z = new Zdjecie(pliki[i]);
                             bw.ReportProgress(0, z);
                             zdjecia.Add(z);
@@ -614,7 +673,7 @@ namespace Photo
                     }
                     catch (ArgumentException)
                     {
-                        //MessageBox.Show("testowo: plik nie jest w poprawnym formacie ");
+                        
                         MessageBox.Show("Plik: \"" + pliki[i].Substring(pliki[i].LastIndexOf("\\") + 1) + "\" mimo poprawnego rozszezenie nie zawiera zdjêcia", pliki[i], MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
@@ -639,104 +698,33 @@ namespace Photo
         private Zdjecie[] ZnajdzPlikiWKatalogu(BackgroundWorker bw, DirTreeNode Node)
         {
             List<Zdjecie> lista = new List<Zdjecie>();
-            //lista.Add(new Zdjecie("c:\\IM000271.jpg"));
-            //lista.Add(new Zdjecie("c:\\IM000271t.jpg"));
-
-            //return lista.ToArray();
-
             List<string> katal_tab = new List<string>();
             List<Katalog> katalogi = new List<Katalog>();
 
-            if(Node.FullPath.LastIndexOf("\\") > 4)
+            if (Node.Path.Length > 4)
             {
-                //MessageBox.Show(Node.Path);
-
                 string s1 = "";
-                char[] s2 = new char[Node.Path.Length];
-
+               
                 katal_tab.AddRange(Directory.GetDirectories(Node.Path));
 
-                Node.Path.CopyTo(0,s2,0,Node.Path.LastIndexOf("\\"));
+                s1 = Node.Path.Substring(0, Node.Path.LastIndexOf("\\"));
 
-                for (int i = 0; i < s2.Length; i++)
-                {
-                    s1 += s2[i];
-                }
-
-                if (s2.Length == 2)
+                if (s1.Length == 2)
                 {
                     katalogi.Add(new Katalog(s1 + "\\", true));
                 }
                 else
                 {
                     katalogi.Add(new Katalog(s1, true));
-                }                
+                }
 
                 foreach (string t in katal_tab)
-                {                 
-                    katalogi.Add(new Katalog(t,false));
-                }
-            }
-
-
-            Db baza = new Db();
-
-            string m1 = "tagzdjecia:   ", m2 = "tag:   ", m3 = "zdjecie:   ";
-
-            baza.Polacz();
-            try
-            {
-                DataSet ds = baza.Select("select * from TagZdjecia");
-
-                foreach (DataTable t in ds.Tables)
                 {
-                    foreach (DataRow r in t.Rows)
-                    {
-                        foreach (DataColumn c in t.Columns)
-                            m1 += c.ColumnName + "=" + r[c.ColumnName] + "  !!  ";
-                        
-                    }
+                    katalogi.Add(new Katalog(t, false));
                 }
-
-                ds = baza.Select("select * from Tag");
-
-                foreach (DataTable t in ds.Tables)
-                {
-                    foreach (DataRow r in t.Rows)
-                    {
-                        foreach (DataColumn c in t.Columns)
-                            m2 += c.ColumnName + "=" + r[c.ColumnName] + "  !!  ";
-
-                    }
-                }
-
-                ds = baza.Select("select * from Zdjecie");
-
-                foreach (DataTable t in ds.Tables)
-                {
-                    foreach (DataRow r in t.Rows)
-                    {
-                        foreach (DataColumn c in t.Columns)
-                            m3 += c.ColumnName + "=" + r[c.ColumnName] + "  !!  ";
-
-                    }
-                }
-
-                //MessageBox.Show(m1);
-                //MessageBox.Show(m2);
-                //MessageBox.Show(m3);
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show(e.ToString() + e.Message);
-            }
-
-
-            baza.Rozlacz();
-
-
-            return WybierzPlikiZdjec(bw,Node);
-           
+            }      
+            
+            return WybierzPlikiZdjec(bw, Node);           
         }
 
         protected override void OnAfterExpand(TreeViewEventArgs e)
@@ -756,6 +744,8 @@ namespace Photo
                 e.Node.ImageIndex = Dyskietka_z;
                 e.Node.SelectedImageIndex = Dyskietka_z;                
             }
+
+            //czy_otwiera = false;
         }
 
         protected override void OnClick(EventArgs e)
@@ -768,6 +758,7 @@ namespace Photo
         protected override void OnNodeMouseClick(TreeNodeMouseClickEventArgs e)
         {
             base.OnNodeMouseClick(e);
+            
 
             if (e.Button == MouseButtons.Right)
             {
@@ -782,10 +773,64 @@ namespace Photo
 
                 Context.Show(this, new Point(e.X, e.Y));
             }
-            else if (e.Button == MouseButtons.Left)
+            else if (e.Button == MouseButtons.Left && czy_otwiera == false)
             {
-                MessageBox.Show("lalal");
+                //MessageBox.Show(e.Node.FullPath);
+                if (e.Node.Text != "Mój Komputer")
+                {
+
+                    if (RozpoczetoWyszukiwanie != null)
+                        RozpoczetoWyszukiwanie(null);
+
+                    BackgroundWorker bw = new BackgroundWorker();
+                    bw.WorkerReportsProgress = true;
+                    bw.DoWork += new DoWorkEventHandler(bw_DoWork);
+                    bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
+                    bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
+                    bw.RunWorkerAsync(e.Node);
+
+                    //DirTreeNode dn = new DirTreeNode("napis");            
+
+                    string etykieta;
+
+                    if (e.Node.Text.IndexOf("A:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
+                    {
+                        etykieta = DirTreeNode.Etykieta(e.Node.Text.Substring(0, 3));
+                        if (etykieta != "")
+                        {
+                            e.Node.Text = "A:\\" + " [" + etykieta + "]";
+                            e.Node.ImageIndex = Dyskietka_z;
+                            e.Node.SelectedImageIndex = Dyskietka_z;
+                        }
+                        else
+                        {
+                            e.Node.Text = "A:\\" + " [Floppy]";
+                            e.Node.ImageIndex = Dyskietka;
+                            e.Node.SelectedImageIndex = Dyskietka;
+                        }
+                    }
+                    else if (e.Node.Text.IndexOf("B:\\") == 0 && e.Node.Text.LastIndexOf("\\") < 4)
+                    {
+                        etykieta = DirTreeNode.Etykieta(e.Node.Text.Substring(0, 3));
+                        if (etykieta != "")
+                        {
+                            e.Node.Text = "B:\\" + " [" + etykieta + "]";
+                            e.Node.ImageIndex = Dyskietka_z;
+                            e.Node.SelectedImageIndex = Dyskietka_z;
+                        }
+                        else
+                        {
+                            e.Node.Text = "B:\\" + " [Floppy]";
+                            e.Node.ImageIndex = Dyskietka;
+                            e.Node.SelectedImageIndex = Dyskietka;
+                        }
+                    }
+                }
+
+                //MessageBox.Show("" + e.Node.FullPath.IndexOf("Mój Komputer"));
             }
+
+            czy_otwiera = false;
         }
 
         internal void dodaj_kolekcje_do_bazy(List<string> lista)
@@ -931,13 +976,28 @@ namespace Photo
         internal void DodajDoAlbumu(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;
-            //MessageBox.Show("Dodaje zawartosc katalogu " + mn.ToolTipText + " do kolekcji!");
-            //Dodaj_do_kolekcji ddk = new Dodaj_do_kolekcji(mn.ToolTipText);
-            //ddk.Show();
+            
             Dodaj_katalog_do_bazy ddk = new Dodaj_katalog_do_bazy(mn.ToolTipText,this);
-            ddk.Show();
-            //d_d_a(mn.ToolTipText);
-        } 
+            ddk.Show();            
+        }
+        
+        protected override void OnAfterCollapse(TreeViewEventArgs e)
+        {
+            base.OnAfterCollapse(e);
+            czy_otwiera = true;
+        }
+
+        protected override void OnBeforeCollapse(TreeViewCancelEventArgs e)
+        {
+            base.OnBeforeCollapse(e);
+            czy_otwiera = true;
+        }
+
+        protected override void OnBeforeExpand(TreeViewCancelEventArgs e)
+        {
+            base.OnBeforeExpand(e);
+            czy_otwiera = true;
+        }
 
         private void InitializeComponent()
         {

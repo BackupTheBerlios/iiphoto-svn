@@ -49,5 +49,39 @@ namespace Photo
                 this.Dispose();             
             }
         }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Keys k = (Keys)e.KeyChar;
+            if (k == Keys.Enter)
+            {
+                string nazwa;
+
+                if (textBox1.Text != "")
+                {
+                    nazwa = textBox1.Text;
+
+                    Db baza = new Db();
+
+                    baza.Polacz();
+
+                    try
+                    {
+                        baza.Insert_czesci("Tag", "nazwa,album", "\'" + nazwa + "\',0");
+
+                    }
+                    catch (SQLiteException)
+                    {
+                        MessageBox.Show("Taka Nazwa Tag juz instnieje");
+                    }
+
+                    baza.Rozlacz();
+
+                    listaAlbumow.odswiez();
+
+                    this.Dispose();
+                }
+            }
+        }
     }
 }
