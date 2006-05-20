@@ -82,6 +82,8 @@ namespace Photo
 
         public void Dodaj(IZdjecie zdjecie)
         {
+            if (zdjecie.Miniatura == null)
+                return;
             if (!((Zdjecie)zdjecie).FormatPliku.Equals("Jpeg") && !((Zdjecie)zdjecie).FormatPliku.Equals("Tiff"))
             {
                 return;

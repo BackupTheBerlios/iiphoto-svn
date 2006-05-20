@@ -43,27 +43,34 @@ namespace Photo
                     string folder = Path.Substring(0, Path.LastIndexOf('\\') + 1);
                     using (FileStream stream = new FileStream(Path, FileMode.Open, FileAccess.Read))
                     {
-                        using (Image image = Image.FromStream(stream,
-                            /* useEmbeddedColorManagement = */ true,
-                            /* validateImageData = */ false))
+                        try
                         {
-                            int scaledH, scaledW;
-                            if (image.Height > image.Width)
+                            using (Image image = Image.FromStream(stream,
+                                /* useEmbeddedColorManagement = */ true,
+                                /* validateImageData = */ false))
                             {
-                                scaledH = maxSize;
-                                scaledW = (int)Math.Round(
-                                    (double)(image.Width * scaledH) / image.Height);
+                                int scaledH, scaledW;
+                                if (image.Height > image.Width)
+                                {
+                                    scaledH = maxSize;
+                                    scaledW = (int)Math.Round(
+                                        (double)(image.Width * scaledH) / image.Height);
+                                }
+                                else
+                                {
+                                    scaledW = maxSize;
+                                    scaledH = (int)Math.Round(
+                                        (double)(image.Height * scaledW) / image.Width);
+                                }
+                                size = image.Size;
+                                format = Zdjecie.sprawdzFormatPliku(image);
+                                miniatura = (Bitmap)image.GetThumbnailImage(scaledW, scaledH, new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback), System.IntPtr.Zero);
+                                UzyjOrientacji(image);
                             }
-                            else
-                            {
-                                scaledW = maxSize;
-                                scaledH = (int)Math.Round(
-                                    (double)(image.Height * scaledW) / image.Width);
-                            }
-                            size = image.Size;
-                            format = Zdjecie.sprawdzFormatPliku(image);
-                            miniatura = (Bitmap)image.GetThumbnailImage(scaledW, scaledH, new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback), System.IntPtr.Zero);
-                            UzyjOrientacji(image);
+                        }
+                        catch (ArgumentException aex)
+                        {
+                            return null;
                         }
                     }
 
