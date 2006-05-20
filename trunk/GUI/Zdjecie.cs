@@ -65,7 +65,8 @@ namespace Photo
                                 size = image.Size;
                                 format = Zdjecie.sprawdzFormatPliku(image);
                                 miniatura = (Bitmap)image.GetThumbnailImage(scaledW, scaledH, new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback), System.IntPtr.Zero);
-                                UzyjOrientacji(image);
+                                Orientation = SprawdzOrientacje(image);
+                                UzyjOrientacji(miniatura);
                             }
                         }
                         catch (ArgumentException)
@@ -88,6 +89,7 @@ namespace Photo
                 else
                 {
                     duze = new Bitmap(Path);
+                    UzyjOrientacji(duze);
                     return duze;
                 }
             }
@@ -277,18 +279,23 @@ namespace Photo
             string path = fileName.Substring(0, fileName.LastIndexOf('\\') + 1);
             using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
             {
-                using (Image image = Image.FromStream(stream,
-                    /* useEmbeddedColorManagement = */ true,
-                    /* validateImageData = */ false))
+                try
                 {
-                    System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
-                    PropertyItem propItem = image.PropertyItems[0];
-                    propItem.Id = PropertyTags.IIPhotoTag;
-                    propItem.Type = 2;
-                    propItem.Value = encoding.GetBytes(value);
-                    propItem.Len = propItem.Value.Length;
-                    image.SetPropertyItem(propItem);
-                    image.Save(path + "img.tmp", image.RawFormat);
+                    using (Image image = Image.FromStream(stream, true, false))
+                    {
+                        System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
+                        PropertyItem propItem = image.PropertyItems[0];
+                        propItem.Id = PropertyTags.IIPhotoTag;
+                        propItem.Type = 2;
+                        propItem.Value = encoding.GetBytes(value);
+                        propItem.Len = propItem.Value.Length;
+                        image.SetPropertyItem(propItem);
+                        image.Save(path + "img.tmp", image.RawFormat);
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    return;
                 }
             }
             File.Delete(fileName);
@@ -299,68 +306,85 @@ namespace Photo
         {
             using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
             {
-                using (Image image = Image.FromStream(stream,
-                    /* useEmbeddedColorManagement = */ true,
-                    /* validateImageData = */ false))
+                try
                 {
-                    PropertyItem[] items = image.PropertyItems;
-                    foreach (PropertyItem item in items)
+                    using (Image image = Image.FromStream(stream,
+                        /* useEmbeddedColorManagement = */ true,
+                        /* validateImageData = */ false))
                     {
-                        if (item.Id == PropertyTags.IIPhotoTag)
+                        PropertyItem[] items = image.PropertyItems;
+                        foreach (PropertyItem item in items)
                         {
-                            return PropertyTags.ParseProp(item);
+                            if (item.Id == PropertyTags.IIPhotoTag)
+                            {
+                                return PropertyTags.ParseProp(item);
+                            }
                         }
+                        return "";
                     }
+                }
+                catch (ArgumentException)
+                {
                     return "";
                 }
             }
         }
 
 
-        public void UzyjOrientacji(Image i)
+        public int SprawdzOrientacje(Image srcImg)
         {
-            foreach (int id in i.PropertyIdList)
+            foreach (int id in srcImg.PropertyIdList)
             {
                 if (id == PropertyTags.Orientation)
                 {
-                    Orientation = BitConverter.ToUInt16(i.GetPropertyItem(id).Value, 0);
+                    return BitConverter.ToUInt16(srcImg.GetPropertyItem(id).Value, 0);
+                }
+            }
+            return 1;
+        }
+
+        public void UzyjOrientacji(Bitmap i)
+        {
                     switch (Orientation)
                     {
                         case 2:
-                            this.Miniatura.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                            i.RotateFlip(RotateFlipType.RotateNoneFlipY);
                             break;
                         case 3:
-                            this.Miniatura.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            i.RotateFlip(RotateFlipType.Rotate180FlipNone);
                             break;
                         case 4:
-                            this.Miniatura.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                            i.RotateFlip(RotateFlipType.RotateNoneFlipX);
                             break;
                         case 5:
-                            this.Miniatura.RotateFlip(RotateFlipType.Rotate90FlipY);
+                            i.RotateFlip(RotateFlipType.Rotate90FlipY);
                             break;
                         case 6:
-                            this.Miniatura.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                            i.RotateFlip(RotateFlipType.Rotate90FlipNone);
                             break;
                         case 7:
-                            this.Miniatura.RotateFlip(RotateFlipType.Rotate270FlipY);
+                            i.RotateFlip(RotateFlipType.Rotate270FlipY);
                             break;
                         case 8:
-                            this.Miniatura.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                            i.RotateFlip(RotateFlipType.Rotate270FlipNone);
                             break;
                     }
-                }
-            }
         }
 
         public static PropertyItem[] PobierzDaneExif(string fileName)
         {
             using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
             {
-                using (Image image = Image.FromStream(stream,
-                    /* useEmbeddedColorManagement = */ true,
-                    /* validateImageData = */ false))
+                try
                 {
-                    return image.PropertyItems;
+                    using (Image image = Image.FromStream(stream, true, false))
+                    {
+                        return image.PropertyItems;
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    return new PropertyItem[0];
                 }
             }
         }
