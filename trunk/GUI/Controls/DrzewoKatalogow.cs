@@ -38,6 +38,7 @@ namespace Photo
             GenerateImage();
             this.BackColor = Color.Beige;
             Context = new ContextMenuStrip();
+            czy_otwiera = false;
         }   
 
         public void GenerateImage()
@@ -308,7 +309,7 @@ namespace Photo
                     if (type == FOLDER && n.Length != 0)
                         setLeaf(true);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //MessageBox.Show(e.ToString() + e.Message);
                 }
@@ -629,7 +630,7 @@ namespace Photo
         {
             List<Zdjecie> zdjecia = new List<Zdjecie>();
             List<string> pliki = new List<string>();
-            string path;
+            //string path;
             string sciezka = "", nazwa_pliku = "";
 
             try
@@ -654,7 +655,7 @@ namespace Photo
 
                             //MessageBox.Show(pliki[i]);
 
-                            //string Tag = Zdjecie.ZwrocIIPhotoTag(pliki[i]);
+                            string Tag = Zdjecie.ZwrocIIPhotoTag(pliki[i]);
                             /*
                             if (!Tag.Equals(""))
                             {
@@ -735,9 +736,9 @@ namespace Photo
             if (Node.Path.Length > 4)
             {
                 string s1 = "";
-               
-                katal_tab.AddRange(Directory.GetDirectories(Node.Path));
 
+                katal_tab.AddRange(Directory.GetDirectories(Node.Path));
+                
                 s1 = Node.Path.Substring(0, Node.Path.LastIndexOf("\\"));
 
                 if (s1.Length == 2)
@@ -806,6 +807,7 @@ namespace Photo
             }
             else if (e.Button == MouseButtons.Left && czy_otwiera == false)
             {
+                Zdjecie[] zdjecia = null;
                 //MessageBox.Show(e.Node.FullPath);
                 if (e.Node.Text != "Mój Komputer")
                 {
@@ -813,8 +815,16 @@ namespace Photo
                     if (RozpoczetoWyszukiwanie != null)
                         RozpoczetoWyszukiwanie(null);
 
+                    try
+                    {
+                        zdjecia = ZnajdzPlikiWKatalogu((DirTreeNode)e.Node);
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        MessageBox.Show("Brak dostêpu do wybranego katalogu.");
+                        return;
+                    }
 
-                    Zdjecie[] zdjecia = ZnajdzPlikiWKatalogu((DirTreeNode)e.Node);
                     if (ZakonczonoWyszukiwanie != null)
                         ZakonczonoWyszukiwanie(zdjecia);
 

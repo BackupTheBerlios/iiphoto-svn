@@ -30,9 +30,15 @@ namespace Photo
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PhotoForm));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.przegladarkaZdjec = new Photo.PrzegladarkaZdjec();
             this.splitter2 = new System.Windows.Forms.Splitter();
+            this.informacjeControl1 = new Photo.InformacjeControl();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.drzewoOpakowane1 = new Photo.DrzewoOpakowane();
+            this.wyszukiwarkaControl1 = new Photo.WyszukiwarkaControl();
+            this.listaAlbumowControl = new Photo.ListaAlbumowControl();
+            this.statusStrip = new Photo.PasekStanuControl();
             this.toolStripOperacje = new System.Windows.Forms.ToolStrip();
             this.Alfa = new System.Windows.Forms.ToolStripButton();
             this.Omega = new System.Windows.Forms.ToolStripButton();
@@ -44,12 +50,6 @@ namespace Photo
             this.filtryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.przegladarkaZdjec = new Photo.PrzegladarkaZdjec();
-            this.informacjeControl1 = new Photo.InformacjeControl();
-            this.drzewoOpakowane1 = new Photo.DrzewoOpakowane();
-            this.wyszukiwarkaControl1 = new Photo.WyszukiwarkaControl();
-            this.listaAlbumowControl = new Photo.ListaAlbumowControl();
-            this.statusStrip = new Photo.PasekStanuControl();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -70,28 +70,44 @@ namespace Photo
             this.toolStripContainer1.ContentPanel.Controls.Add(this.statusStrip);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.toolStripOperacje);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.menuStrip1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(951, 620);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1014, 635);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.Size = new System.Drawing.Size(951, 645);
+            this.toolStripContainer1.Size = new System.Drawing.Size(1014, 660);
             this.toolStripContainer1.TabIndex = 3;
             this.toolStripContainer1.Text = "toolStripContainer1";
+            // 
+            // przegladarkaZdjec
+            // 
+            this.przegladarkaZdjec.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.przegladarkaZdjec.Location = new System.Drawing.Point(201, 49);
+            this.przegladarkaZdjec.Name = "przegladarkaZdjec";
+            this.przegladarkaZdjec.Size = new System.Drawing.Size(674, 564);
+            this.przegladarkaZdjec.TabIndex = 8;
             // 
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter2.Location = new System.Drawing.Point(812, 49);
+            this.splitter2.Location = new System.Drawing.Point(875, 49);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(1, 549);
+            this.splitter2.Size = new System.Drawing.Size(1, 564);
             this.splitter2.TabIndex = 7;
             this.splitter2.TabStop = false;
+            // 
+            // informacjeControl1
+            // 
+            this.informacjeControl1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.informacjeControl1.Location = new System.Drawing.Point(876, 49);
+            this.informacjeControl1.Name = "informacjeControl1";
+            this.informacjeControl1.Size = new System.Drawing.Size(138, 564);
+            this.informacjeControl1.TabIndex = 6;
             // 
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(200, 49);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(1, 549);
+            this.splitter1.Size = new System.Drawing.Size(1, 564);
             this.splitter1.TabIndex = 5;
             this.splitter1.TabStop = false;
             // 
@@ -103,8 +119,40 @@ namespace Photo
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 49);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 549);
+            this.panel1.Size = new System.Drawing.Size(200, 564);
             this.panel1.TabIndex = 4;
+            // 
+            // drzewoOpakowane1
+            // 
+            this.drzewoOpakowane1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.drzewoOpakowane1.Location = new System.Drawing.Point(0, 226);
+            this.drzewoOpakowane1.Name = "drzewoOpakowane1";
+            this.drzewoOpakowane1.Size = new System.Drawing.Size(200, 338);
+            this.drzewoOpakowane1.TabIndex = 2;
+            // 
+            // wyszukiwarkaControl1
+            // 
+            this.wyszukiwarkaControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.wyszukiwarkaControl1.Location = new System.Drawing.Point(0, 144);
+            this.wyszukiwarkaControl1.Name = "wyszukiwarkaControl1";
+            this.wyszukiwarkaControl1.Size = new System.Drawing.Size(200, 82);
+            this.wyszukiwarkaControl1.TabIndex = 1;
+            // 
+            // listaAlbumowControl
+            // 
+            this.listaAlbumowControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.listaAlbumowControl.Location = new System.Drawing.Point(0, 0);
+            this.listaAlbumowControl.Name = "listaAlbumowControl";
+            this.listaAlbumowControl.Size = new System.Drawing.Size(200, 144);
+            this.listaAlbumowControl.TabIndex = 0;
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Location = new System.Drawing.Point(0, 613);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(1014, 22);
+            this.statusStrip.TabIndex = 2;
+            this.statusStrip.Text = "statusStrip";
             // 
             // toolStripOperacje
             // 
@@ -115,7 +163,7 @@ namespace Photo
             this.toolStripOperacje.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripOperacje.Location = new System.Drawing.Point(0, 24);
             this.toolStripOperacje.Name = "toolStripOperacje";
-            this.toolStripOperacje.Size = new System.Drawing.Size(951, 25);
+            this.toolStripOperacje.Size = new System.Drawing.Size(1014, 25);
             this.toolStripOperacje.TabIndex = 1;
             this.toolStripOperacje.Text = "toolStrip1";
             // 
@@ -151,7 +199,7 @@ namespace Photo
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(951, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1014, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -198,59 +246,11 @@ namespace Photo
             this.aboutToolStripMenuItem.Text = "About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // przegladarkaZdjec
-            // 
-            this.przegladarkaZdjec.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.przegladarkaZdjec.Location = new System.Drawing.Point(201, 49);
-            this.przegladarkaZdjec.Name = "przegladarkaZdjec";
-            this.przegladarkaZdjec.Size = new System.Drawing.Size(611, 549);
-            this.przegladarkaZdjec.TabIndex = 8;
-            // 
-            // informacjeControl1
-            // 
-            this.informacjeControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.informacjeControl1.Location = new System.Drawing.Point(813, 49);
-            this.informacjeControl1.Name = "informacjeControl1";
-            this.informacjeControl1.Size = new System.Drawing.Size(138, 549);
-            this.informacjeControl1.TabIndex = 6;
-            // 
-            // drzewoOpakowane1
-            // 
-            this.drzewoOpakowane1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.drzewoOpakowane1.Location = new System.Drawing.Point(0, 226);
-            this.drzewoOpakowane1.Name = "drzewoOpakowane1";
-            this.drzewoOpakowane1.Size = new System.Drawing.Size(200, 323);
-            this.drzewoOpakowane1.TabIndex = 2;
-            // 
-            // wyszukiwarkaControl1
-            // 
-            this.wyszukiwarkaControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.wyszukiwarkaControl1.Location = new System.Drawing.Point(0, 144);
-            this.wyszukiwarkaControl1.Name = "wyszukiwarkaControl1";
-            this.wyszukiwarkaControl1.Size = new System.Drawing.Size(200, 82);
-            this.wyszukiwarkaControl1.TabIndex = 1;
-            // 
-            // listaAlbumowControl
-            // 
-            this.listaAlbumowControl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.listaAlbumowControl.Location = new System.Drawing.Point(0, 0);
-            this.listaAlbumowControl.Name = "listaAlbumowControl";
-            this.listaAlbumowControl.Size = new System.Drawing.Size(200, 144);
-            this.listaAlbumowControl.TabIndex = 0;
-            // 
-            // statusStrip
-            // 
-            this.statusStrip.Location = new System.Drawing.Point(0, 598);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(951, 22);
-            this.statusStrip.TabIndex = 2;
-            this.statusStrip.Text = "statusStrip";
-            // 
             // PhotoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(951, 645);
+            this.ClientSize = new System.Drawing.Size(1014, 660);
             this.Controls.Add(this.toolStripContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;

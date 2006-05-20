@@ -68,7 +68,7 @@ namespace Photo
                                 UzyjOrientacji(image);
                             }
                         }
-                        catch (ArgumentException aex)
+                        catch (ArgumentException)
                         {
                             return null;
                         }
@@ -303,16 +303,15 @@ namespace Photo
                     /* useEmbeddedColorManagement = */ true,
                     /* validateImageData = */ false))
                 {
-                    PropertyItem item;
-                    try
+                    PropertyItem[] items = image.PropertyItems;
+                    foreach (PropertyItem item in items)
                     {
-                        item = image.GetPropertyItem(PropertyTags.IIPhotoTag);
+                        if (item.Id == PropertyTags.IIPhotoTag)
+                        {
+                            return PropertyTags.ParseProp(item);
+                        }
                     }
-                    catch
-                    {
-                        return "";
-                    }
-                    return PropertyTags.ParseProp(item);
+                    return "";
                 }
             }
         }
