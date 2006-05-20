@@ -58,6 +58,8 @@ namespace Photo
 
             drzewoOpakowane1.fileTree1.ZakonczonoWyszukiwanie +=
                 new ZakonczonoWyszukiwanieDelegate(przegladarkaZdjec.Wypelnij);
+            drzewoOpakowane1.fileTree1.ZakonczonoWyszukiwanieKatalogow +=
+                 new ZakonczonoWyszukiwanieKatalogowDelegate(przegladarkaZdjec.DodajKatalogi);
 
             /* Delegowanie RozpoczetoWyszukiwanieDelegate.
              */

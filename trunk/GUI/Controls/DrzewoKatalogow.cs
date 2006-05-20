@@ -429,6 +429,7 @@ namespace Photo
         }
 
         public event ZakonczonoWyszukiwanieDelegate ZakonczonoWyszukiwanie;
+        public event ZakonczonoWyszukiwanieKatalogowDelegate ZakonczonoWyszukiwanieKatalogow;
         public event ZnalezionoZdjecieDelegate ZnalezionoZdjecie;
         public event RozpoczetoWyszukiwanieDelegate RozpoczetoWyszukiwanie;
 
@@ -730,31 +731,6 @@ namespace Photo
         private Zdjecie[] ZnajdzPlikiWKatalogu(DirTreeNode Node)
         {
             List<Zdjecie> lista = new List<Zdjecie>();
-            List<string> katal_tab = new List<string>();
-            List<Katalog> katalogi = new List<Katalog>();
-
-            if (Node.Path.Length > 4)
-            {
-                string s1 = "";
-
-                katal_tab.AddRange(Directory.GetDirectories(Node.Path));
-                
-                s1 = Node.Path.Substring(0, Node.Path.LastIndexOf("\\"));
-
-                if (s1.Length == 2)
-                {
-                    katalogi.Add(new Katalog(s1 + "\\", true));
-                }
-                else
-                {
-                    katalogi.Add(new Katalog(s1, true));
-                }
-
-                foreach (string t in katal_tab)
-                {
-                    katalogi.Add(new Katalog(t, false));
-                }
-            }      
             
             return WybierzPlikiZdjec(Node);           
         }
@@ -808,6 +784,7 @@ namespace Photo
             else if (e.Button == MouseButtons.Left && czy_otwiera == false)
             {
                 Zdjecie[] zdjecia = null;
+                Katalog[] katalogi = null;
                 //MessageBox.Show(e.Node.FullPath);
                 if (e.Node.Text != "Mój Komputer")
                 {
@@ -817,6 +794,7 @@ namespace Photo
 
                     try
                     {
+                        katalogi = ZnajdzKatalogiWKatalogu((DirTreeNode)e.Node);
                         zdjecia = ZnajdzPlikiWKatalogu((DirTreeNode)e.Node);
                     }
                     catch (UnauthorizedAccessException)
@@ -824,6 +802,9 @@ namespace Photo
                         MessageBox.Show("Brak dostêpu do wybranego katalogu.");
                         return;
                     }
+
+                    if (ZakonczonoWyszukiwanieKatalogow != null)
+                        ZakonczonoWyszukiwanieKatalogow(katalogi);
 
                     if (ZakonczonoWyszukiwanie != null)
                         ZakonczonoWyszukiwanie(zdjecia);
@@ -870,6 +851,36 @@ namespace Photo
             }
 
             czy_otwiera = false;
+        }
+
+        private Katalog[] ZnajdzKatalogiWKatalogu(DirTreeNode Node)
+        {
+            List<string> katal_tab = new List<string>();
+            List<Katalog> katalogi = new List<Katalog>();
+
+            if (Node.Path.Length > 4)
+            {
+                string s1 = "";
+
+                katal_tab.AddRange(Directory.GetDirectories(Node.Path));
+
+                s1 = Node.Path.Substring(0, Node.Path.LastIndexOf("\\"));
+
+                if (s1.Length == 2)
+                {
+                    katalogi.Add(new Katalog(s1 + "\\", true));
+                }
+                else
+                {
+                    katalogi.Add(new Katalog(s1, true));
+                }
+
+                foreach (string t in katal_tab)
+                {
+                    katalogi.Add(new Katalog(t, false));
+                }
+            }
+            return katalogi.ToArray();
         }
 
         internal void dodaj_kolekcje_do_bazy(List<string> lista)

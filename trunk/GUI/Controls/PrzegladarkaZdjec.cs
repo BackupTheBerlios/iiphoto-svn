@@ -148,7 +148,7 @@ namespace Photo
         {
             if (AktywneOpakowanie != Thumbnailview)
                 SetThumbnailView();
-            Thumbnailview.Oproznij();
+            //Thumbnailview.Oproznij();
             Thumbnailview.Wypelnij(zdjecia);
         }
 
@@ -188,8 +188,9 @@ namespace Photo
 
         private void widokMiniatur_selectedIndexChanged(object sender, EventArgs e)
         {
+            
             Zdjecie[] zdjecia = (Zdjecie[])((WidokMiniatur)sender).WybraneZdjecia;
-            if (zdjecia.Length == 1)
+            if (zdjecia != null & zdjecia.Length == 1)
             {
                 ZdjecieInfo info = new ZdjecieInfo(Zdjecie.PobierzDaneExif(zdjecia[0].Path), zdjecia[0].NazwaPliku, zdjecia[0].Path, new Size(zdjecia[0].Rozmiar.Width, zdjecia[0].Rozmiar.Height), zdjecia[0].FormatPliku);
                 if (ZaznaczonoZdjecie != null)
@@ -211,7 +212,7 @@ namespace Photo
         {
             if ((WidokMiniatur.listViewTag)listViewItem.Tag == WidokMiniatur.listViewTag.zdjecie)
             {
-                Zdjecie[] z = new Zdjecie[] { (Zdjecie)Thumbnailview[listViewItem.ImageIndex] };
+                Zdjecie[] z = new Zdjecie[] { (Zdjecie)Thumbnailview[listViewItem.ImageIndex - Thumbnailview.IloscKatalogow] };
                 this.widokZdjecia1.Wypelnij(z);
                 this.SetImageView();
                 if (WybranoZdjecie != null)
@@ -219,7 +220,10 @@ namespace Photo
             }
             else
             {
-                //wejdz do katalogu
+                Katalog k = Thumbnailview.Katalogi[listViewItem.ImageIndex];
+                if (WybranoKatalog != null)
+                    WybranoKatalog(k);
+                MessageBox.Show("Wybrano katalog " + k.Path);
             }
         }
 

@@ -76,6 +76,12 @@ namespace Photo
     public delegate void WybranoZdjecieDelegate(IZdjecie zdjecie);
 
     /// <summary>
+    /// Delegat informuj¹cy o wybraniu katalogu z pewnego zbioru.
+    /// </summary>
+    /// <param name="zdjecie">Wybrany obiekt.</param>
+    public delegate void WybranoKatalogDelegate(Katalog katalog);
+
+    /// <summary>
     /// Delegat informuj¹cy o zaznaczeniu zdjêcia z pewnego zbioru.
     /// </summary>
     /// <param name="zdjecie">Wybrany obiekt.</param>
@@ -253,6 +259,7 @@ namespace Photo
     /// </summary>
     /// <param name="zdjecia">Lista zdjêæ bed¹ca wynikiem wyszukiwania.</param>
     public delegate void ZakonczonoWyszukiwanieDelegate(IZdjecie[] zdjecia);
+    public delegate void ZakonczonoWyszukiwanieKatalogowDelegate(Katalog[] zdjecia);
     public delegate void RozpoczetoWyszukiwanieDelegate(IWyszukiwanie wyszukiwanie);
     public delegate void ZnalezionoZdjecieDelegate(IZdjecie zdjecie);
 

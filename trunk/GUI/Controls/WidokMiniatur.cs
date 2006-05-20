@@ -12,6 +12,7 @@ namespace Photo
     {
         private int defaultImageSize;
         private List<IZdjecie> photos = new List<IZdjecie>();
+        private Katalog[] katalogi;
         private double zoom;
         private bool Edycja;
         private Bitmap katalog;
@@ -80,6 +81,16 @@ namespace Photo
             get { return photos.Count; }
         }
 
+        public int IloscKatalogow
+        {
+            get { return katalogi.Length; }
+        }
+
+        public Katalog[] Katalogi
+        {
+            get { return katalogi; }
+        }
+
         public void Dodaj(IZdjecie zdjecie)
         {
             if (zdjecie.Miniatura == null)
@@ -136,12 +147,13 @@ namespace Photo
         {
             get
             {
-                Zdjecie[] zdjecia = new Zdjecie[SelectedItems.Count];
+                List<Zdjecie> zdjecia = new List<Zdjecie>();
                 for (int i = 0; i < SelectedItems.Count; i++)
                 {
-                    zdjecia[i] = (Zdjecie)this[SelectedItems[i].ImageIndex];
+                    if (SelectedItems[i].ImageIndex - katalogi.Length >= 0)
+                        zdjecia.Add((Zdjecie)this[SelectedItems[i].ImageIndex - katalogi.Length]);
                 }
-                return zdjecia;
+                return zdjecia.ToArray();
             }
         }
 
@@ -222,18 +234,50 @@ namespace Photo
 
         #endregion
 
-        internal void DodajKatalogi(Katalog[] katalogi)
-        {
+        internal void DodajKatalogi(Katalog[] k) {
+        
+            Oproznij();
+            katalogi = k;
+            int maxSize = Config.maxRozmiarMiniatury;
+            int posX, posY;
+            Bitmap newBitmap;
+            Graphics MyGraphics;
+            Rectangle MyRectan;
             for (int i = 0; i < katalogi.Length; i++)
             {
+                newBitmap = new Bitmap(maxSize, maxSize);
+                MyGraphics = Graphics.FromImage(newBitmap);
+
+
+                posX = (maxSize - katalog.Width) / 2;
+                posY = (maxSize - katalog.Height) / 2;
+
+                
+                using (Pen p = new Pen(Brushes.LightGray))
+                {
+                    MyGraphics.DrawRectangle(p, 0, 0, maxSize - 1, maxSize - 1);
+                }
+                
+                ListViewItem listViewItem;
                 if (katalogi[i].CzyDoGory == true)
-                    LargeImageList.Images.Add(katalog_do_gory);
+                {
+                    MyRectan = new Rectangle(posX, posY, katalog_do_gory.Width, katalog_do_gory.Height);
+                    MyGraphics.DrawImage(katalog_do_gory, MyRectan);
+                    LargeImageList.Images.Add(newBitmap);
+                    listViewItem = new ListViewItem("..");
+                }
                 else
-                    LargeImageList.Images.Add(katalog);
-                ListViewItem listViewItem = new ListViewItem(katalogi[i].Path);
+                {
+                    MyRectan = new Rectangle(posX, posY, katalog.Width, katalog.Height);
+                    MyGraphics.DrawImage(katalog, MyRectan);
+                    LargeImageList.Images.Add(newBitmap);
+                    listViewItem = new ListViewItem(katalogi[i].Path.Substring(katalogi[i].Path.LastIndexOf('\\') + 1));
+                }
                 listViewItem.ImageIndex = LargeImageList.Images.Count - 1;
+                listViewItem.Tag = WidokMiniatur.listViewTag.katalog;
                 this.Items.Add(listViewItem);
             }
+            this.Refresh();
         }
 
         class wyswietlZdjeciaThread

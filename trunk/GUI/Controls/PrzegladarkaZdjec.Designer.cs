@@ -130,6 +130,7 @@ namespace Photo
         private ContextMenuStrip Context;
 
         public event WybranoZdjecieDelegate WybranoZdjecie;
+        public event WybranoKatalogDelegate WybranoKatalog;
         public event ZaznaczonoZdjecieDelegate ZaznaczonoZdjecie;
 
     }
