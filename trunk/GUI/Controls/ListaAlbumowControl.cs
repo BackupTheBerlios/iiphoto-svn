@@ -173,32 +173,15 @@ namespace Photo
             args.Result = PokazPlikiZAlbumu(bw, Node);
         }
 
-
-
         private Zdjecie[] PokazPlikiZAlbumu(BackgroundWorker bw, TreeNode Node)
         {
             Db baza = new Db();
 
             List<string> pliki = new List<string>();
-            List<Zdjecie> lista = new List<Zdjecie>();
-
-            
-            //pliki.AddRange(Directory.GetFiles("c:\\", "*.jpg"));
+            List<Zdjecie> lista = new List<Zdjecie>();                                    
 
             Zdjecie z;
-
-            foreach (string zd in pliki)
-            {
-               
-                //MessageBox.Show(zd);
-            }
-
             
-            //lista.Add(new Zdjecie("c:\\IM000271.jpg"));
-            //lista.Add(new Zdjecie("c:\\IM000271t.jpg"));
-
-            //MessageBox.Show("c:\\IM000271.jpg");
-
             baza.Polacz();
 
             try
@@ -208,7 +191,7 @@ namespace Photo
                     //MessageBox.Show(Node.FullPath.Substring("Albumy".Length + 1, Node.FullPath.Length - ("Albumy".Length + 1)));
                     DataSet ds = baza.Select("select sciezka,nazwa_pliku from zdjecie where id_zdjecia in (select id_zdjecia from TagZdjecia where id_tagu in (select id_tagu from Tag where album=1 and nazwa=\'" + Node.FullPath.Substring("Albumy".Length + 1, Node.FullPath.Length - ("Albumy".Length + 1)) + "\'))");
 
-                    MessageBox.Show("jest git");
+                    //MessageBox.Show("jest git");
 
                     string pelna_sciezka = "";
 
@@ -217,8 +200,7 @@ namespace Photo
                         foreach (DataRow r in t.Rows)
                         {
                             pelna_sciezka = r[0] + "\\" + r[1];
-                            z = new Zdjecie(pelna_sciezka);
-                            //MessageBox.Show(z.Path);
+                            z = new Zdjecie(pelna_sciezka);                            
                             bw.ReportProgress(0, z);
                             lista.Add(z);
                         }
