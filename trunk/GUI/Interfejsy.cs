@@ -209,6 +209,12 @@ namespace Photo
         {
             get;
         }
+
+        Size Rozmiar
+        {
+            get;
+        }
+
         /// <summary>
         /// Zdarzenie informuj¹ce o modyfikacji zdjêcia.
         /// </summary>

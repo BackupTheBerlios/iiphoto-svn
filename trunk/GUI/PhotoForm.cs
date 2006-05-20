@@ -48,13 +48,16 @@ namespace Photo
 
             /* Delegowanie ZnalezionoZdjecieDelegate.
              */
-            drzewoOpakowane1.fileTree1.ZnalezionoZdjecie += 
-                new ZnalezionoZdjecieDelegate(przegladarkaZdjec.Dodaj);
+            /*drzewoOpakowane1.fileTree1.ZnalezionoZdjecie += 
+                new ZnalezionoZdjecieDelegate(przegladarkaZdjec.Dodaj);*/
 
             /* Delegowanie ZakonczonoWyszukiwanieDelegate.
              */
             drzewoOpakowane1.fileTree1.ZakonczonoWyszukiwanie +=
                 new ZakonczonoWyszukiwanieDelegate(statusStrip.ZakonczonoWyszukiwanie);
+
+            drzewoOpakowane1.fileTree1.ZakonczonoWyszukiwanie +=
+                new ZakonczonoWyszukiwanieDelegate(przegladarkaZdjec.Wypelnij);
 
             /* Delegowanie RozpoczetoWyszukiwanieDelegate.
              */

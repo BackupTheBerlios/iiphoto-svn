@@ -69,7 +69,7 @@ namespace Photo
 
         private PictureBox pictureBox1;
         private Zdjecie zdjecie;
-        private Zdjecie zdjecieZapas;
+        //private Zdjecie zdjecieZapas;
         private bool isDrag;
         private bool Edycja;
         private Point lmStartingPoint;

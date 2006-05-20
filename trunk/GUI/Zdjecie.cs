@@ -10,19 +10,20 @@ namespace Photo
     public class Zdjecie : IZdjecie, IDisposable
     {
         Bitmap miniatura;
+        Bitmap duze;
         string path;
         int Orientation;
         string format;
         public Rectangle Zaznaczenie;
+        int maxSize;
+        Size size;
 
         List<PolecenieOperacji> operacje = new List<PolecenieOperacji>();
 
         public Zdjecie(string Path)
         {
             path = Path;
-            miniatura = new Bitmap(path);
-            format = sprawdzFormatPliku();
-            UseOrientationTag();
+            maxSize = Config.maxRozmiarMiniatury;
             Zaznaczenie = new Rectangle(0,0,0,0);
         }
 
@@ -30,12 +31,44 @@ namespace Photo
         {
             set
             {
-                miniatura.Tag = this;
-                miniatura = Miniatura;
+                //miniatura.Tag = this;
+                miniatura = value;
             }
             get
             {
-                return miniatura;
+                if (miniatura != null)
+                    return miniatura;
+                else
+                {
+                    string folder = Path.Substring(0, Path.LastIndexOf('\\') + 1);
+                    using (FileStream stream = new FileStream(Path, FileMode.Open, FileAccess.Read))
+                    {
+                        using (Image image = Image.FromStream(stream,
+                            /* useEmbeddedColorManagement = */ true,
+                            /* validateImageData = */ false))
+                        {
+                            int scaledH, scaledW;
+                            if (image.Height > image.Width)
+                            {
+                                scaledH = maxSize;
+                                scaledW = (int)Math.Round(
+                                    (double)(image.Width * scaledH) / image.Height);
+                            }
+                            else
+                            {
+                                scaledW = maxSize;
+                                scaledH = (int)Math.Round(
+                                    (double)(image.Height * scaledW) / image.Width);
+                            }
+                            size = image.Size;
+                            format = Zdjecie.sprawdzFormatPliku(image);
+                            miniatura = (Bitmap)image.GetThumbnailImage(scaledW, scaledH, new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback), System.IntPtr.Zero);
+                            UzyjOrientacji(image);
+                        }
+                    }
+
+                    return miniatura;
+                }
             }
         }
 
@@ -43,11 +76,17 @@ namespace Photo
         {
             get
             {
-                return miniatura;
+                if (duze != null)
+                    return duze;
+                else
+                {
+                    duze = new Bitmap(Path);
+                    return duze;
+                }
             }
             set
             {
-                miniatura = value;
+                duze = value;
             }
         }
 
@@ -71,11 +110,19 @@ namespace Photo
             }
         }
 
-        public string sprawdzFormatPliku()
+        public Size Rozmiar
         {
-            if (this.Duze.RawFormat.Equals(ImageFormat.Jpeg))
+            get
+            {
+                return size;
+            }
+        }
+
+        public static string sprawdzFormatPliku(Image i)
+        {
+            if (i.RawFormat.Equals(ImageFormat.Jpeg))
                 return "Jpeg";
-            else if (this.Duze.RawFormat.Equals(ImageFormat.Tiff))
+            else if (i.RawFormat.Equals(ImageFormat.Tiff))
                 return "Tiff";
             else
                 return "";
@@ -85,6 +132,13 @@ namespace Photo
         {
             get
             {
+                if (format == null)
+                {
+                    if (Miniatura == null)
+                        return "Nieznany";
+                    else
+                        return format;
+                }
                 return format;
             }
         }
@@ -107,7 +161,7 @@ namespace Photo
             return Duze.GetThumbnailImage(scaledW, scaledH, new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback), System.IntPtr.Zero);
         }
 
-        public static Image stworzMiniaturke(string fileName, int maxSize)
+        public static Bitmap stworzMiniaturke(string fileName, int maxSize)
         {
             Image i;
             string path = fileName.Substring(0, fileName.LastIndexOf('\\') + 1);
@@ -133,7 +187,7 @@ namespace Photo
                     i = image.GetThumbnailImage(scaledW, scaledH, new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback), System.IntPtr.Zero);
                 }
             }
-            return i;
+            return (Bitmap)i;
         }
 
         public static bool ThumbnailCallback()
@@ -257,13 +311,13 @@ namespace Photo
         }
 
 
-        public void UseOrientationTag()
+        public void UzyjOrientacji(Image i)
         {
-            foreach (int id in miniatura.PropertyIdList)
+            foreach (int id in i.PropertyIdList)
             {
                 if (id == PropertyTags.Orientation)
                 {
-                    Orientation = BitConverter.ToUInt16(miniatura.GetPropertyItem(id).Value, 0);
+                    Orientation = BitConverter.ToUInt16(i.GetPropertyItem(id).Value, 0);
                     switch (Orientation)
                     {
                         case 2:
@@ -341,7 +395,10 @@ namespace Photo
 
         public void Dispose()
         {
-            this.miniatura.Dispose();
+            if (miniatura != null)
+                miniatura.Dispose();
+            if (duze != null)
+                duze.Dispose();
         }
 
         #endregion

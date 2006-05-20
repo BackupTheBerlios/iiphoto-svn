@@ -28,7 +28,7 @@ namespace Photo
 
         public void Zaladuj(IZdjecie zdjecie)
         {
-            ZdjecieInfo info = new ZdjecieInfo(((Zdjecie)zdjecie).PobierzDaneExif(), zdjecie.NazwaPliku, ((Zdjecie)zdjecie).Path, new Size(zdjecie.Duze.Width, zdjecie.Duze.Height), ((Zdjecie)zdjecie).FormatPliku);
+            ZdjecieInfo info = new ZdjecieInfo(((Zdjecie)zdjecie).PobierzDaneExif(), zdjecie.NazwaPliku, ((Zdjecie)zdjecie).Path, new Size(zdjecie.Rozmiar.Width, zdjecie.Rozmiar.Height), ((Zdjecie)zdjecie).FormatPliku);
             Wyswietl(info);
         }
 

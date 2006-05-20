@@ -122,9 +122,6 @@ namespace Photo
             kat_MKomputer.Text = "Mój Komputer";
             Nodes.Add(kat_MKomputer);
 
-            //this.SelectedNode = kat_MKomputer;            
-            //this.Select(true, true);
-
             //kat_MKomputer.Nodes.Clear();
 
             string[] drives = Directory.GetLogicalDrives();
@@ -147,18 +144,18 @@ namespace Photo
             DirTreeNode subnode = null;
             int i, n;
 
-            //MessageBox.Show(path);
+            MessageBox.Show(path);
 
             if(path.IndexOf("Mój Komputer") == 0)
                 path = path.ToLower().Substring("Mój Komputer".Length, path.Length - "Mój Komputer".Length);
             else
                 path = path.ToLower();
 
-            //MessageBox.Show(path);
+            MessageBox.Show(path);
 
             Nodes.Clear();
 
-            //MessageBox.Show("open");
+            MessageBox.Show("open");
 
             nodes = Nodes;
             while (nodes != null)
@@ -310,7 +307,7 @@ namespace Photo
                 }
                 catch (Exception e)
                 {
-                    //MessageBox.Show(e.ToString() + e.Message);
+                    MessageBox.Show(e.ToString() + e.Message);
                 }
             }
 
@@ -445,29 +442,6 @@ namespace Photo
         {
             base.OnAfterSelect(e);
             //czy_otwiera = true;
-        }
-
-        void bw_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            if (ZnalezionoZdjecie != null)
-                ZnalezionoZdjecie((Zdjecie)e.UserState);
-        }
-
-        void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (ZakonczonoWyszukiwanie != null)
-            {
-                ZakonczonoWyszukiwanie((IZdjecie[])e.Result);
-            }
-            
-            this.Refresh();
-        }
-
-        void bw_DoWork(object sender, DoWorkEventArgs args)
-        {
-            DirTreeNode Node = (DirTreeNode)args.Argument;
-            BackgroundWorker bw = sender as BackgroundWorker;
-            args.Result = ZnajdzPlikiWKatalogu(bw, Node);
         }
 
         internal void d_d_a(string sciezka)
@@ -648,12 +622,11 @@ namespace Photo
         }
            
 
-        private Zdjecie[] WybierzPlikiZdjec(BackgroundWorker bw, DirTreeNode Node)
+        private Zdjecie[] WybierzPlikiZdjec(DirTreeNode Node)
         {
             List<Zdjecie> zdjecia = new List<Zdjecie>();
             List<string> pliki = new List<string>();
             string path;
-            string sciezka = "", nazwa_pliku = "";
 
             try
             {                
@@ -661,7 +634,6 @@ namespace Photo
                 pliki.AddRange(Directory.GetFiles(Node.Path, "*.jpeg"));
                 pliki.AddRange(Directory.GetFiles(Node.Path, "*.tif"));
             
-                
                 pliki.Sort();
 
                 for (int i = 0; i < pliki.Count; i++)
@@ -670,61 +642,8 @@ namespace Photo
                     {
                         if ((pliki[i].ToLower().LastIndexOf(".jpg") != -1 && pliki[i].ToLower().LastIndexOf(".jpg") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".jpeg") != -1 && pliki[i].ToLower().LastIndexOf(".jpeg") == (pliki[i].Length - 5)) || (pliki[i].ToLower().LastIndexOf(".tif") != -1 && pliki[i].ToLower().LastIndexOf(".tif") == (pliki[i].Length - 4)) || (pliki[i].ToLower().LastIndexOf(".tiff") != -1 && pliki[i].ToLower().LastIndexOf(".tiff") == (pliki[i].Length - 5)))
                         {
-                            sciezka = pliki[i].Substring(0, pliki[i].LastIndexOf("\\"));
-                            if (sciezka.Length == 2)
-                                sciezka += "\\";
-
-                            nazwa_pliku = pliki[i].Substring(pliki[i].LastIndexOf("\\") + 1, pliki[i].Length - pliki[i].LastIndexOf("\\") - 1);
-
-                            //MessageBox.Show(pliki[i]);
-
-                            string Tag = Zdjecie.ZwrocIIPhotoTag(pliki[i]);
-
-                            if (!Tag.Equals(""))
-                            {
-                                //MessageBox.Show("tag: " + Tag);
-
-                                Db baza = new Db();
-                                baza.Polacz();
-                                try
-                                {
-                                    
-                                    DataSet dss = baza.Select("select id_zdjecia from zdjecie where id_zdjecia=" + Tag + " and sciezka=\'" + sciezka + "\' and nazwa_pliku=\'" + nazwa_pliku + "\'");
-                                    //MessageBox.Show("select id_zdjecia from zdjecie where id_zdjecia=" + Tag + " and sciezka=\'" + sciezka + "\' and nazwa_pliku=\'" + nazwa_pliku + "\'");
-                                    
-                                    foreach (DataTable t in dss.Tables)
-                                    {
-                                        //MessageBox.Show("t.rows.count: "+t.Rows.Count);
-                                        if (t.Rows.Count == 0)
-                                        {
-                                            //MessageBox.Show("niezgadza sie");
-                                        }
-                                        else
-                                        {
-                                            foreach (DataRow r in t.Rows)
-                                            {
-                                                if ((r[0] is DBNull))
-                                                {
-                                                    //MessageBox.Show("niezgadza sie");
-                                                }
-                                                else
-                                                {
-                                                    //MessageBox.Show("zgadza sie");
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                catch (SqlException sqlex)
-                                {
-                                    MessageBox.Show("sql" + sqlex.Message);
-                                }
-                                baza.Rozlacz();
-                            }
-                             
-                            
                             Zdjecie z = new Zdjecie(pliki[i]);
-                            bw.ReportProgress(0, z);
+                            //bw.ReportProgress(0, z);
                             zdjecia.Add(z);
                         }
                     }
@@ -752,7 +671,7 @@ namespace Photo
             return zdjecia.ToArray();
         }
 
-        private Zdjecie[] ZnajdzPlikiWKatalogu(BackgroundWorker bw, DirTreeNode Node)
+        private Zdjecie[] ZnajdzPlikiWKatalogu(DirTreeNode Node)
         {
             List<Zdjecie> lista = new List<Zdjecie>();
             List<string> katal_tab = new List<string>();
@@ -781,7 +700,7 @@ namespace Photo
                 }
             }      
             
-            return WybierzPlikiZdjec(bw, Node);           
+            return WybierzPlikiZdjec(Node);           
         }
 
         protected override void OnAfterExpand(TreeViewEventArgs e)
@@ -839,12 +758,10 @@ namespace Photo
                     if (RozpoczetoWyszukiwanie != null)
                         RozpoczetoWyszukiwanie(null);
 
-                    BackgroundWorker bw = new BackgroundWorker();
-                    bw.WorkerReportsProgress = true;
-                    bw.DoWork += new DoWorkEventHandler(bw_DoWork);
-                    bw.ProgressChanged += new ProgressChangedEventHandler(bw_ProgressChanged);
-                    bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
-                    bw.RunWorkerAsync(e.Node);
+
+                    Zdjecie[] zdjecia = ZnajdzPlikiWKatalogu((DirTreeNode)e.Node);
+                    if (ZakonczonoWyszukiwanie != null)
+                        ZakonczonoWyszukiwanie(zdjecia);
 
                     //DirTreeNode dn = new DirTreeNode("napis");            
 
@@ -967,10 +884,9 @@ namespace Photo
                         //Zdjecie z = new Zdjecie(n);
 
                         //MessageBox.Show(z.IIPhotoTag);
+                        
 
-                        string Tag = Zdjecie.ZwrocIIPhotoTag(n);
-
-                        if (Tag.Equals(""))
+                        if (Zdjecie.ZwrocIIPhotoTag(n).Equals(""))
                         {
                             MessageBox.Show("dodaje tag");
 
@@ -985,28 +901,6 @@ namespace Photo
                             {
                                 MessageBox.Show("bladsql");
                             }
-                        }
-                        else
-                        {
-                            DataSet dss = baza.Select("select id_zdjecia from zdjecie where id_zdjecia=" + Tag + " and sciezka=\'" + sciezka + "\' and nazwa_pliku=\'" + nazwa_pliku + "\'");
-
-                            foreach (DataTable t in dss.Tables)
-                            {
-                                foreach (DataRow r in t.Rows)
-                                {
-                                    if ((r[0] is DBNull))
-                                    {
-                                        MessageBox.Show("niezgadza sie");
-                                        
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("zgadza sie");
-                                        
-                                    }
-                                }
-                            }
-
                         }
 
                         

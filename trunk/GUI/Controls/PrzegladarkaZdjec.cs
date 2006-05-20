@@ -50,7 +50,7 @@ namespace Photo
             {
                 if (panele.SelectedTab == miniatury1Tab)
                 {
-                    return widokMiniatur1;
+                    return Thumbnailview;
                 }
                 else
                 {
@@ -101,8 +101,8 @@ namespace Photo
 
         public void Dodaj(IZdjecie zdjecie)
         {
-            widokMiniatur1.Dodaj(zdjecie);
-            if (AktywneOpakowanie != widokMiniatur1)
+            Thumbnailview.Dodaj(zdjecie);
+            if (AktywneOpakowanie != Thumbnailview)
                 SetThumbnailView();
         }
 
@@ -146,15 +146,17 @@ namespace Photo
 
         public void Wypelnij(IZdjecie[] zdjecia)
         {
-            this.SetThumbnailView();
-            AktywneOpakowanie.Wypelnij(zdjecia);
+            if (AktywneOpakowanie != Thumbnailview)
+                SetThumbnailView();
+            Thumbnailview.Oproznij();
+            Thumbnailview.Wypelnij(zdjecia);
         }
 
         #endregion
 
         public void DodajKatalogi(Katalog[] katalogi)
         {
-            widokMiniatur1.DodajKatalogi(katalogi);
+            Thumbnailview.DodajKatalogi(katalogi);
         }
 
         private void widokMiniatur_Click(object sender, MouseEventArgs e)
@@ -166,14 +168,14 @@ namespace Photo
                 ToolStripItem toolStripItem = Context.Items.Add("Dodaj zaznaczenie do kolekcji");
                 toolStripItem.Click += new EventHandler(DodajZaznaczenieDoKolekcji);
 
-                Context.Show(this.widokMiniatur1, new Point(e.X, e.Y));      
+                Context.Show(this.Thumbnailview, new Point(e.X, e.Y));      
             }
         }
 
         private void DodajZaznaczenieDoKolekcji(object sender, EventArgs e)
         {
             string temp = "";
-            Zdjecie[] zdjecia = (Zdjecie[])widokMiniatur1.WybraneZdjecia;
+            Zdjecie[] zdjecia = (Zdjecie[])Thumbnailview.WybraneZdjecia;
             if (zdjecia.Length != 0)
             {
                 for (int i = 0; i < zdjecia.Length; i++)
@@ -189,7 +191,7 @@ namespace Photo
             Zdjecie[] zdjecia = (Zdjecie[])((WidokMiniatur)sender).WybraneZdjecia;
             if (zdjecia.Length == 1)
             {
-                ZdjecieInfo info = new ZdjecieInfo(Zdjecie.PobierzDaneExif(zdjecia[0].Path), zdjecia[0].NazwaPliku, zdjecia[0].Path, new Size(zdjecia[0].Duze.Width, zdjecia[0].Duze.Height), zdjecia[0].FormatPliku);
+                ZdjecieInfo info = new ZdjecieInfo(Zdjecie.PobierzDaneExif(zdjecia[0].Path), zdjecia[0].NazwaPliku, zdjecia[0].Path, new Size(zdjecia[0].Rozmiar.Width, zdjecia[0].Rozmiar.Height), zdjecia[0].FormatPliku);
                 if (ZaznaczonoZdjecie != null)
                     ZaznaczonoZdjecie(info);
             }
@@ -209,7 +211,7 @@ namespace Photo
         {
             if ((WidokMiniatur.listViewTag)listViewItem.Tag == WidokMiniatur.listViewTag.zdjecie)
             {
-                Zdjecie[] z = new Zdjecie[] { (Zdjecie)widokMiniatur1[listViewItem.ImageIndex] };
+                Zdjecie[] z = new Zdjecie[] { (Zdjecie)Thumbnailview[listViewItem.ImageIndex] };
                 this.widokZdjecia1.Wypelnij(z);
                 this.SetImageView();
                 if (WybranoZdjecie != null)
@@ -257,7 +259,7 @@ namespace Photo
             {
                 Zdjecie z;
                 ListViewItem listViewItem = ((WidokMiniatur)sender).FocusedItem;
-                z = (Zdjecie)widokMiniatur1[listViewItem.ImageIndex];
+                z = (Zdjecie)Thumbnailview[listViewItem.ImageIndex];
                 try
                 {
                     Zdjecie.UstawIIPhotoTag(z.Path, "test!!!");

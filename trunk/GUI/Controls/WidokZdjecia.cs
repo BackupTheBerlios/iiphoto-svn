@@ -37,51 +37,40 @@ namespace Photo
         {
             get
             {
-                return new ZdjecieInfo(zdjecie.PobierzDaneExif(), zdjecie.NazwaPliku, zdjecie.Path, new Size(zdjecie.Duze.Width, zdjecie.Duze.Height), zdjecie.FormatPliku);
+                return new ZdjecieInfo(zdjecie.PobierzDaneExif(), zdjecie.NazwaPliku, zdjecie.Path, new Size(zdjecie.Rozmiar.Width, zdjecie.Rozmiar.Height), zdjecie.FormatPliku);
             }
         }
 
         public bool czyZaladowaneZdjecie
         {
-            get {
+            get 
+            {
                 return zdjecie != null;
-                }
-        }
-
-        private Bitmap pictureBoxImage
-        {
-            get
-            {
-                return (Bitmap)this.pictureBox1.Image;
-            }
-            set
-            {
-                this.pictureBox1.Image = value;
             }
         }
 
         private void checkImagePosition()
         {
-            if (this.pictureBoxImage != null)
+            if (this.pictureBox1.Image != null)
             {
-                if (this.Width > pictureBoxImage.Width)
+                if (this.Width > pictureBox1.Image.Width)
                 {
-                    padX = (this.Width - pictureBoxImage.Width) / 2;
+                    padX = (this.Width - pictureBox1.Image.Width) / 2;
                 }
                 else
                 {
                     padX = 0;
                 }
 
-                if (this.Height > pictureBoxImage.Height)
+                if (this.Height > pictureBox1.Image.Height)
                 {
-                    padY = (this.Height - pictureBoxImage.Height) / 2;
+                    padY = (this.Height - pictureBox1.Image.Height) / 2;
                 } else {
                     padY = 0;
                 }
                 this.pictureBox1.Padding = new Padding(padX, padY, 0, 0);
-                this.pictureBox1.Width = pictureBoxImage.Width + padX;
-                this.pictureBox1.Height = pictureBoxImage.Height + padY;
+                this.pictureBox1.Width = pictureBox1.Image.Width + padX;
+                this.pictureBox1.Height = pictureBox1.Image.Height + padY;
             }
         }
 
@@ -116,29 +105,6 @@ namespace Photo
         /*public void Zoom(double zoom) {
             this.pictureBoxImage = new Bitmap(this.rescueBitmap, (int)(rescueBitmap.Width * zoom), (int)(rescueBitmap.Height * zoom));
             this.checkImagePosition();
-        }*/
-
-        /*public void Crop()
-        {
-            if (selectedRectangle.Width != 0 && selectedRectangle.Height != 0)
-            {
-                this.DrawMyRectangle(selectedRectangle);
-                if (selectedRectangle.Width < 0)
-                {
-                    selectedRectangle.X +=  selectedRectangle.Width;
-                    selectedRectangle.Width *= -1;
-                }
-                if (selectedRectangle.Height < 0)
-                {
-                    selectedRectangle.Y += selectedRectangle.Height;
-                    selectedRectangle.Height *= -1;
-                }
-                Bitmap cropped = new Bitmap(Math.Abs(selectedRectangle.Width), Math.Abs(selectedRectangle.Height), this.pictureBoxImage.PixelFormat);
-                Graphics g = Graphics.FromImage(cropped);
-                g.DrawImage(this.pictureBoxImage, new Rectangle(0, 0, cropped.Width, cropped.Height), selectedRectangle, GraphicsUnit.Pixel);
-                g.Dispose();
-                this.setImage(cropped);
-            }
         }*/
 
         public void RysujXorZaznaczenie()
@@ -239,14 +205,14 @@ namespace Photo
 
         private void DrawMyRectangle(Rectangle r)
         {
-            this.data = this.pictureBoxImage.LockBits(new Rectangle(0, 0, this.pictureBoxImage.Width, this.pictureBoxImage.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            data = ((Bitmap)pictureBox1.Image).LockBits(new Rectangle(0, 0, this.pictureBox1.Image.Width, this.pictureBox1.Image.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             DrawMyLine(new Point(r.X, r.Y), new Point(r.X + r.Width, r.Y));
             DrawMyLine(new Point(r.X, r.Y), new Point(r.X, r.Y + r.Height));
             DrawMyLine(new Point(r.X + r.Width, r.Y), new Point(r.X + r.Width, r.Y + r.Height));
             DrawMyLine(new Point(r.X, r.Y + r.Height), new Point(r.X + r.Width, r.Y + r.Height));
             XorPixel(r.X, r.Y, Color.Gray);
             XorPixel(r.X + r.Width, r.Y + r.Height, Color.Gray);
-            this.pictureBoxImage.UnlockBits(data);
+            ((Bitmap)pictureBox1.Image).UnlockBits(data);
         }
 
         protected override void OnVisibleChanged(EventArgs e)
@@ -361,7 +327,16 @@ namespace Photo
 
         public void Oproznij()
         {
-            throw new Exception("The method or operation is not implemented.");
+            if (this.zdjecie != null)
+            {
+                this.zdjecie.Dispose();
+                this.zdjecie = null;
+            }
+            if (this.pictureBox1.Image != null)
+            {
+                this.pictureBox1.Image.Dispose();
+                this.pictureBox1.Image = null;
+            }
         }
 
         public IZdjecie[] WybraneZdjecia
@@ -411,9 +386,10 @@ namespace Photo
         {
             if (zdjecia.Length != 0)
             {
+                //this.Oproznij();
                 this.zdjecie = (Zdjecie)zdjecia[0];
-                this.zdjecieZapas = (Zdjecie)zdjecia[0];
-                this.pictureBoxImage = FitToPage();
+                //this.zdjecieZapas = (Zdjecie)zdjecia[0];
+                this.pictureBox1.Image = FitToPage();
                 this.checkImagePosition();
                 this.lmStartingPoint = new Point();
                 this.selectedRectangle = new Rectangle(0, 0, 0, 0);
