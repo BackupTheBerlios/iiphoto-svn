@@ -188,6 +188,7 @@ namespace Photo
             this.zapiszButton1.Name = "zapiszButton1";
             this.zapiszButton1.Size = new System.Drawing.Size(57, 22);
             this.zapiszButton1.Text = "&Zapisz";
+            this.zapiszButton1.Click += new System.EventHandler(this.zapiszButton1_Click);
             // 
             // zapiszAllButton
             // 

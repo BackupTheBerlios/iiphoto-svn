@@ -239,5 +239,17 @@ namespace Photo
             przegladarkaZdjec.Imageview.Zdjecie.DisposeDuze();
             przegladarkaZdjec.Imageview.Wypelnij(new IZdjecie[] { przegladarkaZdjec.Imageview.Zdjecie});
         }
+
+        private void zapiszButton1_Click(object sender, EventArgs e)
+        {
+            if (przegladarkaZdjec.AktywneOpakowanie == przegladarkaZdjec.Imageview)
+            {
+                przegladarkaZdjec.Imageview.ZapiszPlik();
+            }
+            else if (przegladarkaZdjec.AktywneOpakowanie == przegladarkaZdjec.Thumbnailview)
+            {
+                przegladarkaZdjec.Thumbnailview.ZapiszPlik();
+            }
+        }
     }
 }
