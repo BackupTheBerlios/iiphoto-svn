@@ -158,7 +158,10 @@ namespace Photo
         public void Usun()
         {
             if (tylkoDoOdczytu)
+            {
+                MessageBox.Show("Plik tylko do odczytu! Nie można usunąć.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
 
             if (MessageBox.Show("Czy napewno chcesz usunąć \"" + Path + "\"", "Potwierdzenie usunięcia pliku", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
@@ -617,8 +620,6 @@ namespace Photo
 
         public void DodajOperacje(PolecenieOperacji polecenie)
         {
-            if (tylkoDoOdczytu)
-                return;
             operacje.Add(polecenie);
         }
 
@@ -856,10 +857,24 @@ namespace Photo
 
         public void Zapisz()
         {
-            if (duze == null || czyEdytowano() == false || tylkoDoOdczytu)
+            if (duze == null || czyEdytowano() == false)
                 return;
-            Duze.Save(Path, ImageFormat.Jpeg);
-            edytowano = false;
+            if (tylkoDoOdczytu)
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "JPEG Images (*.jpg,*.jpeg)|*.jpg;*.jpeg";
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    string strImgName = sfd.FileName;
+                    if (strImgName.EndsWith("jpg") || strImgName.EndsWith("jpeg"))
+                        Duze.Save(strImgName, ImageFormat.Jpeg);
+                }
+            }
+            else
+            {
+                Duze.Save(Path, ImageFormat.Jpeg);
+                edytowano = false;
+            }
         }
 
         public void DisposeDuze() 
