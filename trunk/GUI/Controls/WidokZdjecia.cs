@@ -485,7 +485,8 @@ namespace Photo
         {
             if (zoom != z)
             {
-                DrawMyRectangle(selectedRectangle);
+                if (this.pictureBox1.Image != null)
+                    DrawMyRectangle(selectedRectangle);
                 zoom = z;
                 if (this.zdjecie != null)
                 {
