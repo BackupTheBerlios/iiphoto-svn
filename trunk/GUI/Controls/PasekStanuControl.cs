@@ -61,6 +61,7 @@ namespace Photo
             //Label Katalog
             katalogLabel = new ToolStripStatusLabel();
             katalogLabel.Spring = true;
+            katalogLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         }
     }
 }
