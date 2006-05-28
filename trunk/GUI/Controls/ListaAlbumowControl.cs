@@ -24,7 +24,6 @@ namespace Photo
         private int ilosc_zaznaczonych_albumow, ilosc_zaznaczonych_tagow;
         //private bool czy_wszystkie_tagi_ustawione = false, czy_wszystkie_albumy_ustawione = false;
         //private string albumy = "";
-        private string odnalezionyPlik;
 
         public event ZmieninoTagiDelegate ZmienionoTagi;
         public event ZmienionoZrodloDelegate ZmienionoZrodlo;
@@ -329,37 +328,38 @@ namespace Photo
 
             if (nieOdnalezione.Count > 0)
             {
-                foreach (KeyValuePair<long, string> kv in nieOdnalezione)
+                Dictionary<long, string>.Enumerator enu = nieOdnalezione.GetEnumerator();
+                KeyValuePair<long, string> kv;
+                enu.MoveNext();
+                while (true)
                 {
+                    kv = enu.Current;
                     ZnajdzPliki zp = new ZnajdzPliki(kv);
-                    zp.FormClosing += new FormClosingEventHandler(zp_FormClosing);
                     DialogResult dr = zp.ShowDialog();
                     if (dr == DialogResult.OK)
                     {
-                        Console.WriteLine(odnalezionyPlik + " OK");
-                        //Zdjecie odnalezioneZdjecie = new Zdjecie(odnalezionyPlik);
-                        /*odnalezioneZdjecie.
-                         * Tutaj trzeba cos zrobic z wyszukanym zdjeciem
-                        lista.Add(new Zdjecie(odnalezionyPlik))*/
+                        if (zp.czyOdnaleziono())
+                        {
+                            if (!enu.MoveNext())
+                                break;
+                        }
+                        Zdjecie odnalezioneZdjecie = new Zdjecie(zp.OdnalezionyPlik);
+                        odnalezioneZdjecie.ZweryfikujZdjecie();
+                        lista.Add(odnalezioneZdjecie);
                     }
                     else if (dr == DialogResult.Cancel)
                     {
-                        Console.WriteLine("CANCEL");
+                        if (!enu.MoveNext())
+                            break;
                     }
                     else if (dr == DialogResult.Abort)
                     {
-                        Console.WriteLine("ABORT");
                         break;
                     }
                 }
             }
 
             return lista;
-        }
-
-        void zp_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            odnalezionyPlik = ((ZnajdzPliki)sender).plikOdnaleziony;
         }
         
         private List<Zdjecie> PokazPlikiZAlbumu(TreeNode Node, bool czy_kilka) //czy_kilka jak true to kilka albumow sie zwraca
