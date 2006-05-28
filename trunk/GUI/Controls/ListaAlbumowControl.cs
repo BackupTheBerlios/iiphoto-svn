@@ -278,7 +278,7 @@ namespace Photo
         {
             Db baza = new Db();
 
-            List<string> nieOdnalezione = new List<string>();
+            List<Int64> nieOdnalezione = new List<Int64>();
             List<Zdjecie> lista = new List<Zdjecie>();
 
             DataSet ds = null;
@@ -290,11 +290,11 @@ namespace Photo
             {
                 if (Node.FullPath.IndexOf("Albumy") == 0 && Node.FullPath.Length > "Albumy".Length)
                 {
-                    ds = baza.Select("select sciezka,nazwa_pliku from zdjecie where id_zdjecia in (select id_zdjecia from TagZdjecia where id_tagu in (select id_tagu from Tag where album=1 and nazwa=\'" + Node.FullPath.Substring("Albumy".Length + 1, Node.FullPath.Length - ("Albumy".Length + 1)) + "\'))");
+                    ds = baza.Select("select sciezka,nazwa_pliku,id_zdjecia from zdjecie where id_zdjecia in (select id_zdjecia from TagZdjecia where id_tagu in (select id_tagu from Tag where album=1 and nazwa=\'" + Node.FullPath.Substring("Albumy".Length + 1, Node.FullPath.Length - ("Albumy".Length + 1)) + "\'))");
                 }
                 else if (Node.FullPath.IndexOf("Albumy") == 0)
                 {
-                    ds = baza.Select("select sciezka,nazwa_pliku from zdjecie where id_zdjecia in (select id_zdjecia from TagZdjecia where id_tagu in (select id_tagu from Tag where album=1))");
+                    ds = baza.Select("select sciezka,nazwa_pliku,id_zdjecia from zdjecie where id_zdjecia in (select id_zdjecia from TagZdjecia where id_tagu in (select id_tagu from Tag where album=1))");
                 }
                 pelna_sciezka = "";
 
@@ -313,7 +313,7 @@ namespace Photo
                             }
                             else
                             {
-                                nieOdnalezione.Add(pelna_sciezka);
+                                nieOdnalezione.Add((Int64)r[2]);
                             }
                         }
                     }
@@ -328,7 +328,7 @@ namespace Photo
 
             if (nieOdnalezione.Count > 0)
             {
-                foreach (string s in nieOdnalezione)
+                foreach (Int64 s in nieOdnalezione)
                 {
                     ZnajdzPliki zp = new ZnajdzPliki(s);
                     zp.FormClosing += new FormClosingEventHandler(zp_FormClosing);
