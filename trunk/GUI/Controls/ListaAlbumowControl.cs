@@ -278,7 +278,8 @@ namespace Photo
         {
             Db baza = new Db();
 
-            List<Int64> nieOdnalezione = new List<Int64>();
+            Dictionary<Int64, string> nieOdnalezione;
+            //List<Int64> nieOdnalezione = new List<Int64>();
             List<Zdjecie> lista = new List<Zdjecie>();
 
             DataSet ds = null;
@@ -313,7 +314,7 @@ namespace Photo
                             }
                             else
                             {
-                                nieOdnalezione.Add((Int64)r[2]);
+                                nieOdnalezione.Add((Int64)r[2], pelna_sciezka);                                
                             }
                         }
                     }
