@@ -283,6 +283,9 @@ namespace Photo
 
     public delegate void ZmienionoZrodloDelegate(string dir);
 
+    public delegate void ZmienionoTagiDelegate();
+    public delegate void ZmienionoIdsDelegate();
+
     /// <summary>
     /// Interfejs dla obiektu wyszukuj¹cego zdjêcia.
     /// </summary>

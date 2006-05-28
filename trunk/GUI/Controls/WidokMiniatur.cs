@@ -425,5 +425,21 @@ namespace Photo
                 }
             }
         }
+
+        public void ZresetujIds()
+        {
+            foreach (Zdjecie z in Photos)
+            {
+                z.ResetujId();
+            }
+        }
+
+        public void ZresetujTagi()
+        {
+            foreach (Zdjecie z in Photos)
+            {
+                z.ResetujTagi();
+            }
+        }
     }
 }

@@ -118,6 +118,11 @@ namespace Photo
             listaAlbumowControl.ZmienionoTagi +=
                 new ZmieninoTagiDelegate(przegladarkaZdjec.Thumbnailview.DodajTagi);
 
+            drzewoOpakowane1.fileTree1.ZmienionoIds +=
+                new ZmienionoIdsDelegate(przegladarkaZdjec.Thumbnailview.ZresetujIds);
+
+            drzewoOpakowane1.fileTree1.ZmienionoTagi +=
+                new ZmienionoTagiDelegate(przegladarkaZdjec.Thumbnailview.ZresetujTagi);
         }
 
         private void Alfa_Click(object sender, EventArgs e)

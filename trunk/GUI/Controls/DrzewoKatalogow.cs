@@ -440,6 +440,8 @@ namespace Photo
         public event ZnalezionoZdjecieDelegate ZnalezionoZdjecie;
         public event RozpoczetoWyszukiwanieDelegate RozpoczetoWyszukiwanie;
         public event ZmienionoZrodloDelegate ZmienionoZrodlo;
+        public event ZmienionoTagiDelegate ZmienionoTagi;
+        public event ZmienionoIdsDelegate ZmienionoIds;
 
         #endregion
 

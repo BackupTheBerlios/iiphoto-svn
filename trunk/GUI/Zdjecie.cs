@@ -905,5 +905,15 @@ namespace Photo
         }
 
         #endregion
+
+        public void ResetujId() 
+        {
+            Id = "brak";
+        }
+
+        public void ResetujTagi()
+        {
+            WypelnijListeTagow();
+        }
     }
 }
