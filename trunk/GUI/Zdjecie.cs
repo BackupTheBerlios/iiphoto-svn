@@ -37,7 +37,7 @@ namespace Photo
             FileInfo fi = new FileInfo(Path);
             tylkoDoOdczytu = fi.IsReadOnly;
             //ZweryfikujZdjecie();
-            //WypelnijListeTagow();
+            WypelnijListeTagow();
         }
 
         public string Id
