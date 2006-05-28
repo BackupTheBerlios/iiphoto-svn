@@ -22,7 +22,7 @@ namespace Photo
         public List<Int64> lista_tagow, lista_albumow;
         public List<string> lista_nazw_tagow, lista_nazw_albumow;
         private int ilosc_zaznaczonych_albumow, ilosc_zaznaczonych_tagow;
-        private bool czy_wszystkie_tagi_ustawione = false, czy_wszystkie_albumy_ustawione = false;
+        //private bool czy_wszystkie_tagi_ustawione = false, czy_wszystkie_albumy_ustawione = false;
 
         public event ZmieninoTagiDelegate ZmienionoTagi;
 
@@ -282,10 +282,10 @@ namespace Photo
         {
             Db baza = new Db();
 
-            List<string> pliki = new List<string>();
+            List<string> nieOdnalezione = new List<string>();
             List<Zdjecie> lista = new List<Zdjecie>();
 
-            DataSet ds;
+            DataSet ds = null;
             string pelna_sciezka;
 
             baza.Polacz();
@@ -294,43 +294,28 @@ namespace Photo
             {
                 if (Node.FullPath.IndexOf("Albumy") == 0 && Node.FullPath.Length > "Albumy".Length)
                 {
-                    //MessageBox.Show(Node.FullPath.Substring("Albumy".Length + 1, Node.FullPath.Length - ("Albumy".Length + 1)));
                     ds = baza.Select("select sciezka,nazwa_pliku from zdjecie where id_zdjecia in (select id_zdjecia from TagZdjecia where id_tagu in (select id_tagu from Tag where album=1 and nazwa=\'" + Node.FullPath.Substring("Albumy".Length + 1, Node.FullPath.Length - ("Albumy".Length + 1)) + "\'))");
-
-                    pelna_sciezka = "";
-
-                    foreach (DataTable t in ds.Tables)
-                    {
-                        foreach (DataRow r in t.Rows)
-                        {
-                            pelna_sciezka = r[0] + "\\" + r[1];
-                            
-                            if (System.IO.File.Exists(pelna_sciezka) == true)
-                            {
-                                Zdjecie z = new Zdjecie(pelna_sciezka);
-                                //z.
-                                lista.Add(z);
-                            }
-                            else
-                            {
-                                MessageBox.Show("zdjecie: " + pelna_sciezka + " nie istnieje pod podanym adresem");
-                            }                            
-                        }
-                    }
                 }
                 else if (Node.FullPath.IndexOf("Albumy") == 0)
                 {
                     ds = baza.Select("select sciezka,nazwa_pliku from zdjecie where id_zdjecia in (select id_zdjecia from TagZdjecia where id_tagu in (select id_tagu from Tag where album=1))");
+                }
+                pelna_sciezka = "";
 
-                    pelna_sciezka = "";
-
-                    foreach (DataTable t in ds.Tables)
+                foreach (DataTable t in ds.Tables)
+                {
+                    foreach (DataRow r in t.Rows)
                     {
-                        foreach (DataRow r in t.Rows)
+                        pelna_sciezka = r[0] + "\\" + r[1];
+
+                        if (System.IO.File.Exists(pelna_sciezka) == true)
                         {
-                            pelna_sciezka = r[0] + "\\" + r[1];
                             Zdjecie z = new Zdjecie(pelna_sciezka);
                             lista.Add(z);
+                        }
+                        else
+                        {
+                            nieOdnalezione.Add(pelna_sciezka);
                         }
                     }
                 }
@@ -339,10 +324,21 @@ namespace Photo
             {
                 MessageBox.Show("blad bazy");
             }
+
             baza.Rozlacz();
 
-            return lista;
+            if (nieOdnalezione.Count > 0)
+            {
+                string calosc = "";
+                foreach (string s in nieOdnalezione)
+                {
+                    calosc += s + " ";
+                }
 
+                MessageBox.Show("Nie odnaleziono: " + calosc);
+            }
+
+            return lista;
         }
 
         
