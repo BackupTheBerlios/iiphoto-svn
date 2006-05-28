@@ -40,7 +40,10 @@ namespace Photo
             ilosc_zaznaczonych_albumow = 0;
             ilosc_zaznaczonych_tagow = 0;
 
-            Wypelnij();            
+            Wypelnij();
+
+            tagi.Expand();
+            albumy.Expand();
         }
 
         private void Usun_wszystkie()

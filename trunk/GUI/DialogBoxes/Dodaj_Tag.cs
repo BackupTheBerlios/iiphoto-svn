@@ -24,7 +24,7 @@ namespace Photo
         {
             string nazwa;
 
-            if (textBox1.Text != "")
+            if (textBox1.Text != "" && textBox1.Text.Length < 100)
             {
                 nazwa = textBox1.Text;
 
@@ -60,6 +60,11 @@ namespace Photo
 
                 listaAlbumow.odswiez();
 
+                this.Dispose();
+            }
+            else
+            {
+                MessageBox.Show("Za d³uga nazwa");
                 this.Dispose();
             }
 

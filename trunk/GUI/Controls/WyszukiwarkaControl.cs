@@ -19,7 +19,7 @@ namespace Photo
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Wyszukiwanie wynik = new Wyszukiwanie();
+            /*Wyszukiwanie wynik = new Wyszukiwanie();
             if (checkBox1.Checked)
             {
                 wynik.And(wyszukiwacz_albumow.Wyszukaj());
@@ -29,6 +29,7 @@ namespace Photo
             {
                 ZakonczonoWyszukiwanie(wynik.PodajWynik(), new Katalog[0]);
             }
+             * */
         }
 
         #region Wyszukiwacz Members
