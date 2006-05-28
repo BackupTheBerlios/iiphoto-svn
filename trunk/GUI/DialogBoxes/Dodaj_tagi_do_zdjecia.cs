@@ -139,15 +139,16 @@ namespace Photo
                             baza.Delete("TagZdjecia", "id_zdjecia=" + zdjecie.Id + " and id_tagu in (select id_tagu from Tag where album = 0)");
                             listaTagowDoUstawienia = new List<Int64>();
                         }
-                        /*else
+                        else
                         {
-                            zdjecie.WypelnijListeTagow();
+                            /*zdjecie.WypelnijListeTagow();
                             if (zdjecie.CzyUstawioneId() == true)
                                 MessageBox.Show("tak: "+zdjecie.Id);
                             else
                                 MessageBox.Show("nie");
+                             */
                             listaTagowDoUstawienia = zdjecie.Tagi;
-                        }*/
+                        }
 
                         foreach (string ob in this.checkedListBox1.CheckedItems)
                         {
@@ -160,14 +161,14 @@ namespace Photo
                                     if (!(r[0] is DBNull))
                                     {
                                         baza.Insert("TagZdjecia", zdjecie.Id + "," + r[0]);
-                                        //listaTagowDoUstawienia.Add((Int64)r[0]);
+                                        listaTagowDoUstawienia.Add((Int64)r[0]);
                                         //MessageBox.Show("TagZdjecia" + zdjecie.Id + "," + r[0]);
                                     }
                                 }
                             }
                         }
-                        //zdjecie.Tagi = listaTagowDoUstawienia;
-                        zdjecie.WypelnijListeTagow();
+                        zdjecie.Tagi = listaTagowDoUstawienia;
+                        //zdjecie.WypelnijListeTagow();
                         //zdjecie.Tagi = listaTagowDoUstawienia;
                         //MessageBox.Show("zd.t.cou: " + zdjecie.Tagi.Count);
                     }
