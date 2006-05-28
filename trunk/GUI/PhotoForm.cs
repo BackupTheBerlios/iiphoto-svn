@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Photo.DialogBoxes;
+using System.Data.SQLite;
+using System.Data.SqlClient;
 
 namespace Photo
 {
@@ -261,6 +263,42 @@ namespace Photo
             else if (przegladarkaZdjec.AktywneOpakowanie == przegladarkaZdjec.Thumbnailview)
             {
                 przegladarkaZdjec.Thumbnailview.ZapiszPlik();
+            }
+        }
+
+        private void aktualizacjaBazyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Db baza = new Db();
+
+            baza.Polacz();
+
+            try
+            {
+                DataSet ds;
+                string pelna_sciezka;
+
+                ds = baza.Select("select sciezka,nazwa_pliku from Zdjecie");
+
+                foreach (DataTable t in ds.Tables)
+                {
+                    foreach (DataRow r in t.Rows)
+                    {
+                        if (!(r[0] is DBNull))
+                        {
+                            pelna_sciezka = r[0] + "\\" + r[1];
+
+                            if (System.IO.File.Exists(pelna_sciezka) == true)
+                            {
+                                Zdjecie z = new Zdjecie(pelna_sciezka);
+                                z.ZweryfikujZdjecie();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("blad bazy: " + ex.Message);
             }
         }
     }

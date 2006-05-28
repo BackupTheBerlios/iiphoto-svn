@@ -28,8 +28,9 @@ namespace Photo
             try
             {
                 string pelna_sciezka;
+                DataSet ds;
 
-                DataSet ds = baza.Select("select sciezka,nazwa_pliku from Zdjecie");
+                /*ds = baza.Select("select sciezka,nazwa_pliku from Zdjecie");
 
                 foreach (DataTable t in ds.Tables)
                 {
@@ -46,7 +47,7 @@ namespace Photo
                             }
                         }
                     }
-                }
+                }*/
 
 
                 string sql = "select sciezka,nazwa_pliku from Zdjecie where ";                                

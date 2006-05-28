@@ -59,6 +59,7 @@ namespace Photo
             this.wyszukiwarkaControl1 = new Photo.WyszukiwarkaControl();
             this.listaAlbumowControl = new Photo.ListaAlbumowControl();
             this.statusStrip = new Photo.PasekStanuControl();
+            this.aktualizacjaBazyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -226,7 +227,8 @@ namespace Photo
             // programToolStripMenuItem
             // 
             this.programToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.zakonczToolStripMenuItem});
+            this.zakonczToolStripMenuItem,
+            this.aktualizacjaBazyToolStripMenuItem});
             this.programToolStripMenuItem.Name = "programToolStripMenuItem";
             this.programToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.programToolStripMenuItem.Text = "Program";
@@ -234,7 +236,7 @@ namespace Photo
             // zakonczToolStripMenuItem
             // 
             this.zakonczToolStripMenuItem.Name = "zakonczToolStripMenuItem";
-            this.zakonczToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.zakonczToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.zakonczToolStripMenuItem.Text = "Zakoncz";
             this.zakonczToolStripMenuItem.Click += new System.EventHandler(this.zakonczToolStripMenuItem_Click);
             // 
@@ -346,6 +348,13 @@ namespace Photo
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "statusStrip";
             // 
+            // aktualizacjaBazyToolStripMenuItem
+            // 
+            this.aktualizacjaBazyToolStripMenuItem.Name = "aktualizacjaBazyToolStripMenuItem";
+            this.aktualizacjaBazyToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.aktualizacjaBazyToolStripMenuItem.Text = "Aktualizacja Bazy";
+            this.aktualizacjaBazyToolStripMenuItem.Click += new System.EventHandler(this.aktualizacjaBazyToolStripMenuItem_Click);
+            // 
             // PhotoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -401,6 +410,7 @@ namespace Photo
         private System.Windows.Forms.ToolStripButton zapiszButton1;
         private System.Windows.Forms.ToolStripMenuItem edycjaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wycofajZmianyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aktualizacjaBazyToolStripMenuItem;
 
     }
 }
