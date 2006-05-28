@@ -936,7 +936,18 @@ namespace Photo
 
         internal static void UsunZAlbumu(long id)
         {
-            throw new Exception("The method or operation is not implemented.");
+            Db baza = new Db();
+            baza.Polacz();
+            try
+            {
+                baza.Delete("TagZdjecia", "id_zdjecia=" + id + " and id_tagu in (select id_tagu from Tag where album=1)");
+
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("blad sql: " + ex.Message);
+            }
+            baza.Rozlacz();            
         }
     }
 }
