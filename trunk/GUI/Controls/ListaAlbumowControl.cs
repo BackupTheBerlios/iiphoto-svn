@@ -360,7 +360,15 @@ namespace Photo
                 }
                 else
                 {
+                    albumy_string = "Albumy: ";
 
+                    foreach (TreeNode tr in albumy.Nodes)
+                    {
+                        albumy_string += tr.FullPath.Substring("Albumy".Length + 1, tr.FullPath.Length - ("Albumy".Length + 1)) + ", ";
+                    }
+
+                    if (ZmienionoZrodlo != null)
+                        ZmienionoZrodlo(albumy_string.Substring(0, albumy_string.Length - 2));
                 }
                  
                 return ZwrocZdjeciaZAlbumu(Node);
@@ -376,17 +384,12 @@ namespace Photo
                     if (tr.Checked == true)
                     {
                         albumy_string += tr.FullPath.Substring("Albumy".Length + 1, tr.FullPath.Length - ("Albumy".Length + 1)) + ", ";
-                        lista_zdjec.AddRange(ZwrocZdjeciaZAlbumu(tr));
-                        //MessageBox.Show("dlugosc: " + lista_zdjec.Count);
+                        lista_zdjec.AddRange(ZwrocZdjeciaZAlbumu(tr));//MessageBox.Show("dlugosc: " + lista_zdjec.Count);                        
                     }
                 }
 
-                //lista_zdjec.Sort();
-                if (Node.FullPath != "Albumy")
-                {
-                    if (ZmienionoZrodlo != null)
-                        ZmienionoZrodlo(albumy_string.Substring(0, albumy_string.Length - 2));
-                }
+                if (ZmienionoZrodlo != null)
+                    ZmienionoZrodlo(albumy_string.Substring(0, albumy_string.Length - 2));
 
                 return lista_zdjec;
             }

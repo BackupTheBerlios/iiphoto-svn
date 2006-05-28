@@ -632,6 +632,12 @@ namespace Photo
                 toolStripItem = Context.Items.Add("Dodaj tagi dla katalogu " + ((DirTreeNode)e.Node).Path);
                 toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
                 toolStripItem.Click += new EventHandler(DodajTagiDlaKatalogu);
+                toolStripItem = Context.Items.Add("Usuñ tagi dla katalogu " + ((DirTreeNode)e.Node).Path);
+                toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
+                toolStripItem.Click += new EventHandler(UsunTagiDlaKatalogu);
+                toolStripItem = Context.Items.Add("Usuñ zawartoœæ katalogu " + ((DirTreeNode)e.Node).Path + " z kolekcji");
+                toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
+                toolStripItem.Click += new EventHandler(UsunZKolekcji);
 
 
                 Context.Show(this, new Point(e.X, e.Y));
@@ -1000,10 +1006,51 @@ namespace Photo
                 ZmienionoIds();
         }
 
-        
+        private void UsunTagiDlaKatalogu(object sender, EventArgs e)
+        {
+            ToolStripItem mn = (ToolStripItem)sender;
+
+            List<string> lista_stringow = Przefiltruj(mn.ToolTipText);            
+
+            foreach (string plik in lista_stringow)
+            {
+                Zdjecie z = new Zdjecie(plik);                
+                z.ZweryfikujZdjecie();
+
+                if (z.CzyUstawioneId() == true)
+                {
+                    z.UsunTagi();
+                }                
+            }
+
+            if (ZmienionoTagi != null)
+                ZmienionoTagi();
+        }
+
+        private void UsunZKolekcji(object sender, EventArgs e)
+        {
+            ToolStripItem mn = (ToolStripItem)sender;
+
+            List<string> lista_stringow = Przefiltruj(mn.ToolTipText);
+
+            foreach (string plik in lista_stringow)
+            {
+                Zdjecie z = new Zdjecie(plik);
+                z.ZweryfikujZdjecie();
+
+                if (z.CzyUstawioneId() == true)
+                {
+                    z.UsunZdjecieZBazy();
+                    z.UsunId();
+                }
+            }
+
+            if (ZmienionoIds != null)
+                ZmienionoIds();
+        }
 
         private void DodajTagiDlaKatalogu(object sender, EventArgs e)
-        {
+        {            
             ToolStripItem mn = (ToolStripItem)sender;
 
             List<string> lista_stringow = Przefiltruj(mn.ToolTipText);
