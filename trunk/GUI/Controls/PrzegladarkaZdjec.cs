@@ -138,19 +138,25 @@ namespace Photo
                     ToolStripItem toolStripItem;                
 
                     if (lista.Count == 1)
-                    {
-                        //lista[0].i
-                        //string s = lista[0].Id;
+                    {                        
                         if (lista[0].CzyUstawioneId() == false)
                         {
-                            toolStripItem = Context.Items.Add("Dodaj zaznaczenie do kolekcji");
+                            toolStripItem = Context.Items.Add("Dodaj do kolekcji");
                             toolStripItem.Click += new EventHandler(DodajZaznaczenieDoKolekcji);
                         }
                         else
                         {
                             toolStripItem = Context.Items.Add("Uaktualizuj Tagi");
                             toolStripItem.Click += new EventHandler(UaktualizujTagi);
+                            toolStripItem = Context.Items.Add("Usuñ Tagi");
+                            toolStripItem.Click += new EventHandler(UsunTagi);
+                            toolStripItem = Context.Items.Add("Usuñ z kolekcji");
+                            toolStripItem.Click += new EventHandler(UsunZKolekcji);
+                            toolStripItem = Context.Items.Add("Dodaj do Albumu");
+                            toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
                         }
+                        toolStripItem = Context.Items.Add("Usuñ zdjecie");
+                        toolStripItem.Click += new EventHandler(UsunZdjecie);
                     }
                     else
                     {
@@ -159,11 +165,16 @@ namespace Photo
                         //ewentualnie dla kilku a to pozniej
                         toolStripItem = Context.Items.Add("Dodaj Tagi");
                         toolStripItem.Click += new EventHandler(UaktualizujTagi);
-                    }
-                    toolStripItem = Context.Items.Add("Dodaj zaznaczone do Albumu");
-                    toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
-                    toolStripItem = Context.Items.Add("Usuñ zaznaczone zdjecia");
-                    toolStripItem.Click += new EventHandler(UsunZdjecie);
+                        toolStripItem = Context.Items.Add("Usuñ Tagi z zaznaczenia");
+                        toolStripItem.Click += new EventHandler(UsunTagi);
+                        toolStripItem = Context.Items.Add("Usuñ zaznaczenie z kolekcji");
+                        toolStripItem.Click += new EventHandler(UsunZKolekcji);
+                        toolStripItem = Context.Items.Add("Dodaj zaznaczone do Albumu");
+                        toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
+                        toolStripItem = Context.Items.Add("Usuñ zaznaczone zdjecia");
+                        toolStripItem.Click += new EventHandler(UsunZdjecie);
+                    }                   
+                    
 
                     Context.Show(this.Thumbnailview, new Point(e.X, e.Y));
                 }
@@ -182,6 +193,35 @@ namespace Photo
                 }
             }
             return lista;
+        }
+
+        private void UsunTagi(object sender, EventArgs e)
+        {
+            List<Zdjecie> lista = ZwrocZdjeciaZaznaczone();
+
+            foreach (Zdjecie z in lista)
+            {
+                if (z.CzyUstawioneId() == true)
+                {
+                    z.UsunTagi();
+                    z.WypelnijListeTagow();
+                }
+            }
+            this.Thumbnailview.ZresetujTagi();
+        }
+
+        private void UsunZKolekcji(object sender, EventArgs e)
+        {
+            List<Zdjecie> lista = ZwrocZdjeciaZaznaczone();
+
+            foreach (Zdjecie z in lista)
+            {
+                if (z.CzyUstawioneId() == true)
+                {                    
+                    z.UsunZdjecieZBazy();
+                    z.UsunId();
+                }
+            }
         }
         
 

@@ -138,7 +138,24 @@ namespace Photo
             }
         }
 
-        private void UsunZdjecieZBazy()
+        public void UsunTagi()
+        {
+            Db baza = new Db();
+
+            baza.Polacz();
+            try
+            {                
+                baza.Delete("TagZdjecia", "id_zdjecia = " + Id);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("blad sql" + ex.Message);
+            }
+
+            baza.Rozlacz();
+        }
+
+        public void UsunZdjecieZBazy()
         {
             Db baza = new Db();
 
@@ -382,6 +399,7 @@ namespace Photo
         {
             if(CzyUstawioneId())
             {
+                tagi.Clear();
                 Db baza = new Db();
                 baza.Polacz();
                 try
