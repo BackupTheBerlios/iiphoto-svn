@@ -25,6 +25,8 @@ namespace Photo
         public int indeks;
         bool edytowano;
         bool tylkoDoOdczytu;
+        string autor = "", komentarz = "", orientacja = "";
+        int orient = -1;
 
         List<PolecenieOperacji> operacje = new List<PolecenieOperacji>();
         List<long> tagi = new List<long>();
@@ -145,7 +147,7 @@ namespace Photo
             baza.Polacz();
             try
             {                
-                baza.Delete("TagZdjecia", "id_zdjecia = " + Id);
+                baza.Delete("TagZdjecia", "id_zdjecia = " + Id + " and id_tagu in (select id_tagu from Tag where album=0)");
             }
             catch (SqlException ex)
             {
@@ -484,25 +486,42 @@ namespace Photo
                                     //aktualizacja bazy dla this czyli sciezke i nazwe pliku                                    
                                     try
                                     {
-                                        baza.Update("Zdjecie", "sciezka=\'" + sciezka + "\', nazwa_pliku=\'" + nazwa_pliku + "\' where id_zdjecia=" + Id);
+                                        ZczytajPola();
+                                        baza.Update("Zdjecie", "sciezka=\'" + sciezka + "\', nazwa_pliku=\'" + nazwa_pliku + "\', komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
+                                        //MessageBox.Show("Update1: sciezka=\'" + sciezka + "\', nazwa_pliku=\'" + nazwa_pliku + "\', komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
                                     }
                                     catch (SqlException ex)
                                     {
                                         MessageBox.Show("blad sql: " + ex.Message);
-                                    }                                        
+                                    }
                                 }
                             }
                             else
                             {
                                 //aktualizacja bazy dla this czyli sciezke i nazwe pliku                                
                                 try
-                                {                                    
-                                    baza.Update("Zdjecie", "sciezka=\'" + sciezka + "\', nazwa_pliku=\'" + nazwa_pliku + "\' where id_zdjecia=" + Id);
+                                {
+                                    ZczytajPola();
+                                    baza.Update("Zdjecie", "sciezka=\'" + sciezka + "\', nazwa_pliku=\'" + nazwa_pliku + "\', komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
+                                    //MessageBox.Show("Update2: sciezka=\'" + sciezka + "\', nazwa_pliku=\'" + nazwa_pliku + "\', komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
                                 }
                                 catch (SqlException ex)
                                 {
                                     MessageBox.Show("blad sql: " + ex.Message);
-                                }                                    
+                                }
+                            }
+                        }
+                        else
+                        {//gdy zdjecie zgadza sie ze sciezka to robimy update komentarz, autor itd
+                            try
+                            {
+                                ZczytajPola();
+                                baza.Update("Zdjecie", "komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
+                                //MessageBox.Show("Update3: komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
+                            }
+                            catch (SqlException ex)
+                            {
+                                MessageBox.Show("blad sql: " + ex.Message);
                             }
                         }
                     }
@@ -518,6 +537,44 @@ namespace Photo
             }
             baza.Rozlacz();
         }
+
+
+        private void ZczytajPola()
+        {
+            Dictionary<string, string> tablica;
+
+            autor = "";
+            komentarz = "";            
+            orientacja = "";            
+            orient = -1;
+
+            try
+            {
+                tablica = PobierzExifDoBazy();
+
+                if (tablica.ContainsKey("autor"))
+                {
+                    autor = tablica["autor"];
+                }
+                if (tablica.ContainsKey("komentarz"))
+                {
+                    komentarz = tablica["komentarz"];
+                }                
+                if (tablica.ContainsKey("orientacja"))
+                {
+                    orientacja = tablica["orientacja"];
+                    if (orientacja == "Normal")
+                        orient = 0;
+                    else
+                        orient = 1;
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
 
         public bool DodajDoKolekcji()
         {
@@ -756,7 +813,7 @@ namespace Photo
                 {
                     return new PropertyItem[0];
                 }
-            }
+            }            
         }
         public PropertyItem[] PobierzDaneExif()
         {

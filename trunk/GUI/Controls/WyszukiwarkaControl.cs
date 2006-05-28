@@ -27,10 +27,29 @@ namespace Photo
 
             try
             {
+                string pelna_sciezka;
 
-                string sql = "select sciezka,nazwa_pliku from Zdjecie where ";
+                DataSet ds = baza.Select("select sciezka,nazwa_pliku from Zdjecie");
 
-                string pelna_sciezka;                
+                foreach (DataTable t in ds.Tables)
+                {
+                    foreach (DataRow r in t.Rows)
+                    {
+                        if (!(r[0] is DBNull))
+                        {
+                            pelna_sciezka = r[0] + "\\" + r[1];
+
+                            if (System.IO.File.Exists(pelna_sciezka) == true)
+                            {
+                                Zdjecie z = new Zdjecie(pelna_sciezka);
+                                z.ZweryfikujZdjecie();
+                            }
+                        }
+                    }
+                }
+
+
+                string sql = "select sciezka,nazwa_pliku from Zdjecie where ";                                
 
                 foreach (string s in checkedListBox1.CheckedItems)
                 {
@@ -51,7 +70,7 @@ namespace Photo
 
                 //MessageBox.Show(sql.Substring(0, sql.Length - 4));
 
-                DataSet ds = baza.Select(sql.Substring(0, sql.Length - 4));
+                ds = baza.Select(sql.Substring(0, sql.Length - 4));
 
                 foreach (DataTable t in ds.Tables)
                 {
@@ -64,7 +83,7 @@ namespace Photo
                             if (System.IO.File.Exists(pelna_sciezka) == true)
                             {
                                 Zdjecie z = new Zdjecie(pelna_sciezka);
-                                z.ZweryfikujZdjecie();
+                                //z.ZweryfikujZdjecie();
 
                                 if (z.CzyUstawioneId() == true)
                                 {
