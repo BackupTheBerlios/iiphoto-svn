@@ -314,16 +314,19 @@ namespace Photo
                 {
                     foreach (DataRow r in t.Rows)
                     {
-                        pelna_sciezka = r[0] + "\\" + r[1];
+                        if (!(r[0] is DBNull))
+                        {
+                            pelna_sciezka = r[0] + "\\" + r[1];
 
-                        if (System.IO.File.Exists(pelna_sciezka) == true)
-                        {
-                            Zdjecie z = new Zdjecie(pelna_sciezka);
-                            lista.Add(z);
-                        }
-                        else
-                        {
-                            nieOdnalezione.Add(pelna_sciezka);
+                            if (System.IO.File.Exists(pelna_sciezka) == true)
+                            {
+                                Zdjecie z = new Zdjecie(pelna_sciezka);
+                                lista.Add(z);
+                            }
+                            else
+                            {
+                                nieOdnalezione.Add(pelna_sciezka);
+                            }
                         }
                     }
                 }
