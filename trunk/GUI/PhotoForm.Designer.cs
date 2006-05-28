@@ -275,8 +275,8 @@ namespace Photo
             // programToolStripMenuItem
             // 
             this.programToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.zakonczToolStripMenuItem,
-            this.aktualizacjaBazyToolStripMenuItem});
+            this.aktualizacjaBazyToolStripMenuItem,
+            this.zakonczToolStripMenuItem});
             this.programToolStripMenuItem.Name = "programToolStripMenuItem";
             this.programToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.programToolStripMenuItem.Text = "Program";
