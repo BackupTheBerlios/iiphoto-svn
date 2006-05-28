@@ -25,23 +25,23 @@ namespace Photo
 
         public void RozpoczetoWyszukiwanie(IWyszukiwanie wyszukiwanie)
         {
-            wyszukiwanieLabel.Text = "Rozpoczêto : Wyszukiwanie.";
+            wyszukiwanieLabel.Text = "Rozpoczêto: Wyszukiwanie";
             this.Invalidate();
         }
 
         public void ZakonczonoWyszukiwanie(IZdjecie[] zdjecia, Katalog[] k)
         {
-            wyszukiwanieLabel.Text = "Zakoñczono : Wyszukiwanie.";
+            wyszukiwanieLabel.Text = "Zakoñczono: Wyszukiwanie";
         }
 
         public void RozpoczetoAkcje(string Nazwa)
         {
-            wyszukiwanieLabel.Text = "Rozpoczêto : " + Nazwa + ".";
+            wyszukiwanieLabel.Text = "Rozpoczêto: " + Nazwa;
         }
 
         public void ZakonczonoAkcje(string Nazwa)
         {
-            wyszukiwanieLabel.Text = "Zakoñcono : " + Nazwa + ".";
+            wyszukiwanieLabel.Text = "Zakoñcono: " + Nazwa;
         }
 
         public void ZmienionoZrodlo(string dir)
