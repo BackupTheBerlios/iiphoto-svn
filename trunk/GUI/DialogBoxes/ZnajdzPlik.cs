@@ -10,21 +10,22 @@ namespace Photo
 {
     public partial class ZnajdzPliki : Form
     {
-        public string plik;
+        private string plikSzukany;
+        public string plikOdnaleziony;
+        private long id;
 
-        //public MyDialogResult mdr;
-
-        public ZnajdzPliki(string s)
+        public ZnajdzPliki(KeyValuePair<long, string> kv)
         {
             InitializeComponent();
-            plik = s;
+            plikSzukany = kv.Value;
+            id = kv.Key;
             Znajdz();
         }
 
         private void Znajdz()
         {
-            textBox1.Text = plik;
-            plik = "lala";
+            textBox1.Text = plikSzukany;
+            plikOdnaleziony = "lala";
         }
 
         private void OK_Button_Click(object sender, EventArgs e)

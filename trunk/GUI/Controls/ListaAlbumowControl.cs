@@ -278,7 +278,7 @@ namespace Photo
         {
             Db baza = new Db();
 
-            Dictionary<Int64, string> nieOdnalezione;
+            Dictionary<Int64, string> nieOdnalezione = new Dictionary<long,string>();
             //List<Int64> nieOdnalezione = new List<Int64>();
             List<Zdjecie> lista = new List<Zdjecie>();
 
@@ -329,15 +329,15 @@ namespace Photo
 
             if (nieOdnalezione.Count > 0)
             {
-                foreach (Int64 s in nieOdnalezione)
+                foreach (KeyValuePair<long, string> kv in nieOdnalezione)
                 {
-                    ZnajdzPliki zp = new ZnajdzPliki(s);
+                    ZnajdzPliki zp = new ZnajdzPliki(kv);
                     zp.FormClosing += new FormClosingEventHandler(zp_FormClosing);
                     DialogResult dr = zp.ShowDialog();
                     if (dr == DialogResult.OK)
                     {
                         Console.WriteLine(odnalezionyPlik + " OK");
-                        Zdjecie odnalezioneZdjecie = new Zdjecie(odnalezionyPlik);
+                        //Zdjecie odnalezioneZdjecie = new Zdjecie(odnalezionyPlik);
                         /*odnalezioneZdjecie.
                          * Tutaj trzeba cos zrobic z wyszukanym zdjeciem
                         lista.Add(new Zdjecie(odnalezionyPlik))*/
@@ -359,7 +359,7 @@ namespace Photo
 
         void zp_FormClosing(object sender, FormClosingEventArgs e)
         {
-            odnalezionyPlik = ((ZnajdzPliki)sender).plik;
+            odnalezionyPlik = ((ZnajdzPliki)sender).plikOdnaleziony;
         }
         
         private List<Zdjecie> PokazPlikiZAlbumu(TreeNode Node, bool czy_kilka) //czy_kilka jak true to kilka albumow sie zwraca
