@@ -17,6 +17,8 @@ namespace Photo
         private List<Zdjecie> lista_zdjec;
         private int opcja = 0;
 
+        public event ZmienionoTagiDelegate ZmienionoTagi;
+
         public Dodaj_tagi_do_zdjecia(PrzegladarkaZdjec p)
         {
             InitializeComponent();

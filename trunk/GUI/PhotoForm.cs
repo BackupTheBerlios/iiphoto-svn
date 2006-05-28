@@ -123,6 +123,7 @@ namespace Photo
 
             drzewoOpakowane1.fileTree1.ZmienionoTagi +=
                 new ZmienionoTagiDelegate(przegladarkaZdjec.Thumbnailview.ZresetujTagi);
+
         }
 
         private void Alfa_Click(object sender, EventArgs e)
