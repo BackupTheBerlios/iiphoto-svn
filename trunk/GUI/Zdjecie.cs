@@ -908,7 +908,7 @@ namespace Photo
 
         public void ResetujId() 
         {
-            Id = "brak";
+            iiphotoTag = "brak";
         }
 
         public void ResetujTagi()
