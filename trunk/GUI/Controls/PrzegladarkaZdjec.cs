@@ -455,25 +455,13 @@ namespace Photo
             }
             else if (e.KeyData == Keys.R)
             {
-                IZdjecie[] zdjecia = Thumbnailview.WybraneZdjecia;
-                for (int i = 0; i < zdjecia.Length; i++)
-                {
-                    Rotate r = new Rotate(1);
-
-                    zdjecia[i].DodajOperacje(new PolecenieOperacji(r, new object[0]));
-                    zdjecia[i].WykonajOperacje();
-                }
+                Rotate r = new Rotate(1);
+                DodajOperacje(new PolecenieOperacji(r, r.PodajArgumenty().ToArray()));
             }
             else if (e.KeyData == Keys.L)
             {
-                IZdjecie[] zdjecia = Thumbnailview.WybraneZdjecia;
-                for (int i = 0; i < zdjecia.Length; i++)
-                {
-                    Rotate r = new Rotate(2);
-
-                    zdjecia[i].DodajOperacje(new PolecenieOperacji(r, new object[0]));
-                    zdjecia[i].WykonajOperacje();
-                }
+                Rotate r = new Rotate(2);
+                DodajOperacje(new PolecenieOperacji(r, r.PodajArgumenty().ToArray()));
             }
             else if (e.KeyData == (Keys.Control | Keys.F))
             {
@@ -522,12 +510,12 @@ namespace Photo
             else if (e.KeyData == Keys.R)
             {
                 Rotate r = new Rotate(1);
-                Imageview.DodajOperacje(new PolecenieOperacji(r, new object[0]));
+                this.DodajOperacje(new PolecenieOperacji(r, r.PodajArgumenty().ToArray()));
             }
             else if (e.KeyData == Keys.L)
             {
-                Rotate r = new Rotate(1);
-                Imageview.DodajOperacje(new PolecenieOperacji(r, new object[0]));
+                Rotate r = new Rotate(2);
+                this.DodajOperacje(new PolecenieOperacji(r, r.PodajArgumenty().ToArray()));
             }
         }
 
