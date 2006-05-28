@@ -340,12 +340,12 @@ namespace Photo
                     {
                         if (zp.czyOdnaleziono())
                         {
+                            Zdjecie odnalezioneZdjecie = new Zdjecie(zp.OdnalezionyPlik);
+                            odnalezioneZdjecie.ZweryfikujZdjecie();
+                            lista.Add(odnalezioneZdjecie);
                             if (!enu.MoveNext())
                                 break;
                         }
-                        Zdjecie odnalezioneZdjecie = new Zdjecie(zp.OdnalezionyPlik);
-                        odnalezioneZdjecie.ZweryfikujZdjecie();
-                        lista.Add(odnalezioneZdjecie);
                     }
                     else if (dr == DialogResult.Cancel)
                     {
