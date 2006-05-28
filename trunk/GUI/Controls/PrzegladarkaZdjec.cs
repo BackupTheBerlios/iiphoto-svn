@@ -189,7 +189,7 @@ namespace Photo
         {
             List<Zdjecie> lista = ZwrocZdjeciaZaznaczone();
 
-            Dodaj_tagi_do_zdjecia dtdz = new Dodaj_tagi_do_zdjecia(lista);
+            Dodaj_tagi_do_zdjecia dtdz = new Dodaj_tagi_do_zdjecia(lista,false);
             dtdz.Show();
         }
 
@@ -199,7 +199,7 @@ namespace Photo
 
             //if (lista.Count == 1)
             //{                
-                Dodaj_tagi_do_zdjecia dtdz = new Dodaj_tagi_do_zdjecia(lista);
+                Dodaj_tagi_do_zdjecia dtdz = new Dodaj_tagi_do_zdjecia(lista,false);
                 dtdz.Show();
             //}
         }

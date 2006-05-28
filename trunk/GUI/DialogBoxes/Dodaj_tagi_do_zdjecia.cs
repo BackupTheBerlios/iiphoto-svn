@@ -16,6 +16,7 @@ namespace Photo
         //private Zdjecie zdjecie;
         private List<Zdjecie> lista_zdjec;
         private int opcja = 0;
+        bool czy_lista_z_katalogu = false;
 
         public event ZmienionoTagiDelegate ZmienionoTagi;
 
@@ -32,7 +33,7 @@ namespace Photo
             //Wypelnij();
             //opcja = 1;
         }
-        public Dodaj_tagi_do_zdjecia(List<Zdjecie> lis_z)
+        public Dodaj_tagi_do_zdjecia(List<Zdjecie> lis_z, bool czy_katalog )
         {
             InitializeComponent();
             lista_zdjec = lis_z;
@@ -45,6 +46,7 @@ namespace Photo
             {
                 Wypelnij_dla_kilku();
             }
+            czy_lista_z_katalogu = czy_katalog;
             //opcja = 2;
         }
 
@@ -174,6 +176,12 @@ namespace Photo
                         //zdjecie.Tagi = listaTagowDoUstawienia;
                         //MessageBox.Show("zd.t.cou: " + zdjecie.Tagi.Count);
                     }
+                }
+
+                if (czy_lista_z_katalogu == true)
+                {
+                    if (ZmienionoTagi != null)
+                        ZmienionoTagi();
                 }
 
             }

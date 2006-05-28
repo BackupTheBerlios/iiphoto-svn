@@ -1016,7 +1016,7 @@ namespace Photo
                 lista_zdjec.Add(z);
             }
 
-            Dodaj_tagi_do_zdjecia dtdz = new Dodaj_tagi_do_zdjecia(lista_zdjec);
+            Dodaj_tagi_do_zdjecia dtdz = new Dodaj_tagi_do_zdjecia(lista_zdjec,true);
             dtdz.ZmienionoTagi += new ZmienionoTagiDelegate(this.ZmienionoTagi);
             dtdz.Show();           
         }
