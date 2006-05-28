@@ -995,6 +995,9 @@ namespace Photo
             ToolStripItem mn = (ToolStripItem)sender;            
             List<string> lista = Przefiltruj(mn.ToolTipText);
             dodaj_kolekcje_do_bazy(lista);
+
+            if (ZmienionoIds != null)
+                ZmienionoIds();
         }
 
         

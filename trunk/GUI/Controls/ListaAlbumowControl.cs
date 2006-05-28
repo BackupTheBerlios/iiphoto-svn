@@ -23,6 +23,7 @@ namespace Photo
         public List<string> lista_nazw_tagow, lista_nazw_albumow;
         private int ilosc_zaznaczonych_albumow, ilosc_zaznaczonych_tagow;
         //private bool czy_wszystkie_tagi_ustawione = false, czy_wszystkie_albumy_ustawione = false;
+        //private string albumy = "";
 
         public event ZmieninoTagiDelegate ZmienionoTagi;
         public event ZmienionoZrodloDelegate ZmienionoZrodlo;
@@ -223,6 +224,9 @@ namespace Photo
                         ZakonczonoWyszukiwanie(zdjecia.ToArray(), new Katalog[0]);
                     //wyswietlic pare albomow
                 }
+
+
+
             }
             else
             {
@@ -345,25 +349,45 @@ namespace Photo
         
         private List<Zdjecie> PokazPlikiZAlbumu(TreeNode Node, bool czy_kilka) //czy_kilka jak true to kilka albumow sie zwraca
         {
+            string albumy_string = "";
+
             if (czy_kilka == false)
             {
+                if (Node.FullPath != "Albumy")
+                {
+                    if (ZmienionoZrodlo != null)
+                        ZmienionoZrodlo("Album: " + Node.FullPath.Substring("Albumy".Length + 1, Node.FullPath.Length - ("Albumy".Length + 1)));
+                }
+                else
+                {
+
+                }
+                 
                 return ZwrocZdjeciaZAlbumu(Node);
             }
             else
             {
                 List<Zdjecie> lista_zdjec = new List<Zdjecie>();
 
+                albumy_string = "Albumy: ";
+
                 foreach (TreeNode tr in albumy.Nodes)
                 {
                     if (tr.Checked == true)
                     {
+                        albumy_string += tr.FullPath.Substring("Albumy".Length + 1, tr.FullPath.Length - ("Albumy".Length + 1)) + ", ";
                         lista_zdjec.AddRange(ZwrocZdjeciaZAlbumu(tr));
                         //MessageBox.Show("dlugosc: " + lista_zdjec.Count);
                     }
                 }
 
                 //lista_zdjec.Sort();
-                
+                if (Node.FullPath != "Albumy")
+                {
+                    if (ZmienionoZrodlo != null)
+                        ZmienionoZrodlo(albumy_string.Substring(0, albumy_string.Length - 2));
+                }
+
                 return lista_zdjec;
             }
         }
