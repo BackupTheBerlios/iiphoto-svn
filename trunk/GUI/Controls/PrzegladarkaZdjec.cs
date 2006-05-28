@@ -131,41 +131,42 @@ namespace Photo
         {
             if (e.Button == MouseButtons.Right)
             {
-                Context.Items.Clear();
-
-                ToolStripItem toolStripItem;
-
                 List<Zdjecie> lista = ZwrocZdjeciaZaznaczone();
-
-                if (lista.Count == 1)
+                if (lista.Count != 0)
                 {
-                    //lista[0].i
-                    //string s = lista[0].Id;
-                    if (lista[0].CzyUstawioneId() == false)
+                    Context.Items.Clear();
+                    ToolStripItem toolStripItem;                
+
+                    if (lista.Count == 1)
                     {
-                        toolStripItem = Context.Items.Add("Dodaj zaznaczenie do kolekcji");
-                        toolStripItem.Click += new EventHandler(DodajZaznaczenieDoKolekcji);
+                        //lista[0].i
+                        //string s = lista[0].Id;
+                        if (lista[0].CzyUstawioneId() == false)
+                        {
+                            toolStripItem = Context.Items.Add("Dodaj zaznaczenie do kolekcji");
+                            toolStripItem.Click += new EventHandler(DodajZaznaczenieDoKolekcji);
+                        }
+                        else
+                        {
+                            toolStripItem = Context.Items.Add("Uaktualizuj Tagi");
+                            toolStripItem.Click += new EventHandler(UaktualizujTagi);
+                        }
                     }
                     else
                     {
-                        toolStripItem = Context.Items.Add("Uaktualizuj Tagi");
+                        toolStripItem = Context.Items.Add("Dodaj zaznaczenie do kolekcji");
+                        toolStripItem.Click += new EventHandler(DodajZaznaczenieDoKolekcji);
+                        //ewentualnie dla kilku a to pozniej
+                        toolStripItem = Context.Items.Add("Dodaj Tagi");
                         toolStripItem.Click += new EventHandler(UaktualizujTagi);
                     }
-                }
-                else
-                {
-                    toolStripItem = Context.Items.Add("Dodaj zaznaczenie do kolekcji");
-                    toolStripItem.Click += new EventHandler(DodajZaznaczenieDoKolekcji);
-                    //ewentualnie dla kilku a to pozniej
-                    toolStripItem = Context.Items.Add("Dodaj Tagi");
-                    toolStripItem.Click += new EventHandler(UaktualizujTagi);
-                }                
-                toolStripItem = Context.Items.Add("Dodaj zaznaczone do Albumu");
-                toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
-                toolStripItem = Context.Items.Add("Usuñ zaznaczone zdjecia");
-                toolStripItem.Click += new EventHandler(UsunZdjecie);
+                    toolStripItem = Context.Items.Add("Dodaj zaznaczone do Albumu");
+                    toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
+                    toolStripItem = Context.Items.Add("Usuñ zaznaczone zdjecia");
+                    toolStripItem.Click += new EventHandler(UsunZdjecie);
 
-                Context.Show(this.Thumbnailview, new Point(e.X, e.Y));
+                    Context.Show(this.Thumbnailview, new Point(e.X, e.Y));
+                }
             }
         }
 
