@@ -236,7 +236,7 @@ namespace Photo
                 using (SQLiteCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = "update " + tableName + " set " + parameters + " ;";
-                    Console.WriteLine(cmd.CommandText);
+                    //Console.WriteLine(cmd.CommandText);
                     cmd.ExecuteNonQuery();
 
                     dbTrans.Commit();
