@@ -86,12 +86,16 @@ namespace Photo
             {
                 textBox2.Text = folderBrowserDialog1.SelectedPath;
             }
-
         }
 
         internal bool czyOdnaleziono()
         {
             return (plikOdnaleziony != null);
+        }
+
+        private void Usun_Click(object sender, EventArgs e)
+        {
+            Zdjecie.UsunZAlbumu(id);
         }
     }
 }

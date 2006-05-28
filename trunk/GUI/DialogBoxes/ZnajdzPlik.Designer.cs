@@ -35,13 +35,14 @@ namespace Photo
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.button1 = new System.Windows.Forms.Button();
+            this.Usun = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OK_Button
             // 
             this.OK_Button.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.OK_Button.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OK_Button.Location = new System.Drawing.Point(121, 133);
+            this.OK_Button.Location = new System.Drawing.Point(81, 133);
             this.OK_Button.Name = "OK_Button";
             this.OK_Button.Size = new System.Drawing.Size(75, 23);
             this.OK_Button.TabIndex = 0;
@@ -53,7 +54,7 @@ namespace Photo
             // 
             this.Pomin_Button.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Pomin_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Pomin_Button.Location = new System.Drawing.Point(202, 133);
+            this.Pomin_Button.Location = new System.Drawing.Point(162, 133);
             this.Pomin_Button.Name = "Pomin_Button";
             this.Pomin_Button.Size = new System.Drawing.Size(75, 23);
             this.Pomin_Button.TabIndex = 1;
@@ -65,7 +66,7 @@ namespace Photo
             // 
             this.PominAll_Button.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.PominAll_Button.DialogResult = System.Windows.Forms.DialogResult.Abort;
-            this.PominAll_Button.Location = new System.Drawing.Point(283, 133);
+            this.PominAll_Button.Location = new System.Drawing.Point(243, 133);
             this.PominAll_Button.Name = "PominAll_Button";
             this.PominAll_Button.Size = new System.Drawing.Size(106, 23);
             this.PominAll_Button.TabIndex = 2;
@@ -106,6 +107,18 @@ namespace Photo
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // Usun
+            // 
+            this.Usun.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.Usun.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.Usun.Location = new System.Drawing.Point(355, 133);
+            this.Usun.Name = "Usun";
+            this.Usun.Size = new System.Drawing.Size(75, 23);
+            this.Usun.TabIndex = 6;
+            this.Usun.Text = "Usuñ";
+            this.Usun.UseVisualStyleBackColor = true;
+            this.Usun.Click += new System.EventHandler(this.Usun_Click);
+            // 
             // ZnajdzPliki
             // 
             this.AcceptButton = this.OK_Button;
@@ -113,6 +126,7 @@ namespace Photo
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(511, 168);
+            this.Controls.Add(this.Usun);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
@@ -136,5 +150,6 @@ namespace Photo
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Usun;
     }
 }

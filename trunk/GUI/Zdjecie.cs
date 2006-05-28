@@ -933,5 +933,10 @@ namespace Photo
         {
             WypelnijListeTagow();
         }
+
+        internal static void UsunZAlbumu(long id)
+        {
+            throw new Exception("The method or operation is not implemented.");
+        }
     }
 }
