@@ -657,7 +657,7 @@ namespace Photo
             }
         }
 
-        private void AktualizujMiniature()
+        public void AktualizujMiniature()
         {
             Miniatura = stworzMiniaturke(Config.RozmiarMiniatury);
         }
@@ -700,73 +700,6 @@ namespace Photo
         #endregion
 
         #region Meta
-
- /*       public void UstawIIPhotoProperty(string value)
-        {
-            System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
-            PropertyItem propItem = miniatura.PropertyItems[0];
-            propItem.Id = PropertyTags.IIPhotoTag;
-            propItem.Type = 2;
-            propItem.Value = encoding.GetBytes(value);
-            propItem.Len = propItem.Value.Length;
-            miniatura.SetPropertyItem(propItem);
-        }*/
-
-        /*public string IIPhotoTag
-        {
-            get
-            {
-                PropertyItem item;
-                try
-                
-                {
-                    item = Duze.GetPropertyItem(PropertyTags.IIPhotoTag);
-                }
-                catch
-                {
-                    return "";
-                }
-                return PropertyTags.ParseProp(item);
-            }
-            set
-            {
-                System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
-                PropertyItem propItem = Duze.PropertyItems[0];
-                propItem.Id = PropertyTags.IIPhotoTag;
-                propItem.Type = 2;
-                propItem.Value = encoding.GetBytes(value);
-                propItem.Len = propItem.Value.Length;
-                Duze.SetPropertyItem(propItem);
-            }
-        }*/
-
-        /*private void UstawIIPhotoTag(string fileName, string value)
-        {
-            string path = fileName.Substring(0, fileName.LastIndexOf('\\') + 1);
-            using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
-            {
-                try
-                {
-                    using (Image image = Image.FromStream(stream, true, false))
-                    {
-                        System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
-                        PropertyItem propItem = image.PropertyItems[0];
-                        propItem.Id = PropertyTags.IIPhotoTag;
-                        propItem.Type = 2;
-                        propItem.Value = encoding.GetBytes(value);
-                        propItem.Len = propItem.Value.Length;
-                        image.SetPropertyItem(propItem);
-                        image.Save(path + "img.tmp", image.RawFormat);
-                    }
-                }
-                catch (ArgumentException)
-                {
-                    return;
-                }
-            }
-            File.Delete(fileName);
-            File.Move(path + "img.tmp", fileName);
-        }*/
 
         public int SprawdzOrientacje(Image srcImg)
         {
