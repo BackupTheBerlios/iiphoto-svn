@@ -9,33 +9,58 @@ namespace Photo
 
     class PasekStanuControl : StatusStrip
     {
-        private ToolStripStatusLabel Label = new ToolStripStatusLabel();
+        private ToolStripStatusLabel wyszukiwanieLabel;
+        private ToolStripStatusLabel katalogLabel;
+        private ToolStripSeparator sep;
 
         public PasekStanuControl() :
             base()
         {
-            this.Items.Add(Label);
+            InitializeComponent();
+
+            this.Items.Add(wyszukiwanieLabel);
+            this.Items.Add(sep);
+            this.Items.Add(katalogLabel);
         }
 
         public void RozpoczetoWyszukiwanie(IWyszukiwanie wyszukiwanie)
         {
-            Label.Text = "Rozpoczêto : Wyszukiwanie.";
+            wyszukiwanieLabel.Text = "Rozpoczêto : Wyszukiwanie.";
             this.Invalidate();
         }
 
         public void ZakonczonoWyszukiwanie(IZdjecie[] zdjecia, Katalog[] k)
         {
-            Label.Text = "Zakoñczono : Wyszukiwanie.";
+            wyszukiwanieLabel.Text = "Zakoñczono : Wyszukiwanie.";
         }
 
         public void RozpoczetoAkcje(string Nazwa)
         {
-            Label.Text = "Rozpoczêto : " + Nazwa + ".";
+            wyszukiwanieLabel.Text = "Rozpoczêto : " + Nazwa + ".";
         }
 
         public void ZakonczonoAkcje(string Nazwa)
         {
-            Label.Text = "Zakoñcono : " + Nazwa + ".";
+            wyszukiwanieLabel.Text = "Zakoñcono : " + Nazwa + ".";
+        }
+
+        public void ZmienionoZrodlo(string dir)
+        {
+            katalogLabel.Text = dir;
+        }
+
+        private void InitializeComponent()
+        {
+            //Label Wyszukiwanie
+            wyszukiwanieLabel = new ToolStripStatusLabel();
+            wyszukiwanieLabel.Text = "Aplikacja uruchomiona";
+
+            //Separator
+            sep = new ToolStripSeparator();
+
+            //Label Katalog
+            katalogLabel = new ToolStripStatusLabel();
+            katalogLabel.Spring = true;
         }
     }
 }

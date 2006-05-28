@@ -92,7 +92,7 @@ namespace Photo
             this.przegladarkaZdjec.Dock = System.Windows.Forms.DockStyle.Fill;
             this.przegladarkaZdjec.Location = new System.Drawing.Point(201, 49);
             this.przegladarkaZdjec.Name = "przegladarkaZdjec";
-            this.przegladarkaZdjec.Size = new System.Drawing.Size(684, 564);
+            this.przegladarkaZdjec.Size = new System.Drawing.Size(684, 563);
             this.przegladarkaZdjec.TabIndex = 8;
             // 
             // splitter2
@@ -100,7 +100,7 @@ namespace Photo
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitter2.Location = new System.Drawing.Point(885, 49);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(1, 564);
+            this.splitter2.Size = new System.Drawing.Size(1, 563);
             this.splitter2.TabIndex = 7;
             this.splitter2.TabStop = false;
             // 
@@ -109,14 +109,14 @@ namespace Photo
             this.informacjeControl1.Dock = System.Windows.Forms.DockStyle.Right;
             this.informacjeControl1.Location = new System.Drawing.Point(886, 49);
             this.informacjeControl1.Name = "informacjeControl1";
-            this.informacjeControl1.Size = new System.Drawing.Size(138, 564);
+            this.informacjeControl1.Size = new System.Drawing.Size(138, 563);
             this.informacjeControl1.TabIndex = 6;
             // 
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(200, 49);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(1, 564);
+            this.splitter1.Size = new System.Drawing.Size(1, 563);
             this.splitter1.TabIndex = 5;
             this.splitter1.TabStop = false;
             // 
@@ -128,7 +128,7 @@ namespace Photo
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 49);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 564);
+            this.panel1.Size = new System.Drawing.Size(200, 563);
             this.panel1.TabIndex = 4;
             // 
             // drzewoOpakowane1
@@ -136,7 +136,7 @@ namespace Photo
             this.drzewoOpakowane1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.drzewoOpakowane1.Location = new System.Drawing.Point(0, 226);
             this.drzewoOpakowane1.Name = "drzewoOpakowane1";
-            this.drzewoOpakowane1.Size = new System.Drawing.Size(200, 338);
+            this.drzewoOpakowane1.Size = new System.Drawing.Size(200, 337);
             this.drzewoOpakowane1.TabIndex = 2;
             // 
             // wyszukiwarkaControl1
@@ -157,9 +157,9 @@ namespace Photo
             // 
             // statusStrip
             // 
-            this.statusStrip.Location = new System.Drawing.Point(0, 613);
+            this.statusStrip.Location = new System.Drawing.Point(0, 612);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(1024, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1024, 23);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "statusStrip";
             // 

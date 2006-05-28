@@ -439,6 +439,7 @@ namespace Photo
         public event ZakonczonoWyszukiwanieDelegate ZakonczonoWyszukiwanie;
         public event ZnalezionoZdjecieDelegate ZnalezionoZdjecie;
         public event RozpoczetoWyszukiwanieDelegate RozpoczetoWyszukiwanie;
+        public event ZmienionoZrodloDelegate ZmienionoZrodlo;
 
         #endregion
 
@@ -584,8 +585,10 @@ namespace Photo
         private void PowiadomOZawartosciKatalogu(DirTreeNode zap)
         {
             List<Zdjecie> zdjecia = new List<Zdjecie>();
-            List<Katalog> katalogi = new List<Katalog>(); 
-            
+            List<Katalog> katalogi = new List<Katalog>();
+
+            if (ZmienionoZrodlo != null)
+                ZmienionoZrodlo(zap.Path);
 
             if (RozpoczetoWyszukiwanie != null)
                 RozpoczetoWyszukiwanie(null);

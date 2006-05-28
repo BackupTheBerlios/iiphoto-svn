@@ -47,6 +47,9 @@ namespace Photo
             drzewoOpakowane1.fileTree1.RozpoczetoWyszukiwanie +=
                 new RozpoczetoWyszukiwanieDelegate(statusStrip.RozpoczetoWyszukiwanie);
 
+            drzewoOpakowane1.fileTree1.ZmienionoZrodlo +=
+                new ZmienionoZrodloDelegate(statusStrip.ZmienionoZrodlo);
+
             /* Delegowanie ZnalezionoZdjecieDelegate.
              */
             /*drzewoOpakowane1.fileTree1.ZnalezionoZdjecie += 
