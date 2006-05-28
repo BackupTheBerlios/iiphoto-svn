@@ -139,6 +139,8 @@ namespace Photo
 
                 if (lista.Count == 1)
                 {
+                    //lista[0].i
+                    //string s = lista[0].Id;
                     if (lista[0].CzyUstawioneId() == false)
                     {
                         toolStripItem = Context.Items.Add("Dodaj zaznaczenie do kolekcji");

@@ -33,10 +33,11 @@ namespace Photo
         {
             path = Path;
             Zaznaczenie = new Rectangle(0,0,0,0);
-            iiphotoTag = "brak";
-            WypelnijListeTagow();
+            iiphotoTag = "brak";            
             FileInfo fi = new FileInfo(Path);
             tylkoDoOdczytu = fi.IsReadOnly;
+            //ZweryfikujZdjecie();
+            //WypelnijListeTagow();
         }
 
         public string Id

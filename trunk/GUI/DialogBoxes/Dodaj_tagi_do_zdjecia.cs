@@ -36,6 +36,7 @@ namespace Photo
             lista_zdjec = lis_z;
             if (lista_zdjec.Count == 1)
             {
+                lista_zdjec[0].WypelnijListeTagow();
                 Wypelnij(lista_zdjec[0]);
             }
             else
@@ -122,52 +123,54 @@ namespace Photo
             baza.Polacz();
             List<Int64> listaTagowDoUstawienia;// = new List<Int64>();
 
-
             if (lista_zdjec.Count == 1)
                 opcja = 1;
-
-            //if (opcja == 1)
-            //{
+            
             try
             {
                 foreach (Zdjecie zdjecie in lista_zdjec)
                 {
-                    if (opcja == 1)
+                    if (zdjecie.CzyUstawioneId() == true)
                     {
-                        MessageBox.Show("usuwa");
-                        //usuniecie wszystkich tagow zeby dodac nowe
-                        baza.Delete("TagZdjecia", "id_zdjecia=" + zdjecie.Id + " and id_tagu in (select id_tagu from Tag where album = 0)");
-                        listaTagowDoUstawienia = new List<Int64>();
-                    }
-                    else
-                    {
-                        listaTagowDoUstawienia = zdjecie.Tagi;
-                    }
-
-                    foreach (string ob in this.checkedListBox1.CheckedItems)
-                    {
-                        DataSet ds = baza.Select("select id_tagu from Tag where nazwa=\'" + ob + "\' and album = 0");
-
-                        foreach (DataTable t in ds.Tables)
+                        //MessageBox.Show("dodaje tag");
+                        if (opcja == 1)
+                        {                            
+                            //usuniecie wszystkich tagow zeby dodac nowe
+                            baza.Delete("TagZdjecia", "id_zdjecia=" + zdjecie.Id + " and id_tagu in (select id_tagu from Tag where album = 0)");
+                            listaTagowDoUstawienia = new List<Int64>();
+                        }
+                        /*else
                         {
-                            foreach (DataRow r in t.Rows)
+                            zdjecie.WypelnijListeTagow();
+                            if (zdjecie.CzyUstawioneId() == true)
+                                MessageBox.Show("tak: "+zdjecie.Id);
+                            else
+                                MessageBox.Show("nie");
+                            listaTagowDoUstawienia = zdjecie.Tagi;
+                        }*/
+
+                        foreach (string ob in this.checkedListBox1.CheckedItems)
+                        {
+                            DataSet ds = baza.Select("select id_tagu from Tag where nazwa=\'" + ob + "\' and album = 0");
+
+                            foreach (DataTable t in ds.Tables)
                             {
-                                if (!(r[0] is DBNull))
+                                foreach (DataRow r in t.Rows)
                                 {
-                                    baza.Insert("TagZdjecia", zdjecie.Id + "," + r[0]);                                        
-                                    listaTagowDoUstawienia.Add((Int64)r[0]);
+                                    if (!(r[0] is DBNull))
+                                    {
+                                        baza.Insert("TagZdjecia", zdjecie.Id + "," + r[0]);
+                                        //listaTagowDoUstawienia.Add((Int64)r[0]);
+                                        //MessageBox.Show("TagZdjecia" + zdjecie.Id + "," + r[0]);
+                                    }
                                 }
                             }
                         }
+                        //zdjecie.Tagi = listaTagowDoUstawienia;
+                        zdjecie.WypelnijListeTagow();
+                        //zdjecie.Tagi = listaTagowDoUstawienia;
+                        //MessageBox.Show("zd.t.cou: " + zdjecie.Tagi.Count);
                     }
-
-                    zdjecie.Tagi = listaTagowDoUstawienia;
-
-                    MessageBox.Show("tagi.lenght: " + zdjecie.Tagi.Count);
-
-                    //listaTagowDoUstawienia.Clear();
-
-                    MessageBox.Show("tagi.lenght: " + zdjecie.Tagi.Count);
                 }
 
             }
@@ -175,19 +178,7 @@ namespace Photo
             {
                 MessageBox.Show("blad sql " + ex.Message);
             }
-            /*}
-            else if (opcja == 2)
-            {
-                try
-                {
-
-                }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show("blad sql " + ex.Message);
-                }
-            }
-            */
+            
             baza.Rozlacz();
 
             this.Dispose();

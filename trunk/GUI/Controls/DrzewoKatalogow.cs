@@ -627,6 +627,9 @@ namespace Photo
                 toolStripItem = Context.Items.Add("Dodaj zawartosc katalogu " + ((DirTreeNode)e.Node).Path + " do Albumu");
                 toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
                 toolStripItem.Click += new EventHandler(DodajDoAlbumu);
+                toolStripItem = Context.Items.Add("Dodaj tagi dla katalogu " + ((DirTreeNode)e.Node).Path);
+                toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
+                toolStripItem.Click += new EventHandler(DodajTagiDlaKatalogu);
 
 
                 Context.Show(this, new Point(e.X, e.Y));
@@ -990,6 +993,26 @@ namespace Photo
             ToolStripItem mn = (ToolStripItem)sender;            
             List<string> lista = Przefiltruj(mn.ToolTipText);
             dodaj_kolekcje_do_bazy(lista);
+        }
+
+        
+
+        private void DodajTagiDlaKatalogu(object sender, EventArgs e)
+        {
+            ToolStripItem mn = (ToolStripItem)sender;
+
+            List<string> lista_stringow = Przefiltruj(mn.ToolTipText);
+            List<Zdjecie> lista_zdjec = new List<Zdjecie>();
+
+            foreach (string plik in lista_stringow)
+            {
+                Zdjecie z = new Zdjecie(plik);
+                z.ZweryfikujZdjecie();
+                lista_zdjec.Add(z);
+            }
+
+            Dodaj_tagi_do_zdjecia dtdz = new Dodaj_tagi_do_zdjecia(lista_zdjec);
+            dtdz.Show();           
         }
 
         internal void DodajDoAlbumu(object sender, EventArgs e)
