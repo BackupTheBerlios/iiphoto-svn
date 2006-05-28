@@ -105,6 +105,12 @@
     <Compile Include="DialogBoxes\SkrotyKlawiaturoweHelp.Designer.cs">
       <DependentUpon>SkrotyKlawiaturoweHelp.cs</DependentUpon>
     </Compile>
+    <Compile Include="DialogBoxes\ZnajdzPlik.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\ZnajdzPlik.Designer.cs">
+      <DependentUpon>ZnajdzPlik.cs</DependentUpon>
+    </Compile>
     <Compile Include="Filters.cs" />
     <Compile Include="Controls\InformacjeControl.cs">
       <SubType>UserControl</SubType>
@@ -163,6 +169,10 @@
     <EmbeddedResource Include="DialogBoxes\SkrotyKlawiaturoweHelp.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SkrotyKlawiaturoweHelp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DialogBoxes\ZnajdzPlik.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ZnajdzPlik.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhotoForm.resx">
       <SubType>Designer</SubType>
