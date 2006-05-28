@@ -50,6 +50,9 @@ namespace Photo
             drzewoOpakowane1.fileTree1.ZmienionoZrodlo +=
                 new ZmienionoZrodloDelegate(statusStrip.ZmienionoZrodlo);
 
+            listaAlbumowControl.ZmienionoZrodlo +=
+                new ZmienionoZrodloDelegate(statusStrip.ZmienionoZrodlo);
+
             /* Delegowanie ZnalezionoZdjecieDelegate.
              */
             /*drzewoOpakowane1.fileTree1.ZnalezionoZdjecie += 

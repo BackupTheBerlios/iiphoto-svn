@@ -25,6 +25,7 @@ namespace Photo
         //private bool czy_wszystkie_tagi_ustawione = false, czy_wszystkie_albumy_ustawione = false;
 
         public event ZmieninoTagiDelegate ZmienionoTagi;
+        public event ZmienionoZrodloDelegate ZmienionoZrodlo;
 
         public ListaAlbumowControl()
         {
