@@ -66,6 +66,12 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="Db.cs" />
+    <Compile Include="DialogBoxes\Dodaj_albumy_do_zdjecia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\Dodaj_albumy_do_zdjecia.designer.cs">
+      <DependentUpon>Dodaj_albumy_do_zdjecia.cs</DependentUpon>
+    </Compile>
     <Compile Include="DialogBoxes\OznaczeniaHelp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +150,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DialogBoxes\Dodaj_albumy_do_zdjecia.resx">
+      <DependentUpon>Dodaj_albumy_do_zdjecia.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="DialogBoxes\OznaczeniaHelp.resx">
       <DependentUpon>OznaczeniaHelp.cs</DependentUpon>
       <SubType>Designer</SubType>
