@@ -138,6 +138,12 @@ namespace Photo
             Refresh();
         }
 
+        public void OdswiezZdjecie(IZdjecie zdjecie)
+        {
+            LargeImageList.Images[((Zdjecie)zdjecie).indeks] = ((Zdjecie)zdjecie).StworzMiniatureDoWidokuMiniatur();
+            Refresh();
+        }
+
         public void Usun(IZdjecie zdjecie)
         {
             Photos.Remove(zdjecie);

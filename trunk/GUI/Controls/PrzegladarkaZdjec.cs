@@ -282,8 +282,7 @@ namespace Photo
                 }
                 else
                 {
-                    //if (ZmodyfikowanoZdjecie != null)
-                    //    z.ZmodyfikowanoZdjecie(null, z, RodzajModyfikacjiZdjecia.Zawartosc);                    
+                    Thumbnailview.OdswiezZdjecie(z);                   
                 }
             }
             if (nieUdaloSie)
@@ -309,8 +308,7 @@ namespace Photo
                 }
                 else
                 {
-                    //if (ZmodyfikowanoZdjecie != null)
-                    //    z.ZmodyfikowanoZdjecie(null, z, RodzajModyfikacjiZdjecia.Zawartosc);                    
+                    Thumbnailview.OdswiezZdjecie(z);
                     lista_sciezek.Add(z.Path);
                 }
             }
