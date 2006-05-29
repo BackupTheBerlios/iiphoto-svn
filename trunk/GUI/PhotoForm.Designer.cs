@@ -94,13 +94,13 @@ namespace Photo
             this.przegladarkaZdjec.Dock = System.Windows.Forms.DockStyle.Fill;
             this.przegladarkaZdjec.Location = new System.Drawing.Point(201, 49);
             this.przegladarkaZdjec.Name = "przegladarkaZdjec";
-            this.przegladarkaZdjec.Size = new System.Drawing.Size(649, 563);
+            this.przegladarkaZdjec.Size = new System.Drawing.Size(660, 563);
             this.przegladarkaZdjec.TabIndex = 8;
             // 
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitter2.Location = new System.Drawing.Point(850, 49);
+            this.splitter2.Location = new System.Drawing.Point(861, 49);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(1, 563);
             this.splitter2.TabIndex = 7;
@@ -109,9 +109,9 @@ namespace Photo
             // informacjeControl1
             // 
             this.informacjeControl1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.informacjeControl1.Location = new System.Drawing.Point(851, 49);
+            this.informacjeControl1.Location = new System.Drawing.Point(862, 49);
             this.informacjeControl1.Name = "informacjeControl1";
-            this.informacjeControl1.Size = new System.Drawing.Size(173, 563);
+            this.informacjeControl1.Size = new System.Drawing.Size(162, 563);
             this.informacjeControl1.TabIndex = 6;
             // 
             // splitter1

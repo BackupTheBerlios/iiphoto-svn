@@ -17,12 +17,8 @@ namespace Photo
 
             Tags.Columns.Add("Nazwa");
             Tags.Columns.Add("Wartoœæ");
-            Tags.Columns[0].Width = 60;
-            Tags.Columns[1].Width = 100;
             Exif.Columns.Add("Nazwa");
             Exif.Columns.Add("Wartoœæ");
-            Exif.Columns[0].Width = 70;
-            Exif.Columns[1].Width = 90;
         }
 
         public void Zaladuj(ZdjecieInfo info)
