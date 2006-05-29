@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using Photo.DialogBoxes;
 using System.Data.SQLite;
 using System.Data.SqlClient;
 
@@ -309,7 +308,8 @@ namespace Photo
 
         private void oznaczeniaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            OznaczeniaHelp oznaczenia = new OznaczeniaHelp();
+            oznaczenia.Show();
         }
     }
 }

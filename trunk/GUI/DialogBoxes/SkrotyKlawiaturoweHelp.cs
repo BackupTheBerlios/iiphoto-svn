@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Photo.DialogBoxes
+namespace Photo
 {
     public partial class SkrotyKlawiaturoweHelp : Form
     {

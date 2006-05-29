@@ -59,8 +59,8 @@ namespace Photo
             this.filtryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.skrótyKlawiaturoweToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oznaczeniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -350,19 +350,19 @@ namespace Photo
             this.skrótyKlawiaturoweToolStripMenuItem.Text = "Skróty klawiaturowe";
             this.skrótyKlawiaturoweToolStripMenuItem.Click += new System.EventHandler(this.skrótyKlawiaturoweToolStripMenuItem_Click);
             // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.aboutToolStripMenuItem.Text = "O programie...";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
             // oznaczeniaToolStripMenuItem
             // 
             this.oznaczeniaToolStripMenuItem.Name = "oznaczeniaToolStripMenuItem";
             this.oznaczeniaToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.oznaczeniaToolStripMenuItem.Text = "Oznaczenia";
             this.oznaczeniaToolStripMenuItem.Click += new System.EventHandler(this.oznaczeniaToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.aboutToolStripMenuItem.Text = "O programie...";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // PhotoForm
             // 

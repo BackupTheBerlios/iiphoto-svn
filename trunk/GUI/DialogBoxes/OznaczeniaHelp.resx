@@ -118,14 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>Skróty klawiaturowe obsługiwane przez program:
- - Enter: wybranie katalogu
- - Spacja: zdjęcie do przodu
- - Backspace: katalog do gory, zdjęcie do tyłu
- - Strzałki: poruszanie się
- - CTRL-Tab: przełączanie zakładek w widoku miniatur
- - CTRL-f: przełączanie focusu z widoku miniatur na drzewko i z powrotem
- - CTRL-a: zaznaczenie wszystkich miniaturek
- - R,L: obroty</value>
+    <value>Oznaczenia używane w programie:
+ - Widok miniatur:
+  -- Szara ramka: zwykłe zdjęcie na dysku
+  -- Zielona ramka: zdjęcie znajdujące się w kolekcji
+  -- Czerwona ramka: zdjęcie "tylko do odczytu"
+  -- Niebieska ramka: zdjęcie znajdujące się w kolekcji, ale jednocześnie "tylko do odczytu"</value>
   </data>
 </root>

@@ -1,6 +1,6 @@
-namespace Photo.DialogBoxes
+namespace Photo
 {
-    partial class SkrotyKlawiaturoweHelp
+    partial class OznaczeniaHelp
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace Photo.DialogBoxes
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SkrotyKlawiaturoweHelp));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OznaczeniaHelp));
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -57,14 +57,14 @@ namespace Photo.DialogBoxes
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
-            // SkrotyKlawiaturoweHelp
+            // OznaczeniaHelp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(543, 291);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
-            this.Name = "SkrotyKlawiaturoweHelp";
+            this.Name = "OznaczeniaHelp";
             this.Text = "Skroty Klawiaturowe";
             this.ResumeLayout(false);
             this.PerformLayout();

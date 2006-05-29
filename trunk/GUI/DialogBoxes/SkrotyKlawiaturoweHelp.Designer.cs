@@ -1,4 +1,4 @@
-namespace Photo.DialogBoxes
+namespace Photo
 {
     partial class SkrotyKlawiaturoweHelp
     {
