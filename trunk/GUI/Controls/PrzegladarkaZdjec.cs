@@ -215,14 +215,28 @@ namespace Photo
         {
             List<Zdjecie> lista = ZwrocZdjeciaZaznaczone();
 
-            foreach (Zdjecie z in lista)
+            if (Thumbnailview.MiniaturyZDrzewa == true)
             {
-                if (z.CzyUstawioneId() == true)
-                {                    
+                foreach (Zdjecie z in lista)
+                {
+                    if (z.CzyUstawioneId() == true)
+                    {
+                        z.UsunZdjecieZBazy();
+                        z.UsunId();
+                        Thumbnailview.OdswiezZdjecie(z);
+                    }
+                }
+            }
+            else
+            {
+                foreach (Zdjecie z in lista)
+                {
+                    
                     z.UsunZdjecieZBazy();
                     z.UsunId();
-                    Thumbnailview.OdswiezZdjecie(z);
+                    Thumbnailview.Usun(z);
                 }
+                Thumbnailview.Odswiez();
             }
         }
         
