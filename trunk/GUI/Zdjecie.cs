@@ -754,7 +754,7 @@ namespace Photo
         {
             int maxSize = Config.RozmiarMiniatury;
             int posX, posY;
-            Bitmap newBitmap = new Bitmap(maxSize, maxSize);
+            Bitmap newBitmap = new Bitmap(maxSize + 2, maxSize + 2);
             Graphics MyGraphics = Graphics.FromImage(newBitmap);
 
             if (Miniatura.Height > Miniatura.Width)
@@ -768,7 +768,7 @@ namespace Photo
                 posY = (maxSize - Miniatura.Height) / 2;
             }
 
-            Rectangle MyRectan = new Rectangle(posX, posY, Miniatura.Width, Miniatura.Height);
+            Rectangle MyRectan = new Rectangle(posX + 1, posY + 1, Miniatura.Width, Miniatura.Height);
             Pen p;
             if (CzyUstawioneId() && tylkoDoOdczytu)
             {
@@ -787,7 +787,7 @@ namespace Photo
                 p = new Pen(Color.LightGray, 1);
             }
 
-            MyGraphics.DrawRectangle(p, 0, 0, maxSize-1, maxSize-1);
+            MyGraphics.DrawRectangle(p, 0, 0, maxSize + 1, maxSize + 1);
             p.Dispose();
             MyGraphics.DrawImage(Miniatura, MyRectan);
             MyGraphics.Dispose();

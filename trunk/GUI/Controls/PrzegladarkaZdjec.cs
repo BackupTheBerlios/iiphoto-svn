@@ -543,7 +543,7 @@ namespace Photo
 
         internal void ZmienionoRozmiarMiniatury()
         {
-            widokMiniatur1.LargeImageList.ImageSize = new Size(Config.RozmiarMiniatury, Config.RozmiarMiniatury);
+            widokMiniatur1.LargeImageList.ImageSize = new Size(Config.RozmiarMiniatury + 2, Config.RozmiarMiniatury + 2);
             IZdjecie[] zdjecia = widokMiniatur1.Zdjecia;
             foreach (Zdjecie z in zdjecia)
             {

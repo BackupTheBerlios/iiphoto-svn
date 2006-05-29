@@ -11,7 +11,6 @@ namespace Photo
 {
     public class WidokMiniatur : System.Windows.Forms.ListView, IOpakowanieZdjec, IKontekst
     {
-        private int defaultImageSize;
         private bool Edycja;
         private Bitmap katalog;
         private Bitmap katalog_do_gory;
@@ -42,8 +41,7 @@ namespace Photo
             LargeImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             LargeImageList.Tag = "100%";
             LargeImageList.TransparentColor = System.Drawing.Color.Transparent;
-            defaultImageSize = Config.RozmiarMiniatury;
-            LargeImageList.ImageSize = new Size(Config.RozmiarMiniatury, Config.RozmiarMiniatury);
+            LargeImageList.ImageSize = new Size(Config.RozmiarMiniatury + 2, Config.RozmiarMiniatury + 2);
 
             //Activate double buffering
 
@@ -71,7 +69,7 @@ namespace Photo
 
         public void ZmienRozmiarMiniatur(int size)
         {
-            defaultImageSize = size;
+            LargeImageList.ImageSize = new Size(size + 2, size + 2);
         }
 
         public void AddImages(List<IZdjecie> images)
