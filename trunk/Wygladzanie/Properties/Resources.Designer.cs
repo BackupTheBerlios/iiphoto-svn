@@ -60,9 +60,9 @@ namespace Wygladzanie.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap wyladzanie_ico {
+        internal static System.Drawing.Bitmap wygladzanie {
             get {
-                object obj = ResourceManager.GetObject("wyladzanie.ico", resourceCulture);
+                object obj = ResourceManager.GetObject("wygladzanie", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
