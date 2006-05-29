@@ -745,10 +745,26 @@ namespace Photo
             }
 
             Rectangle MyRectan = new Rectangle(posX, posY, Miniatura.Width, Miniatura.Height);
-            using (Pen p = new Pen(Brushes.LightGray))
+            Pen p;
+            if (CzyUstawioneId() && tylkoDoOdczytu)
             {
-                MyGraphics.DrawRectangle(p, 0, 0, maxSize - 1, maxSize - 1);
+                p = new Pen(Color.LightBlue, 1);
             }
+            else if (CzyUstawioneId())
+            {
+                p = new Pen(Color.GreenYellow, 1);
+            }
+            else if (tylkoDoOdczytu)
+            {
+                p = new Pen(Color.FromArgb(255,141, 138), 1);
+            }
+            else
+            {
+                p = new Pen(Color.LightGray, 1);
+            }
+
+            MyGraphics.DrawRectangle(p, 0, 0, maxSize-1, maxSize-1);
+            p.Dispose();
             MyGraphics.DrawImage(Miniatura, MyRectan);
             MyGraphics.Dispose();
             return newBitmap;
