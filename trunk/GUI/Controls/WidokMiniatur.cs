@@ -149,6 +149,12 @@ namespace Photo
         public void Usun(IZdjecie zdjecie)
         {
             Photos.Remove(zdjecie);
+            NiePrzefiltrowanePhotos.Remove(zdjecie);
+        }
+
+        public void Odswiez()
+        {
+            Wypelnij(Photos, katalogi, MiniaturyZDrzewa);
         }
 
         public void Oproznij()
