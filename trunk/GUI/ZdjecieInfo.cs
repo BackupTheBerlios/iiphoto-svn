@@ -8,6 +8,9 @@ namespace Photo
 {
     public class ZdjecieInfo
     {
+        List<string> tagi;
+        List<string> albumy;
+
         PropertyItem[] propItems;
         string nazwaPliku;
         string sciezka;
@@ -55,6 +58,32 @@ namespace Photo
             get
             {
                 return format;
+            }
+        }
+        public List<string> Tagi
+        {
+            get
+            {
+                if (tagi == null)
+                    return new List<string>();
+                return tagi;
+            }
+            set
+            {
+                tagi = value;
+            }
+        }
+        public List<string> Albumy
+        {
+            get
+            {
+                if (albumy == null)
+                    return new List<string>();
+                return albumy;
+            }
+            set
+            {
+                albumy = value;
             }
         }
     }

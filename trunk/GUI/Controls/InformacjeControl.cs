@@ -74,6 +74,29 @@ namespace Photo
             Tags.Items.Add(new ListViewItem(new string[] { "Szerokoœæ", info.Rozmiar.Width.ToString() }));
             Tags.Items.Add(new ListViewItem(new string[] { "Wysokoœæ", info.Rozmiar.Height.ToString() }));
             Tags.Items.Add(new ListViewItem(new string[] { "Format", info.Format}));
+            StringBuilder sb;
+            if (info.Albumy.Count > 0)
+            {
+                sb = new StringBuilder();
+                int i;
+                for (i = 0; i < info.Albumy.Count - 1; i++)
+                {
+                    sb.Append(info.Albumy[i] + ", ");
+                }
+                sb.Append(info.Albumy[i]);
+                Tags.Items.Add(new ListViewItem(new string[] { "Albumy", sb.ToString() }));
+            }
+            if (info.Tagi.Count > 0)
+            {
+                sb = new StringBuilder();
+                int i;
+                for (i = 0; i < info.Tagi.Count - 1; i++)
+                {
+                    sb.Append(info.Tagi[i] + ", ");
+                }
+                sb.Append(info.Tagi[i]);
+                Tags.Items.Add(new ListViewItem(new string[] { "Tagi", sb.ToString() }));
+            }
         }
 
     }
