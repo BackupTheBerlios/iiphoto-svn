@@ -115,7 +115,6 @@ namespace Photo
                 return;
             }
 
-
             zdjecie.ZmodyfikowanoZdjecie += new ZmodyfikowanoZdjecieDelegate(zdjecie_ZmodyfikowanoZdjecie);
             if (CzyWyswietlic(zdjecie))
             {
@@ -456,6 +455,7 @@ namespace Photo
             {
                 z.ResetujTagi();
             }
+            Odswiez();
         }
     }
 }
