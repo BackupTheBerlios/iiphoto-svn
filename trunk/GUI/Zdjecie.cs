@@ -398,6 +398,71 @@ namespace Photo
         #region Baza
 
 
+        private List<string> ZwrocNazwyTagow()
+        {
+            Db baza = new Db();
+            List<string> lista = new List<string>();
+
+            baza.Polacz();
+
+            try
+            {
+                DataSet ds = baza.Select("select nazwa from Tag where id_tagu in (select id_tagu from TagZdjecia where id_zdjecia =" + this.Id + ") and album = 0");
+
+                foreach (DataTable t in ds.Tables)
+                {
+                    foreach (DataRow r in t.Rows)
+                    {
+                        if (!(r[0] is DBNull))
+                        {
+                            lista.Add((string)r[0]);                            
+                        }
+                    }
+                }                
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("blad sql: " + ex.Message);
+            }
+
+            baza.Rozlacz();
+
+            return lista;
+        }
+
+
+        private List<string> ZwrocNazwyAlbumow()
+        {
+            Db baza = new Db();
+            List<string> lista = new List<string>();
+
+            baza.Polacz();
+
+            try
+            {
+                DataSet ds = baza.Select("select nazwa from Tag where id_tagu in (select id_tagu from TagZdjecia where id_zdjecia =" + this.Id + ") and album = 1");
+
+                foreach (DataTable t in ds.Tables)
+                {
+                    foreach (DataRow r in t.Rows)
+                    {
+                        if (!(r[0] is DBNull))
+                        {
+                            lista.Add((string)r[0]);
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("blad sql: " + ex.Message);
+            }
+
+            baza.Rozlacz();
+
+            return lista;
+        }
+
         public void AktualizujBaze()
         {
             Db baza = new Db();

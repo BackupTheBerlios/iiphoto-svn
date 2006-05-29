@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Collections.Generic;
 using System.Text;
-using Photo;
+//using Photo;
 
 namespace Wyostrzenie
 {
