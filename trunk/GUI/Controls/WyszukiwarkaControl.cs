@@ -129,7 +129,7 @@ namespace Photo
                 }
 
                 if (ZakonczonoWyszukiwanie != null)
-                    ZakonczonoWyszukiwanie(zdjecia.ToArray(), new Katalog[0]);
+                    ZakonczonoWyszukiwanie(zdjecia.ToArray(), new Katalog[0], false);
             }
             /*Wyszukiwanie wynik = new Wyszukiwanie();
             if (checkBox1.Checked)

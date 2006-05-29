@@ -118,11 +118,12 @@ namespace Photo
             AktywneOpakowanie.UsunWszystkieOperacje();
         }
 
-        public void Wypelnij(IZdjecie[] zdjecia, Katalog[] katalogi)
+        public void Wypelnij(IZdjecie[] zdjecia, Katalog[] katalogi, bool CzyZDrzewa)
         {
             if (AktywneOpakowanie != Thumbnailview)
                 SetThumbnailView();
-            Thumbnailview.Wypelnij(zdjecia, katalogi);
+            Thumbnailview.Wypelnij(zdjecia, katalogi, CzyZDrzewa);
+            
         }
 
         #endregion
@@ -220,7 +221,6 @@ namespace Photo
                 {                    
                     z.UsunZdjecieZBazy();
                     z.UsunId();
-                    Thumbnailview.OdswiezZdjecie(z);                   
                 }
             }
         }
@@ -533,7 +533,7 @@ namespace Photo
             {
                 z.DisposeMini();
             }
-            widokMiniatur1.Wypelnij(zdjecia, widokMiniatur1.Katalogi);
+            widokMiniatur1.Wypelnij(zdjecia, widokMiniatur1.Katalogi, Thumbnailview.MiniaturyZDrzewa);
             widokMiniatur1.Refresh();
         }
 

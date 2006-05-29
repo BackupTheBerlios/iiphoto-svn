@@ -29,7 +29,7 @@ namespace Photo
             this.Invalidate();
         }
 
-        public void ZakonczonoWyszukiwanie(IZdjecie[] zdjecia, Katalog[] k)
+        public void ZakonczonoWyszukiwanie(IZdjecie[] zdjecia, Katalog[] k, bool czyzdrzewa)
         {
             wyszukiwanieLabel.Text = "Zakoñczono: Wyszukiwanie";
         }

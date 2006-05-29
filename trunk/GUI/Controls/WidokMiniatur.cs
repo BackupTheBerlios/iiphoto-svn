@@ -246,8 +246,9 @@ namespace Photo
             return wyswietlic;
         }
 
-        public void Wypelnij(IZdjecie[] zdjecia, Katalog[] katalogi)
+        public void Wypelnij(IZdjecie[] zdjecia, Katalog[] katalogi, bool CzyZDrzewa)
         {
+            MiniaturyZDrzewa = CzyZDrzewa;
             if (t != null && t.IsAlive)
             {
                 if (wypelnijThreadClass != null)
@@ -266,7 +267,7 @@ namespace Photo
         public void DodajTagi(List<long> t)
         {
             tagi = t;
-            Wypelnij(NiePrzefiltrowanePhotos.ToArray(), katalogi);
+            Wypelnij(NiePrzefiltrowanePhotos.ToArray(), katalogi, MiniaturyZDrzewa);
         }
 
         #region IKontekst Members

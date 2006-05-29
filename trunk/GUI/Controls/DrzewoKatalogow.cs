@@ -612,7 +612,7 @@ namespace Photo
             }            
 
             if (ZakonczonoWyszukiwanie != null)
-                ZakonczonoWyszukiwanie(zdjecia.ToArray(), katalogi.ToArray());
+                ZakonczonoWyszukiwanie(zdjecia.ToArray(), katalogi.ToArray(), true);
 
         }
 

@@ -181,7 +181,7 @@ namespace Photo
         /// Powoduje ¿e opakowanie wype³nia siê nowym zbiorem zdjêæ.
         /// </summary>
         /// <param name="zdjecia">Nowy zbiór obiektów dla opakowania.</param>
-        void Wypelnij(IZdjecie[] zdjecia, Katalog[] katalogi);
+        void Wypelnij(IZdjecie[] zdjecia, Katalog[] katalogi, bool CzyZDrzewa);
     }
 
     public enum RodzajModyfikacjiZdjecia
@@ -276,7 +276,7 @@ namespace Photo
     /// Delegat informuj¹cy o zakoñczeniu wyszukiwania.
     /// </summary>
     /// <param name="zdjecia">Lista zdjêæ bed¹ca wynikiem wyszukiwania.</param>
-    public delegate void ZakonczonoWyszukiwanieDelegate(IZdjecie[] zdjecia, Katalog[] katalogi);
+    public delegate void ZakonczonoWyszukiwanieDelegate(IZdjecie[] zdjecia, Katalog[] katalogi, bool CzyZDrzewa);
     public delegate void RozpoczetoWyszukiwanieDelegate(IWyszukiwanie wyszukiwanie);
 
     public delegate void ZnalezionoZdjecieDelegate(IZdjecie zdjecie);

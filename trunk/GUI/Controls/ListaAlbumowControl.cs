@@ -204,7 +204,7 @@ namespace Photo
                    // Zdjecie[] tablica = zdjecia.ToArray();
 
                     if (ZakonczonoWyszukiwanie != null)
-                        ZakonczonoWyszukiwanie(przefi.ToArray(), new Katalog[0]);
+                        ZakonczonoWyszukiwanie(przefi.ToArray(), new Katalog[0], false);
 
                     //przefiltrowac
                 }
@@ -224,7 +224,7 @@ namespace Photo
                     }
 
                     if (ZakonczonoWyszukiwanie != null)
-                        ZakonczonoWyszukiwanie(zdjecia.ToArray(), new Katalog[0]);
+                        ZakonczonoWyszukiwanie(zdjecia.ToArray(), new Katalog[0], false);
                     //wyswietlic pare albomow
                 }
 
@@ -644,7 +644,7 @@ namespace Photo
                     }
 
                     if (ZakonczonoWyszukiwanie != null)
-                        ZakonczonoWyszukiwanie(zdjecia.ToArray(), new Katalog[0]);
+                        ZakonczonoWyszukiwanie(zdjecia.ToArray(), new Katalog[0], false);
                     czy_otwiera = true;
                 }
             }

@@ -334,7 +334,7 @@ namespace Photo
 
         public event WybranoZdjecieDelegate WybranoZdjecie;
 
-        public void Wypelnij(IZdjecie[] zdjecia, Katalog[] k)
+        public void Wypelnij(IZdjecie[] zdjecia, Katalog[] k, bool CzyZDrzewa)
         {
             throw new Exception("This method is not used");
         }
