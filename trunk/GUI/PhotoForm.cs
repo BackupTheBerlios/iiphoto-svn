@@ -290,7 +290,12 @@ namespace Photo
                             if (System.IO.File.Exists(pelna_sciezka) == true)
                             {
                                 Zdjecie z = new Zdjecie(pelna_sciezka);
+                                //tutaj musi byc wukorzystana funkcja do zczytania pol i do update bazy                                
                                 z.ZweryfikujZdjecie();
+                                if (z.CzyUstawioneId() == true)
+                                {
+                                    z.AktualizujBaze();
+                                }
                             }
                         }
                     }

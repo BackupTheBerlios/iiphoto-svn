@@ -397,6 +397,28 @@ namespace Photo
 
         #region Baza
 
+
+        public void AktualizujBaze()
+        {
+            Db baza = new Db();
+
+            baza.Polacz();
+
+            try
+            {
+                ZczytajPola();
+                baza.Update("Zdjecie", "komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
+                //MessageBox.Show("Update3: komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("blad sql: " + ex.Message);
+            }
+
+            baza.Rozlacz();
+
+        }
+
         public void WypelnijListeTagow()
         {
             if(CzyUstawioneId())
@@ -486,8 +508,9 @@ namespace Photo
                                     //aktualizacja bazy dla this czyli sciezke i nazwe pliku                                    
                                     try
                                     {
-                                        ZczytajPola();
-                                        baza.Update("Zdjecie", "sciezka=\'" + sciezka + "\', nazwa_pliku=\'" + nazwa_pliku + "\', komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
+                                        //ZczytajPola();
+                                        baza.Update("Zdjecie", "sciezka=\'" + sciezka + "\', nazwa_pliku=\'" + nazwa_pliku + "\' where id_zdjecia=" + Id);
+                                        //, komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + "
                                         //MessageBox.Show("Update1: sciezka=\'" + sciezka + "\', nazwa_pliku=\'" + nazwa_pliku + "\', komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
                                     }
                                     catch (SqlException ex)
@@ -501,8 +524,9 @@ namespace Photo
                                 //aktualizacja bazy dla this czyli sciezke i nazwe pliku                                
                                 try
                                 {
-                                    ZczytajPola();
-                                    baza.Update("Zdjecie", "sciezka=\'" + sciezka + "\', nazwa_pliku=\'" + nazwa_pliku + "\', komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
+                                    baza.Update("Zdjecie", "sciezka=\'" + sciezka + "\', nazwa_pliku=\'" + nazwa_pliku + "\' where id_zdjecia=" + Id);
+                                    //ZczytajPola();
+                                    //baza.Update("Zdjecie", "sciezka=\'" + sciezka + "\', nazwa_pliku=\'" + nazwa_pliku + "\', komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
                                     //MessageBox.Show("Update2: sciezka=\'" + sciezka + "\', nazwa_pliku=\'" + nazwa_pliku + "\', komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
                                 }
                                 catch (SqlException ex)
@@ -515,8 +539,8 @@ namespace Photo
                         {//gdy zdjecie zgadza sie ze sciezka to robimy update komentarz, autor itd
                             try
                             {
-                                ZczytajPola();
-                                baza.Update("Zdjecie", "komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
+                                //ZczytajPola();
+                                //baza.Update("Zdjecie", "komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
                                 //MessageBox.Show("Update3: komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
                             }
                             catch (SqlException ex)

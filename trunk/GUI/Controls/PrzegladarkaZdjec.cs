@@ -280,9 +280,14 @@ namespace Photo
                         nieUdaloSie = true;
                     }
                 }
+                else
+                {
+                    //if (ZmodyfikowanoZdjecie != null)
+                    //    z.ZmodyfikowanoZdjecie(null, z, RodzajModyfikacjiZdjecia.Zawartosc);                    
+                }
             }
             if (nieUdaloSie)
-                MessageBox.Show(sb.ToString());
+                MessageBox.Show(sb.ToString());            
         }
 
         public List<string> dodaj_kolekcje_do_bazy()
@@ -304,6 +309,8 @@ namespace Photo
                 }
                 else
                 {
+                    //if (ZmodyfikowanoZdjecie != null)
+                    //    z.ZmodyfikowanoZdjecie(null, z, RodzajModyfikacjiZdjecia.Zawartosc);                    
                     lista_sciezek.Add(z.Path);
                 }
             }
