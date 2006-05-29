@@ -394,11 +394,13 @@ namespace Photo
                 {
                     if (WlaczonoWidokZdjecia != null)
                         WlaczonoWidokZdjecia();
+                    Imageview.DrawMyRectangle(Imageview.selectedRectangle);
                 }
                 if (((TabControl)sender).SelectedTab == miniatury1Tab)
                 {
                     if (WlaczonoWidokZdjecia != null)
                         WylaczonoWidokZdjecia();
+                    Imageview.DrawMyRectangle(Imageview.selectedRectangle);
                 }
             } catch (FileNotFoundException)
                 {

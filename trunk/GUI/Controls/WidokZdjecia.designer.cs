@@ -72,7 +72,7 @@ namespace Photo
         private bool isDrag;
         private bool Edycja;
         private Point lmStartingPoint;
-        private Rectangle selectedRectangle;
+        internal Rectangle selectedRectangle;
         private BitmapData data;
         private int padX, padY;
         private double WidthRatio, HeightRatio;

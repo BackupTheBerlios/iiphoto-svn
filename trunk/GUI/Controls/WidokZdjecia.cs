@@ -146,7 +146,7 @@ namespace Photo
             }
         }
 
-        private void DrawMyRectangle(Rectangle r)
+        internal void DrawMyRectangle(Rectangle r)
         {
             data = ((Bitmap)pictureBox1.Image).LockBits(new Rectangle(0, 0, this.pictureBox1.Image.Width, this.pictureBox1.Image.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
             DrawMyLine(new Point(r.X, r.Y), new Point(r.X + r.Width, r.Y));
