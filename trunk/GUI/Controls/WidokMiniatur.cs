@@ -24,6 +24,8 @@ namespace Photo
         private Katalog[] katalogi;
         private List<long> tagi;
 
+        public bool MiniaturyZDrzewa;
+
         public enum listViewTag
         {
             katalog,
