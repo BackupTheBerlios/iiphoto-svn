@@ -229,12 +229,13 @@ namespace Photo
             if (tagi.Count == 0)
                 return true;
 
-            return ((Zdjecie)zdjecie).Tagi.Exists(new Predicate<long>(CzyWyswietlicPredicate));
-        }
-
-        private bool CzyWyswietlicPredicate(long l)
-        {
-            return tagi.Contains(l);
+            bool wyswietlic = true;
+            foreach (long l in tagi) 
+            {
+                if (!((Zdjecie)zdjecie).Tagi.Contains(l))
+                    wyswietlic = false;
+            }
+            return wyswietlic;
         }
 
         public void Wypelnij(IZdjecie[] zdjecia, Katalog[] katalogi)

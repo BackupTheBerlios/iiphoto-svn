@@ -50,8 +50,8 @@ namespace Photo
             this.toolStripComboBox2 = new System.Windows.Forms.ToolStripComboBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.programToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zakonczToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aktualizacjaBazyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zakonczToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.edycjaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -281,19 +281,19 @@ namespace Photo
             this.programToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.programToolStripMenuItem.Text = "Program";
             // 
-            // zakonczToolStripMenuItem
-            // 
-            this.zakonczToolStripMenuItem.Name = "zakonczToolStripMenuItem";
-            this.zakonczToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.zakonczToolStripMenuItem.Text = "Zakoncz";
-            this.zakonczToolStripMenuItem.Click += new System.EventHandler(this.zakonczToolStripMenuItem_Click);
-            // 
             // aktualizacjaBazyToolStripMenuItem
             // 
             this.aktualizacjaBazyToolStripMenuItem.Name = "aktualizacjaBazyToolStripMenuItem";
             this.aktualizacjaBazyToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.aktualizacjaBazyToolStripMenuItem.Text = "Aktualizacja Bazy";
             this.aktualizacjaBazyToolStripMenuItem.Click += new System.EventHandler(this.aktualizacjaBazyToolStripMenuItem_Click);
+            // 
+            // zakonczToolStripMenuItem
+            // 
+            this.zakonczToolStripMenuItem.Name = "zakonczToolStripMenuItem";
+            this.zakonczToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.zakonczToolStripMenuItem.Text = "Zakoncz";
+            this.zakonczToolStripMenuItem.Click += new System.EventHandler(this.zakonczToolStripMenuItem_Click);
             // 
             // fileToolStripMenuItem
             // 
