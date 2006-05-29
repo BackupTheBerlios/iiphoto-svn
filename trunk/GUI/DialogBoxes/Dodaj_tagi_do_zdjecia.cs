@@ -194,15 +194,5 @@ namespace Photo
 
             this.Dispose();
         }
-
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void checkedListBox1_SelectedValueChanged(object sender, EventArgs e)
-        {
-            
-        }
     }
 }
