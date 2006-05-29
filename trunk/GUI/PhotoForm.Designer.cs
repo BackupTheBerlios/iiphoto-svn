@@ -60,6 +60,7 @@ namespace Photo
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.skrótyKlawiaturoweToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.oznaczeniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -336,6 +337,7 @@ namespace Photo
             this.helpToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.skrótyKlawiaturoweToolStripMenuItem,
+            this.oznaczeniaToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
@@ -354,6 +356,13 @@ namespace Photo
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.aboutToolStripMenuItem.Text = "O programie...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // oznaczeniaToolStripMenuItem
+            // 
+            this.oznaczeniaToolStripMenuItem.Name = "oznaczeniaToolStripMenuItem";
+            this.oznaczeniaToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.oznaczeniaToolStripMenuItem.Text = "Oznaczenia";
+            this.oznaczeniaToolStripMenuItem.Click += new System.EventHandler(this.oznaczeniaToolStripMenuItem_Click);
             // 
             // PhotoForm
             // 
@@ -411,6 +420,7 @@ namespace Photo
         private System.Windows.Forms.ToolStripMenuItem edycjaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wycofajZmianyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aktualizacjaBazyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem oznaczeniaToolStripMenuItem;
 
     }
 }

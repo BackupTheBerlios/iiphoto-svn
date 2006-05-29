@@ -66,6 +66,12 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="Db.cs" />
+    <Compile Include="DialogBoxes\Copy of SkrotyKlawiaturoweHelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\Copy of SkrotyKlawiaturoweHelp.Designer.cs">
+      <DependentUpon>Copy of SkrotyKlawiaturoweHelp.cs</DependentUpon>
+    </Compile>
     <Compile Include="DialogBoxes\Dodaj_Album.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +144,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DialogBoxes\Copy of SkrotyKlawiaturoweHelp.resx">
+      <DependentUpon>Copy of SkrotyKlawiaturoweHelp.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="DialogBoxes\Dodaj_Album.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Dodaj_Album.cs</DependentUpon>

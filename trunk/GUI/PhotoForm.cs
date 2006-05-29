@@ -306,5 +306,10 @@ namespace Photo
                 MessageBox.Show("blad bazy: " + ex.Message);
             }
         }
+
+        private void oznaczeniaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
