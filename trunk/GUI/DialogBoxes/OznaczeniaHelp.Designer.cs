@@ -65,7 +65,7 @@ namespace Photo
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Name = "OznaczeniaHelp";
-            this.Text = "Skroty Klawiaturowe";
+            this.Text = "Oznaczenia";
             this.ResumeLayout(false);
             this.PerformLayout();
 
