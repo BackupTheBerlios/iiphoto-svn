@@ -220,6 +220,7 @@ namespace Photo
                 {                    
                     z.UsunZdjecieZBazy();
                     z.UsunId();
+                    Thumbnailview.OdswiezZdjecie(z);                   
                 }
             }
         }
