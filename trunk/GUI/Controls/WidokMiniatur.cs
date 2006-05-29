@@ -19,8 +19,8 @@ namespace Photo
         private Thread t;
         private Semaphore sem;
 
-        private List<IZdjecie> Photos;
-        private List<IZdjecie> NiePrzefiltrowanePhotos;
+        private List<IZdjecie> ZdjeciaWyswietlone;
+        private List<IZdjecie> WszystkieZdjecia;
         private Katalog[] katalogi;
         private List<long> tagi;
 
@@ -34,8 +34,8 @@ namespace Photo
 
         public WidokMiniatur()
         {
-            Photos = new List<IZdjecie>();
-            NiePrzefiltrowanePhotos = new List<IZdjecie>();
+            ZdjeciaWyswietlone = new List<IZdjecie>();
+            WszystkieZdjecia = new List<IZdjecie>();
             katalogi = new Katalog[0];
             tagi = new List<long>();
             LargeImageList = new ImageList();
@@ -76,24 +76,24 @@ namespace Photo
 
         public void AddImages(List<IZdjecie> images)
         {
-            this.Photos.AddRange(images);
+            this.ZdjeciaWyswietlone.AddRange(images);
         }
 
         #region IOpakowanieZdjec Members
 
         public IZdjecie this[int numer]
         {
-            get { return Photos[numer]; }
+            get { return ZdjeciaWyswietlone[numer]; }
         }
 
         public int Ilosc
         {
-            get { return Photos.Count + katalogi.Length ; }
+            get { return ZdjeciaWyswietlone.Count + katalogi.Length ; }
         }
 
         public int IloscZdjec
         {
-            get { return Photos.Count; }
+            get { return ZdjeciaWyswietlone.Count; }
         }
 
         public int IloscKatalogow
@@ -120,8 +120,8 @@ namespace Photo
             if (CzyWyswietlic(zdjecie))
             {
                 ((Zdjecie)zdjecie).indeks = LargeImageList.Images.Count;
-                Photos.Add(zdjecie);
-                NiePrzefiltrowanePhotos.Add(zdjecie);
+                ZdjeciaWyswietlone.Add(zdjecie);
+                WszystkieZdjecia.Add(zdjecie);
                 LargeImageList.Images.Add(((Zdjecie)zdjecie).StworzMiniatureDoWidokuMiniatur());
                 ListViewItem listViewItem = new ListViewItem(zdjecie.NazwaPliku);
                 listViewItem.ImageIndex = LargeImageList.Images.Count - 1;
@@ -130,7 +130,7 @@ namespace Photo
             }
             else
             {
-                NiePrzefiltrowanePhotos.Add(zdjecie);
+                WszystkieZdjecia.Add(zdjecie);
             }
         }
 
@@ -148,13 +148,13 @@ namespace Photo
 
         public void Usun(IZdjecie zdjecie)
         {
-            Photos.Remove(zdjecie);
-            NiePrzefiltrowanePhotos.Remove(zdjecie);
+            ZdjeciaWyswietlone.Remove(zdjecie);
+            WszystkieZdjecia.Remove(zdjecie);
         }
 
         public void Odswiez()
         {
-            Wypelnij(Photos.ToArray(), katalogi, MiniaturyZDrzewa);
+            Wypelnij(ZdjeciaWyswietlone.ToArray(), katalogi, MiniaturyZDrzewa);
         }
 
         public void Oproznij()
@@ -168,13 +168,13 @@ namespace Photo
         {
             get
             {
-                return Photos.ToArray();
+                return ZdjeciaWyswietlone.ToArray();
             }
         }
 
         public IZdjecie ZdjecieZIndeksem(int i)
         {
-            foreach (Zdjecie z in Photos)
+            foreach (Zdjecie z in ZdjeciaWyswietlone)
             {
                 if (z.indeks == i)
                     return z;
@@ -204,7 +204,7 @@ namespace Photo
         public void ZakonczEdycje()
         {
             Edycja = false;
-            foreach (IZdjecie zdjecie in Photos)
+            foreach (IZdjecie zdjecie in ZdjeciaWyswietlone)
             {
                 zdjecie.WykonajOperacje();
                 zdjecie.UsunWszystkieOperacje();
@@ -273,7 +273,7 @@ namespace Photo
         public void DodajTagi(List<long> t)
         {
             tagi = t;
-            Wypelnij(NiePrzefiltrowanePhotos.ToArray(), katalogi, MiniaturyZDrzewa);
+            Wypelnij(WszystkieZdjecia.ToArray(), katalogi, MiniaturyZDrzewa);
         }
 
         #region IKontekst Members
@@ -409,8 +409,8 @@ namespace Photo
                     widokMiniatur.Invoke(new WyswietlKatalog(widokMiniatur.DodajKatalog), katalogi[i]);
                 }
 
-                widokMiniatur.Photos.Clear();
-                widokMiniatur.NiePrzefiltrowanePhotos.Clear();
+                widokMiniatur.ZdjeciaWyswietlone.Clear();
+                widokMiniatur.WszystkieZdjecia.Clear();
 
                 for (int i = 0; i < zdjecia.Length; i++)
                 {
@@ -429,7 +429,7 @@ namespace Photo
 
         internal void ZapiszWszystkiePliki()
         {
-            foreach (Zdjecie z in Photos)
+            foreach (Zdjecie z in ZdjeciaWyswietlone)
             {
                 try
                 {
@@ -444,7 +444,7 @@ namespace Photo
 
         public void ZresetujIds()
         {
-            foreach (Zdjecie z in Photos)
+            foreach (Zdjecie z in ZdjeciaWyswietlone)
             {
                 z.ResetujId();
             }
@@ -452,7 +452,7 @@ namespace Photo
 
         public void ZresetujTagi()
         {
-            foreach (Zdjecie z in Photos)
+            foreach (Zdjecie z in ZdjeciaWyswietlone)
             {
                 z.ResetujTagi();
             }
