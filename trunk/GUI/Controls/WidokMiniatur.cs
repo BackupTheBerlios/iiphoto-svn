@@ -154,7 +154,7 @@ namespace Photo
 
         public void Odswiez()
         {
-            Wypelnij(Photos, katalogi, MiniaturyZDrzewa);
+            Wypelnij(Photos.ToArray(), katalogi, MiniaturyZDrzewa);
         }
 
         public void Oproznij()
