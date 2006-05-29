@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 
 namespace Photo
 {
-    public partial class Dodaj_tagi_do_zdjecia : Form
+    public partial class Dodaj_albumy_do_zdjecia : Form
     {
         private PrzegladarkaZdjec przegladarka;
         //private Zdjecie zdjecie;
@@ -20,20 +20,20 @@ namespace Photo
 
         public event ZmienionoTagiDelegate ZmienionoTagi;
 
-        public Dodaj_tagi_do_zdjecia(PrzegladarkaZdjec p)
+        public Dodaj_albumy_do_zdjecia(PrzegladarkaZdjec p)
         {
             InitializeComponent();
             przegladarka = p;
             //Wypelnij();
         }
-        public Dodaj_tagi_do_zdjecia(Zdjecie z)
+        public Dodaj_albumy_do_zdjecia(Zdjecie z)
         {
             InitializeComponent();
             //zdjecie = z;
             //Wypelnij();
             //opcja = 1;
         }
-        public Dodaj_tagi_do_zdjecia(List<Zdjecie> lis_z, bool czy_katalog )
+        public Dodaj_albumy_do_zdjecia(List<Zdjecie> lis_z, bool czy_katalog)
         {
             InitializeComponent();
             lista_zdjec = lis_z;
@@ -59,7 +59,8 @@ namespace Photo
                 List<Int64> lista;
                 bool czy_znaleziony = false;                
 
-                DataSet ds = baza.Select("select id_tagu, nazwa from Tag where album = 0");
+                DataSet ds = baza.Select("select id_tagu, nazwa from Tag where album = 1");
+                DataSet zczytanie_z_bazy_almumow;
 
                 foreach (DataTable t in ds.Tables)
                 {
@@ -67,17 +68,24 @@ namespace Photo
                     {
                         if (!(r[0] is DBNull))
                         {
-                            lista = zdjecie.ZwrocListeTagow;
-                            //MessageBox.Show("lista.count: " + lista.Count);
-                            foreach (Int64 tag in lista)
-                            {                                
-                                if (tag == (Int64)r[0])
-                                {                                    
-                                    this.checkedListBox1.Items.Add((string)r[1], true);
-                                    czy_znaleziony = true;
-                                    break;
+                            zczytanie_z_bazy_almumow = baza.Select("select id_tagu from TagZdjecia where id_zdjecia=" + zdjecie.Id + " and id_tagu in (select id_tagu from Tag where album=1)");
+
+                            foreach (DataTable t2 in zczytanie_z_bazy_almumow.Tables)
+                            {
+                                foreach (DataRow r2 in t2.Rows)
+                                {
+                                    if (!(r2[0] is DBNull))
+                                    {
+                                        if (r2[0] == r[0])
+                                        {
+                                            this.checkedListBox1.Items.Add((string)r[1], true);
+                                            czy_znaleziony = true;
+                                            break;
+                                        }
+                                    }
                                 }
                             }
+                            
                             if (czy_znaleziony == false)
                             {
                                 this.checkedListBox1.Items.Add((string)r[1], false);
@@ -101,7 +109,7 @@ namespace Photo
             baza.Polacz();
             try
             {   
-                DataSet ds = baza.Select("select id_tagu, nazwa from Tag where album = 0");
+                DataSet ds = baza.Select("select id_tagu, nazwa from Tag where album = 1");
 
                 foreach (DataTable t in ds.Tables)
                 {

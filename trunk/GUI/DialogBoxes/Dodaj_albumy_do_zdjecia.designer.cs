@@ -1,6 +1,6 @@
 namespace Photo
 {
-    partial class Dodaj_tagi_do_zdjecia
+    partial class Dodaj_albumy_do_zdjecia
     {
         /// <summary>
         /// Required designer variable.
