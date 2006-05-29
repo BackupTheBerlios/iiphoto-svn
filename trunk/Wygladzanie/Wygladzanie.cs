@@ -39,7 +39,7 @@ namespace Wygladzanie
         {
             get
             {
-                return Properties.Resources.wyladzanie_ico;
+                return Properties.Resources.wygladzanie;
             }
         }
 
@@ -62,7 +62,7 @@ namespace Wygladzanie
         {
             if (z.Zaznaczenie.IsEmpty)
             {
-                Photo.BitmapFilter.Sharpen(z.Duze, 10);
+                Photo.BitmapFilter.GaussianBlur(z.Duze, 4);
             }
             else
             {
