@@ -77,6 +77,7 @@ namespace Photo
         public void AddImages(List<IZdjecie> images)
         {
             this.ZdjeciaWyswietlone.AddRange(images);
+            this.WszystkieZdjecia.AddRange(images);
         }
 
         #region IOpakowanieZdjec Members
@@ -153,7 +154,7 @@ namespace Photo
 
         public void Odswiez()
         {
-            Wypelnij(ZdjeciaWyswietlone.ToArray(), katalogi, MiniaturyZDrzewa);
+            Wypelnij(WszystkieZdjecia.ToArray(), katalogi, MiniaturyZDrzewa);
         }
 
         public void Oproznij()
