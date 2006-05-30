@@ -455,7 +455,7 @@ namespace Photo
                     {
                         if (!(r[0] is DBNull))
                         {
-                            data = ((DateTime)r[0]).ToString();                            
+                            data = ((DateTime)r[0]).ToLocalTime().ToString();                            
                         }
                     }
                 }
