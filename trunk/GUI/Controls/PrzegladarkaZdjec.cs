@@ -341,6 +341,7 @@ namespace Photo
 
         private void UsunZdjecie(object sender, EventArgs e)
         {
+            bool usunieto = false;
             Zdjecie[] zdjecia = (Zdjecie[])Thumbnailview.WybraneZdjecia;
             if (zdjecia.Length != 0)
             {
@@ -348,7 +349,14 @@ namespace Photo
                 {
                     try
                     {
-                        zdjecia[i].Usun();
+                        if (zdjecia[i].Usun())
+                        {
+                            if (usunieto == false)
+                                usunieto = true;
+                            Thumbnailview.Usun(zdjecia[i]);
+                            zdjecia[i].Dispose();
+                        }
+
                     }
                     catch (FileNotFoundException)
                     {
@@ -359,6 +367,8 @@ namespace Photo
                         MessageBox.Show("Katalog z wybranym zdjêciem nie mo¿e zostaæ odnaleziony!", "B³¹d!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
+                if (usunieto)
+                    Thumbnailview.Odswiez();
             }
         }
 

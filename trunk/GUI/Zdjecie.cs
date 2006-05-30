@@ -175,16 +175,16 @@ namespace Photo
             baza.Rozlacz();
         }      
 
-        public void Usun()
+        public bool Usun()
         {
             if (tylkoDoOdczytu)
             {
                 MessageBox.Show("Plik tylko do odczytu! Nie można usunąć.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return false;
             }
 
             if (MessageBox.Show("Czy napewno chcesz usunąć \"" + Path + "\"", "Potwierdzenie usunięcia pliku", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                return;
+                return false;
 
             if (CzyUstawioneId() == true)
             {
@@ -192,6 +192,7 @@ namespace Photo
             }
 
             System.IO.File.Delete(Path);
+            return true;
         }
 
         public Bitmap Miniatura
