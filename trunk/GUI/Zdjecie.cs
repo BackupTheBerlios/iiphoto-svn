@@ -526,22 +526,25 @@ namespace Photo
 
         public void AktualizujBaze()
         {
-            Db baza = new Db();
-
-            baza.Polacz();
-
-            try
+            if (CzyUstawioneId())
             {
-                ZczytajPola();
-                baza.Update("Zdjecie", "komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
-                //MessageBox.Show("Update3: komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show("blad sql: " + ex.Message);
-            }
+                Db baza = new Db();
 
-            baza.Rozlacz();
+                baza.Polacz();
+
+                try
+                {
+                    ZczytajPola();
+                    baza.Update("Zdjecie", "komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
+                    //MessageBox.Show("Update3: komentarz=\'" + komentarz + "\', autor=\'" + autor + "\', orientacja=" + orient + " where id_zdjecia=" + Id);
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("blad sql: " + ex.Message);
+                }
+
+                baza.Rozlacz();
+            }
 
         }
 
