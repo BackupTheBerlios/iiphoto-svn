@@ -214,9 +214,10 @@ namespace Photo
                 case "75%": zoom = 0.75; break;
                 case "100%": zoom = 1.0; break;
                 case "150%": zoom = 1.5; break;
-                case "Do ekranu": przegladarkaZdjec.Imageview.UstawDopasowanieDoEkranu(); return;
+                case "Do ekranu": przegladarkaZdjec.Imageview.UstawDopasowanieDoEkranu(); przegladarkaZdjec.Imageview.Focus(); return;
             }
             przegladarkaZdjec.Imageview.Zoom(zoom);
+            przegladarkaZdjec.Imageview.Focus();
         }
         
         //toolStripComboBox2
@@ -235,6 +236,7 @@ namespace Photo
                 Config.ZmienRozmiarMiniatury(size);
                 przegladarkaZdjec.ZmienionoRozmiarMiniatury();
             }
+            przegladarkaZdjec.Thumbnailview.Focus();
         }
 
         private void toolStripComboBox2_KeyPress(object sender, KeyPressEventArgs e)
