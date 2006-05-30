@@ -118,6 +118,6 @@ namespace Photo
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ListView Exif;
         private System.Windows.Forms.Splitter splitter1;
-
+        private Zdjecie zdjecie;
     }
 }

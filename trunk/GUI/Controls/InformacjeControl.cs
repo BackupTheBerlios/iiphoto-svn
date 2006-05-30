@@ -25,25 +25,26 @@ namespace Photo
             Exif.Columns[1].Width = 95;
         }
 
-        public void Zaladuj(ZdjecieInfo info)
+        /*public void Zaladuj(ZdjecieInfo info)
         {
             Wyswietl(info);
-        }
+        }*/
 
-        public void Zaladuj(IZdjecie zdjecie)
+        public void Zaladuj(Zdjecie zdjecie)
         {
-            ZdjecieInfo info = new ZdjecieInfo(((Zdjecie)zdjecie).PobierzDaneExif(), zdjecie.NazwaPliku, ((Zdjecie)zdjecie).Path, new Size(zdjecie.Rozmiar.Width, zdjecie.Rozmiar.Height), ((Zdjecie)zdjecie).FormatPliku);
-            Wyswietl(info);
+            //ZdjecieInfo info = new ZdjecieInfo(((Zdjecie)zdjecie).PobierzDaneExif(), zdjecie.NazwaPliku, ((Zdjecie)zdjecie).Path, new Size(zdjecie.Rozmiar.Width, zdjecie.Rozmiar.Height), ((Zdjecie)zdjecie).FormatPliku);
+            this.zdjecie = zdjecie;
+            Wyswietl();
         }
 
-        private void Wyswietl(ZdjecieInfo info)
+        private void Wyswietl()
         {
             Tags.Items.Clear();
             Exif.Items.Clear();
-            if (info != null)
+            if (zdjecie != null)
             {
-                fillTags(info);
-                fillExif(info.propertyItems);
+                fillTags();
+                fillExif();
             }
             else
             {
@@ -52,8 +53,9 @@ namespace Photo
             }
         }
 
-        private void fillExif(PropertyItem[] propertyItems)
+        private void fillExif()
         {
+            PropertyItem[] propertyItems = zdjecie.PobierzDaneExif();
             Dictionary<int, string> d = PropertyTags.defaultExifIds;
             string propertyValue;
 
@@ -67,34 +69,36 @@ namespace Photo
             }
         }
 
-        private void fillTags(ZdjecieInfo info)
+        private void fillTags()
         {
-            Tags.Items.Add(new ListViewItem(new string[] { "Lokalizacja", info.Sciezka.Substring(0, info.Sciezka.LastIndexOf('\\') + 1) }));
-            Tags.Items.Add(new ListViewItem(new string[] { "Nazwa", info.NazwaPliku }));
-            Tags.Items.Add(new ListViewItem(new string[] { "Szerokoœæ", info.Rozmiar.Width.ToString() }));
-            Tags.Items.Add(new ListViewItem(new string[] { "Wysokoœæ", info.Rozmiar.Height.ToString() }));
-            Tags.Items.Add(new ListViewItem(new string[] { "Format", info.Format}));
+            Tags.Items.Add(new ListViewItem(new string[] { "Lokalizacja", zdjecie.Path.Substring(0, zdjecie.Path.LastIndexOf('\\') + 1) }));
+            Tags.Items.Add(new ListViewItem(new string[] { "Nazwa", zdjecie.NazwaPliku }));
+            Tags.Items.Add(new ListViewItem(new string[] { "Szerokoœæ", zdjecie.Rozmiar.Width.ToString() }));
+            Tags.Items.Add(new ListViewItem(new string[] { "Wysokoœæ", zdjecie.Rozmiar.Height.ToString() }));
+            Tags.Items.Add(new ListViewItem(new string[] { "Format", zdjecie.FormatPliku }));
             StringBuilder sb;
-            if (info.Albumy.Count > 0)
+            List<string> Albumy = zdjecie.ZwrocNazwyAlbumow();
+            List<string> Tagi = zdjecie.ZwrocNazwyTagow();
+            if (Albumy.Count > 0)
             {
                 sb = new StringBuilder();
                 int i;
-                for (i = 0; i < info.Albumy.Count - 1; i++)
+                for (i = 0; i < Albumy.Count - 1; i++)
                 {
-                    sb.Append(info.Albumy[i] + ", ");
+                    sb.Append(Albumy[i] + ", ");
                 }
-                sb.Append(info.Albumy[i]);
+                sb.Append(Albumy[i]);
                 Tags.Items.Add(new ListViewItem(new string[] { "Albumy", sb.ToString() }));
             }
-            if (info.Tagi.Count > 0)
+            if (Tagi.Count > 0)
             {
                 sb = new StringBuilder();
                 int i;
-                for (i = 0; i < info.Tagi.Count - 1; i++)
+                for (i = 0; i < Tagi.Count - 1; i++)
                 {
-                    sb.Append(info.Tagi[i] + ", ");
+                    sb.Append(Tagi[i] + ", ");
                 }
-                sb.Append(info.Tagi[i]);
+                sb.Append(Tagi[i]);
                 Tags.Items.Add(new ListViewItem(new string[] { "Tagi", sb.ToString() }));
             }
         }

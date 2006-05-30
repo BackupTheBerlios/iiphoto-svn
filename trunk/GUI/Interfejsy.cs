@@ -73,7 +73,7 @@ namespace Photo
     /// Delegat informuj¹cy o wybraniu zdjêcia z pewnego zbioru.
     /// </summary>
     /// <param name="zdjecie">Wybrany obiekt.</param>
-    public delegate void WybranoZdjecieDelegate(IZdjecie zdjecie);
+    public delegate void WybranoZdjecieDelegate(Zdjecie zdjecie);
 
     /// <summary>
     /// Delegat informuj¹cy o wybraniu katalogu z pewnego zbioru.
@@ -85,7 +85,7 @@ namespace Photo
     /// Delegat informuj¹cy o zaznaczeniu zdjêcia z pewnego zbioru.
     /// </summary>
     /// <param name="ZdjecieInfo">Informacje o wybranym obiekcie.</param>
-    public delegate void ZaznaczonoZdjecieDelegate(ZdjecieInfo info);
+    public delegate void ZaznaczonoZdjecieDelegate(Zdjecie zdjecie);
     /// <summary>
     /// Delegat informuj¹cy o wlaczeniu widoku zdjecia
     /// </summary>

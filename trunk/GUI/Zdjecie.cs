@@ -398,7 +398,7 @@ namespace Photo
         #region Baza
 
 
-        private List<string> ZwrocNazwyTagow()
+        public List<string> ZwrocNazwyTagow()
         {
             Db baza = new Db();
             List<string> lista = new List<string>();
@@ -431,7 +431,7 @@ namespace Photo
         }
 
 
-        private List<string> ZwrocNazwyAlbumow()
+        public List<string> ZwrocNazwyAlbumow()
         {
             Db baza = new Db();
             List<string> lista = new List<string>();

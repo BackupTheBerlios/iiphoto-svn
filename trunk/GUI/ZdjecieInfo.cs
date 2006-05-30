@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace Photo
 {
-    public class ZdjecieInfo
+    /*public class ZdjecieInfo
     {
         List<string> tagi;
         List<string> albumy;
@@ -16,6 +16,13 @@ namespace Photo
         string sciezka;
         Size rozmiar;
         string format;
+
+        public ZdjecieInfo(Zdjecie z)
+        {
+            propItems = z.PobierzDaneExif();
+            nazwaPliku = z.NazwaPliku;
+            sciezka = z.Path;
+        }
 
         public ZdjecieInfo(PropertyItem[] pItems, string nazwa, string path, Size rozm, string f) {
             propItems = pItems;
@@ -86,5 +93,5 @@ namespace Photo
                 albumy = value;
             }
         }
-    }
+    }*/
 }
