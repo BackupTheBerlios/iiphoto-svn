@@ -442,9 +442,18 @@ namespace Photo
         {
             switch (KodOperacji)
             {
-                case 1: z.Duze.RotateFlip(RotateFlipType.Rotate90FlipNone); break;
-                case 2: z.Duze.RotateFlip(RotateFlipType.Rotate270FlipNone); break;
-                case 3: z.Duze.RotateFlip(RotateFlipType.Rotate180FlipNone); break;
+                case 1:
+                    z.Duze.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                    z.Duze = new Bitmap(z.Duze);
+                    break;
+                case 2:
+                    z.Duze.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    z.Duze = new Bitmap(z.Duze);
+                    break;
+                case 3:
+                    z.Duze.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                    z.Duze = new Bitmap(z.Duze);
+                    break;
             }
         }
 
