@@ -402,6 +402,8 @@ namespace Photo
         {
             Db baza = new Db();
             List<string> lista = new List<string>();
+            if (!CzyUstawioneId())
+                return lista;
 
             baza.Polacz();
 
@@ -435,6 +437,8 @@ namespace Photo
         {
             Db baza = new Db();
             List<string> lista = new List<string>();
+            if (!CzyUstawioneId())
+                return lista;
 
             baza.Polacz();
 
