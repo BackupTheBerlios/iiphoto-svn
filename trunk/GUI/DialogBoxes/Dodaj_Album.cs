@@ -63,10 +63,13 @@ namespace Photo
 
                 this.Dispose();
             }
+            else if (textBox1.Text == "")
+            {
+                MessageBox.Show("Wpisz nazwe albumu");                
+            }
             else
             {
                 MessageBox.Show("Za d³uga nazwa");
-                this.Dispose();
             }
 
         }

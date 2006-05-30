@@ -62,10 +62,13 @@ namespace Photo
 
                 this.Dispose();
             }
+            else if (textBox1.Text == "")
+            {
+                MessageBox.Show("Wpisz nazwe tagu"); 
+            }
             else
             {
-                MessageBox.Show("Za d³uga nazwa");
-                this.Dispose();
+                MessageBox.Show("Za d³uga nazwa");                
             }
 
         }
