@@ -186,7 +186,10 @@ namespace Photo
             if (MessageBox.Show("Czy napewno chcesz usunąć \"" + Path + "\"", "Potwierdzenie usunięcia pliku", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
 
-            UsunZdjecieZBazy();
+            if (CzyUstawioneId() == true)
+            {
+                UsunZdjecieZBazy();
+            }
 
             System.IO.File.Delete(Path);
         }

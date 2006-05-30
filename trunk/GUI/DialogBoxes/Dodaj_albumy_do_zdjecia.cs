@@ -11,21 +11,13 @@ using System.Data.SqlClient;
 namespace Photo
 {
     public partial class Dodaj_albumy_do_zdjecia : Form
-    {
-        private PrzegladarkaZdjec przegladarka;
-        //private Zdjecie zdjecie;
+    {                
         private List<Zdjecie> lista_zdjec;
-        private int opcja = 0;
-        bool czy_lista_z_katalogu = false;
-
-        public event ZmienionoTagiDelegate ZmienionoTagi;
-
-        public Dodaj_albumy_do_zdjecia(PrzegladarkaZdjec p)
-        {
-            InitializeComponent();
-            przegladarka = p;
-            //Wypelnij();
-        }
+        private int opcja = 0;//1 - dodawanie z katalogu  // 2 - dodawanie z miniaturek        
+        private string sciezka;
+        private FileTree drzewo;
+        private PrzegladarkaZdjec przegladarka;
+                        
         public Dodaj_albumy_do_zdjecia(Zdjecie z)
         {
             InitializeComponent();
@@ -33,10 +25,31 @@ namespace Photo
             //Wypelnij();
             //opcja = 1;
         }
-        public Dodaj_albumy_do_zdjecia(List<Zdjecie> lis_z, bool czy_katalog)
+        public Dodaj_albumy_do_zdjecia(List<Zdjecie> lis_z, PrzegladarkaZdjec pr, string s)
         {
             InitializeComponent();
             lista_zdjec = lis_z;
+            przegladarka = pr;
+            if (lista_zdjec.Count == 1 && lista_zdjec[0].CzyUstawioneId() == true)
+            {                
+                Wypelnij(lista_zdjec[0]);
+            }
+            else
+            {
+                Wypelnij_dla_kilku();
+            }
+
+            sciezka = s.Substring(0, s.LastIndexOf("\\"));
+            if (sciezka.Length == 2)
+                sciezka += "\\";
+            opcja = 2;
+        }
+
+        public Dodaj_albumy_do_zdjecia(List<Zdjecie> lis_z, FileTree tr, string s)
+        {
+            InitializeComponent();
+            lista_zdjec = lis_z;
+            drzewo = tr;
             if (lista_zdjec.Count == 1)
             {
                 lista_zdjec[0].WypelnijListeTagow();
@@ -46,8 +59,8 @@ namespace Photo
             {
                 Wypelnij_dla_kilku();
             }
-            czy_lista_z_katalogu = czy_katalog;
-            //opcja = 2;
+            sciezka = s;
+            opcja = 1;
         }
 
         private void Wypelnij(Zdjecie zdjecie)
@@ -55,8 +68,7 @@ namespace Photo
             Db baza = new Db();
             baza.Polacz();
             try
-            {
-                List<Int64> lista;
+            {                
                 bool czy_znaleziony = false;                
 
                 DataSet ds = baza.Select("select id_tagu, nazwa from Tag where album = 1");
@@ -67,7 +79,7 @@ namespace Photo
                     foreach (DataRow r in t.Rows)
                     {
                         if (!(r[0] is DBNull))
-                        {
+                        {                            
                             zczytanie_z_bazy_almumow = baza.Select("select id_tagu from TagZdjecia where id_zdjecia=" + zdjecie.Id + " and id_tagu in (select id_tagu from Tag where album=1)");
 
                             foreach (DataTable t2 in zczytanie_z_bazy_almumow.Tables)
@@ -75,9 +87,9 @@ namespace Photo
                                 foreach (DataRow r2 in t2.Rows)
                                 {
                                     if (!(r2[0] is DBNull))
-                                    {
-                                        if (r2[0] == r[0])
-                                        {
+                                    {                                        
+                                        if ((Int64)r2[0] == (Int64)r[0])
+                                        {                                            
                                             this.checkedListBox1.Items.Add((string)r[1], true);
                                             czy_znaleziony = true;
                                             break;
@@ -129,42 +141,25 @@ namespace Photo
             baza.Rozlacz();            
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void DodajDoAlbumu(List<Zdjecie> list)
         {
             Db baza = new Db();
             baza.Polacz();
-            List<Int64> listaTagowDoUstawienia;// = new List<Int64>();
 
-            if (lista_zdjec.Count == 1)
-                opcja = 1;
-            
             try
             {
                 foreach (Zdjecie zdjecie in lista_zdjec)
                 {
                     if (zdjecie.CzyUstawioneId() == true)
-                    {
-                        //MessageBox.Show("dodaje tag");
-                        if (opcja == 1)
+                    {                        
+                        if (lista_zdjec.Count == 1)
                         {                            
-                            //usuniecie wszystkich tagow zeby dodac nowe
-                            baza.Delete("TagZdjecia", "id_zdjecia=" + zdjecie.Id + " and id_tagu in (select id_tagu from Tag where album = 0)");
-                            listaTagowDoUstawienia = new List<Int64>();
-                        }
-                        else
-                        {
-                            /*zdjecie.WypelnijListeTagow();
-                            if (zdjecie.CzyUstawioneId() == true)
-                                MessageBox.Show("tak: "+zdjecie.Id);
-                            else
-                                MessageBox.Show("nie");
-                             */
-                            listaTagowDoUstawienia = zdjecie.Tagi;
+                            baza.Delete("TagZdjecia", "id_zdjecia=" + zdjecie.Id + " and id_tagu in (select id_tagu from Tag where album = 1)");                         
                         }
 
                         foreach (string ob in this.checkedListBox1.CheckedItems)
                         {
-                            DataSet ds = baza.Select("select id_tagu from Tag where nazwa=\'" + ob + "\' and album = 0");
+                            DataSet ds = baza.Select("select id_tagu from Tag where nazwa=\'" + ob + "\' and album = 1");
 
                             foreach (DataTable t in ds.Tables)
                             {
@@ -172,34 +167,35 @@ namespace Photo
                                 {
                                     if (!(r[0] is DBNull))
                                     {
-                                        baza.Insert("TagZdjecia", zdjecie.Id + "," + r[0]);
-                                        listaTagowDoUstawienia.Add((Int64)r[0]);
-                                        //MessageBox.Show("TagZdjecia" + zdjecie.Id + "," + r[0]);
+                                        baza.Insert("TagZdjecia", zdjecie.Id + "," + r[0]);                                       
                                     }
                                 }
                             }
-                        }
-                        zdjecie.Tagi = listaTagowDoUstawienia;
-                        //zdjecie.WypelnijListeTagow();
-                        //zdjecie.Tagi = listaTagowDoUstawienia;
-                        //MessageBox.Show("zd.t.cou: " + zdjecie.Tagi.Count);
+                        }                       
                     }
                 }
-
-                if (czy_lista_z_katalogu == true)
-                {
-                    if (ZmienionoTagi != null)
-                        ZmienionoTagi();
-                }
-
             }
             catch (SqlException ex)
             {
                 MessageBox.Show("blad sql " + ex.Message);
             }
-            
-            baza.Rozlacz();
 
+            baza.Rozlacz();            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (opcja == 1)
+            {
+                drzewo.d_d_a(sciezka);
+                DodajDoAlbumu(lista_zdjec);
+            }
+            else if (opcja == 2)
+            {
+                przegladarka.dodaj_kolekcje_do_bazy(lista_zdjec);
+                DodajDoAlbumu(lista_zdjec);
+            }            
+            
             this.Dispose();
         }
     }

@@ -1072,8 +1072,20 @@ namespace Photo
         {
             ToolStripItem mn = (ToolStripItem)sender;
 
-            Dodaj_katalog_do_bazy ddk = new Dodaj_katalog_do_bazy(mn.ToolTipText, this);
-            ddk.Show();
+            List<string> lista_stringow = Przefiltruj(mn.ToolTipText);
+            List<Zdjecie> lista_zdjec = new List<Zdjecie>();
+            foreach (string s in lista_stringow)
+            {
+                Zdjecie z = new Zdjecie(s);
+                z.ZweryfikujZdjecie();
+                lista_zdjec.Add(z);
+            }
+
+            Dodaj_albumy_do_zdjecia dadz = new Dodaj_albumy_do_zdjecia(lista_zdjec, this, mn.ToolTipText);
+            dadz.Show();
+
+            //Dodaj_katalog_do_bazy ddk = new Dodaj_katalog_do_bazy(mn.ToolTipText, this);
+            //ddk.Show();
         }
 
         protected override void OnAfterCollapse(TreeViewEventArgs e)

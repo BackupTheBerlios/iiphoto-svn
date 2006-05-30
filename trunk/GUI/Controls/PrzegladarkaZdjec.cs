@@ -144,6 +144,8 @@ namespace Photo
                         {
                             toolStripItem = Context.Items.Add("Dodaj do kolekcji");
                             toolStripItem.Click += new EventHandler(DodajZaznaczenieDoKolekcji);
+                            toolStripItem = Context.Items.Add("Dodaj do Albumu");
+                            toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
                         }
                         else
                         {
@@ -153,7 +155,7 @@ namespace Photo
                             toolStripItem.Click += new EventHandler(UsunTagi);
                             toolStripItem = Context.Items.Add("Usuñ z kolekcji");
                             toolStripItem.Click += new EventHandler(UsunZKolekcji);
-                            toolStripItem = Context.Items.Add("Dodaj do Albumu");
+                            toolStripItem = Context.Items.Add("Uaktualizuj Albumy");
                             toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
                         }
                         toolStripItem = Context.Items.Add("Usuñ zdjecie");
@@ -277,8 +279,10 @@ namespace Photo
 
             if (lista.Count != 0)
             {
-                Dodaj_katalog_do_bazy ddk = new Dodaj_katalog_do_bazy(lista[0].Path, this);
-                ddk.Show();
+                Dodaj_albumy_do_zdjecia dadz = new Dodaj_albumy_do_zdjecia(lista, this, lista[0].Path);
+                dadz.Show();
+                //Dodaj_katalog_do_bazy ddk = new Dodaj_katalog_do_bazy(lista[0].Path, this);
+                //ddk.Show();
             }
 
         }

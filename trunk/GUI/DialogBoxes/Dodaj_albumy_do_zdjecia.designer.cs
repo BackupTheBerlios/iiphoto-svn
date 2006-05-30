@@ -53,15 +53,15 @@ namespace Photo
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Dodaj_tagi_do_zdjecia
+            // Dodaj_albumy_do_zdjecia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(154, 184);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.checkedListBox1);
-            this.Name = "Dodaj_tagi_do_zdjecia";
-            this.Text = "Etykiety";
+            this.Name = "Dodaj_albumy_do_zdjecia";
+            this.Text = "Albumy";
             this.ResumeLayout(false);
 
         }
