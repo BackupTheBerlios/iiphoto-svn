@@ -253,7 +253,9 @@ namespace Photo
 
         private void wycofajZmianyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            przegladarkaZdjec.Imageview.Zdjecie.DisposeDuze();
+            przegladarkaZdjec.Imageview.Zdjecie.Dispose();
+            przegladarkaZdjec.Imageview.Zdjecie.Edytowano = false;
+            przegladarkaZdjec.Thumbnailview.ZmodyfikowanoZdjecie(null, przegladarkaZdjec.Imageview.Zdjecie, RodzajModyfikacjiZdjecia.Zawartosc);
             przegladarkaZdjec.Imageview.Wypelnij(new IZdjecie[] { przegladarkaZdjec.Imageview.Zdjecie});
         }
 

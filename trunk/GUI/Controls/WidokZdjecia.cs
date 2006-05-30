@@ -347,7 +347,7 @@ namespace Photo
                 zdjecie.Zaznaczenie = selectedRectangle;
                 if (temp != zdjecie && temp != null)
                 {
-                    if (temp.czyEdytowano())
+                    if (temp.Edytowano)
                     {
                         if (MessageBox.Show("S¹ niezapisane zmiany w zdjêciu " + temp.NazwaPliku + ". Czy zapisaæ?", "Czy zapisaæ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             temp.Zapisz();

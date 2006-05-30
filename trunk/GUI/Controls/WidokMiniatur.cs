@@ -132,11 +132,11 @@ namespace Photo
             }
         }
 
-        public void OdswiezZdjecie(IZdjecie zdjecie)
+        /*public void OdswiezZdjecie(IZdjecie zdjecie)
         {
             LargeImageList.Images[((Zdjecie)zdjecie).indeks] = ((Zdjecie)zdjecie).StworzMiniatureDoWidokuMiniatur();
             Refresh();
-        }
+        }*/
 
         public void Usun(IZdjecie zdjecie)
         {
@@ -398,7 +398,7 @@ namespace Photo
 
                 foreach (Zdjecie z in widokMiniatur.Zdjecia)
                 {
-                    if (z.czyEdytowano() == true)
+                    if (z.Edytowano == true)
                     {
                         if (MessageBox.Show("S¹ niezapisane zmiany w zdjêciu " + z.NazwaPliku + ". Czy zapisaæ?", "Czy zapisaæ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             z.Zapisz();

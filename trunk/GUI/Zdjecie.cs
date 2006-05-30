@@ -1034,14 +1034,21 @@ namespace Photo
 
         #endregion
 
-        public bool czyEdytowano()
+        public bool Edytowano
         {
-            return edytowano;
+            get
+            {
+                return edytowano;
+            }
+            set
+            {
+                edytowano = value;
+            }
         }
 
         public void Zapisz()
         {
-            if (duze == null || czyEdytowano() == false)
+            if (duze == null || Edytowano == false)
                 return;
             if (tylkoDoOdczytu)
             {
