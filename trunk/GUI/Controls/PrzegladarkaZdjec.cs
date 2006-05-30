@@ -151,12 +151,16 @@ namespace Photo
                         {
                             toolStripItem = Context.Items.Add("Uaktualizuj Tagi");
                             toolStripItem.Click += new EventHandler(UaktualizujTagi);
-                            toolStripItem = Context.Items.Add("Usuñ Tagi");
-                            toolStripItem.Click += new EventHandler(UsunTagi);
-                            toolStripItem = Context.Items.Add("Usuñ z kolekcji");
-                            toolStripItem.Click += new EventHandler(UsunZKolekcji);
                             toolStripItem = Context.Items.Add("Uaktualizuj Albumy");
                             toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
+                            toolStripItem = Context.Items.Add("Aktualizuj w Bazie");
+                            toolStripItem.Click += new EventHandler(AktualizujBaze);
+                            toolStripItem = Context.Items.Add("Usuñ Tagi");
+                            toolStripItem.Click += new EventHandler(UsunTagi);
+                            toolStripItem = Context.Items.Add("Usuñ Albumy");
+                            toolStripItem.Click += new EventHandler(UsunAlbumy);
+                            toolStripItem = Context.Items.Add("Usuñ z kolekcji");
+                            toolStripItem.Click += new EventHandler(UsunZKolekcji);                            
                         }
                         toolStripItem = Context.Items.Add("Usuñ zdjecie");
                         toolStripItem.Click += new EventHandler(UsunZdjecie);
@@ -168,12 +172,16 @@ namespace Photo
                         //ewentualnie dla kilku a to pozniej
                         toolStripItem = Context.Items.Add("Dodaj Tagi");
                         toolStripItem.Click += new EventHandler(UaktualizujTagi);
+                        toolStripItem = Context.Items.Add("Dodaj zaznaczone do Albumów");
+                        toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
+                        toolStripItem = Context.Items.Add("Aktualizuj zaznaczone w Bazie");
+                        toolStripItem.Click += new EventHandler(AktualizujBaze);
                         toolStripItem = Context.Items.Add("Usuñ Tagi z zaznaczenia");
                         toolStripItem.Click += new EventHandler(UsunTagi);
+                        toolStripItem = Context.Items.Add("Usuñ Albumy z zaznaczemia");
+                        toolStripItem.Click += new EventHandler(UsunAlbumy);
                         toolStripItem = Context.Items.Add("Usuñ zaznaczenie z kolekcji");
-                        toolStripItem.Click += new EventHandler(UsunZKolekcji);
-                        toolStripItem = Context.Items.Add("Dodaj zaznaczone do Albumu");
-                        toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
+                        toolStripItem.Click += new EventHandler(UsunZKolekcji);                        
                         toolStripItem = Context.Items.Add("Usuñ zaznaczone zdjecia");
                         toolStripItem.Click += new EventHandler(UsunZdjecie);
                     }                   
@@ -208,6 +216,20 @@ namespace Photo
                 {
                     z.UsunTagi();
                     z.WypelnijListeTagow();
+                }
+            }
+            this.Thumbnailview.ZresetujTagi();
+        }
+
+        private void UsunAlbumy(object sender, EventArgs e)
+        {
+            List<Zdjecie> lista = ZwrocZdjeciaZaznaczone();
+
+            foreach (Zdjecie z in lista)
+            {
+                if (z.CzyUstawioneId() == true)
+                {
+                    z.UsunAlbumy();                    
                 }
             }
             this.Thumbnailview.ZresetujTagi();
@@ -255,12 +277,19 @@ namespace Photo
         {
             List<Zdjecie> lista = ZwrocZdjeciaZaznaczone();
 
-            //if (lista.Count == 1)
-            //{                
-                Dodaj_tagi_do_zdjecia dtdz = new Dodaj_tagi_do_zdjecia(lista,false);
-                dtdz.ShowDialog();
-                Thumbnailview.Odswiez();
-            //}
+            Dodaj_tagi_do_zdjecia dtdz = new Dodaj_tagi_do_zdjecia(lista,false);
+            dtdz.ShowDialog();
+            Thumbnailview.Odswiez();            
+        }
+
+        private void AktualizujBaze(object sender, EventArgs e)
+        {
+            List<Zdjecie> lista = ZwrocZdjeciaZaznaczone();
+
+            foreach (Zdjecie z in lista)
+            {
+                z.AktualizujBaze();
+            }
         }
 
         private void DodajZaznaczenieDoKolekcji(object sender, EventArgs e)

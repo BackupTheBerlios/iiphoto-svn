@@ -140,41 +140,7 @@ namespace Photo
             }
         }
 
-        public void UsunTagi()
-        {
-            Db baza = new Db();
-
-            baza.Polacz();
-            try
-            {                
-                baza.Delete("TagZdjecia", "id_zdjecia = " + Id + " and id_tagu in (select id_tagu from Tag where album=0)");
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show("blad sql" + ex.Message);
-            }
-
-            baza.Rozlacz();
-        }
-
-        public void UsunZdjecieZBazy()
-        {
-            Db baza = new Db();
-
-            baza.Polacz();
-            try
-            {
-                baza.Delete("Zdjecie", "id_zdjecia = " + Id);
-                baza.Delete("TagZdjecia", "id_zdjecia = " + Id);
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show("blad sql" + ex.Message);
-            }
-
-            baza.Rozlacz();
-        }      
-
+        
         public bool Usun()
         {
             if (tylkoDoOdczytu)
@@ -400,6 +366,59 @@ namespace Photo
 
 
         #region Baza
+
+        public void UsunTagi()
+        {
+            Db baza = new Db();
+
+            baza.Polacz();
+            try
+            {
+                baza.Delete("TagZdjecia", "id_zdjecia = " + Id + " and id_tagu in (select id_tagu from Tag where album=0)");
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("blad sql" + ex.Message);
+            }
+
+            baza.Rozlacz();
+        }
+
+        public void UsunAlbumy()
+        {
+            Db baza = new Db();
+
+            baza.Polacz();
+            try
+            {
+                baza.Delete("TagZdjecia", "id_zdjecia = " + Id + " and id_tagu in (select id_tagu from Tag where album=1)");
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("blad sql" + ex.Message);
+            }
+
+            baza.Rozlacz();
+        }
+
+        public void UsunZdjecieZBazy()
+        {
+            Db baza = new Db();
+
+            baza.Polacz();
+            try
+            {
+                baza.Delete("Zdjecie", "id_zdjecia = " + Id);
+                baza.Delete("TagZdjecia", "id_zdjecia = " + Id);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("blad sql" + ex.Message);
+            }
+
+            baza.Rozlacz();
+        }      
+
 
 
         public List<string> ZwrocNazwyTagow()
@@ -820,6 +839,8 @@ namespace Photo
             }
         }
 
+        
+
 
         #endregion
 
@@ -1086,5 +1107,7 @@ namespace Photo
             }
             baza.Rozlacz();            
         }
+
+        
     }
 }
