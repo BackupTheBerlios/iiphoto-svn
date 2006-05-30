@@ -230,6 +230,10 @@ namespace Photo
                             /* validateImageData = */ false))
                         {
                             duze = new Bitmap(image);
+                            foreach (PropertyItem pi in image.PropertyItems) 
+                            {
+                                duze.SetPropertyItem(pi);
+                            }
                         }
                     }
                     UzyjOrientacji(duze);
