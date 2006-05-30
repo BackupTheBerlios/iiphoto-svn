@@ -430,18 +430,19 @@ namespace Photo
                 {
                     if (ZaznaczonoZdjecie != null)
                         ZaznaczonoZdjecie(widokZdjecia1.Zdjecie);
+                    Imageview.DrawMyRectangle(Imageview.selectedRectangle);
                 }
                 if (((TabControl)sender).SelectedTab == zdjecie1Tab)
                 {
                     if (WlaczonoWidokZdjecia != null)
                         WlaczonoWidokZdjecia();
-                    Imageview.DrawMyRectangle(Imageview.selectedRectangle);
                 }
                 if (((TabControl)sender).SelectedTab == miniatury1Tab)
                 {
                     if (WlaczonoWidokZdjecia != null)
                         WylaczonoWidokZdjecia();
-                    Imageview.DrawMyRectangle(Imageview.selectedRectangle);
+                    if (widokZdjecia1.czyZaladowaneZdjecie)
+                        Imageview.DrawMyRectangle(Imageview.selectedRectangle);
                 }
             } catch (FileNotFoundException)
                 {
