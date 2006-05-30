@@ -152,9 +152,7 @@ namespace Photo
 
         public IWyszukiwanie Wyszukaj()
         {
-            Wyszukiwanie wynik = new Wyszukiwanie();
-            wynik.And("..\\..\\img\\wyszuk1.bmp");
-            return wynik;
+            throw new Exception("The method or operation is not implemented.");
         }
 
         #endregion
