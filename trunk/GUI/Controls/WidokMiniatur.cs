@@ -114,7 +114,7 @@ namespace Photo
                 return;
             }
 
-            zdjecie.ZmodyfikowanoZdjecie += new ZmodyfikowanoZdjecieDelegate(zdjecie_ZmodyfikowanoZdjecie);
+            zdjecie.ZmodyfikowanoZdjecie += new ZmodyfikowanoZdjecieDelegate(ZmodyfikowanoZdjecie);
             if (CzyWyswietlic(zdjecie))
             {
                 ((Zdjecie)zdjecie).indeks = LargeImageList.Images.Count;
@@ -130,12 +130,6 @@ namespace Photo
             {
                 WszystkieZdjecia.Add(zdjecie);
             }
-        }
-
-        void zdjecie_ZmodyfikowanoZdjecie(IKontekst kontekst, IZdjecie zdjecie, RodzajModyfikacjiZdjecia rodzaj)
-        {
-            LargeImageList.Images[((Zdjecie)zdjecie).indeks] = ((Zdjecie)zdjecie).StworzMiniatureDoWidokuMiniatur();
-            Refresh();
         }
 
         public void OdswiezZdjecie(IZdjecie zdjecie)
@@ -288,7 +282,8 @@ namespace Photo
 
         public void ZmodyfikowanoZdjecie(IKontekst kontekst, IZdjecie zdjecie, RodzajModyfikacjiZdjecia rodzaj)
         {
-            throw new Exception("The method or operation is not implemented.");
+            LargeImageList.Images[((Zdjecie)zdjecie).indeks] = ((Zdjecie)zdjecie).StworzMiniatureDoWidokuMiniatur();
+            Refresh();
         }
 
         #endregion

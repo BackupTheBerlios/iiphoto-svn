@@ -331,6 +331,8 @@ namespace Photo
             throw new Exception("This method is not used");
         }
 
+        public event ZmodyfikowanoZdjecieDelegate ZmodyfikowanoZdjecie;
+
         public void Wypelnij(IZdjecie[] zdjecia)
         {
             if (zdjecia.Length != 0)
@@ -343,8 +345,19 @@ namespace Photo
                 this.lmStartingPoint = new Point();
                 this.selectedRectangle = new Rectangle(0, 0, 0, 0);
                 zdjecie.Zaznaczenie = selectedRectangle;
-                if (temp != zdjecie && temp != null && temp.czyEdytowano() == false)
-                    temp.DisposeDuze();
+                if (temp != zdjecie && temp != null)
+                {
+                    if (temp.czyEdytowano())
+                    {
+                        //Czy zapisac???
+                        DialogResult dr;
+                        if (MessageBox.Show("S¹ niezapisane zmiany w zdjêciu " + temp.NazwaPliku + ". Czy zapisaæ?", "Czy zapisaæ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            temp.Zapisz();
+                    }
+                    temp.Dispose();
+                    if (ZmodyfikowanoZdjecie != null)
+                        ZmodyfikowanoZdjecie(null, temp, RodzajModyfikacjiZdjecia.Zawartosc);
+                }
                 this.Refresh();
             }
         }
