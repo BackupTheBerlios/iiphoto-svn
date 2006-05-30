@@ -365,7 +365,6 @@ namespace Photo
                 Zdjecie[] zdjecia = (Zdjecie[])Thumbnailview.WybraneZdjecia;
                 if (zdjecia != null & zdjecia.Length == 1)
                 {
-                    //ZdjecieInfo info = new ZdjecieInfo(Zdjecie.PobierzDaneExif(zdjecia[0].Path), zdjecia[0].NazwaPliku, zdjecia[0].Path, new Size(zdjecia[0].Rozmiar.Width, zdjecia[0].Rozmiar.Height), zdjecia[0].FormatPliku);
                     if (ZaznaczonoZdjecie != null)
                         ZaznaczonoZdjecie(zdjecia[0]);
                 }
@@ -386,7 +385,6 @@ namespace Photo
             {
                 if (((TabControl)sender).SelectedTab == zdjecie1Tab && widokZdjecia1.czyZaladowaneZdjecie)
                 {
-                    //ZdjecieInfo info = widokZdjecia1.pobierzInfoZdjecia;
                     if (ZaznaczonoZdjecie != null)
                         ZaznaczonoZdjecie(widokZdjecia1.Zdjecie);
                 }

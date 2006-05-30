@@ -25,14 +25,8 @@ namespace Photo
             Exif.Columns[1].Width = 95;
         }
 
-        /*public void Zaladuj(ZdjecieInfo info)
-        {
-            Wyswietl(info);
-        }*/
-
         public void Zaladuj(Zdjecie zdjecie)
         {
-            //ZdjecieInfo info = new ZdjecieInfo(((Zdjecie)zdjecie).PobierzDaneExif(), zdjecie.NazwaPliku, ((Zdjecie)zdjecie).Path, new Size(zdjecie.Rozmiar.Width, zdjecie.Rozmiar.Height), ((Zdjecie)zdjecie).FormatPliku);
             this.zdjecie = zdjecie;
             Wyswietl();
         }

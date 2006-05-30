@@ -24,14 +24,6 @@ namespace Photo
             zoom = 1.0;
         }
 
-        /*public ZdjecieInfo pobierzInfoZdjecia
-        {
-            get
-            {
-                return new ZdjecieInfo(zdjecie.PobierzDaneExif(), zdjecie.NazwaPliku, zdjecie.Path, new Size(zdjecie.Rozmiar.Width, zdjecie.Rozmiar.Height), zdjecie.FormatPliku);
-            }
-        }*/
-
         public bool czyZaladowaneZdjecie
         {
             get 

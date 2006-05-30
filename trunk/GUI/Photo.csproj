@@ -256,7 +256,6 @@
       <DependentUpon>WyszukiwarkaControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Zdjecie.cs" />
-    <Compile Include="ZdjecieInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OgolnyDiagramKlas.cd">
