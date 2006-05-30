@@ -215,6 +215,16 @@ namespace Photo
             }
         }
 
+        public static Bitmap FromImage(Image i)
+        {
+            Bitmap from = new Bitmap(i);
+            foreach (PropertyItem pi in i.PropertyItems)
+            {
+                from.SetPropertyItem(pi);
+            }
+            return from;
+        }
+
         public Bitmap Duze
         {
             get
@@ -229,11 +239,7 @@ namespace Photo
                             /* useEmbeddedColorManagement = */ true,
                             /* validateImageData = */ false))
                         {
-                            duze = new Bitmap(image);
-                            foreach (PropertyItem pi in image.PropertyItems) 
-                            {
-                                duze.SetPropertyItem(pi);
-                            }
+                            duze = Zdjecie.FromImage(image);
                         }
                     }
                     UzyjOrientacji(duze);

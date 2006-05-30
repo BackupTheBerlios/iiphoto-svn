@@ -444,17 +444,15 @@ namespace Photo
             {
                 case 1:
                     z.Duze.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                    z.Duze = new Bitmap(z.Duze);
                     break;
                 case 2:
                     z.Duze.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    z.Duze = new Bitmap(z.Duze);
                     break;
                 case 3:
                     z.Duze.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                    z.Duze = new Bitmap(z.Duze);
                     break;
             }
+            z.Duze = Zdjecie.FromImage(z.Duze);
         }
 
         public bool CzyNaToolbar()
