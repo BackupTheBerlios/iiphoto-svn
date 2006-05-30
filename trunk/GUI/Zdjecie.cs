@@ -907,15 +907,15 @@ namespace Photo
             Pen p;
             if (CzyUstawioneId() && tylkoDoOdczytu)
             {
-                p = new Pen(Color.LightBlue, 1);
+                p = new Pen(Color.LightBlue, 3);
             }
             else if (CzyUstawioneId())
             {
-                p = new Pen(Color.GreenYellow, 1);
+                p = new Pen(Color.Green, 3);
             }
             else if (tylkoDoOdczytu)
             {
-                p = new Pen(Color.FromArgb(255,141, 138), 1);
+                p = new Pen(Color.FromArgb(255,141, 138), 3);
             }
             else
             {

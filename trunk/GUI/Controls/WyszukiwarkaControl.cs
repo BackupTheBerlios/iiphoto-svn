@@ -104,9 +104,8 @@ namespace Photo
             return lista_zdjec;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void WykonajZapytanie()
         {
-
             if (textBox1.Text == "" || checkedListBox1.CheckedItems.Count == 0)
             {
                 MessageBox.Show("¯eby wyszukaæ podaj frazê i zaznacz po czym chcesz szukaæ");
@@ -131,17 +130,11 @@ namespace Photo
                 if (ZakonczonoWyszukiwanie != null)
                     ZakonczonoWyszukiwanie(zdjecia.ToArray(), new Katalog[0], false);
             }
-            /*Wyszukiwanie wynik = new Wyszukiwanie();
-            if (checkBox1.Checked)
-            {
-                wynik.And(wyszukiwacz_albumow.Wyszukaj());
-            }
-            wynik.And(Wyszukaj());
-            if (ZakonczonoWyszukiwanie != null)
-            {
-                ZakonczonoWyszukiwanie(wynik.PodajWynik(), new Katalog[0]);
-            }
-             * */
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            WykonajZapytanie();            
         }
 
         #region Wyszukiwacz Members
@@ -156,5 +149,14 @@ namespace Photo
         }
 
         #endregion
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Keys k = (Keys)e.KeyChar;
+            if (k == Keys.Enter)
+            {
+                WykonajZapytanie();
+            }
+        }
     }
 }
