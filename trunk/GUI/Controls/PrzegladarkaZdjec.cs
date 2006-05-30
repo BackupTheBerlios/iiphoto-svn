@@ -541,6 +541,10 @@ namespace Photo
                     Thumbnailview.Items[i].Selected = true;
                 }
             }
+            else if (e.KeyData == (Keys.Control | Keys.S))
+            {
+                Thumbnailview.ZapiszWszystkiePliki();
+            }
         }
 
         public bool WezFocus() {
@@ -582,6 +586,10 @@ namespace Photo
             {
                 Rotate r = new Rotate(2);
                 this.DodajOperacje(new PolecenieOperacji(r, r.PodajArgumenty().ToArray()));
+            }
+            else if (e.KeyData == (Keys.Control | Keys.S))
+            {
+                Imageview.ZapiszPlik();
             }
         }
 
