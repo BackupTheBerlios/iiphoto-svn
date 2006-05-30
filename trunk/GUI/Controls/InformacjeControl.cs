@@ -70,6 +70,8 @@ namespace Photo
             Tags.Items.Add(new ListViewItem(new string[] { "Szerokoœæ", zdjecie.Rozmiar.Width.ToString() }));
             Tags.Items.Add(new ListViewItem(new string[] { "Wysokoœæ", zdjecie.Rozmiar.Height.ToString() }));
             Tags.Items.Add(new ListViewItem(new string[] { "Format", zdjecie.FormatPliku }));
+            if (zdjecie.CzyUstawioneId())
+                Tags.Items.Add(new ListViewItem(new string[] { "Data dodania:", zdjecie.ZwrocDateDodaniaDoKolekcji() }));
             StringBuilder sb;
             List<string> Albumy = zdjecie.ZwrocNazwyAlbumow();
             List<string> Tagi = zdjecie.ZwrocNazwyTagow();
