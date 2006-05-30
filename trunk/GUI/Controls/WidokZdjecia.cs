@@ -349,8 +349,6 @@ namespace Photo
                 {
                     if (temp.czyEdytowano())
                     {
-                        //Czy zapisac???
-                        DialogResult dr;
                         if (MessageBox.Show("S¹ niezapisane zmiany w zdjêciu " + temp.NazwaPliku + ". Czy zapisaæ?", "Czy zapisaæ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             temp.Zapisz();
                     }

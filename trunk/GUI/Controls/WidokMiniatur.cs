@@ -396,6 +396,15 @@ namespace Photo
             {
                 widokMiniatur.sem.WaitOne();
 
+                foreach (Zdjecie z in widokMiniatur.Zdjecia)
+                {
+                    if (z.czyEdytowano() == true)
+                    {
+                        if (MessageBox.Show("S¹ niezapisane zmiany w zdjêciu " + z.NazwaPliku + ". Czy zapisaæ?", "Czy zapisaæ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            z.Zapisz();
+                    }
+                }
+
                 widokMiniatur.Invoke(new OproznijWidokMiniatur(widokMiniatur.Oproznij));
                 widokMiniatur.katalogi = katalogi;
 
