@@ -436,6 +436,40 @@ namespace Photo
             return lista;
         }
 
+        public string ZwrocDateDodaniaDoKolekcji()
+        {
+            Db baza = new Db();
+            string data = "";
+            if (!CzyUstawioneId())
+                return data;
+
+            baza.Polacz();
+
+            try
+            {
+                DataSet ds = baza.Select("select data_dodania from Zdjecie where id_zdjecia =" + this.Id);
+
+                foreach (DataTable t in ds.Tables)
+                {
+                    foreach (DataRow r in t.Rows)
+                    {
+                        if (!(r[0] is DBNull))
+                        {
+                            data = (string)r[0];                            
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("blad sql: " + ex.Message);
+            }
+
+            baza.Rozlacz();
+
+            return data;
+        }
+
 
         public List<string> ZwrocNazwyAlbumow()
         {
@@ -725,7 +759,7 @@ namespace Photo
                     
                     try
                     {
-                        baza.Insert_czesci("zdjecie", "sciezka,data_dodania,data_wykonania,komentarz,autor,nazwa_pliku,orientacja", "'" + sciezka + "',current_date,null,'" + komentarz + "','" + autor + "','" + nazwa_pliku + "'," + orient);
+                        baza.Insert_czesci("zdjecie", "sciezka,data_dodania,data_wykonania,komentarz,autor,nazwa_pliku,orientacja", "'" + sciezka + "',current_time,null,'" + komentarz + "','" + autor + "','" + nazwa_pliku + "'," + orient);
                         //MessageBox.Show("dodano do bazy");
 
                         DataSet ds = baza.Select("select id_zdjecia from Zdjecie where sciezka=\'" + sciezka + "\' and nazwa_pliku=\'" + nazwa_pliku + "\'");
