@@ -201,7 +201,7 @@ namespace Photo
                                 format = Zdjecie.sprawdzFormatPliku(image);
                                 miniatura = (Bitmap)image.GetThumbnailImage(scaledW, scaledH, new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback), System.IntPtr.Zero);
                                 Orientation = SprawdzOrientacje(image);
-                                UzyjOrientacji(miniatura);
+                                //UzyjOrientacji(miniatura);
                             }
                         }
                         catch (ArgumentException)
@@ -242,7 +242,7 @@ namespace Photo
                             duze = Zdjecie.FromImage(image);
                         }
                     }
-                    UzyjOrientacji(duze);
+                    //UzyjOrientacji(duze);
                     return duze;
                 }
             }
