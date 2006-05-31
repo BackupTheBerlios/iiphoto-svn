@@ -376,8 +376,6 @@ namespace Photo
 
         public void ZapiszPlik()
         {
-            zdjecie.Duze = (Bitmap)pictureBox1.Image;
-
             try
             {
                 zdjecie.Zapisz();
