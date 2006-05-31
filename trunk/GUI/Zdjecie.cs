@@ -1064,7 +1064,10 @@ namespace Photo
                 {
                     string strImgName = sfd.FileName;
                     if (strImgName.EndsWith("jpg") || strImgName.EndsWith("jpeg"))
+                    {
                         Duze.Save(strImgName, ImageFormat.Jpeg);
+                        edytowano = false;
+                    }
                 }
             }
             else
