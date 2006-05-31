@@ -356,6 +356,10 @@ namespace Photo
                 Graphics g = Graphics.FromImage(cropped);
                 g.DrawImage(z.Duze, new Rectangle(0, 0, cropped.Width, cropped.Height), z.Zaznaczenie, GraphicsUnit.Pixel);
                 g.Dispose();
+                foreach (PropertyItem pi in z.Duze.PropertyItems)
+                {
+                    cropped.SetPropertyItem(pi);
+                }
                 z.Duze = cropped;
             }
         }
