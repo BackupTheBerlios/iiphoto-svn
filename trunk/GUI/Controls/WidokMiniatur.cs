@@ -362,6 +362,8 @@ namespace Photo
         {
             Zdjecie z;
             ListViewItem listViewItem = this.FocusedItem;
+            if (listViewItem == null || (WidokMiniatur.listViewTag)listViewItem.Tag == WidokMiniatur.listViewTag.katalog)
+                return;
             z = (Zdjecie)this[listViewItem.ImageIndex - katalogi.Length];
             try
             {
