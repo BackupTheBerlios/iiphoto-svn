@@ -57,7 +57,7 @@ namespace Photo
             // 
             // fileTree1
             // 
-            this.fileTree1.BackColor = System.Drawing.Color.Beige;
+            this.fileTree1.BackColor = System.Drawing.Color.Ivory;
             this.fileTree1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileTree1.ImageIndex = 0;
             this.fileTree1.Location = new System.Drawing.Point(0, 0);
