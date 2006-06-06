@@ -263,7 +263,6 @@
       </SubType>
     </None>
     <None Include="GUI_TemporaryKey.pfx" />
-    <None Include="icons\nozyce.png" />
     <BaseApplicationManifest Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>
@@ -292,8 +291,6 @@
     <None Include="icons\rotate-270.png" />
     <None Include="icons\rotate-90.png" />
     <Content Include="icons\User.png" />
-    <Content Include="icons\W_lewo.ico" />
-    <Content Include="icons\W_prawo.ico" />
     <None Include="Resources\Grayscale.png" />
     <None Include="Resources\katalog_do_gory.png" />
     <None Include="Resources\katalog.png" />
