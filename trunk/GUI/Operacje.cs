@@ -139,7 +139,7 @@ namespace Photo
         {
             get
             {
-                return new Bitmap("..\\..\\icons\\xor.png");
+                return null;
             }
         }
 
@@ -230,7 +230,7 @@ namespace Photo
 
         public Image Ikona
         {
-            get { return Properties.Resources.Grayscale; }
+            get { return Properties.Resources.desaturate; }
         }
 
         public string Autor
@@ -315,7 +315,7 @@ namespace Photo
 
         public Image Ikona
         {
-            get { return Properties.Resources.nozyce; }
+            get { return Properties.Resources.crop; }
         }
 
         public string Autor
@@ -414,8 +414,8 @@ namespace Photo
             {
                 switch (KodOperacji)
                 {
-                    case 1: return Properties.Resources.W_prawo.ToBitmap();
-                    case 2: return Properties.Resources.W_lewo.ToBitmap();
+                    case 1: return Properties.Resources.rotate_90;
+                    case 2: return Properties.Resources.rotate_270;
                     case 3: return null;
                     default: return null;
                 }

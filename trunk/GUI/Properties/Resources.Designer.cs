@@ -88,6 +88,20 @@ namespace Photo.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap crop {
+            get {
+                object obj = ResourceManager.GetObject("crop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap desaturate {
+            get {
+                object obj = ResourceManager.GetObject("desaturate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Dysk {
             get {
                 object obj = ResourceManager.GetObject("Dysk", resourceCulture);
@@ -105,6 +119,20 @@ namespace Photo.Properties {
         internal static System.Drawing.Bitmap Dyskietka_z {
             get {
                 object obj = ResourceManager.GetObject("Dyskietka_z", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap edit_image {
+            get {
+                object obj = ResourceManager.GetObject("edit_image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap edit_image_end {
+            get {
+                object obj = ResourceManager.GetObject("edit_image_end", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -137,6 +165,13 @@ namespace Photo.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap new_tag {
+            get {
+                object obj = ResourceManager.GetObject("new_tag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap nozyce {
             get {
                 object obj = ResourceManager.GetObject("nozyce", resourceCulture);
@@ -154,6 +189,20 @@ namespace Photo.Properties {
         internal static System.Drawing.Bitmap Pulpit {
             get {
                 object obj = ResourceManager.GetObject("Pulpit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap rotate_270 {
+            get {
+                object obj = ResourceManager.GetObject("rotate_270", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap rotate_90 {
+            get {
+                object obj = ResourceManager.GetObject("rotate_90", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

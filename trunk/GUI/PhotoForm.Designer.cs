@@ -208,7 +208,7 @@ namespace Photo
             // 
             // Alfa
             // 
-            this.Alfa.Image = ((System.Drawing.Image)(resources.GetObject("Alfa.Image")));
+            this.Alfa.Image = global::Photo.Properties.Resources.edit_image;
             this.Alfa.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Alfa.Name = "Alfa";
             this.Alfa.Size = new System.Drawing.Size(113, 22);
@@ -217,7 +217,7 @@ namespace Photo
             // 
             // Omega
             // 
-            this.Omega.Image = ((System.Drawing.Image)(resources.GetObject("Omega.Image")));
+            this.Omega.Image = global::Photo.Properties.Resources.edit_image_end;
             this.Omega.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Omega.Name = "Omega";
             this.Omega.Size = new System.Drawing.Size(101, 22);
