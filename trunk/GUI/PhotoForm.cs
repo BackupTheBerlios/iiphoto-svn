@@ -253,6 +253,8 @@ namespace Photo
 
         private void wycofajZmianyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (przegladarkaZdjec.Imageview.czyZaladowaneZdjecie == false)
+                return;
             przegladarkaZdjec.Imageview.Zdjecie.Dispose();
             przegladarkaZdjec.Imageview.Zdjecie.Edytowano = false;
             przegladarkaZdjec.Thumbnailview.ZmodyfikowanoZdjecie(null, przegladarkaZdjec.Imageview.Zdjecie, RodzajModyfikacjiZdjecia.Zawartosc);

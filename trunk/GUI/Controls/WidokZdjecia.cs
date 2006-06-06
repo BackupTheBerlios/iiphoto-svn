@@ -376,8 +376,11 @@ namespace Photo
 
         public void ZapiszPlik()
         {
+            if (czyZaladowaneZdjecie == false)
+                return;
             try
             {
+
                 zdjecie.Zapisz();
             }
             catch (DirectoryNotFoundException)
