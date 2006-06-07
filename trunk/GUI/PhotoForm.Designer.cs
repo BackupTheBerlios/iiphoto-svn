@@ -167,6 +167,15 @@ namespace Photo
             // 
             // toolStripOperacje
             // 
+            this.toolStripOperacje.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zapiszButton1,
+            this.zapiszAllButton,
+            this.toolStripSeparator2,
+            this.Alfa,
+            this.Omega,
+            this.toolStripSeparator1,
+            this.toolStripComboBox1,
+            this.toolStripComboBox2});
             this.toolStripOperacje.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStripOperacje.Location = new System.Drawing.Point(0, 24);
             this.toolStripOperacje.Name = "toolStripOperacje";
@@ -252,6 +261,12 @@ namespace Photo
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.programToolStripMenuItem,
+            this.fileToolStripMenuItem,
+            this.edycjaToolStripMenuItem,
+            this.filtryToolStripMenuItem,
+            this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1024, 24);
