@@ -172,13 +172,6 @@ namespace Photo.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap nozyce {
-            get {
-                object obj = ResourceManager.GetObject("nozyce", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap Pictures_2 {
             get {
                 object obj = ResourceManager.GetObject("Pictures_2", resourceCulture);
@@ -189,6 +182,13 @@ namespace Photo.Properties {
         internal static System.Drawing.Bitmap Pulpit {
             get {
                 object obj = ResourceManager.GetObject("Pulpit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap rotate_180 {
+            get {
+                object obj = ResourceManager.GetObject("rotate_180", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -214,17 +214,10 @@ namespace Photo.Properties {
             }
         }
         
-        internal static System.Drawing.Icon W_lewo {
+        internal static System.Drawing.Bitmap xor {
             get {
-                object obj = ResourceManager.GetObject("W_lewo", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Icon W_prawo {
-            get {
-                object obj = ResourceManager.GetObject("W_prawo", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("xor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

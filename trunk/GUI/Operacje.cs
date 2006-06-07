@@ -139,7 +139,7 @@ namespace Photo
         {
             get
             {
-                return null;
+                return Properties.Resources.xor;
             }
         }
 
@@ -366,7 +366,7 @@ namespace Photo
 
         public bool CzyNaToolbar()
         {
-            return true;
+            return false;
         }
 
         #endregion
@@ -416,7 +416,7 @@ namespace Photo
                 {
                     case 1: return Properties.Resources.rotate_90;
                     case 2: return Properties.Resources.rotate_270;
-                    case 3: return null;
+                    case 3: return Properties.Resources.rotate_180;
                     default: return null;
                 }
             }
