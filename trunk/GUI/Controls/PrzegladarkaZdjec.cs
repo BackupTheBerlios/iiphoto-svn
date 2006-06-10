@@ -167,23 +167,45 @@ namespace Photo
                     }
                     else
                     {
-                        toolStripItem = Context.Items.Add("Dodaj zaznaczenie do kolekcji");
-                        toolStripItem.Click += new EventHandler(DodajZaznaczenieDoKolekcji);
-                        //ewentualnie dla kilku a to pozniej
-                        toolStripItem = Context.Items.Add("Dodaj Tagi");
-                        toolStripItem.Click += new EventHandler(UaktualizujTagi);
-                        toolStripItem = Context.Items.Add("Dodaj zaznaczone do Albumów");
-                        toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
-                        toolStripItem = Context.Items.Add("Aktualizuj zaznaczone w Bazie");
-                        toolStripItem.Click += new EventHandler(AktualizujBaze);
-                        toolStripItem = Context.Items.Add("Usuñ Tagi z zaznaczenia");
-                        toolStripItem.Click += new EventHandler(UsunTagi);
-                        toolStripItem = Context.Items.Add("Usuñ Albumy z zaznaczemia");
-                        toolStripItem.Click += new EventHandler(UsunAlbumy);
-                        toolStripItem = Context.Items.Add("Usuñ zaznaczenie z kolekcji");
-                        toolStripItem.Click += new EventHandler(UsunZKolekcji);                        
-                        toolStripItem = Context.Items.Add("Usuñ zaznaczone zdjecia");
-                        toolStripItem.Click += new EventHandler(UsunZdjecie);
+                        bool stan = false;
+
+                        foreach (Zdjecie z in lista)
+                        {
+                            if (z.CzyUstawioneId() == true)
+                            {
+                                stan = true;
+                                break;
+                            }
+                        }
+
+                        if (stan == true)
+                        {
+                            toolStripItem = Context.Items.Add("Dodaj zaznaczenie do kolekcji");
+                            toolStripItem.Click += new EventHandler(DodajZaznaczenieDoKolekcji);
+                            toolStripItem = Context.Items.Add("Dodaj Tagi");
+                            toolStripItem.Click += new EventHandler(UaktualizujTagi);
+                            toolStripItem = Context.Items.Add("Dodaj zaznaczone do Albumów");
+                            toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
+                            toolStripItem = Context.Items.Add("Aktualizuj zaznaczone w Bazie");
+                            toolStripItem.Click += new EventHandler(AktualizujBaze);
+                            toolStripItem = Context.Items.Add("Usuñ Tagi z zaznaczenia");
+                            toolStripItem.Click += new EventHandler(UsunTagi);
+                            toolStripItem = Context.Items.Add("Usuñ Albumy z zaznaczemia");
+                            toolStripItem.Click += new EventHandler(UsunAlbumy);
+                            toolStripItem = Context.Items.Add("Usuñ zaznaczenie z kolekcji");
+                            toolStripItem.Click += new EventHandler(UsunZKolekcji);
+                            toolStripItem = Context.Items.Add("Usuñ zaznaczone zdjecia");
+                            toolStripItem.Click += new EventHandler(UsunZdjecie);
+                        }
+                        else
+                        {
+                            toolStripItem = Context.Items.Add("Dodaj zaznaczenie do kolekcji");
+                            toolStripItem.Click += new EventHandler(DodajZaznaczenieDoKolekcji);                            
+                            toolStripItem = Context.Items.Add("Dodaj zaznaczone do Albumów");
+                            toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
+                            toolStripItem = Context.Items.Add("Usuñ zaznaczone zdjecia");
+                            toolStripItem.Click += new EventHandler(UsunZdjecie);
+                        }
                     }                   
                     
 
