@@ -282,7 +282,10 @@ namespace Photo
 
         public void ZmodyfikowanoZdjecie(IKontekst kontekst, IZdjecie zdjecie, RodzajModyfikacjiZdjecia rodzaj)
         {
-            IZdjecie z = WyswietloneZdjecia[((Zdjecie)zdjecie).indeks - katalogi.Length];
+            int indx = ((Zdjecie)zdjecie).indeks - katalogi.Length;
+            if (indx < 0 || indx > WyswietloneZdjecia.Count)
+                return;
+            IZdjecie z = WyswietloneZdjecia[indx];
             if (z == zdjecie)
             {
                 LargeImageList.Images[((Zdjecie)zdjecie).indeks] = ((Zdjecie)zdjecie).StworzMiniatureDoWidokuMiniatur();
