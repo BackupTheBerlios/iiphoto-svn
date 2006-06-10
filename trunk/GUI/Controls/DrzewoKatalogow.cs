@@ -13,6 +13,9 @@ using System.Data.SqlClient;
 
 namespace Photo
 {
+    /// <summary>
+    /// Klasa implementuj¹ca interfejs wyszukiwacz i drzewo wykorzystywana do tworzenia drzewa katalogów
+    /// </summary>
     public class FileTree : TreeView, IWyszukiwacz
     {
         private const int Dysk = 0;
@@ -33,7 +36,9 @@ namespace Photo
         private string FullPath_zaznaczonego = "";
 
         private ContextMenuStrip Context;
-
+        /// <summary>
+        /// Konstruktor generuje liste ikon wykorzystywanych w drzewie katalogów
+        /// </summary>
         public FileTree()
         {
             GenerateImage();
@@ -43,6 +48,9 @@ namespace Photo
             
         }
 
+        /// <summary>
+        /// Metoda generuj¹ca i wype³niaj¹ca liste ikonami wykorzystywanymi w drzewie katalogów
+        /// </summary>
         public void GenerateImage()
         {
             ImageList list = new ImageList();
@@ -60,6 +68,9 @@ namespace Photo
             ImageList = list;
         }
 
+        /// <summary>
+        /// Metoda wype³niaj¹ca drzewo katalogow
+        /// </summary>
         public void Fill()
         {
             BeginUpdate();
@@ -141,25 +152,22 @@ namespace Photo
             BeforeExpand += new TreeViewCancelEventHandler(prepare);
             AfterCollapse += new TreeViewEventHandler(clear);
         }
-
+        /// <summary>
+        /// Metoda do otwierania wez³a drzewa
+        /// </summary>
+        /// <param name="path">sciezka katalogu do otwrcia</param>
         public void Open(string path)
         {
             TreeNodeCollection nodes = Nodes;
             DirTreeNode subnode = null;
-            int i, n;
-
-            //MessageBox.Show(path);
+            int i, n;            
 
             if (path.IndexOf("Mój Komputer") == 0)
                 path = path.ToLower().Substring("Mój Komputer".Length, path.Length - "Mój Komputer".Length);
             else
                 path = path.ToLower();
-
-            //MessageBox.Show(path);
-
-            Nodes.Clear();
-
-            //MessageBox.Show("open");
+            
+            Nodes.Clear();            
 
             nodes = Nodes;
             while (nodes != null)
@@ -184,6 +192,10 @@ namespace Photo
                 nodes = subnode.Nodes;
             }
         }
+
+        /// <summary>
+        /// Metoda przygotowuj¹ca wêze³ drzewa do otwarcia
+        /// </summary>        
         void prepare(object sender, TreeViewCancelEventArgs e)
         {
             BeginUpdate();
@@ -206,13 +218,16 @@ namespace Photo
                     //zaznaczony.Collapse(false);               
                 }
                 else
-                {
-                    
+                {                    
                     //DirNode("", false);
                 }
                 EndUpdate();
             }
         }
+
+        /// <summary>
+        /// Metoda czyszcz¹ca drzewo (w przypadku aplikacji nie sa usuwane wezly ktore zostaly zamkniete jest to spowodowane odbudowaniem drzewa gdy zmiana katalogu odbywa sie za pomoca wdoku miniatur)
+        /// </summary>        
         void clear(object sender, TreeViewEventArgs e)
         {
             BeginUpdate();
@@ -221,6 +236,9 @@ namespace Photo
             EndUpdate();
         }
 
+        /// <summary>
+        /// Metoda usuwaj¹ca wszystkie wez³y z drzewa katalogów
+        /// </summary>
         public void Delete()
         {
             BeginUpdate();
@@ -229,12 +247,19 @@ namespace Photo
             EndUpdate();
         }
 
+        /// <summary>
+        /// Klasa imlementuj¹ca TreeNode czyli odpowiada za tworzenie wez³ów drzewa katalogow
+        /// </summary>
         public class DirTreeNode : TreeNode
         {
             string path;
             int type;
             public virtual string Path { get { return path; } }
 
+            /// <summary>
+            /// Konstruktor
+            /// </summary>
+            /// <param name="s">scie¿ka wêz³a</param>
             public DirTreeNode(string s)
                 : base(s)
             {
@@ -264,13 +289,18 @@ namespace Photo
                 setLeaf(true);
             }
 
+            /// <summary>
+            /// Konstruktor
+            /// </summary>
+            /// <param name="aType">typ ikony jaka ma byc u¿yta</param>
+            /// <param name="s">scie¿ka wêz³a</param>
+            /// <param name="z">informacja czy dodajemy wêz³y do g³ównego trzonu czy jakieœ podrzedne katalogi</param>
             public DirTreeNode(string s, int aType, bool z)
                 : base(s)
             {
 
                 path = s.ToLower();
                 type = aType;
-
 
                 if (s.CompareTo("A:\\") == 0 || s.CompareTo("B:\\") == 0)
                 {
@@ -299,11 +329,23 @@ namespace Photo
                 path = s.ToLower();
                 setLeaf(true);
             }
+
+            /// <summary>
+            /// Konstruktor
+            /// </summary>
+            /// <param name="label">jak¹ etykiete wypisaæ przy urz¹dzeniu</param>
+            /// <param name="s">scie¿ka wêz³a</param>
             public DirTreeNode(string s, string label)
                 : this(s)
             {
                 Text = label;
             }
+
+            /// <summary>
+            /// Konstruktor
+            /// </summary>
+            /// <param name="aType">typ ikony jak¹ ma byæ u¿yta</param>
+            /// <param name="s">scie¿ka wêz³a</param>
             public DirTreeNode(string s, int aType)
                 : base(new FileInfo(s).Name)
             {
@@ -324,9 +366,17 @@ namespace Photo
                 }
             }
 
-
+            /// <summary>
+            /// Metoda wyznaczaj¹ca typ urz¹dzenia
+            /// </summary>
+            /// <param name="driveLetter">nazwa urz¹dzenia</param>
+            /// <returns>zwraca typ urz¹dzenia</returns>
             [DllImport("kernel32.dll")]
             public static extern long GetDriveType(string driveLetter);
+
+            /// <summary>
+            /// Metoda wykorzystywana do wy³uskania etykiety urz¹dzenia ( partycja, cdrom, floppy )
+            /// </summary>
             [DllImport("Kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             extern static bool GetVolumeInformation(
                                     string RootPathName,
@@ -339,7 +389,10 @@ namespace Photo
                                     int nFileSystemNameSize);
 
 
-
+            /// <summary>
+            /// Metoda zwraca typ urz¹dzenia
+            /// </summary>
+            /// <param name="drive">nazwa urz¹dzenia</param>
             public int getDriveType(string drive)
             {
                 if ((GetDriveType(drive) & 5) == 5) return Cdrom;//cd
@@ -350,6 +403,10 @@ namespace Photo
                 return 0;
             }
 
+            /// <summary>
+            /// Metoda zwracaj¹ca nazwê/etykiete urz¹dzenia
+            /// </summary>
+            /// <param name="drive">nazwa urz¹dzenia</param>
             public static string GetDriveName(string drive)
             {
                 //receives volume name of drive
@@ -368,11 +425,19 @@ namespace Photo
                 else return "";
             }
 
+            /// <summary>
+            /// Metoda zwracaj¹ca etykiete urz¹dzenia
+            /// </summary>
+            /// <param name="drive">nazwa urz¹dzenia</param>
             public static string Etykieta(string drive)
             {
                 return GetDriveName(drive);
             }
 
+            /// <summary>
+            /// Metoda tworz¹ca i dodaj¹ca wêz³y do drzewa katalogów
+            /// </summary>
+            /// <param name="tn">wêze³ drzewa który zostanie otwarty</param>
             internal void populate(DirTreeNode tn)
             {
                 ArrayList folder = new ArrayList(); ;
@@ -416,6 +481,11 @@ namespace Photo
             }
 
             bool isLeaf = true;
+
+            /// <summary>
+            /// Metoda ustawiaj¹ca dany wêze³ czy ma byæ liœciem i nie mieæ ju¿ potomków czy nie 
+            /// </summary>
+            /// <param name="b">czy ma byc liœciem</param>
             internal void setLeaf(bool b)
             {
                 Nodes.Clear();
@@ -445,7 +515,9 @@ namespace Photo
 
         #endregion
 
-
+        /// <summary>
+        /// Metoda wywo³uj¹ca sie przed zaznaczeniem wêz³a
+        /// </summary>
         protected override void OnBeforeSelect(TreeViewCancelEventArgs e)
         {
             base.OnBeforeSelect(e);
@@ -455,6 +527,9 @@ namespace Photo
             //MessageBox.Show("numer: " + e.Node.SelectedImageIndex);
         }
 
+        /// <summary>
+        /// Metoda wywo³uj¹ca sie po zaznaczeniem wêz³a
+        /// </summary>
         protected override void OnAfterSelect(TreeViewEventArgs e)
         {
             base.OnAfterSelect(e);
@@ -463,7 +538,10 @@ namespace Photo
             //this.Select(true, true);
         }
 
-
+        /// <summary>
+        /// Metoda dodaj¹ca katalog do albumu
+        /// </summary>
+        /// <param name="sciezka">sciezka katalogu</param>
         internal void d_d_a(string sciezka)
         {
             List<Zdjecie> zdjecia = new List<Zdjecie>();
@@ -485,7 +563,11 @@ namespace Photo
             }
         }
 
-        
+        /// <summary>
+        /// Metoda filtruj¹ca pliki w katalogu
+        /// </summary>
+        /// <param name="sciezka">sciezka katalogu</param>
+        /// <returns>zwraca liste przefiltrowana czyli tylko pliki ze zdjêciami</returns>
         internal List<string> Przefiltruj(string sciezka)
         {
             List<string> pliki = new List<string>();
@@ -521,6 +603,11 @@ namespace Photo
             return pliki_przefiltrowane;
         }
 
+        /// <summary>
+        /// Metoda tworz¹ca obiekty zdjêc i dodaj¹ca je do kontrolki wyœwietlaj¹cej
+        /// </summary>
+        /// <param name="Node">wêz³ dla którego tworzymy obiekty zdjêæ</param>
+        /// <returns>zwraca tablice obiektów zdjêæ</returns>
         private Zdjecie[] WybierzPlikiZdjec(DirTreeNode Node)
         {
             List<Zdjecie> zdjecia = new List<Zdjecie>();
@@ -556,7 +643,10 @@ namespace Photo
             }
             return zdjecia.ToArray();
         }
-        
+
+        /// <summary>
+        /// Metoda wywo³ana po otworzeniu danego wêz³a drzewa
+        /// </summary>
         protected override void OnAfterExpand(TreeViewEventArgs e)
         {
             base.OnAfterExpand(e);
@@ -573,17 +663,14 @@ namespace Photo
                 e.Node.Text = "B:\\ " + "[" + DirTreeNode.Etykieta(e.Node.Text.Substring(0, 3)) + "]";
                 e.Node.ImageIndex = Dyskietka_z;
                 e.Node.SelectedImageIndex = Dyskietka_z;
-            }
-            //MessageBox.Show(e.Node.FullPath);
-            czy_otwiera = true;
-            //MessageBox.Show("after expand");
+            }        
+            czy_otwiera = true;            
         }
 
-        protected override void OnClick(EventArgs e)
-        {
-            base.OnClick(e);            
-        }
-
+        /// <summary>
+        /// Metoda informuj¹ca za pomoc¹ delegatów kontrolkê wyœwietlaj¹ca o zawartoœci katalogu w zdjêcia i podkatalogi
+        /// </summary>
+        /// <param name="zap">wêz³ dla ktorego wykonujemy zapytanie</param>
         private void PowiadomOZawartosciKatalogu(DirTreeNode zap)
         {
             List<Zdjecie> zdjecia = new List<Zdjecie>();
@@ -616,6 +703,9 @@ namespace Photo
 
         }
 
+        /// <summary>
+        /// Metoda wywo³ana po klikniêciu na wêze³
+        /// </summary>
         protected override void OnNodeMouseClick(TreeNodeMouseClickEventArgs e)
         {
             base.OnNodeMouseClick(e);            
@@ -647,16 +737,16 @@ namespace Photo
                 zaznaczony = (DirTreeNode)e.Node;
                 FullPath_zaznaczonego = zaznaczony.FullPath;
 
-                //this.SelectedNode = new TreeNode("cos");
-                //this.Select(true, true);
-
-                
                 DirNode("", false);                
             }
 
             czy_otwiera = false;
         }
 
+        /// <summary>
+        /// Metoda informuje kontrolke wyœwietlaj¹ca o nowej zawartoœci albo katalogu nadrzêdnego albo podkatalogu
+        /// </summary>
+        /// <param name="k">katalog którego zawartoœæ ma byæ wyœwietlona</param>
         public void ZaladujZawartoscKatalogu(Katalog k)
         {
             if (k.CzyDoGory == true)
@@ -668,7 +758,9 @@ namespace Photo
                 DirNode(k.Path, false);
             }
         }
-
+        /// <summary>
+        /// Metoda do nawigacji za pomoc¹ klawiatury po drzewie. Naciœniecie klawisza Enter na zaznaczonym wêŸle drzewa spowoduje jego eyœwietlenie
+        /// </summary>
         protected override void OnKeyPress(KeyPressEventArgs e)
         {
             base.OnKeyPress(e);
@@ -684,10 +776,14 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda która dotosowuje wygl¹d drzewa do sytuacji w widoku miniatur
+        /// </summary>
+        /// <param name="czy_do_gory">czy katalog nadrzêdny</param>
+        /// <param name="napis">sciezka katalogu do wyœwietlenia</param>
         public void DirNode(string napis, bool czy_do_gory)
         {
             string nn = "";
-
             
             try
             {
@@ -740,6 +836,10 @@ namespace Photo
             }           
         }
 
+        /// <summary>
+        /// Metoda otwiera drzewo do zaznaczonego wêz³a
+        /// </summary>
+        /// <param name="zaz">wêz³ do którego nale¿y pootwieraæ</param>
         private string PootwierajDrzewoDoZaznaczonego(DirTreeNode zaz)
         {
             TreeNodeCollection kolekcja = this.Nodes;
@@ -864,6 +964,10 @@ namespace Photo
 
         }
 
+        /// <summary>
+        /// Metoda ustawia etykiete dyskietki
+        /// </summary>
+        /// <param name="zap">wêze³ zaznaczony</param>
         private void UstawienieEtykietyDyskietki(DirTreeNode zap)
         {
             string etykieta;
@@ -902,6 +1006,11 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda zwracaj¹ca tablice katalogów z danego katalogu
+        /// </summary>
+        /// <param name="Node">wêz³ drzewa</param>
+        /// <returns>zwraca tablice katalogów</returns>
         private Katalog[] ZnajdzKatalogiWKatalogu(DirTreeNode Node)
         {
             List<string> katal_tab = new List<string>();
@@ -965,9 +1074,12 @@ namespace Photo
             }
             return katalogi.ToArray();
         }
-        
 
 
+        /// <summary>
+        /// Metoda dodaje wpisy do bazy
+        /// </summary>
+        /// <param name="lista">lista plików o których nale¿y dodaæ wpisy do bazy</param>
         internal void dodaj_kolekcje_do_bazy(List<string> lista)
         {            
             StringBuilder sb = new StringBuilder("Nie uda³o siê dodaæ do kolekcji nastepuj¹cych zdjêæ:\n");
@@ -996,6 +1108,9 @@ namespace Photo
                 MessageBox.Show(sb.ToString());
         }
 
+        /// <summary>
+        /// Metoda dodaje kolekcje do bazy
+        /// </summary>
         internal void DodajDoKolekcji(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;            
@@ -1006,6 +1121,9 @@ namespace Photo
                 ZmienionoIds();
         }
 
+        /// <summary>
+        /// Metoda usuwa tagi dla katalogu
+        /// </summary>
         private void UsunTagiDlaKatalogu(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;
@@ -1027,6 +1145,9 @@ namespace Photo
                 ZmienionoTagi();
         }
 
+        /// <summary>
+        /// Metoda usuwa katalog z bazy
+        /// </summary>
         private void UsunZKolekcji(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;
@@ -1049,6 +1170,9 @@ namespace Photo
                 ZmienionoIds();
         }
 
+        /// <summary>
+        /// Metoda dodaje tagi dla katalogu
+        /// </summary>
         private void DodajTagiDlaKatalogu(object sender, EventArgs e)
         {            
             ToolStripItem mn = (ToolStripItem)sender;
@@ -1068,6 +1192,9 @@ namespace Photo
             dtdz.Show();           
         }
 
+        /// <summary>
+        /// Metoda dodaje katalog do albumów
+        /// </summary>
         internal void DodajDoAlbumu(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;
@@ -1088,6 +1215,9 @@ namespace Photo
             //ddk.Show();
         }
 
+        /// <summary>
+        /// Metoda wywo³ana po zamkniêciu wêz³a drzewa
+        /// </summary>
         protected override void OnAfterCollapse(TreeViewEventArgs e)
         {
             base.OnAfterCollapse(e);
@@ -1095,6 +1225,9 @@ namespace Photo
             //MessageBox.Show("after colapse");
         }
 
+        /// <summary>
+        /// Metoda wywo³ana przed zamkniêciu wêz³a drzewa
+        /// </summary>
         protected override void OnBeforeCollapse(TreeViewCancelEventArgs e)
         {
             base.OnBeforeCollapse(e);
@@ -1102,6 +1235,9 @@ namespace Photo
             //MessageBox.Show("before colapse");
         }
 
+        /// <summary>
+        /// Metoda wywo³ana przed otwarciem wêz³a drzewa
+        /// </summary>
         protected override void OnBeforeExpand(TreeViewCancelEventArgs e)
         {
             base.OnBeforeExpand(e);
@@ -1109,6 +1245,9 @@ namespace Photo
             //MessageBox.Show("before expand");
         }
 
+        /// <summary>
+        /// Metoda inicjalizuj¹ca obiekt drzewa katalogów
+        /// </summary>
         private void InitializeComponent()
         {
             this.SuspendLayout();
