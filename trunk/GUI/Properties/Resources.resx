@@ -130,8 +130,8 @@
   <data name="Computer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\computer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Contacts" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\contacts.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Contacts_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\contacts_d.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Contacts1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\contacts.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,8 +193,8 @@
   <data name="rotate_90" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\rotate-90.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Starred" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\starred.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Starred_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\starred_d.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Starred1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\starred.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -202,11 +202,11 @@
   <data name="tag" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\tag.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Trash_empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\trash_empty.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Trash_empty_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\trash_empty_d.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Trash_full" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\trash_full.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Trash_full_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\trash_full_d.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="User" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\user.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

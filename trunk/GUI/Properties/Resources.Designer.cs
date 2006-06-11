@@ -88,9 +88,9 @@ namespace Photo.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap Contacts {
+        internal static System.Drawing.Bitmap Contacts_d {
             get {
-                object obj = ResourceManager.GetObject("Contacts", resourceCulture);
+                object obj = ResourceManager.GetObject("Contacts_d", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -235,9 +235,9 @@ namespace Photo.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap Starred {
+        internal static System.Drawing.Bitmap Starred_d {
             get {
-                object obj = ResourceManager.GetObject("Starred", resourceCulture);
+                object obj = ResourceManager.GetObject("Starred_d", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -256,16 +256,16 @@ namespace Photo.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap Trash_empty {
+        internal static System.Drawing.Bitmap Trash_empty_d {
             get {
-                object obj = ResourceManager.GetObject("Trash_empty", resourceCulture);
+                object obj = ResourceManager.GetObject("Trash_empty_d", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap Trash_full {
+        internal static System.Drawing.Bitmap Trash_full_d {
             get {
-                object obj = ResourceManager.GetObject("Trash_full", resourceCulture);
+                object obj = ResourceManager.GetObject("Trash_full_d", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
