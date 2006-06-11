@@ -582,8 +582,14 @@ namespace Photo
             return newBitmap;
         }
 
+        /// <summary>
+        /// Metoda ustawiajaca zoom
+        /// </summary>
+        /// <param name="z">Zmienna typu "double", wieksza od 0.</param>
         internal void Zoom(double z)
         {
+            if (z <= 0)
+                return;
             if (zoom != z)
             {
                 if (this.pictureBox1.Image != null)
