@@ -210,13 +210,13 @@ namespace Photo
                         }
                         else
                         {
-                            toolStripItem = Context.Items.Add("Uaktualizuj Tagi");
+                            toolStripItem = Context.Items.Add("Uaktualizuj Tagi", Properties.Resources.new_tag);
                             toolStripItem.Click += new EventHandler(UaktualizujTagi);
                             toolStripItem = Context.Items.Add("Uaktualizuj Albumy");
                             toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
                             toolStripItem = Context.Items.Add("Aktualizuj w Bazie");
                             toolStripItem.Click += new EventHandler(AktualizujBaze);
-                            toolStripItem = Context.Items.Add("Usuñ Tagi");
+                            toolStripItem = Context.Items.Add("Usuñ Tagi", Properties.Resources.delete_tag);
                             toolStripItem.Click += new EventHandler(UsunTagi);
                             toolStripItem = Context.Items.Add("Usuñ Albumy");
                             toolStripItem.Click += new EventHandler(UsunAlbumy);
