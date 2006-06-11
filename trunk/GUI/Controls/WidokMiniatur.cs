@@ -9,7 +9,10 @@ using System.IO;
 
 namespace Photo
 {
-    public class WidokMiniatur : System.Windows.Forms.ListView, IOpakowanieZdjec, IKontekst
+    /// <summary>
+    /// Kontrolka dziedziczaca po ListView, do wyswietlania miniatur zdjec.
+    /// </summary>
+    public class WidokMiniatur : ListView, IOpakowanieZdjec, IKontekst
     {
         private bool Edycja;
         private Bitmap katalog;
@@ -25,12 +28,18 @@ namespace Photo
 
         public bool MiniaturyZDrzewa;
 
+        /// <summary>
+        /// Wyliczenie informujace czy ListViewItem jest zdjeciem czy katalogiem
+        /// </summary>
         public enum listViewTag
         {
             katalog,
             zdjecie
         }
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public WidokMiniatur()
         {
             WyswietloneZdjecia = new List<IZdjecie>();
@@ -67,44 +76,63 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda zmieniajaca rozmiar wyswietlanych miniatur
+        /// </summary>
+        /// <param name="size">Nowy rozmiar</param>
         public void ZmienRozmiarMiniatur(int size)
         {
             LargeImageList.ImageSize = new Size(size + 2, size + 2);
         }
 
-        public void AddImages(List<IZdjecie> images)
-        {
-            this.WyswietloneZdjecia.AddRange(images);
-            this.WszystkieZdjecia.AddRange(images);
-        }
-
         #region IOpakowanieZdjec Members
 
+        /// <summary>
+        /// Propercja zwracajaca zdjecie sposrod wyswietlanych zdjec
+        /// </summary>
+        /// <param name="numer">Indeks zdjecia do pobrania</param>
+        /// <returns>Zwroca obiekt implementujacy interfejs IZdjecie</returns>
         public IZdjecie this[int numer]
         {
             get { return WyswietloneZdjecia[numer]; }
         }
 
+        /// <summary>
+        /// Propercja zwracajaca ilosc wyswietlanych elementow
+        /// </summary>
         public int Ilosc
         {
             get { return WyswietloneZdjecia.Count + katalogi.Length ; }
         }
 
+        /// <summary>
+        /// Propercja zwracajaca ilosc wyswietlanych zdjec
+        /// </summary>
         public int IloscZdjec
         {
             get { return WyswietloneZdjecia.Count; }
         }
 
+        /// <summary>
+        /// Propercja zwracajaca ilosc wyswietlanych katalogow
+        /// </summary>
         public int IloscKatalogow
         {
             get { return katalogi.Length; }
         }
 
+        /// <summary>
+        /// Propercja zwracajaca aktualnie wyswietlane katalogi 
+        /// </summary>
         public Katalog[] Katalogi
         {
             get { return katalogi; }
         }
 
+        /// <summary>
+        /// Metoda dodajaca zdjecie do wyswietlenia
+        /// </summary>
+        /// <param name="zdjecie">Zdjecie do wyswietlenia</param>
         public void Dodaj(IZdjecie zdjecie)
         {
             if (zdjecie.Miniatura == null)
@@ -138,17 +166,27 @@ namespace Photo
             Refresh();
         }*/
 
+        /// <summary>
+        /// Metoda usuwajaca zdjecie z kolekcji zdjec do wyswietlenia
+        /// </summary>
+        /// <param name="zdjecie">Zdjecie do usuniecia</param>
         public void Usun(IZdjecie zdjecie)
         {
             WyswietloneZdjecia.Remove(zdjecie);
             WszystkieZdjecia.Remove(zdjecie);
         }
 
+        /// <summary>
+        /// Metoda odswiezajaca widok miniatur
+        /// </summary>
         public void Odswiez()
         {
             Wypelnij(WszystkieZdjecia.ToArray(), katalogi, MiniaturyZDrzewa);
         }
 
+        /// <summary>
+        /// Metoda czyszczaca obszar wyswietlania
+        /// </summary>
         public void Oproznij()
         {
             katalogi = new Katalog[0];
@@ -156,6 +194,9 @@ namespace Photo
             this.Items.Clear();
         }
 
+        /// <summary>
+        /// Propercja zwracajaca kolekcje wyswietlanych zdjec 
+        /// </summary>
         public IZdjecie[] Zdjecia
         {
             get
@@ -164,6 +205,11 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda zwracajaca zdjecie, ktorego pole "indeks" jest rowne podanej wartosci
+        /// </summary>
+        /// <param name="i">Indeks szukanego zdjecia</param>
+        /// <returns>Obiekt implementujacy interfejs IZdjecie</returns>
         public IZdjecie ZdjecieZIndeksem(int i)
         {
             foreach (Zdjecie z in WyswietloneZdjecia)
@@ -174,6 +220,9 @@ namespace Photo
             return null;
         }
 
+        /// <summary>
+        /// Propercja zwraca wybrane (zaznaczone) zdjecia 
+        /// </summary>
         public IZdjecie[] WybraneZdjecia
         {
             get
@@ -188,11 +237,17 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda rozpoczynajaca tryb szybkiej edycji
+        /// </summary>
         public void RozpocznijEdycje()
         {
             Edycja = true;
         }
 
+        /// <summary>
+        /// Metoda konczaca tryb szybkiej edycji - wykonujaca wszystkie oczekujace operacje
+        /// </summary>
         public void ZakonczEdycje()
         {
             Edycja = false;
@@ -203,6 +258,11 @@ namespace Photo
             }
         }
 
+
+        /// <summary>
+        /// Metoda dodajaca operacje do wykonania na zdjeciu/ach
+        /// </summary>
+        /// <param name="operacja">Obiekt bedacy poleceniem operacji</param>
         public void DodajOperacje(PolecenieOperacji operacja)
         {
             if (Edycja == false)
@@ -223,13 +283,24 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda usuwajaca wszystkie operacje na zdjeciu/ach z aktywnego widoku
+        /// </summary>
         public void UsunWszystkieOperacje()
         {
-            throw new Exception("The method or operation is not implemented.");
+            foreach (IZdjecie zdjecie in WybraneZdjecia)
+            {
+                zdjecie.UsunWszystkieOperacje();
+            }
         }
 
         public event WybranoZdjecieDelegate WybranoZdjecie;
 
+        /// <summary>
+        /// Metoda sprawdzajaca czy podane zdjecie spelnia kryteria filtracji tagami
+        /// </summary>
+        /// <param name="zdjecie">Zdjecie do przefitlrowania</param>
+        /// <returns>Wartosc boolowska informujaca czy zdjecie nalezy wyswietlic czy nie</returns>
         public bool CzyWyswietlic(IZdjecie zdjecie)
         {
             if (tagi.Count == 0)
@@ -244,6 +315,12 @@ namespace Photo
             return wyswietlic;
         }
 
+        /// <summary>
+        /// Metoda wypelniajaca zdjeciami i katalogami widok miniatur.
+        /// </summary>
+        /// <param name="zdjecia">Tablica obiektow do wyswietlenia</param>
+        /// <param name="katalogi">Tablica katalogow do wyswietlenia</param>
+        /// <param name="CzyZDrzewa">Zmienna informujaca czy podane dane pochodza z drzewa katalogow czy nie</param>
         public void Wypelnij(IZdjecie[] zdjecia, Katalog[] katalogi, bool CzyZDrzewa)
         {
             MiniaturyZDrzewa = CzyZDrzewa;
@@ -262,6 +339,10 @@ namespace Photo
 
         #endregion
 
+        /// <summary>
+        /// Metoda ustawiajaca nowe tagi do filtrowania i przeladowujaca kontrolke
+        /// </summary>
+        /// <param name="t">Nowa lista tagow</param>
         public void DodajTagi(List<long> t)
         {
             tagi = t;
@@ -270,16 +351,28 @@ namespace Photo
 
         #region IKontekst Members
 
+        /// <summary>
+        /// Metoda nieuzywana
+        /// </summary>
         public void DodajDoKontekstu(IZdjecie zdjecie)
         {
             throw new Exception("The method or operation is not implemented.");
         }
 
+        /// <summary>
+        /// Metoda nieuzywana
+        /// </summary>
         public void UsunZKontekstu(IZdjecie zdjecie)
         {
             throw new Exception("The method or operation is not implemented.");
         }
 
+        /// <summary>
+        /// Metoda zmieniajaca miniature zdjecia, na ktorym wykonano modyfikacje
+        /// </summary>
+        /// <param name="kontekst">Nieuzywany</param>
+        /// <param name="zdjecie">Zdjecie na ktorym wykonano modyfikacje</param>
+        /// <param name="rodzaj">Rodzaj modyfikacji</param>
         public void ZmodyfikowanoZdjecie(IKontekst kontekst, IZdjecie zdjecie, RodzajModyfikacjiZdjecia rodzaj)
         {
             int indx = ((Zdjecie)zdjecie).indeks - katalogi.Length;
@@ -295,6 +388,10 @@ namespace Photo
 
         #endregion
 
+        /// <summary>
+        /// Metoda dodajaca miniature katalogu do wyswietlenia
+        /// </summary>
+        /// <param name="k">Katalog do wyswietlenia</param>
         public void DodajKatalog(Katalog k)
         {
             string podpis;
@@ -356,11 +453,14 @@ namespace Photo
             this.Refresh();
         }
 
-        public static bool ThumbnailCallback()
+        private static bool ThumbnailCallback()
         {
             return true;
         }
 
+        /// <summary>
+        /// Metoda zapisujaca na dysku wybrane zdjecie
+        /// </summary>
         public void ZapiszPlik()
         {
             Zdjecie z;
@@ -378,6 +478,9 @@ namespace Photo
             }
         } 
 
+        /// <summary>
+        /// Klasa wykonujaca wypelnianie elementami widoku miniatur, poprzez osobny watek
+        /// </summary>
         internal class WypelnijMiniaturyThread
         {
             WidokMiniatur widokMiniatur;
@@ -438,6 +541,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda zapisujaca zmiany na wszystkich wyswietlanych aktualnie zdjeciach, na ktorych zostaly wykonane modyfikacje
+        /// </summary>
         internal void ZapiszWszystkiePliki()
         {
             foreach (Zdjecie z in WyswietloneZdjecia)
@@ -453,6 +559,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda resetujaca i odswiezajaca identyfikatory aktualnie wyswietlonych zdjec
+        /// </summary>
         public void ZresetujIds()
         {
             foreach (Zdjecie z in WyswietloneZdjecia)
@@ -461,6 +570,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda resetujaca i odswiezajaca tagi aktualnie wyswietlonych zdjec
+        /// </summary>
         public void ZresetujTagi()
         {
             foreach (Zdjecie z in WyswietloneZdjecia)
