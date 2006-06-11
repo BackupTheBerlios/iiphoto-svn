@@ -13,6 +13,9 @@ using System.Data.SqlClient;
 
 namespace Photo
 {
+    /// <summary>
+    /// Klasa implementuj¹ca UserControl i interfejs IWyszukiwacz s³u¿y do tworzenia, obs³ugi drzewa albumów i tagów
+    /// </summary>
     public partial class ListaAlbumowControl : UserControl, IWyszukiwacz
     {
         private ContextMenuStrip Context;
@@ -28,6 +31,9 @@ namespace Photo
         public event ZmieninoTagiDelegate ZmienionoTagi;
         public event ZmienionoZrodloDelegate ZmienionoZrodlo;
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public ListaAlbumowControl()
         {
             InitializeComponent();
@@ -46,6 +52,9 @@ namespace Photo
             albumy.Expand();
         }
 
+        /// <summary>
+        /// Metoda usuwaj¹ca wszystkie wêz³y drzewa
+        /// </summary>
         private void Usun_wszystkie()
         {
             treeView1.BeginUpdate();
@@ -53,6 +62,10 @@ namespace Photo
             treeView1.EndUpdate();
         }
 
+
+        /// <summary>
+        /// Metoda wype³niaj¹ca zawartoœæ drzewa dane s¹ pobierane z bazy
+        /// </summary>
         private void Wypelnij()
         {
             Db baza = new Db();
@@ -113,6 +126,12 @@ namespace Photo
             baza.Rozlacz();
         }
 
+
+        /// <summary>
+        /// Metoda od znajdowania numeru tagu gdy mamy do dyspozycji tylko nazwe
+        /// </summary>
+        /// <param name="nazwa">nazwa tagu</param>
+        /// <returns>zwraca numer tagu o danej nazwie</returns>
         private Int64 znajdzNumer(string nazwa)
         {
             for (int i = 0; i < lista_nazw_tagow.Count; i++)
@@ -125,6 +144,11 @@ namespace Photo
             return 0;
         }
 
+
+        /// <summary>
+        /// Metoda wykonywana gdy u¿ytkownik kliknie na przycisk poka¿. Wtedy zostaj¹ wyszukane zdjêcia z zaznaczonych albumów
+        /// i po uprzednim sprawdzeniu o tagi zdjêcia zostaj¹ wys³ane do kontrolki wyœwietlaj¹cej miniturki
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
             List<Zdjecie> zdjecia = null;
@@ -273,6 +297,11 @@ namespace Photo
 
         #endregion
 
+        /// <summary>
+        /// Metoda która zwraca zdjêcia nale¿ace do albumu który w³aœnie klikneliœmy
+        /// </summary>
+        /// <param name="Node">wêz³ drzewa z którego wy³usamy nazwe albumu</param>
+        /// <returns>lista zdjêæ która zosta³a utworzona przez przeszukanie bazy</returns>
         private List<Zdjecie> ZwrocZdjeciaZAlbumu(TreeNode Node)
         {
             Db baza = new Db();
@@ -361,8 +390,14 @@ namespace Photo
 
             return lista;
         }
-        
-        private List<Zdjecie> PokazPlikiZAlbumu(TreeNode Node, bool czy_kilka) //czy_kilka jak true to kilka albumow sie zwraca
+
+        /// <summary>
+        /// Metoda zwraca liste zdjêæ które nale¿y wyœwietliæ w kontrolce miniatur
+        /// </summary>
+        /// <param name="czy_kilka">czy_kilka jak true to kilka albumów sie zwraca</param>
+        /// <param name="Node">dla jakiego wêz³a ma byæ wykonane przeszukanie bazy</param>
+        /// <returns>lista zdjêæ które maj¹ byæ wyœwietlone</returns>
+        private List<Zdjecie> PokazPlikiZAlbumu(TreeNode Node, bool czy_kilka) 
         {
             string albumy_string = "";
 
@@ -410,16 +445,9 @@ namespace Photo
             }
         }
 
-        protected override void OnClick(EventArgs e)
-        {
-            base.OnClick(e);
-        }
-
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Metoda która odœwie¿a zawartoœæ drzewa po dodaniu/usuniêciu albumu/tagu
+        /// </summary>
         public void odswiez()
         {
             bool al = false, t = false;
@@ -447,6 +475,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda wywo³uj¹ca formularz dodawania albumu
+        /// </summary>
         private void DodajAlbum(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;
@@ -455,6 +486,9 @@ namespace Photo
             da.Show();            
         }
 
+        /// <summary>
+        /// Metoda usuwaj¹ca album z drzewa i z bazy
+        /// </summary>
         private void UsunAlbum(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;          
@@ -485,6 +519,9 @@ namespace Photo
             odswiez();
         }
 
+        /// <summary>
+        /// Metoda usuwaj¹ca zawartoœæ albumu czyli usuwa wszystkie wpisy w bazie na temat zdjêæ nale¿¹cych do tego albumu
+        /// </summary>
         private void UsunZawartoscAlbumu(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;
@@ -517,6 +554,9 @@ namespace Photo
             odswiez();
         }
 
+        /// <summary>
+        /// Metoda wywo³uj¹ca formularz dodawania tagu
+        /// </summary>
         private void DodajTag(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;            
@@ -525,6 +565,9 @@ namespace Photo
             dt.Show();
         }
 
+        /// <summary>
+        /// Metoda usuwaj¹ca tag z bazy i z drzewa
+        /// </summary>
         private void UsunTag(object sender, EventArgs e)
         {
             ToolStripItem mn = (ToolStripItem)sender;            
@@ -555,7 +598,11 @@ namespace Photo
             odswiez();
         }
 
-
+        /// <summary>
+        /// Metoda która ze wzglêdu na przyciœniêty przycisk myszki:
+        /// je¿eli lewy to za pomoc¹ delegatów informuje kontrolke wyœwietlaj¹c¹ o obiektach jakie maj¹ byæ w danej chwili wyœwietlone
+        /// je¿eli prawy to tworzy sie menu kontekstowe
+        /// </summary>        
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
            //MessageBox.Show("wchodzi");
@@ -620,8 +667,7 @@ namespace Photo
                 }
             }
             else if (e.Button == MouseButtons.Left && czy_otwiera == false)
-            {
-                //MessageBox.Show("wchodzi2222");                
+            {                
                 if (e.Node.FullPath.IndexOf("Albumy") == 0)
                 {
 
@@ -652,9 +698,11 @@ namespace Photo
             zaznaczony = false;
         }
 
+        /// <summary>
+        /// Metoda która zostaje wywo³ana po zaznaczeniu checkboxa
+        /// </summary>
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
-        {
-            //MessageBox.Show("check");
+        {            
             int czy_al_zaz = 0, czy_ta_zaz = 0;
 
             if (e.Node.FullPath == "Albumy")// && czy_wszystkie_albumy_ustawione == false)
@@ -745,9 +793,7 @@ namespace Photo
 
             if (e.Node.FullPath.IndexOf("Tagi") == 0)
             {
-                List<Int64> lista_tagow_do_przekazania = new List<Int64>();
-
-                //MessageBox.Show(e.Node.FullPath);
+                List<Int64> lista_tagow_do_przekazania = new List<Int64>();              
 
                 foreach (TreeNode t in tagi.Nodes)
                 {
@@ -785,69 +831,15 @@ namespace Photo
                 albumy.Checked = true;
                 czy_wszystkie_albumy_ustawione = true;
                 MessageBox.Show("4");
-            }*/
-
-            //MessageBox.Show("ilosc zaznaczonych albumow: " + ilosc_zaznaczonych_albumow);
-            //MessageBox.Show("ilosc zaznaczonych tagow: " + ilosc_zaznaczonych_tagow);
-            
+            }*/           
         }
 
-        private void treeView1_AfterCollapse(object sender, TreeViewEventArgs e)
-        {
-            //czy_otwiera = true;
-            //MessageBox.Show("after collapse");
-        }
-
-        private void treeView1_AfterExpand(object sender, TreeViewEventArgs e)
-        {
-            //czy_otwiera = true;
-            //MessageBox.Show("after expand");
-        }
-
-        private void treeView1_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
-        {
-            //czy_otwiera = true;
-            //MessageBox.Show("before collapse");
-        }
-
-        private void treeView1_BeforeExpand(object sender, TreeViewCancelEventArgs e)
-        {
-            //czy_otwiera = true;
-            //MessageBox.Show("before expand");
-        }
-
-        private void treeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
-        {
-            //czy_otwiera = false;
-        }
-
+        /// <summary>
+        /// Metoda która zostaje wywo³ana przed zaznaczeniu checkboxa
+        /// </summary>
         private void treeView1_BeforeCheck(object sender, TreeViewCancelEventArgs e)
         {
             zaznaczony = true;
-
-            
-
-            //MessageBox.Show(e.Node.FullPath);
-
-            /*if (e.Node.FullPath == "Albumy")
-            {
-                if (e.Node.Checked == true)
-                {
-                    ilosc_zaznaczonych_albumow = 0;
-                }
-                else
-                {
-                    ilosc_zaznaczonych_albumow = lista_albumow.Count;
-                }
-                
-            }
-            else */
-            
-
-            //MessageBox.Show("ilosc zaznaczonych albumow: " + ilosc_zaznaczonych_albumow);
-            //MessageBox.Show("ilosc zaznaczonych tagow: " + ilosc_zaznaczonych_tagow);
-            //MessageBox.Show("ilosc albumow: " + lista_albumow.Count);
-
         }        
     }
 }

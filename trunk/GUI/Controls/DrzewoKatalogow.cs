@@ -14,7 +14,7 @@ using System.Data.SqlClient;
 namespace Photo
 {
     /// <summary>
-    /// Klasa implementuj¹ca interfejs wyszukiwacz i drzewo wykorzystywana do tworzenia drzewa katalogów
+    /// Klasa implementuj¹ca interfejs IWyszukiwacz i drzewo wykorzystywana do tworzenia drzewa katalogów
     /// </summary>
     public class FileTree : TreeView, IWyszukiwacz
     {
@@ -705,6 +705,9 @@ namespace Photo
 
         /// <summary>
         /// Metoda wywo³ana po klikniêciu na wêze³
+        /// w zale¿noœci od przycisku myszki który klik¹³
+        /// je¿eli lewy zostaje wywo³ana medota informuj¹ca o zawartoœci danego wêz³a
+        /// je¿eli prawy jest tworzone menu kontekstowe
         /// </summary>
         protected override void OnNodeMouseClick(TreeNodeMouseClickEventArgs e)
         {
