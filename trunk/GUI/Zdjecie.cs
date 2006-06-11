@@ -119,7 +119,7 @@ namespace Photo
             if (!iiphotoTag.Equals(""))
             {
                 iiphotoTag = "";
-                string path = Path.Substring(0, Path.LastIndexOf('\\') + 1);
+                string tempFileName = System.IO.Path.GetTempFileName();
                 using (FileStream stream = new FileStream(Path, FileMode.Open, FileAccess.Read))
                 {
                     try
@@ -127,7 +127,7 @@ namespace Photo
                         using (Image image = Image.FromStream(stream, true, false))
                         {
                             image.RemovePropertyItem(PropertyTags.IIPhotoTag);
-                            image.Save(path + "img.tmp", image.RawFormat);
+                            image.Save(tempFileName, image.RawFormat);
                         }
                     }
                     catch (ArgumentException)
@@ -136,7 +136,7 @@ namespace Photo
                     }
                 }
                 File.Delete(Path);
-                File.Move(path + "img.tmp", Path);
+                File.Move(tempFileName, Path);
             }
         }
 
