@@ -282,15 +282,18 @@ namespace Photo
         #region IOpakowanieZdjec Members
 
         /// <summary>
-        /// 
+        /// Propercja zwracajaca wyswietlane zdjecie
         /// </summary>
-        /// <param name="numer"></param>
-        /// <returns></returns>
+        /// <param name="numer">Parametr pomijany</param>
+        /// <returns>Zwroca obiekt implementujacy interfejs IZdjecie</returns>
         public IZdjecie this[int numer]
         {
             get { return zdjecie; }
         }
 
+        /// <summary>
+        /// Propercja zwracajaca ilosc wyswietlanych elementow - 0 lub 1
+        /// </summary>
         public int Ilosc
         {
             get 
@@ -302,16 +305,27 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda dodajaca zdjecie do wyswietlenia
+        /// </summary>
+        /// <param name="zdjecie">Zdjecie do wyswietlenia</param>
         public void Dodaj(IZdjecie zdjecie)
         {
             Wypelnij(new IZdjecie[] { zdjecie });
         }
 
+        /// <summary>
+        /// Metoda usuwajaca zdjecie z wyswietlenia
+        /// </summary>
+        /// <param name="zdjecie">Zdjecie do usuniecia</param>
         public void Usun(IZdjecie zdjecie)
         {
-            throw new Exception("The method or operation is not implemented.");
+            Oproznij();
         }
 
+        /// <summary>
+        /// Metoda czyszczaca obszar wyswietlania
+        /// </summary>
         public void Oproznij()
         {
             if (this.zdjecie != null)
@@ -326,16 +340,25 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Propercja zwraca wybrane (zaznaczone) zdjecia 
+        /// </summary>
         public IZdjecie[] WybraneZdjecia
         {
-            get { throw new Exception("The method or operation is not implemented."); }
+            get { return zdjecie; }
         }
 
+        /// <summary>
+        /// Metoda rozpoczynajaca tryb szybkiej edycji
+        /// </summary>
         public void RozpocznijEdycje()
         {
             Edycja = true;
         }
 
+        /// <summary>
+        /// Metoda konczaca tryb szybkiej edycji - wykonujaca wszystkie oczekujace operacje
+        /// </summary>
         public void ZakonczEdycje()
         {
             Edycja = false;
@@ -352,6 +375,10 @@ namespace Photo
             
         }
 
+        /// <summary>
+        /// Metoda dodajaca operacje do wykonania na zdjeciu
+        /// </summary>
+        /// <param name="operacja">Obiekt bedacy poleceniem operacji</param>
         public void DodajOperacje(PolecenieOperacji operacja)
         {
             if (pictureBox1.Image == null)
@@ -366,6 +393,9 @@ namespace Photo
                 zdjecie.DodajOperacje(operacja);
         }
 
+        /// <summary>
+        /// Metoda usuwajaca wszystkie operacje na zdjeciu
+        /// </summary>
         public void UsunWszystkieOperacje()
         {
             zdjecie.UsunWszystkieOperacje();
@@ -380,6 +410,10 @@ namespace Photo
 
         public event ZmodyfikowanoZdjecieDelegate ZmodyfikowanoZdjecie;
 
+        /// <summary>
+        /// Metoda wypelniajaca kontrolke przekazanym zdjeciem
+        /// </summary>
+        /// <param name="zdjecia">Tablica zdjec</param>
         public void Wypelnij(IZdjecie[] zdjecia)
         {
             if (zdjecia.Length != 0)
@@ -409,6 +443,9 @@ namespace Photo
 
         #endregion
 
+        /// <summary>
+        /// Propercja zwracajaca/ustawiajaca zdjecie
+        /// </summary>
         public Zdjecie Zdjecie
         {
             get
@@ -421,13 +458,15 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda zapisujaca zmiany na zdjeciu
+        /// </summary>
         public void ZapiszPlik()
         {
             if (czyZaladowaneZdjecie == false)
                 return;
             try
             {
-
                 zdjecie.Zapisz();
             }
             catch (DirectoryNotFoundException)
@@ -436,6 +475,10 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda zmieniajaca rozmiar zdjecia w zaleznosci od wybranego zoom'a
+        /// </summary>
+        /// <returns></returns>
         private Image ZoomImage()
         {
             if (zoom == 0.0)
@@ -474,6 +517,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda ustawiajaca zdjecie na srodku widoku
+        /// </summary>
         private void checkImagePosition()
         {
             if (this.pictureBox1.Image != null)
@@ -501,6 +547,10 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda dopasowujaca zdjecie do rozmiarow kontrolki
+        /// </summary>
+        /// <returns></returns>
         public Bitmap FitToPage()
         {
             int scaledH, scaledW;

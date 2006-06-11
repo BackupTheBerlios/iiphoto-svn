@@ -284,7 +284,7 @@ namespace Photo
         }
 
         /// <summary>
-        /// Metoda usuwajaca wszystkie operacje na zdjeciu/ach z aktywnego widoku
+        /// Metoda usuwajaca wszystkie operacje na zdjeciu/ach z wybranych (zaznaczonych) zdjec
         /// </summary>
         public void UsunWszystkieOperacje()
         {
