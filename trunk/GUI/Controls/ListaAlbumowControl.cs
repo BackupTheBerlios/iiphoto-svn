@@ -654,7 +654,7 @@ namespace Photo
                     
                     ToolStripItem toolStripItem = Context.Items.Add("Dodaj Album",Properties.Resources.Contacts_d);
                     toolStripItem.Click += new EventHandler(DodajAlbum);
-                    toolStripItem = Context.Items.Add("Usun Zawartoœæ Albumu",Properties.Resources.Trash_full_d);
+                    toolStripItem = Context.Items.Add("Usun Zawartoœæ Albumu",Properties.Resources.Recycle_Bin_Full_d);
                     toolStripItem.ToolTipText = e.Node.Text;
                     toolStripItem.Click += new EventHandler(UsunZawartoscAlbumu);
                     toolStripItem = Context.Items.Add("Usun Album",Properties.Resources.Recycle_Bin_Empty_d);
@@ -668,7 +668,7 @@ namespace Photo
                     Context.Items.Clear();
                     ToolStripItem toolStripItem = Context.Items.Add("Dodaj Tag",Properties.Resources.tag);
                     toolStripItem.Click += new EventHandler(DodajTag);
-                    toolStripItem = Context.Items.Add("Usun Tag", Properties.Resources.Trash_empty_d);
+                    toolStripItem = Context.Items.Add("Usun Tag", Properties.Resources.Recycle_Bin_Empty_d);
                     toolStripItem.ToolTipText = e.Node.Text;                    
                     toolStripItem.Click += new EventHandler(UsunTag);
 

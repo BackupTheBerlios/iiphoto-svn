@@ -130,6 +130,13 @@ namespace Photo.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap dodaj_do_kolekcji {
+            get {
+                object obj = ResourceManager.GetObject("dodaj_do_kolekcji", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Dysk {
             get {
                 object obj = ResourceManager.GetObject("Dysk", resourceCulture);
@@ -228,6 +235,13 @@ namespace Photo.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Recycle_Bin_Full_d {
+            get {
+                object obj = ResourceManager.GetObject("Recycle_Bin_Full_d", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap rotate_180 {
             get {
                 object obj = ResourceManager.GetObject("rotate_180", resourceCulture);
@@ -287,6 +301,13 @@ namespace Photo.Properties {
         internal static System.Drawing.Bitmap User {
             get {
                 object obj = ResourceManager.GetObject("User", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap usun_z_kolekcji {
+            get {
+                object obj = ResourceManager.GetObject("usun_z_kolekcji", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

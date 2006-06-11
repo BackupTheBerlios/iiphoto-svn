@@ -716,19 +716,19 @@ namespace Photo
             if (e.Button == MouseButtons.Right)
             {
                 Context.Items.Clear();
-                ToolStripItem toolStripItem = Context.Items.Add("Dodaj zawartosc katalogu " + ((DirTreeNode)e.Node).Path + " do kolekcji");
+                ToolStripItem toolStripItem = Context.Items.Add("Dodaj zawartosc katalogu " + ((DirTreeNode)e.Node).Path + " do kolekcji",Properties.Resources.dodaj_do_kolekcji);
                 toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
                 toolStripItem.Click += new EventHandler(DodajDoKolekcji);
-                toolStripItem = Context.Items.Add("Dodaj zawartosc katalogu " + ((DirTreeNode)e.Node).Path + " do Albumu");
+                toolStripItem = Context.Items.Add("Dodaj zawartosc katalogu " + ((DirTreeNode)e.Node).Path + " do Albumu",Properties.Resources.Contacts_d);
                 toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
                 toolStripItem.Click += new EventHandler(DodajDoAlbumu);
-                toolStripItem = Context.Items.Add("Dodaj tagi dla katalogu " + ((DirTreeNode)e.Node).Path);
+                toolStripItem = Context.Items.Add("Dodaj tagi dla katalogu " + ((DirTreeNode)e.Node).Path,Properties.Resources.new_tag);
                 toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
                 toolStripItem.Click += new EventHandler(DodajTagiDlaKatalogu);
-                toolStripItem = Context.Items.Add("Usuñ tagi dla katalogu " + ((DirTreeNode)e.Node).Path);
+                toolStripItem = Context.Items.Add("Usuñ tagi dla katalogu " + ((DirTreeNode)e.Node).Path,Properties.Resources.delete_tag);
                 toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
                 toolStripItem.Click += new EventHandler(UsunTagiDlaKatalogu);
-                toolStripItem = Context.Items.Add("Usuñ zawartoœæ katalogu " + ((DirTreeNode)e.Node).Path + " z kolekcji");
+                toolStripItem = Context.Items.Add("Usuñ zawartoœæ katalogu " + ((DirTreeNode)e.Node).Path + " z kolekcji",Properties.Resources.Recycle_Bin_Full_d);
                 toolStripItem.ToolTipText = ((DirTreeNode)e.Node).Path;
                 toolStripItem.Click += new EventHandler(UsunZKolekcji);
 

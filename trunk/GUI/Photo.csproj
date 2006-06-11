@@ -282,6 +282,7 @@
     <None Include="icons\delete-tag.png" />
     <Content Include="icons\Contacts.ico" />
     <Content Include="icons\Contacts_d.png" />
+    <Content Include="icons\dodaj_do_kolekcji.png" />
     <Content Include="icons\Dysk.png" />
     <Content Include="icons\Dyskietka.png" />
     <Content Include="icons\Dyskietka_z.png" />
@@ -298,11 +299,13 @@
     <None Include="icons\tag.png" />
     <Content Include="icons\Recycle Bin Empty.png" />
     <Content Include="icons\Recycle Bin Empty_d.png" />
+    <Content Include="icons\Recycle Bin Full_d.png" />
     <Content Include="icons\Starred.ico" />
     <Content Include="icons\Starred_d.png" />
     <Content Include="icons\Trash_empty_d.png" />
     <Content Include="icons\Trash_full_d.png" />
     <Content Include="icons\User.png" />
+    <Content Include="icons\usun_z_kolekcji.png" />
     <None Include="icons\xor.png" />
     <None Include="Resources\Grayscale.png" />
     <None Include="Resources\katalog_do_gory.png" />

@@ -148,6 +148,9 @@
   <data name="desaturate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\desaturate.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="dodaj_do_kolekcji" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\dodaj_do_kolekcji.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Dysk" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\dysk.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -190,6 +193,9 @@
   <data name="Recycle_Bin_Empty_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\recycle bin empty_d.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Recycle_Bin_Full_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\recycle bin full_d.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="rotate_180" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\rotate-180.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -216,6 +222,9 @@
   </data>
   <data name="User" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\user.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="usun_z_kolekcji" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\usun_z_kolekcji.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="xor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\xor.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
