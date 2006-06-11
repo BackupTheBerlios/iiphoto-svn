@@ -203,27 +203,27 @@ namespace Photo
                     {                        
                         if (lista[0].CzyUstawioneId() == false)
                         {
-                            toolStripItem = Context.Items.Add("Dodaj do kolekcji");
+                            toolStripItem = Context.Items.Add("Dodaj do kolekcji", Properties.Resources.dodaj_do_kolekcji);
                             toolStripItem.Click += new EventHandler(DodajZaznaczenieDoKolekcji);
-                            toolStripItem = Context.Items.Add("Dodaj do Albumu");
+                            toolStripItem = Context.Items.Add("Dodaj do Albumu",Properties.Resources.Contacts_d);
                             toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
                         }
                         else
                         {
                             toolStripItem = Context.Items.Add("Uaktualizuj Tagi", Properties.Resources.new_tag);
                             toolStripItem.Click += new EventHandler(UaktualizujTagi);
-                            toolStripItem = Context.Items.Add("Uaktualizuj Albumy");
+                            toolStripItem = Context.Items.Add("Uaktualizuj Albumy", Properties.Resources.Contacts_d);
                             toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
                             toolStripItem = Context.Items.Add("Aktualizuj w Bazie");
                             toolStripItem.Click += new EventHandler(AktualizujBaze);
                             toolStripItem = Context.Items.Add("Usuñ Tagi", Properties.Resources.delete_tag);
                             toolStripItem.Click += new EventHandler(UsunTagi);
-                            toolStripItem = Context.Items.Add("Usuñ Albumy");
+                            toolStripItem = Context.Items.Add("Usuñ Albumy",Properties.Resources.Recycle_Bin_Full_d);
                             toolStripItem.Click += new EventHandler(UsunAlbumy);
-                            toolStripItem = Context.Items.Add("Usuñ z kolekcji");
+                            toolStripItem = Context.Items.Add("Usuñ z kolekcji",Properties.Resources.usun_z_kolekcji);
                             toolStripItem.Click += new EventHandler(UsunZKolekcji);                            
                         }
-                        toolStripItem = Context.Items.Add("Usuñ zdjecie");
+                        toolStripItem = Context.Items.Add("Usuñ zdjecie",Properties.Resources.Recycle_Bin_Empty_d);
                         toolStripItem.Click += new EventHandler(UsunZdjecie);
                     }
                     else
@@ -241,32 +241,31 @@ namespace Photo
 
                         if (stan == true)
                         {
-                            toolStripItem = Context.Items.Add("Dodaj zaznaczenie do kolekcji");
+                            toolStripItem = Context.Items.Add("Dodaj zaznaczenie do kolekcji", Properties.Resources.dodaj_do_kolekcji);
                             toolStripItem.Click += new EventHandler(DodajZaznaczenieDoKolekcji);
-                            toolStripItem = Context.Items.Add("Dodaj Tagi");
+                            toolStripItem = Context.Items.Add("Dodaj Tagi", Properties.Resources.new_tag);
                             toolStripItem.Click += new EventHandler(UaktualizujTagi);
-                            toolStripItem = Context.Items.Add("Dodaj zaznaczone do Albumów");
+                            toolStripItem = Context.Items.Add("Dodaj zaznaczone do Albumów", Properties.Resources.Contacts_d);
                             toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
                             toolStripItem = Context.Items.Add("Aktualizuj zaznaczone w Bazie");
                             toolStripItem.Click += new EventHandler(AktualizujBaze);
-                            toolStripItem = Context.Items.Add("Usuñ Tagi z zaznaczenia");
+                            toolStripItem = Context.Items.Add("Usuñ Tagi z zaznaczenia", Properties.Resources.delete_tag);
                             toolStripItem.Click += new EventHandler(UsunTagi);
-                            toolStripItem = Context.Items.Add("Usuñ Albumy z zaznaczemia");
+                            toolStripItem = Context.Items.Add("Usuñ Albumy z zaznaczemia",Properties.Resources.Recycle_Bin_Full_d);
                             toolStripItem.Click += new EventHandler(UsunAlbumy);
-                            toolStripItem = Context.Items.Add("Usuñ zaznaczenie z kolekcji");
-                            toolStripItem.Click += new EventHandler(UsunZKolekcji);
-                            toolStripItem = Context.Items.Add("Usuñ zaznaczone zdjecia");
-                            toolStripItem.Click += new EventHandler(UsunZdjecie);
+                            toolStripItem = Context.Items.Add("Usuñ zaznaczenie z kolekcji",Properties.Resources.usun_z_kolekcji);
+                            toolStripItem.Click += new EventHandler(UsunZKolekcji);                            
                         }
                         else
                         {
-                            toolStripItem = Context.Items.Add("Dodaj zaznaczenie do kolekcji");
-                            toolStripItem.Click += new EventHandler(DodajZaznaczenieDoKolekcji);                            
-                            toolStripItem = Context.Items.Add("Dodaj zaznaczone do Albumów");
-                            toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
-                            toolStripItem = Context.Items.Add("Usuñ zaznaczone zdjecia");
-                            toolStripItem.Click += new EventHandler(UsunZdjecie);
+                            toolStripItem = Context.Items.Add("Dodaj zaznaczenie do kolekcji", Properties.Resources.dodaj_do_kolekcji);
+                            toolStripItem.Click += new EventHandler(DodajZaznaczenieDoKolekcji);
+                            toolStripItem = Context.Items.Add("Dodaj zaznaczone do Albumów", Properties.Resources.Contacts_d);
+                            toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);                            
                         }
+
+                        toolStripItem = Context.Items.Add("Usuñ zaznaczone zdjecia",Properties.Resources.Recycle_Bin_Empty_d);
+                        toolStripItem.Click += new EventHandler(UsunZdjecie);
                     }                   
                     
 
