@@ -95,6 +95,13 @@ namespace Photo.Properties {
             }
         }
         
+        internal static System.Drawing.Icon Contacts1 {
+            get {
+                object obj = ResourceManager.GetObject("Contacts1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap crop {
             get {
                 object obj = ResourceManager.GetObject("crop", resourceCulture);
@@ -235,9 +242,30 @@ namespace Photo.Properties {
             }
         }
         
+        internal static System.Drawing.Icon Starred1 {
+            get {
+                object obj = ResourceManager.GetObject("Starred1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap tag {
             get {
                 object obj = ResourceManager.GetObject("tag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Trash_empty {
+            get {
+                object obj = ResourceManager.GetObject("Trash_empty", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Trash_full {
+            get {
+                object obj = ResourceManager.GetObject("Trash_full", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

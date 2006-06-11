@@ -280,6 +280,7 @@
     <None Include="icons\crop.png" />
     <None Include="icons\desaturate.png" />
     <None Include="icons\delete-tag.png" />
+    <Content Include="icons\Contacts.ico" />
     <Content Include="icons\Contacts.png" />
     <Content Include="icons\Dysk.png" />
     <Content Include="icons\Dyskietka.png" />
@@ -294,7 +295,10 @@
     <None Include="icons\rotate-90.png" />
     <None Include="icons\rotate-180.png" />
     <None Include="icons\tag.png" />
+    <Content Include="icons\Starred.ico" />
     <Content Include="icons\Starred.png" />
+    <Content Include="icons\Trash_empty.png" />
+    <Content Include="icons\Trash_full.png" />
     <Content Include="icons\User.png" />
     <None Include="icons\xor.png" />
     <None Include="Resources\Grayscale.png" />

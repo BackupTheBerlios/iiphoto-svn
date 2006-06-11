@@ -32,7 +32,7 @@ namespace Photo
         public event ZmienionoZrodloDelegate ZmienionoZrodlo;
 
         private const int contacts = 0;
-        private const int starred = 1;
+        private const int tag = 1;
 
         /// <summary>
         /// Konstruktor
@@ -50,8 +50,8 @@ namespace Photo
             ilosc_zaznaczonych_tagow = 0;
 
             ImageList list = new ImageList();
-            list.Images.Add(Properties.Resources.Contacts);
-            list.Images.Add(Properties.Resources.Starred);
+            list.Images.Add(Properties.Resources.Contacts1);
+            list.Images.Add(Properties.Resources.Starred1);
             this.treeView1.ImageList = list;
 
             Wypelnij();
@@ -86,7 +86,7 @@ namespace Photo
                 //baza.Insert_czesci("Tag", "nazwa,album", "\'miejsca\',1");
 
                 TreeNode alb = new TreeNode("Albumy", contacts, contacts);
-                TreeNode ta = new TreeNode("Tagi",starred,starred);
+                TreeNode ta = new TreeNode("Tagi",tag,tag);
                 albumy = alb;
                 tagi = ta;
 
@@ -116,7 +116,7 @@ namespace Photo
                     {
                         if (!(r[0] is DBNull))
                         {
-                            ta.Nodes.Add(new TreeNode((string)r[0],starred,starred));
+                            ta.Nodes.Add(new TreeNode((string)r[0], tag, tag));
                             lista_tagow.Add((Int64)r[1]);
                             lista_nazw_tagow.Add((string)r[0]);                
                         }                           
@@ -652,12 +652,12 @@ namespace Photo
 
                     Context.Items.Clear();                    
                     
-                    ToolStripItem toolStripItem = Context.Items.Add("Dodaj Album");
+                    ToolStripItem toolStripItem = Context.Items.Add("Dodaj Album",Properties.Resources.Contacts);
                     toolStripItem.Click += new EventHandler(DodajAlbum);
-                    toolStripItem = Context.Items.Add("Usun Zawartoœæ Albumu");
+                    toolStripItem = Context.Items.Add("Usun Zawartoœæ Albumu",Properties.Resources.Trash_full);
                     toolStripItem.ToolTipText = e.Node.Text;
                     toolStripItem.Click += new EventHandler(UsunZawartoscAlbumu);
-                    toolStripItem = Context.Items.Add("Usun Album");
+                    toolStripItem = Context.Items.Add("Usun Album",Properties.Resources.Trash_empty);
                     toolStripItem.ToolTipText = e.Node.Text;
                     toolStripItem.Click += new EventHandler(UsunAlbum);
                    
@@ -666,9 +666,9 @@ namespace Photo
                 else
                 {
                     Context.Items.Clear();
-                    ToolStripItem toolStripItem = Context.Items.Add("Dodaj Tag");
+                    ToolStripItem toolStripItem = Context.Items.Add("Dodaj Tag",Properties.Resources.Starred);
                     toolStripItem.Click += new EventHandler(DodajTag);
-                    toolStripItem = Context.Items.Add("Usun Tag");
+                    toolStripItem = Context.Items.Add("Usun Tag", Properties.Resources.Trash_empty);
                     toolStripItem.ToolTipText = e.Node.Text;                    
                     toolStripItem.Click += new EventHandler(UsunTag);
 

@@ -28,6 +28,7 @@ namespace Photo
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dodaj_albumy_do_zdjecia));
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -60,6 +61,7 @@ namespace Photo
             this.ClientSize = new System.Drawing.Size(154, 184);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.checkedListBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Dodaj_albumy_do_zdjecia";
             this.Text = "Albumy";
             this.ResumeLayout(false);
