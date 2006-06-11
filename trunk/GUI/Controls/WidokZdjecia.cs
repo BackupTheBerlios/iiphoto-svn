@@ -345,7 +345,7 @@ namespace Photo
         /// </summary>
         public IZdjecie[] WybraneZdjecia
         {
-            get { return zdjecie; }
+            get { return new IZdjecie[] { this.zdjecie }; }
         }
 
         /// <summary>
