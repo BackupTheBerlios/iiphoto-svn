@@ -699,7 +699,7 @@ namespace Photo
         }
 
         /// <summary>
-        /// Metoda która zostaje wywo³ana po zaznaczeniu checkboxa
+        /// Metoda która zostaje wywo³ana po zaznaczeniu checkboxa je¿eli zaznaczony by³ checkbox obok tagu automatycznie jest informowana kontrolka wyœwietlaj¹ca miniaturki o liœcie zaznaczonych tagów
         /// </summary>
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
         {            

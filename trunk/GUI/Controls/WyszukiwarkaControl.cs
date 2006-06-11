@@ -10,8 +10,14 @@ using System.Data.SqlClient;
 
 namespace Photo
 {
-    public partial class WyszukiwarkaControl : UserControl, IWyszukiwacz
+    /// <summary>
+    /// Klasa imlementuj¹ca UserControl i interjfejs IWyszukiwacz odpowiada za sworzenie kontrolki do wyszukiwanie i za realizacje wyszukania odpowiednich zdjêæ w bazie
+    /// </summary>
+    public partial class WyszukiwarkaControl : UserControl, IWyszukiwacz    
     {
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public WyszukiwarkaControl()
         {
             InitializeComponent();
@@ -19,6 +25,10 @@ namespace Photo
 
         public IWyszukiwacz wyszukiwacz_albumow;
 
+        /// <summary>
+        /// Metoda realizuj¹ca zapytanie sql do bazy i zwracaj¹ca liste zdjêc która zosta³a sworzona w oparciu o wynik zapytania
+        /// </summary>
+        /// <returns>lista zdjêæ która spe³nia warunki wyszukania</returns>
         private List<Zdjecie> ZwrocWyszukanie()
         {
             Db baza = new Db();
@@ -104,6 +114,9 @@ namespace Photo
             return lista_zdjec;
         }
 
+        /// <summary>
+        /// Metoda która za pomoc¹ delegatów informuje kontrolke wyœwietlaj¹ca jakie obiekty zdjêæ ma wyœwietliæ
+        /// </summary>
         private void WykonajZapytanie()
         {
             if (textBox1.Text == "" || checkedListBox1.CheckedItems.Count == 0)
@@ -132,6 +145,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda wykonywana gdy u¿ytkownik kliknie przecisk szukaj metoda wywo³uje WykonajZapytanie
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
             WykonajZapytanie();            
@@ -150,6 +166,9 @@ namespace Photo
 
         #endregion
 
+        /// <summary>
+        /// Metoda do mo¿liwoœci klikniêcia enter po wpisaniu frazy dziêki czemu mechanizm wyszukiwania jest uruchamiany bez wykorzystywania myszki
+        /// </summary>
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             Keys k = (Keys)e.KeyChar;
