@@ -296,6 +296,8 @@
     <None Include="icons\rotate-90.png" />
     <None Include="icons\rotate-180.png" />
     <None Include="icons\tag.png" />
+    <Content Include="icons\Recycle Bin Empty.png" />
+    <Content Include="icons\Recycle Bin Empty_d.png" />
     <Content Include="icons\Starred.ico" />
     <Content Include="icons\Starred_d.png" />
     <Content Include="icons\Trash_empty_d.png" />

@@ -657,7 +657,7 @@ namespace Photo
                     toolStripItem = Context.Items.Add("Usun Zawartoœæ Albumu",Properties.Resources.Trash_full_d);
                     toolStripItem.ToolTipText = e.Node.Text;
                     toolStripItem.Click += new EventHandler(UsunZawartoscAlbumu);
-                    toolStripItem = Context.Items.Add("Usun Album",Properties.Resources.Trash_empty_d);
+                    toolStripItem = Context.Items.Add("Usun Album",Properties.Resources.Recycle_Bin_Empty_d);
                     toolStripItem.ToolTipText = e.Node.Text;
                     toolStripItem.Click += new EventHandler(UsunAlbum);
                    

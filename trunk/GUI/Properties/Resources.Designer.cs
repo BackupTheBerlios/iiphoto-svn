@@ -214,6 +214,20 @@ namespace Photo.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Recycle_Bin_Empty {
+            get {
+                object obj = ResourceManager.GetObject("Recycle_Bin_Empty", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Recycle_Bin_Empty_d {
+            get {
+                object obj = ResourceManager.GetObject("Recycle_Bin_Empty_d", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap rotate_180 {
             get {
                 object obj = ResourceManager.GetObject("rotate_180", resourceCulture);

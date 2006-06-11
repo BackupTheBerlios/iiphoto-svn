@@ -184,6 +184,12 @@
   <data name="Pulpit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\pulpit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Recycle_Bin_Empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\recycle bin empty.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Recycle_Bin_Empty_d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\recycle bin empty_d.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="rotate_180" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\rotate-180.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
