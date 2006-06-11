@@ -79,7 +79,7 @@ namespace Photo
                 if (value != null)
                 {
                     iiphotoTag = value;
-                    string dirName = Path.Substring(0, Path.LastIndexOf('\\') + 1);
+                    string tempFileName = System.IO.Path.GetTempFileName();
                     using (FileStream stream = new FileStream(Path, FileMode.Open, FileAccess.Read))
                     {
                         try
@@ -93,7 +93,7 @@ namespace Photo
                                 propItem.Value = encoding.GetBytes(value);
                                 propItem.Len = propItem.Value.Length;
                                 image.SetPropertyItem(propItem);
-                                image.Save(dirName + "img.tmp", image.RawFormat);
+                                image.Save(tempFileName, image.RawFormat);
                             }
                         }
                         catch (ArgumentException)
@@ -102,7 +102,7 @@ namespace Photo
                         }
                     }
                     File.Delete(Path);
-                    File.Move(dirName + "img.tmp", Path);
+                    File.Move(tempFileName, Path);
                 }
             }
         }
