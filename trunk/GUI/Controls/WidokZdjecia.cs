@@ -11,8 +11,14 @@ using System.IO;
 
 namespace Photo
 {
+    /// <summary>
+    /// Kontrolka do wyswietlania zdjecia i jego podstawowej edycji.
+    /// </summary>
     public partial class WidokZdjecia : UserControl, IOpakowanieZdjec
     {
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public WidokZdjecia()
         {
             InitializeComponent();
@@ -24,6 +30,9 @@ namespace Photo
             zoom = 1.0;
         }
 
+        /// <summary>
+        /// Propercja zwraca wartosc boolowska, czy kontrolka ma aktualnie zaladowane zdjecie
+        /// </summary>
         public bool czyZaladowaneZdjecie
         {
             get 
@@ -32,6 +41,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda ustawia kontrolke w tryb dopasowywania wyswietlanego zdjecia do jej rozmiaru
+        /// </summary>
         public void UstawDopasowanieDoEkranu()
         {
             DrawMyRectangle(selectedRectangle);
@@ -42,11 +54,20 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda rysuje obszar zaznaczenia na zdjeciu
+        /// </summary>
         public void RysujXorZaznaczenie()
         {
             this.DrawMyRectangle(selectedRectangle);
         }
 
+        /// <summary>
+        /// Metoda zwraca kolor piksela we wskazanym polozeniu
+        /// </summary>
+        /// <param name="x">Wspolrzedna X-owa</param>
+        /// <param name="y">Wspolrzedna Y-kowa</param>
+        /// <returns></returns>
         private Color MyGetPixel(int x, int y)
         {
             unsafe
@@ -57,6 +78,12 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda ustawia kolor podanego piksela
+        /// </summary>
+        /// <param name="x">Wspolrzedna X-owa</param>
+        /// <param name="y">Wspolrzedna Y-kowa</param>
+        /// <param name="c">Kolor na ktory ma zostac ustawiony piksel</param>
         private void MySetPixel(int x, int y, Color c)
         {
             unsafe
@@ -69,6 +96,12 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Medoda xor'uje podany piksel z podanym kolorem
+        /// </summary>
+        /// <param name="x">Wspolrzedna X-owa</param>
+        /// <param name="y">Wspolrzedna Y-kowa</param>
+        /// <param name="c">Kolor z ktorym ma zostac xorowany piksel</param>
         private void XorPixel(int x, int y, Color color)
         {
 
@@ -77,6 +110,11 @@ namespace Photo
 
         }
 
+        /// <summary>
+        /// Metoda rysuje linie
+        /// </summary>
+        /// <param name="srcPoint">Punkt poczatkowy</param>
+        /// <param name="destPoint">Punkt docelowy</param>
         private void DrawMyLine(Point srcPoint, Point destPoint)
         {
             int d, delta_A, delta_B, x, y;
@@ -138,6 +176,10 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda rysuje kwadrat
+        /// </summary>
+        /// <param name="r">Kwadrat ktory ma zostac narysowany</param>
         internal void DrawMyRectangle(Rectangle r)
         {
             data = ((Bitmap)pictureBox1.Image).LockBits(new Rectangle(0, 0, this.pictureBox1.Image.Width, this.pictureBox1.Image.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
@@ -239,6 +281,11 @@ namespace Photo
 
         #region IOpakowanieZdjec Members
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="numer"></param>
+        /// <returns></returns>
         public IZdjecie this[int numer]
         {
             get { return zdjecie; }
