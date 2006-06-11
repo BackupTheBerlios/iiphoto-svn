@@ -88,9 +88,30 @@ namespace Photo.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Contacts {
+            get {
+                object obj = ResourceManager.GetObject("Contacts", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap crop {
             get {
                 object obj = ResourceManager.GetObject("crop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap delete_tag {
+            get {
+                object obj = ResourceManager.GetObject("delete_tag", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap delete_tag1 {
+            get {
+                object obj = ResourceManager.GetObject("delete_tag1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,6 +224,20 @@ namespace Photo.Properties {
         internal static System.Drawing.Bitmap rotate_90 {
             get {
                 object obj = ResourceManager.GetObject("rotate_90", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Starred {
+            get {
+                object obj = ResourceManager.GetObject("Starred", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap tag {
+            get {
+                object obj = ResourceManager.GetObject("tag", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

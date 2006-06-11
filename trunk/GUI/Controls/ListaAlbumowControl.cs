@@ -31,6 +31,9 @@ namespace Photo
         public event ZmieninoTagiDelegate ZmienionoTagi;
         public event ZmienionoZrodloDelegate ZmienionoZrodlo;
 
+        private const int contacts = 0;
+        private const int starred = 1;
+
         /// <summary>
         /// Konstruktor
         /// </summary>
@@ -46,7 +49,13 @@ namespace Photo
             ilosc_zaznaczonych_albumow = 0;
             ilosc_zaznaczonych_tagow = 0;
 
+            ImageList list = new ImageList();
+            list.Images.Add(Properties.Resources.Contacts);
+            list.Images.Add(Properties.Resources.Starred);
+            this.treeView1.ImageList = list;
+
             Wypelnij();
+            
 
             tagi.Expand();
             albumy.Expand();
@@ -76,8 +85,8 @@ namespace Photo
             {
                 //baza.Insert_czesci("Tag", "nazwa,album", "\'miejsca\',1");
 
-                TreeNode alb = new TreeNode("Albumy");
-                TreeNode ta = new TreeNode("Tagi");
+                TreeNode alb = new TreeNode("Albumy", contacts, contacts);
+                TreeNode ta = new TreeNode("Tagi",starred,starred);
                 albumy = alb;
                 tagi = ta;
 
@@ -92,7 +101,7 @@ namespace Photo
                     {
                         if (!(r[0] is DBNull))
                         {
-                            alb.Nodes.Add(new TreeNode((string)r[1]));
+                            alb.Nodes.Add(new TreeNode((string)r[1],contacts,contacts));
                             lista_albumow.Add((Int64)r[0]);
                             lista_nazw_albumow.Add((string)r[1]);
                         }                        
@@ -107,7 +116,7 @@ namespace Photo
                     {
                         if (!(r[0] is DBNull))
                         {
-                            ta.Nodes.Add(new TreeNode((string)r[0]));
+                            ta.Nodes.Add(new TreeNode((string)r[0],starred,starred));
                             lista_tagow.Add((Int64)r[1]);
                             lista_nazw_tagow.Add((string)r[0]);                
                         }                           
