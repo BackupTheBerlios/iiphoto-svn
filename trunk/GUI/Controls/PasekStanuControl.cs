@@ -5,14 +5,18 @@ using System.Text;
 
 namespace Photo
 {
-    //class Thre
-
+    /// <summary>
+    /// Formatka dzieiczaca po StatusStrip, wyswietlajaca wazne dla uzytkownika informacje.
+    /// </summary>
     class PasekStanuControl : StatusStrip
     {
         private ToolStripStatusLabel wyszukiwanieLabel;
         private ToolStripStatusLabel katalogLabel;
         private ToolStripSeparator sep;
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public PasekStanuControl() :
             base()
         {
@@ -23,32 +27,53 @@ namespace Photo
             this.Items.Add(katalogLabel);
         }
 
+        /// <summary>
+        /// Metoda informujaca uzytkownika o rozpoczeniu wyszukiwania
+        /// </summary>
         public void RozpoczetoWyszukiwanie(IWyszukiwanie wyszukiwanie)
         {
             wyszukiwanieLabel.Text = "Rozpoczêto: Wyszukiwanie";
             this.Invalidate();
         }
 
+        /// <summary>
+        /// Metoda informujaca uzytkownika o zakonczeniu wyszukiwania
+        /// </summary>
         public void ZakonczonoWyszukiwanie(IZdjecie[] zdjecia, Katalog[] k, bool czyzdrzewa)
         {
             wyszukiwanieLabel.Text = "Zakoñczono: Wyszukiwanie";
         }
 
+        /// <summary>
+        /// Metoda informujaca uzytkownika o rozpoczeniu akcji
+        /// </summary>
+        /// <param name="Nazwa">Nazwa akcji do wyswietlenia</param>
         public void RozpoczetoAkcje(string Nazwa)
         {
             wyszukiwanieLabel.Text = "Rozpoczêto: " + Nazwa;
         }
 
+        /// <summary>
+        /// Metoda informujaca uzytkownika o zakonczeniu akcji
+        /// </summary>
+        /// <param name="Nazwa">Nazwa akcji do wyswietlenia</param>
         public void ZakonczonoAkcje(string Nazwa)
         {
             wyszukiwanieLabel.Text = "Zakoñcono: " + Nazwa;
         }
 
+        /// <summary>
+        /// Metoda informujaca uzytkownika o zmianie zrodla wyswietlanych zdjec
+        /// </summary>
+        /// <param name="Nazwa">Nazwa zrodla do wyswietlenia</param>
         public void ZmienionoZrodlo(string dir)
         {
             katalogLabel.Text = dir;
         }
 
+        /// <summary>
+        /// Metoda inicjalizujaca formatke
+        /// </summary>
         private void InitializeComponent()
         {
             //Label Wyszukiwanie

@@ -12,26 +12,38 @@ using System.IO;
 
 namespace Photo
 {
+    /// <summary>
+    /// Kontrolka sluzaca do przegladania zdjec. Posiada dwa tryby wyswietlania - widok miniatur oraz widok zdjecia. 
+    /// Implementuje interfejs IOpakowanieZdjec.
+    /// </summary>
     public partial class PrzegladarkaZdjec : UserControl, IOpakowanieZdjec
     {
+        /// <summary>
+        /// Kontruktor bezparametryczny
+        /// </summary>
         public PrzegladarkaZdjec()
         {
             InitializeComponent();
             Context = new ContextMenuStrip();
         }
+        /// <summary>
+        /// Ustawia jako aktywny widok miniatur
+        /// </summary>
         public void SetThumbnailView()
         {
-            if (panele.SelectedTab == zdjecie1Tab)
-            {
-                // zamykanie dytora
-            }
             panele.SelectedTab = miniatury1Tab;
         }
+        /// <summary>
+        /// Ustawia jako aktywny widok zdjecia
+        /// </summary>
         public void SetImageView()
         {
             panele.SelectedTab = zdjecie1Tab;
         }
 
+        /// <summary>
+        /// Propercja zwracajaca obiekt bedacy widokiem miniatur
+        /// </summary>
         public WidokMiniatur Thumbnailview
         {
             get
@@ -39,13 +51,21 @@ namespace Photo
                 return widokMiniatur1;
             }
         }
+
+        /// <summary>
+        /// Propercja zwracajaca obiekt bedacy widokiem zdjecia
+        /// </summary>
         public WidokZdjecia Imageview
         {
             get
             {
                 return widokZdjecia1;
             }
-        }        
+        }
+
+        /// <summary>
+        /// Propercja zwracajaca aktywny widok
+        /// </summary>
         public IOpakowanieZdjec AktywneOpakowanie
         {
             get
@@ -63,16 +83,28 @@ namespace Photo
 
         #region IOpakowanieZdjec Members
 
+        /// <summary>
+        /// Propercja zwracajaca zdjecie o podanym indeksie z aktywnego widoku
+        /// </summary>
+        /// <param name="numer">Indeks zdjecia</param>
+        /// <returns>Obiekt implementujacy interfejs IZdjecie</returns>
         public IZdjecie this[int numer]
         {
             get { return AktywneOpakowanie[numer]; }
         }
 
+        /// <summary>
+        /// Propercja zwracajaca ilosc zdjec z aktywnego widoku
+        /// </summary>
         public int Ilosc
         {
             get { return AktywneOpakowanie.Ilosc; }
         }
 
+        /// <summary>
+        /// Metoda dodajaca zdjecie do widoku miniatur
+        /// </summary>
+        /// <param name="zdjecie"></param>
         public void Dodaj(IZdjecie zdjecie)
         {
             Thumbnailview.Dodaj(zdjecie);
@@ -80,16 +112,26 @@ namespace Photo
                 SetThumbnailView();
         }
 
+        /// <summary>
+        /// Metoda uzuwajaca podane zdjecie z aktywnego widoku
+        /// </summary>
+        /// <param name="zdjecie">Obiekt do usuniecia</param>
         public void Usun(IZdjecie zdjecie)
         {
             AktywneOpakowanie.Usun(zdjecie);
         }
 
+        /// <summary>
+        /// Metoda oprozniajaca zawartosc aktywnego widoku
+        /// </summary>
         public void Oproznij()
         {
             AktywneOpakowanie.Oproznij();
         }
 
+        /// <summary>
+        /// Propercja zwracajaca wybrane (zaznaczone) zdjecia z aktywnego widoku
+        /// </summary>
         public IZdjecie[] WybraneZdjecia
         {
             get
@@ -98,32 +140,51 @@ namespace Photo
             }
         }
 
+
+        /// <summary>
+        /// Metoda ustawiacjaca aktywny widok w tryb szybkiej edycji
+        /// </summary>
         public void RozpocznijEdycje()
         {
             AktywneOpakowanie.RozpocznijEdycje();
         }
 
+        /// <summary>
+        /// Metoda konczaca tryb szybkiej edycji na aktywnym widoku
+        /// </summary>
         public void ZakonczEdycje()
         {
             AktywneOpakowanie.ZakonczEdycje();
         }
 
+        /// <summary>
+        /// Metoda dodajaca operacje do wykonania na zdjeciu/ach z aktywnego widoku
+        /// </summary>
+        /// <param name="operacja">Obiekt bedacy poleceniem operacji</param>
         public void DodajOperacje(PolecenieOperacji operacja)
         {
             AktywneOpakowanie.DodajOperacje(operacja);
         }
 
+        /// <summary>
+        /// Metoda usuwajaca wszystkie operacje na zdjeciu/ach z aktywnego widoku
+        /// </summary>
         public void UsunWszystkieOperacje()
         {
             AktywneOpakowanie.UsunWszystkieOperacje();
         }
 
+        /// <summary>
+        /// Metoda wypelniajaca zdjeciami i katalogami widok miniatur.
+        /// </summary>
+        /// <param name="zdjecia">Tablica obiektow do wyswietlenia</param>
+        /// <param name="katalogi">Tablica katalogow do wyswietlenia</param>
+        /// <param name="CzyZDrzewa">Zmienna informujaca czy podane dane pochodza z drzewa katalogow czy nie</param>
         public void Wypelnij(IZdjecie[] zdjecia, Katalog[] katalogi, bool CzyZDrzewa)
         {
             if (AktywneOpakowanie != Thumbnailview)
                 SetThumbnailView();
             Thumbnailview.Wypelnij(zdjecia, katalogi, CzyZDrzewa);
-            
         }
 
         #endregion
@@ -338,6 +399,10 @@ namespace Photo
 
         }
 
+        /// <summary>
+        /// Metoda dodajaca zbior zdjec do bazy danych uzytkownika
+        /// </summary>
+        /// <param name="lista">Kolekcja Zdjec do dodania</param>
         public void dodaj_kolekcje_do_bazy(List<Zdjecie> lista)
         {
             StringBuilder sb = new StringBuilder("Nie uda³o siê dodaæ do kolekcji nastepuj¹cych zdjêæ:\n");
@@ -569,6 +634,10 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda przeciagajaca Focus na widok miniatur
+        /// </summary>
+        /// <returns></returns>
         public bool WezFocus() {
             return widokMiniatur1.Focus();
         }
@@ -615,6 +684,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda odrysowywujaca od nowa miniatury o nowym rozmiarze
+        /// </summary>
         internal void ZmienionoRozmiarMiniatury()
         {
             widokMiniatur1.LargeImageList.ImageSize = new Size(Config.RozmiarMiniatury + 2, Config.RozmiarMiniatury + 2);
@@ -625,11 +697,6 @@ namespace Photo
             }
             widokMiniatur1.Wypelnij(zdjecia, widokMiniatur1.Katalogi, Thumbnailview.MiniaturyZDrzewa);
             widokMiniatur1.Refresh();
-        }
-
-        public void PokazAktualnyKatalog(string katalog) 
-        {
-            miniatury1Tab.Text = "Widok miniatur (" + katalog + ")";
         }
     }
 }

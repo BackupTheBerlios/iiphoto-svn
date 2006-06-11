@@ -9,8 +9,14 @@ using System.Windows.Forms;
 
 namespace Photo
 {
+    /// <summary>
+    /// Kontrolka wyswietlajaca informacje o zdjeciach.
+    /// </summary>
     public partial class InformacjeControl : UserControl
     {
+        /// <summary>
+        /// Konstruktow ustawia wyglad kontrolki.
+        /// </summary>
         public InformacjeControl()
         {
             InitializeComponent();
@@ -25,12 +31,19 @@ namespace Photo
             Exif.Columns[1].Width = 95;
         }
 
+        /// <summary>
+        /// Metoda pobierajaca zdjecie i przekazujaca je do wyswietlenia
+        /// </summary>
+        /// <param name="zdjecie">Zdjecie ktorego informacje maja zostac wyswietlone</param>
         public void Zaladuj(Zdjecie zdjecie)
         {
             this.zdjecie = zdjecie;
             Wyswietl();
         }
 
+        /// <summary>
+        /// Metoda wypelniajaca kontrolke informacjami o zdjeciu
+        /// </summary>
         private void Wyswietl()
         {
             Tags.Items.Clear();
@@ -47,6 +60,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda pobierajaca dane Exif ze zdjecia i dodajaca je do wyswietlenia
+        /// </summary>
         private void fillExif()
         {
             PropertyItem[] propertyItems = zdjecie.PobierzDaneExif();
@@ -63,6 +79,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda pobierajaca podstawowe dane o zdjeciu i dodajaca je do wyswietlenia
+        /// </summary>
         private void fillTags()
         {
             Tags.Items.Add(new ListViewItem(new string[] { "Lokalizacja", zdjecie.Path.Substring(0, zdjecie.Path.LastIndexOf('\\') + 1) }));
@@ -98,6 +117,5 @@ namespace Photo
                 Tags.Items.Add(new ListViewItem(new string[] { "Tagi", sb.ToString() }));
             }
         }
-
     }
 }
