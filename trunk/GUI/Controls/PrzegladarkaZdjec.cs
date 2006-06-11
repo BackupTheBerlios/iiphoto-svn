@@ -214,7 +214,7 @@ namespace Photo
                             toolStripItem.Click += new EventHandler(UaktualizujTagi);
                             toolStripItem = Context.Items.Add("Uaktualizuj Albumy", Properties.Resources.Contacts_d);
                             toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
-                            toolStripItem = Context.Items.Add("Aktualizuj w Bazie");
+                            toolStripItem = Context.Items.Add("Aktualizuj w Bazie",Properties.Resources.aktualizacja_bazy);
                             toolStripItem.Click += new EventHandler(AktualizujBaze);
                             toolStripItem = Context.Items.Add("Usuñ Tagi", Properties.Resources.delete_tag);
                             toolStripItem.Click += new EventHandler(UsunTagi);
@@ -247,7 +247,7 @@ namespace Photo
                             toolStripItem.Click += new EventHandler(UaktualizujTagi);
                             toolStripItem = Context.Items.Add("Dodaj zaznaczone do Albumów", Properties.Resources.Contacts_d);
                             toolStripItem.Click += new EventHandler(DodajZaznaczoneDoAlbumu);
-                            toolStripItem = Context.Items.Add("Aktualizuj zaznaczone w Bazie");
+                            toolStripItem = Context.Items.Add("Aktualizuj zaznaczone w Bazie",Properties.Resources.aktualizacja_bazy);
                             toolStripItem.Click += new EventHandler(AktualizujBaze);
                             toolStripItem = Context.Items.Add("Usuñ Tagi z zaznaczenia", Properties.Resources.delete_tag);
                             toolStripItem.Click += new EventHandler(UsunTagi);

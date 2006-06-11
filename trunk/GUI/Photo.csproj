@@ -273,6 +273,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icons\aktualizacja_bazy.png" />
     <Content Include="icons\Cdrom.png" />
     <Content Include="icons\Cdrom_z.jpg" />
     <Content Include="icons\Cdrom_z_2.png" />
