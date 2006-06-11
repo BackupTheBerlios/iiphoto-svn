@@ -51,7 +51,7 @@ namespace Photo
 
             ImageList list = new ImageList();
             list.Images.Add(Properties.Resources.Contacts1);
-            list.Images.Add(Properties.Resources.Starred1);
+            list.Images.Add(Properties.Resources.tag);
             this.treeView1.ImageList = list;
 
             Wypelnij();
@@ -652,12 +652,12 @@ namespace Photo
 
                     Context.Items.Clear();                    
                     
-                    ToolStripItem toolStripItem = Context.Items.Add("Dodaj Album",Properties.Resources.Contacts);
+                    ToolStripItem toolStripItem = Context.Items.Add("Dodaj Album",Properties.Resources.Contacts_d);
                     toolStripItem.Click += new EventHandler(DodajAlbum);
-                    toolStripItem = Context.Items.Add("Usun Zawartoœæ Albumu",Properties.Resources.Trash_full);
+                    toolStripItem = Context.Items.Add("Usun Zawartoœæ Albumu",Properties.Resources.Trash_full_d);
                     toolStripItem.ToolTipText = e.Node.Text;
                     toolStripItem.Click += new EventHandler(UsunZawartoscAlbumu);
-                    toolStripItem = Context.Items.Add("Usun Album",Properties.Resources.Trash_empty);
+                    toolStripItem = Context.Items.Add("Usun Album",Properties.Resources.Trash_empty_d);
                     toolStripItem.ToolTipText = e.Node.Text;
                     toolStripItem.Click += new EventHandler(UsunAlbum);
                    
@@ -666,9 +666,9 @@ namespace Photo
                 else
                 {
                     Context.Items.Clear();
-                    ToolStripItem toolStripItem = Context.Items.Add("Dodaj Tag",Properties.Resources.Starred);
+                    ToolStripItem toolStripItem = Context.Items.Add("Dodaj Tag",Properties.Resources.tag);
                     toolStripItem.Click += new EventHandler(DodajTag);
-                    toolStripItem = Context.Items.Add("Usun Tag", Properties.Resources.Trash_empty);
+                    toolStripItem = Context.Items.Add("Usun Tag", Properties.Resources.Trash_empty_d);
                     toolStripItem.ToolTipText = e.Node.Text;                    
                     toolStripItem.Click += new EventHandler(UsunTag);
 
