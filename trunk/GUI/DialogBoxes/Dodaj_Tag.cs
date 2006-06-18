@@ -10,16 +10,26 @@ using System.Data.SqlClient;
 
 namespace Photo
 {
+    /// <summary>
+    /// Klasa tworz¹ca formatke do dodawania tagu do drzewa albumów i do bazy
+    /// </summary>
     public partial class Dodaj_Tag : Form
     {
         private ListaAlbumowControl listaAlbumow;
 
+        /// <summary>
+        /// Konstruktor 
+        /// </summary>
+        /// <param name="la">obiekt listy albumów ¿eby wykorzystaæ niektóre jego metody</param>
         public Dodaj_Tag(ListaAlbumowControl la)
         {
             InitializeComponent();
             listaAlbumow = la;
         }
 
+        /// <summary>
+        /// Metoda dodaj¹ca nazwe tagu do bazy i do drzewa albumów i aktualizuj¹ca drzewko 
+        /// </summary>
         private void DodajTagDoBazy()
         {
             string nazwa;
@@ -73,12 +83,17 @@ namespace Photo
 
         }
 
-
+        /// <summary>
+        /// Metoda wywo³ana gdy u¿ytkownik naciœnie przycisk akceptuj¹cy i wywo³uje metode DodajTagDoBazy
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
             DodajTagDoBazy();
         }
 
+        /// <summary>
+        /// Metoda wywo³ana gdy u¿ytkownik naciœnie klawisz Enter i wywo³uje metode DodajTagDoBazy
+        /// </summary>
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             Keys k = (Keys)e.KeyChar;

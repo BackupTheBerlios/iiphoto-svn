@@ -60,6 +60,13 @@ namespace Photo.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap aktualizacja_bazy {
+            get {
+                object obj = ResourceManager.GetObject("aktualizacja_bazy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Cdrom {
             get {
                 object obj = ResourceManager.GetObject("Cdrom", resourceCulture);

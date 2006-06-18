@@ -14,11 +14,17 @@ using System.Collections;
 
 namespace Photo
 {
+    /// <summary>
+    /// Klasa do korzystania z bazy danych SQLite. Zawiera wszystkie metody potrzebne do obs³ugi bazy danych
+    /// </summary>
     class Db
     {
         private string DBfile;
         private SQLiteConnection conn;
 
+        /// <summary>
+        /// Konstrunktor. Je¿eli baza jeszcze nie jest stworzona to jest tworzona
+        /// </summary>
         public Db()
         {
             DBfile = Config.katalogAplikacji + "\\" + Config.plikBazy;
@@ -32,6 +38,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda tworz¹ca wszystkie tabele bazy potrzebne w aplikacji
+        /// </summary>
         private void UtworzTabele()
         {
             try
@@ -87,18 +96,29 @@ namespace Photo
                 MessageBox.Show(e.Message);
             }
         }
-
+        /// <summary>
+        /// Metoda która zestawia po³aczenie z plikiem bazy
+        /// </summary>
         public void Polacz()
         {
             this.conn = new SQLiteConnection("Data Source=" + DBfile + ";Version=3;");    
             conn.Open();
         }
 
+        /// <summary>
+        /// Metoda koñcz¹ca po³¹czenie z plikiem bazy
+        /// </summary>
         public void Rozlacz()
         {
             conn.Close();
         }
 
+        /// <summary>
+        /// Metoda do szybkiego wstawiania du¿ej iloœci danych
+        /// </summary>
+        /// <param name="fields">tablica dwu-wymiarowa z polami tworz¹cymi kolejne rekordy</param>
+        /// <param name="parameters">string z parametrami jakie wpisujemy do tabeli</param>
+        /// <param name="tableName">nazwa tabeli</param>
         public void SzybkieInserty(string tableName, string parameters, string[,] fields)
         {
             using (SQLiteTransaction dbTrans = conn.BeginTransaction())
@@ -128,6 +148,12 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda która wykonuje zapytanie sql i zwraca adapter z którego u¿ytkownik bêdzie móg³ wy³uskaæ dane jakie potrzebuje
+        /// </summary>
+        /// <param name="forEdit">pole okreœlaj¹ce czy ma byæ edytowalne czy nie</param>
+        /// <param name="query">zapytanie sql</param>
+        /// <returns>zwraca SQLiteDataAdapter</returns>
         public SQLiteDataAdapter PobierzAdapter(string query, bool forEdit)
         {
             SQLiteDataAdapter sqladapt = new SQLiteDataAdapter(query, conn);
@@ -139,6 +165,11 @@ namespace Photo
             return sqladapt;
         }
 
+        /// <summary>
+        /// Metoda zwracaj¹ca DataSet. Pobiera dane z SQLiteDataAdapter-a
+        /// </summary>
+        /// <param name="ad">SQLiteDataAdapter</param>
+        /// <returns>zwraca DataSet</returns>
         public DataSet PobierzDane(SQLiteDataAdapter ad)
         {
             DataSet dataSet = new DataSet("Dane");
@@ -146,6 +177,11 @@ namespace Photo
             return dataSet;
         }
 
+        /// <summary>
+        /// Metoda wykonuj¹ca zapytanie typu 'select' i zwracaj¹ca dane w obiekcie DataSet
+        /// </summary>
+        /// <param name="select">zapytanie sql typu 'select'</param>
+        /// <returns>zwraca wynik w DataSet</returns>
         public DataSet Select(string select)
         {
             SQLiteDataAdapter sqladapt = new SQLiteDataAdapter(select, conn);
@@ -155,12 +191,22 @@ namespace Photo
             return dataSet;
         }
 
+        /// <summary>
+        /// Metoda wykonuj¹ca zapytanie sql
+        /// </summary>
+        /// <param name="query">zapytanie sql</param>
         public int WykonajQuery(string query)
         {
             SQLiteCommand cmd = conn.CreateCommand();
             cmd.CommandText = query;
             return cmd.ExecuteNonQuery();
         }
+
+        /// <summary>
+        /// Metoda wstawiaj¹ca rekord do tabeli
+        /// </summary>
+        /// <param name="parameters">string z parametrami</param>
+        /// <param name="tableName">nazwa tabeli</param>
         public void Insert(string tableName, string parameters)
         {
             using (SQLiteTransaction dbTrans = conn.BeginTransaction())
@@ -176,6 +222,12 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda wstawiaj¹ca rekord ale nie trzeba podawaæ wszystkich parametrów
+        /// </summary>
+        /// <param name="parameters">string z parametrami</param>
+        /// <param name="pola">string z polami</param>
+        /// <param name="tableName">nazwa tabeli</param>
         public void Insert_czesci(string tableName, string pola, string parameters)
         {
             using (SQLiteTransaction dbTrans = conn.BeginTransaction())
@@ -193,6 +245,10 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda usuwaj¹ca zawartoœæ tabeli
+        /// </summary>
+        /// <param name="tableName">nazwa tabeli</param>
         public void Delete_zawartosci_tabeli(string tableName)
         {
             using (SQLiteTransaction dbTrans = conn.BeginTransaction())
@@ -206,10 +262,13 @@ namespace Photo
                     dbTrans.Commit();
                 }
             }
-
-
         }
 
+        /// <summary>
+        /// Metoda usuwaj¹ca rekordy o spe³niej¹cych warunkach
+        /// </summary>
+        /// <param name="po_where">warunki jakie musz¹ byæ spe³nione aby rekord zosta³ usuniêty</param>
+        /// <param name="tableName">nazwa tabeli</param>
         public void Delete(string tableName, string po_where)
         {
             using (SQLiteTransaction dbTrans = conn.BeginTransaction())
@@ -225,10 +284,13 @@ namespace Photo
                     dbTrans.Commit();
                 }
             }
-
-
         }
 
+        /// <summary>
+        /// Metoda uaktualniaj¹ca rekordy 
+        /// </summary>
+        /// <param name="parameters">parametry jakie wystêpuja po 'set'</param>
+        /// <param name="tableName">nazwa tabeli</param>
         public void Update(string tableName, string parameters)
         {
             using (SQLiteTransaction dbTrans = conn.BeginTransaction())
@@ -242,7 +304,6 @@ namespace Photo
                     dbTrans.Commit();
                 }
             }
-
         }
     }
 }

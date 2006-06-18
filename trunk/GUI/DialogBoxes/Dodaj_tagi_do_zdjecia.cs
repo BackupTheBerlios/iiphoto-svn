@@ -10,6 +10,9 @@ using System.Data.SqlClient;
 
 namespace Photo
 {
+    /// <summary>
+    /// Klasa tworz¹ca formatke do dodawania tagów do zdjêæ
+    /// </summary>
     public partial class Dodaj_tagi_do_zdjecia : Form
     {
         private PrzegladarkaZdjec przegladarka;
@@ -20,12 +23,21 @@ namespace Photo
 
         public event ZmienionoTagiDelegate ZmienionoTagi;
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="p">obiekt przegl¹darka zdjêæ potrzebny do u¿ycia pewnych metod z tego obiektu</param>
         public Dodaj_tagi_do_zdjecia(PrzegladarkaZdjec p)
         {
             InitializeComponent();
             przegladarka = p;
             //Wypelnij();
         }
+        
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="z">obiekt zdjêcia potrzebny do u¿ycia pewnych metod z tego obiektu</param>
         public Dodaj_tagi_do_zdjecia(Zdjecie z)
         {
             InitializeComponent();
@@ -33,6 +45,11 @@ namespace Photo
             //Wypelnij();
             //opcja = 1;
         }
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="czy_katalog">zmienna bool czy chcemy dodaæ tagi dla katalogu czy nie</param>
+        /// <param name="lis_z">lista zdjêæ dla których dodajemy tagi</param>        
         public Dodaj_tagi_do_zdjecia(List<Zdjecie> lis_z, bool czy_katalog )
         {
             InitializeComponent();
@@ -50,6 +67,10 @@ namespace Photo
             //opcja = 2;
         }
 
+        /// <summary>
+        /// Metoda wype³niaj¹ca formatke z godnie z informacjami z bazy dotycz¹cych danego zdjêcia
+        /// </summary>
+        /// <param name="zdjecie">zdjêcie dla którego uaktualniamy tagi</param>
         private void Wypelnij(Zdjecie zdjecie)
         {            
             Db baza = new Db();
@@ -95,6 +116,9 @@ namespace Photo
         }
 
         //wypelnia kontrolke tagami ale zadne nie jest zaznaczone bierz sie i ustawia sie tago dla wszystkich zaznaczonych zdjec
+        /// <summary>
+        /// Metoda wype³nia formatke dla kilku zdjêæ czyli wszystkie tagi s¹ odznaczone
+        /// </summary>
         private void Wypelnij_dla_kilku()
         {
             Db baza = new Db();
@@ -121,6 +145,9 @@ namespace Photo
             baza.Rozlacz();            
         }
 
+        /// <summary>
+        /// Metoda jest wywo³ywana po klikniêciu przez u¿ytkownika ZatwierdŸ. Uruchamia metody dodawania tagów
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
             Db baza = new Db();

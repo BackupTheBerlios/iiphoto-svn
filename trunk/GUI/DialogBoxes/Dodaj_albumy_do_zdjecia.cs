@@ -10,6 +10,9 @@ using System.Data.SqlClient;
 
 namespace Photo
 {
+    /// <summary>
+    /// Klasa tworz¹ca formatke dodaj¹c¹ albumy do zdjêæ
+    /// </summary>
     public partial class Dodaj_albumy_do_zdjecia : Form
     {                
         private List<Zdjecie> lista_zdjec;
@@ -17,7 +20,11 @@ namespace Photo
         private string sciezka;
         private FileTree drzewo;
         private PrzegladarkaZdjec przegladarka;
-                        
+
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="z">zdjecie dla którego ma formatka byæ wywo³ana</param>
         public Dodaj_albumy_do_zdjecia(Zdjecie z)
         {
             InitializeComponent();
@@ -25,6 +32,12 @@ namespace Photo
             //Wypelnij();
             //opcja = 1;
         }
+        /// <summary>
+        /// Konstruktor wykorzystywaby gdy wywo³ujemy formatke dodawania z widoku miniatur
+        /// </summary>
+        /// <param name="lis_z">lista zdjêæ dla których maj¹ byæ dodane albumy</param>
+        /// <param name="pr">obiekt przegl¹darki zdjêæ potrzebny do wywo³ania metod z tego obiektu</param>
+        /// <param name="s">scie¿ka zdjêcia/zdjêæ dla którego/których wykonuje siê dodawanie do albumu</param>
         public Dodaj_albumy_do_zdjecia(List<Zdjecie> lis_z, PrzegladarkaZdjec pr, string s)
         {
             InitializeComponent();
@@ -44,7 +57,12 @@ namespace Photo
                 sciezka += "\\";
             opcja = 2;
         }
-
+        /// <summary>
+        /// Konstruktor wykorzystywaby gdy wywo³ujemy formatke dodawania z drzewa katalogów
+        /// </summary>
+        /// <param name="lis_z">lista zdjêæ dla których maj¹ byæ dodane albumy</param>
+        /// <param name="tr">obiekt drzewa katalogów potrzebny do wywo³ania metod z tego obiektu</param>
+        /// <param name="s">scie¿ka zdjêcia/zdjêæ dla którego/których wykonuje siê dodawanie do albumu</param>
         public Dodaj_albumy_do_zdjecia(List<Zdjecie> lis_z, FileTree tr, string s)
         {
             InitializeComponent();
@@ -63,6 +81,10 @@ namespace Photo
             opcja = 1;
         }
 
+        /// <summary>
+        /// Metoda wype³niaj¹ca formatke albumami ustawionymi dla zdjêcia
+        /// </summary>
+        /// <param name="zdjecie">zdjêcia dla którego wype³niamy formatke</param>
         private void Wypelnij(Zdjecie zdjecie)
         {            
             Db baza = new Db();
@@ -113,8 +135,10 @@ namespace Photo
             }
             baza.Rozlacz();        
         }
-
-        //wypelnia kontrolke tagami ale zadne nie jest zaznaczone bierz sie i ustawia sie tago dla wszystkich zaznaczonych zdjec
+        
+        /// <summary>
+        /// Metoda wype³niaj¹ca formatke dla kilku zdjêæ nie jesteœmy w stanie w jednej formatce wyœwietliæ albumów dla ka¿dego zdjêcia wiec wyœwietla sie liste albumó lecz ¿aden z nich nie jest zaznaczony gdy u¿ytkownik zaznaczy albumy zostana one dodane do ka¿dego zdjêcia z listy zdjêæ
+        /// </summary>
         private void Wypelnij_dla_kilku()
         {
             Db baza = new Db();
@@ -141,6 +165,10 @@ namespace Photo
             baza.Rozlacz();            
         }
 
+        /// <summary>
+        /// Metoda dodaj¹ca albumy do zdjêæ i dodaj¹ca odpowiednie wpisy do bazy
+        /// </summary>
+        /// <param name="list">lista zdjêæ dla których metoda ma byæ wywo³ana</param>
         private void DodajDoAlbumu(List<Zdjecie> list)
         {
             Db baza = new Db();
@@ -183,6 +211,9 @@ namespace Photo
             baza.Rozlacz();            
         }
 
+        /// <summary>
+        /// Metoda wywa³ana gdy u¿ytkownik kliknie przycisk ZatwierdŸ. Uruchamia metody dodawania do albumu
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
             if (opcja == 1)

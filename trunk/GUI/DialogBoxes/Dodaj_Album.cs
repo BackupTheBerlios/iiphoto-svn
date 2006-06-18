@@ -10,16 +10,25 @@ using System.Data.SqlClient;
 
 namespace Photo
 {
+    /// <summary>
+    /// Klasa tworz¹ca formatka do dodawania albumu do drzewa albumów
+    /// </summary>
     public partial class Dodaj_Album : Form
     {
         private ListaAlbumowControl listaAlbumow;
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public Dodaj_Album(ListaAlbumowControl la)
         {
             InitializeComponent();
             listaAlbumow = la;
         }
 
+        /// <summary>
+        /// Metoda dodaj¹ca nazwe albumu do bazy
+        /// </summary>
         private void DodajAlbumDoBazy()
         {
             string nazwa;
@@ -74,11 +83,17 @@ namespace Photo
 
         }
 
+        /// <summary>
+        /// Metoda wykonywana po klikniêciu przycisku zatwierdzaj¹cego("OK" lub nacisniecie "ENTER"). Uruchamia metody dodawania albumu
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
             DodajAlbumDoBazy();            
         }
 
+        /// <summary>
+        /// Metoda wywo³uje metode DodajAlbumDoBazy gdy u¿ytkownik naciœnie Enter. Uruchamia metody dodawania albumu
+        /// </summary>
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             Keys k = (Keys)e.KeyChar;

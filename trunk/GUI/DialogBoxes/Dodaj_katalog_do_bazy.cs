@@ -10,6 +10,9 @@ using System.Data.SqlClient;
 
 namespace Photo
 {
+    /// <summary>
+    /// Klasa tworz¹ca formatke do dodawania katalogu do kolekcji jak i do albumu
+    /// </summary>
     public partial class Dodaj_katalog_do_bazy : Form
     {
 
@@ -18,7 +21,11 @@ namespace Photo
         private PrzegladarkaZdjec przegladarka;
         
         private int opcja = 0; //1 - dodawanie z katalogu  // 2 - dodawanie z miniaturek
-
+        /// <summary>
+        /// Konstruktor wywo³any gdy wywo³ana jest formatka z drzewa katalogów
+        /// </summary>
+        /// <param name="s">sciezka do pliku</param>
+        /// <param name="tr">obiekt drzewa katalogów aby wywo³aæ metody z tego obiekru</param>
         public Dodaj_katalog_do_bazy(string s, FileTree tr)
         {
             InitializeComponent();
@@ -32,6 +39,11 @@ namespace Photo
             opcja = 1;            
         }
 
+        /// <summary>
+        /// Konstruktor wywo³any gdy wywo³ana jest formatka z przegl¹darki zdjêæ
+        /// </summary>
+        /// <param name="s">sciezka do pliku</param>
+        /// <param name="pr">obiekt przegl¹darki zdjêæ aby wywo³aæ metody z tego obiekru</param>
         public Dodaj_katalog_do_bazy(string s, PrzegladarkaZdjec pr)
         {
             InitializeComponent();
@@ -48,6 +60,9 @@ namespace Photo
 
         }
 
+        /// <summary>
+        /// Metoda wype³niaj¹ca listBox nazwami albumów które s¹ w bazie
+        /// </summary>        
         private void Wypelnij()
         {
             List<string> lista= new List<string>();
@@ -87,6 +102,9 @@ namespace Photo
             this.button1.Enabled = true;
 
         }
+        /// <summary>
+        /// Metoda dodaj¹ca zdjêcia z katalogu do albumu
+        /// </summary>
         private void dodaj_do_albumu()
         {
             string nazwa = (string)this.comboBox1.SelectedItem;
@@ -106,9 +124,7 @@ namespace Photo
                     {
                         id_tagu = (Int64)r[0];                        
                     }
-                }
-
-                
+                }                
 
                 dataSet = baza.Select("select id_zdjecia from Zdjecie where sciezka=\'" + sciezka + "\'"); ;
 
@@ -120,16 +136,18 @@ namespace Photo
                         baza.Insert("TagZdjecia", r[0] + "," + id_tagu);
                     }
                 }
-
             }
             catch (SqlException e)
             {
                 MessageBox.Show(e.ToString() + e.Message);
             }
             baza.Rozlacz();
-
         }
 
+        /// <summary>
+        /// Metoda dodaj¹ca zdjêcia z listy do albumu
+        /// </summary>
+        /// <param name="lista">lista scie¿ek do dodania do bazy</param>
         private void dodaj_do_albumu(List<string> lista)
         {
             string nazwa = (string)this.comboBox1.SelectedItem;
@@ -181,6 +199,9 @@ namespace Photo
 
         }
 
+        /// <summary>
+        /// Metoda wywo³ana gdy zostanie przyciœniety przycisk zatwierdzaj¹ca formatke. Uruchamia metody dodawania albumu
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {                
             if (opcja == 1)
