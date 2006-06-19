@@ -871,18 +871,11 @@ namespace Photo
                     }
 
                     if (licznik < spl.Length-1)
-                    {
-                        /*MessageBox.Show("spl[licznik].IndexOf(\":\") " + spl[licznik].IndexOf(":"));
-                        MessageBox.Show("spl[licznik].Length " + spl[licznik].Length);
-                        MessageBox.Show("spl[licznik + 1].IndexOf(\"[\") " + spl[licznik + 1].IndexOf("["));
-                        MessageBox.Show("spl[licznik + 1].LastIndexOf(\"]\") " + spl[licznik + 1].LastIndexOf("]"));
-                        MessageBox.Show("spl[licznik + 1].Length - 1) " + (spl[licznik + 1].Length - 1));
-                        */
+                    {                        
                         if (spl[licznik].IndexOf(":") == 1 && spl[licznik].Length == 2 && spl[licznik + 1].IndexOf("[") == 1 && spl[licznik + 1].LastIndexOf("]") == (spl[licznik + 1].Length - 1))
                         {
                             do_sprawdzenia = spl[licznik] + "\\" + spl[licznik + 1];
-                            nazwa_pliku = dn.FullPath.Substring(dn.FullPath.LastIndexOf("\\") - 2, dn.FullPath.Length - dn.FullPath.LastIndexOf("\\") + 2);
-                            //licznik++;
+                            nazwa_pliku = dn.FullPath.Substring(dn.FullPath.LastIndexOf("\\") - 2, dn.FullPath.Length - dn.FullPath.LastIndexOf("\\") + 2);                           
                             dysk = true;
                         }
                         else
@@ -897,17 +890,10 @@ namespace Photo
                         nazwa_pliku = dn.FullPath.Substring(dn.FullPath.LastIndexOf("\\") + 1, dn.FullPath.Length - dn.FullPath.LastIndexOf("\\") - 1);
                     }
 
-                    //MessageBox.Show(nazwa_pliku + "==" + do_sprawdzenia);
-                    //MessageBox.Show("dn.f: " + dn.FullPath);
-
-                    
                     if (do_sprawdzenia.CompareTo(nazwa_pliku) == 0)
                     {
-                        //MessageBox.Show(sciezka);
-                        //dn.Collapse();
-
                         dn.Expand();
-                        // MessageBox.Show("dn.f: " + dn.FullPath);
+                        
                         kolekcja = dn.Nodes;
 
                         if (sciezka.CompareTo(dn.FullPath) == 0)
@@ -915,15 +901,12 @@ namespace Photo
                             dn.Collapse();
                             zaznaczony = dn;
                             FullPath_zaznaczonego = zaznaczony.FullPath;
-                            stan = true;
-                            //this.SelectedNode = zaznaczony;
-                            //this.Select(true, true);
+                            stan = true;                            
                         }
                         
                         znaleziono_wezl = true;
-
                         ostatni = dn;
-                        //MessageBox.Show("ostatni: " + ostatni.FullPath);
+                        
                         break;
                     }
                 }
@@ -937,23 +920,15 @@ namespace Photo
 
                 if (znaleziono_wezl == false)
                 {
-                    stan = true;
-                    //ostatni.
+                    stan = true;                    
                     zaznaczony = ostatni;
-                    zaznaczony.Collapse();
-                    //MessageBox.Show("brak wezla");
-                    //MessageBox.Show("ostatni: " + ostatni.FullPath);
-                    czy_byl_blad = true;
-                    //MessageBox.Show("licznik: " + licznik);
-//                    MessageBox.Show("Dany katalog zosta³ usuniêty przez inny program aplikacja powróci do rodzica katalogu który istnieje - Odmowa dostêpu", "B³¹d braku katalogu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    zaznaczony.Collapse();                    
+                    czy_byl_blad = true;                    
                 }
                 else
-                {
-                    //MessageBox.Show("wezl znaleziony");
-                    znaleziono_wezl = false;
-                    //MessageBox.Show("ostatni: " + ostatni.FullPath);
-                }
-                //MessageBox.Show("ostatni2: " + ostatni.FullPath);
+                {                  
+                    znaleziono_wezl = false;                 
+                }               
 
                 licznik++;
             }
@@ -966,7 +941,6 @@ namespace Photo
             {
                 return "";
             }
-
         }
 
         /// <summary>
@@ -1068,7 +1042,7 @@ namespace Photo
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message + " - Odmowa dostêpu654646464", Node.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message + " - Odmowa dostêpu", Node.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 katal_tab.Sort();
                 foreach (string t in katal_tab)
