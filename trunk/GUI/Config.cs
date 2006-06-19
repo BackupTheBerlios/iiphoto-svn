@@ -5,6 +5,9 @@ using System.IO;
 
 namespace Photo
 {
+    /// <summary>
+    /// Klasa dostarcza podstawowe dane, jak zmienne srodowiskowe, aktualna konfiguracja.
+    /// </summary>
     public class Config
     {
         private static int rozmiarMiniatury = 100;
@@ -17,6 +20,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Zwraca katalog domowy aplikacji
+        /// </summary>
         public static string katalogAplikacji
         {
             get
@@ -25,6 +31,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Zwraca katalog "Moje Dokumenty" aktualnego uzytkownika
+        /// </summary>
         public static string katalogMojeDokumenty
         {
             get
@@ -33,6 +42,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Zwraca katalog "Moje Obrazy" aktualnego uzytkownika
+        /// </summary>
         public static string katalogMojeObrazy
         {
             get
@@ -41,6 +53,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Zwraca katalog "Pulpit" aktualnego uzytkownika
+        /// </summary>
         public static string katalogPulpit
         {
             get
@@ -49,6 +64,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Zwraca aktualny rozmiar miniatur
+        /// </summary>
         public static int RozmiarMiniatury
         {
             get
@@ -57,6 +75,10 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Umozliwia zmiane rozmiaru miniatur
+        /// </summary>
+        /// <param name="size"></param>
         public static void ZmienRozmiarMiniatury(int size)
         {
             switch (size)
@@ -68,19 +90,9 @@ namespace Photo
             }
         }
 
-        public static string katalogMiniatur
-        {
-            get
-            {
-                string katalog = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\IIPhoto\\thumbs";
-                if (!Directory.Exists(katalog))
-                {
-                    DirectoryInfo di = Directory.CreateDirectory(katalog);
-                }
-                return katalog;
-            }
-        }
-
+        /// <summary>
+        /// Nazwa pliku z baza danych SQLite
+        /// </summary>
         public static string plikBazy = "iiphoto.db3";
     }
 }

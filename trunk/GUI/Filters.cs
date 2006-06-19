@@ -58,6 +58,10 @@ namespace Photo
 			b.UnlockBits(bmData);
 		}
 
+        /// <summary>
+        /// Metoda wykonujaca konwersje zdjecia Bitmap'y do odcieni szarosci
+        /// </summary>
+        /// <param name="b">Bitmapa na ktorej ma zostac wykonana operacja</param>
 		public static void GrayScale(Bitmap b)
 		{
             BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
