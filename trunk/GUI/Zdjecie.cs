@@ -42,6 +42,9 @@ namespace Photo
             WypelnijListeTagow();
         }
 
+        /// <summary>
+        /// Propercja zwraca lub ustawia IIPhotoTag, zapisany w danych Exif zdjecia
+        /// </summary>
         public string Id
         {
             get
@@ -107,11 +110,18 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda sprawdza czy zdjecie ma ustawiony IIPhotoTag
+        /// </summary>
+        /// <returns></returns>
         public bool CzyUstawioneId()
         {
             return !Id.Equals("");
         }
 
+        /// <summary>
+        /// Metoda usuwa IIPhotoTag ze zdjecia
+        /// </summary>
         public void UsunId()
         {
             if (tylkoDoOdczytu)
@@ -140,7 +150,10 @@ namespace Photo
             }
         }
 
-        
+        /// <summary>
+        /// Metoda usuwa zdjecie i zwraca wynik czy zdjecie zostalo usuniete
+        /// </summary>
+        /// <returns>Zmienna typu bool, mowiaca czy zdjecie zostalo poprawnie usuniete</returns>
         public bool Usun()
         {
             if (tylkoDoOdczytu)
@@ -161,6 +174,9 @@ namespace Photo
             return true;
         }
 
+        /// <summary>
+        /// Metoda zwraca lub ustawia miniature zdjecia
+        /// </summary>
         public Bitmap Miniatura
         {
             set
@@ -215,6 +231,11 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda statyczna tworzaca nowa bitmape z podanego obrazu
+        /// </summary>
+        /// <param name="i">Obraz</param>
+        /// <returns>Bitmapa</returns>
         public static Bitmap FromImage(Image i)
         {
             Bitmap from = new Bitmap(i);
@@ -225,6 +246,9 @@ namespace Photo
             return from;
         }
 
+        /// <summary>
+        /// Metoda zwraca lub ustawia faktyczne zdjecie
+        /// </summary>
         public Bitmap Duze
         {
             get
@@ -252,6 +276,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda zwraca nazwe pliku z ktorego wczytane jest dane zdjecie
+        /// </summary>
         public string NazwaPliku
         {
             get
@@ -260,14 +287,9 @@ namespace Photo
             }
         }
 
-        public List<Int64> ZwrocListeTagow
-        {
-            get
-            {
-                return tagi;
-            }
-        }
-
+        /// <summary>
+        /// Propercja zwraca lokalizacje zdjecia na dysku
+        /// </summary>
         public string Path
         {
             get
@@ -279,6 +301,10 @@ namespace Photo
                 this.path = value;
             }
         }
+
+        /// <summary>
+        /// Propercja zwraca/ustawia liste tagow, ktore posiada zdjecie
+        /// </summary>
         public List<Int64> Tagi
         {
             get
@@ -291,6 +317,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Propercja zwraca rozmiar zdjecia
+        /// </summary>
         public Size Rozmiar
         {
             get
@@ -299,6 +328,11 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Medota zwraca format podanego zdjecia
+        /// </summary>
+        /// <param name="i">Obraz</param>
+        /// <returns>Napis z formatem pliku</returns>
         public static string sprawdzFormatPliku(Image i)
         {
             if (i.RawFormat.Equals(ImageFormat.Jpeg))
@@ -307,6 +341,9 @@ namespace Photo
                 return "";
         }
 
+        /// <summary>
+        /// Propercja zwraca format zdjecia
+        /// </summary>
         public string FormatPliku
         {
             get
@@ -322,6 +359,11 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda tworzy miniature o podanym maksymalnym rozmiarze
+        /// </summary>
+        /// <param name="maxSize">Maksymalny rozmiar miniatury</param>
+        /// <returns>Miniatura zdjecia</returns>
         public Bitmap stworzMiniaturke(int maxSize)
         {
             int scaledH, scaledW;
@@ -340,6 +382,12 @@ namespace Photo
             return (Bitmap)Duze.GetThumbnailImage(scaledW, scaledH, new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback), System.IntPtr.Zero);
         }
 
+        /// <summary>
+        /// Metoda tworzy miniature o podanym maksymalnym rozmiarze z pliku na dysku
+        /// </summary>
+        /// <param name="fileName">Sciezka do zdjecia</param>
+        /// <param name="maxSize">Maksymalny rozmiar miniatury</param>
+        /// <returns>Miniatura zdjecia</returns>
         public static Bitmap stworzMiniaturke(string fileName, int maxSize)
         {
             Image i;
@@ -369,7 +417,7 @@ namespace Photo
             return (Bitmap)i;
         }
 
-        public static bool ThumbnailCallback()
+        private static bool ThumbnailCallback()
         {
             return true;
         }
@@ -377,6 +425,9 @@ namespace Photo
 
         #region Baza
 
+        /// <summary>
+        /// Metoda usuwa tagi zdjecia z bazy danych
+        /// </summary>
         public void UsunTagi()
         {
             Db baza = new Db();
@@ -394,6 +445,9 @@ namespace Photo
             baza.Rozlacz();
         }
 
+        /// <summary>
+        /// Metoda usuwa zdjecie z albomow w bazie danych
+        /// </summary>
         public void UsunAlbumy()
         {
             Db baza = new Db();
@@ -410,7 +464,10 @@ namespace Photo
 
             baza.Rozlacz();
         }
-
+        
+        /// <summary>
+        /// Metoda usuwa zdjecie z bazy danych
+        /// </summary>
         public void UsunZdjecieZBazy()
         {
             Db baza = new Db();
@@ -429,8 +486,10 @@ namespace Photo
             baza.Rozlacz();
         }      
 
-
-
+        /// <summary>
+        /// Metoda zwraca nazwy tagow z bazy danych
+        /// </summary>
+        /// <returns>Lista nazw tagow</returns>
         public List<string> ZwrocNazwyTagow()
         {
             Db baza = new Db();
@@ -465,6 +524,10 @@ namespace Photo
             return lista;
         }
 
+        /// <summary>
+        /// Metoda zwraca date dodania do bazy danych
+        /// </summary>
+        /// <returns>Data dodania do bazy danych</returns>
         public string ZwrocDateDodaniaDoKolekcji()
         {
             Db baza = new Db();
@@ -499,7 +562,10 @@ namespace Photo
             return data;
         }
 
-
+        /// <summary>
+        /// Metoda zwraca nazwy albomow do ktorych nalezy zdjecie
+        /// </summary>
+        /// <returns>Lista nazw albomow</returns>
         public List<string> ZwrocNazwyAlbumow()
         {
             Db baza = new Db();
@@ -534,6 +600,9 @@ namespace Photo
             return lista;
         }
 
+        /// <summary>
+        /// Metoda aktualizuje dane o zdjeciu w bazie danych
+        /// </summary>
         public void AktualizujBaze()
         {
             if (CzyUstawioneId())
@@ -558,6 +627,9 @@ namespace Photo
 
         }
 
+        /// <summary>
+        /// Metoda wypelnia tagi danymi z bazy
+        /// </summary>
         public void WypelnijListeTagow()
         {
             if(CzyUstawioneId())
@@ -589,7 +661,9 @@ namespace Photo
             }
         }
 
-        //metoda sprawdza czy jezeli zdejecie mialo tag to czy ten tag skasowac czy nie
+        /// <summary>
+        /// Metoda sprawdza czy jezeli zdejecie mialo tag to czy ten tag skasowac czy nie
+        /// </summary>
         public void ZweryfikujZdjecie()
         {
             string sciezka_z_bazy = "", nazwa_pliku_z_bazy = "", sciezka = "", nazwa_pliku = "";
@@ -701,7 +775,9 @@ namespace Photo
             baza.Rozlacz();
         }
 
-
+        /// <summary>
+        /// Medota zczytuje dane Exif ze zdjecia
+        /// </summary>
         private void ZczytajPola()
         {
             Dictionary<string, string> tablica;
@@ -738,7 +814,10 @@ namespace Photo
             }
         }
 
-
+        /// <summary>
+        /// Metoda dodaje zdjecie do bazy danych
+        /// </summary>
+        /// <returns>Czy operacja sie powiodla</returns>
         public bool DodajDoKolekcji()
         {
             if (tylkoDoOdczytu)
@@ -823,6 +902,9 @@ namespace Photo
             return true;
         }
 
+        /// <summary>
+        /// Metoda zwraca lokalizacje zdjecia na podstawie danych z bazy
+        /// </summary>
         private string PathZBazy
         {
             get
@@ -852,18 +934,22 @@ namespace Photo
             }
         }
 
-        
-
-
         #endregion
 
         #region Zdjecie Members
 
+        /// <summary>
+        /// Metoda dodaje operacje do wykonania na zdjeciu
+        /// </summary>
+        /// <param name="polecenie">Nowe polecenie wykonania operacji</param>
         public void DodajOperacje(PolecenieOperacji polecenie)
         {
             operacje.Add(polecenie);
         }
 
+        /// <summary>
+        /// Metoda wykonuje wszystkie oczekujace operacje
+        /// </summary>
         public void WykonajOperacje()
         {
             if (operacje.Count > 0)
@@ -879,18 +965,31 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda aktualuzuje miniature
+        /// </summary>
         public void AktualizujMiniature()
         {
             Miniatura = stworzMiniaturke(Config.RozmiarMiniatury);
         }
 
+        /// <summary>
+        /// Metoda usuwa wszystkie oczekujace operacje
+        /// </summary>
         public void UsunWszystkieOperacje()
         {
             operacje.Clear();
         }
 
+        /// <summary>
+        /// Zdarzenie informujace o modyfikacji zdjecia
+        /// </summary>
         public event ZmodyfikowanoZdjecieDelegate ZmodyfikowanoZdjecie;
 
+        /// <summary>
+        /// Metoda tworzy miniature do Widoku Miniatur i ja zwraca
+        /// </summary>
+        /// <returns>Miniatura do Widoku Miniatur</returns>
         public Image StworzMiniatureDoWidokuMiniatur()
         {
             int maxSize = Config.RozmiarMiniatury;
@@ -939,7 +1038,12 @@ namespace Photo
 
         #region Meta
 
-        public int SprawdzOrientacje(Image srcImg)
+        /// <summary>
+        /// Metoda sprawdza orientacje w danych Exif zdjecia
+        /// </summary>
+        /// <param name="srcImg">Zdjecie z ktorego ma zostac odczytana orientacja</param>
+        /// <returns>Wartosc okreslajaca orientacje zdjecia</returns>
+        public static int SprawdzOrientacje(Image srcImg)
         {
             foreach (int id in srcImg.PropertyIdList)
             {
@@ -951,6 +1055,10 @@ namespace Photo
             return 1;
         }
 
+        /// <summary>
+        /// Metoda obraca zdjecie zgodnie z orientacja zapisana w danych Exif
+        /// </summary>
+        /// <param name="i"></param>
         public void UzyjOrientacji(Bitmap i)
         {
                     switch (Orientation)
@@ -979,6 +1087,11 @@ namespace Photo
                     }
         }
 
+        /// <summary>
+        /// Metoda zwraca tablice z danymi Exif zdjecia
+        /// </summary>
+        /// <param name="fileName">Sciezka zdjecia</param>
+        /// <returns>Tablica z danymi Exif</returns>
         public static PropertyItem[] PobierzDaneExif(string fileName)
         {
             using (FileStream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read))
@@ -996,6 +1109,11 @@ namespace Photo
                 }
             }            
         }
+
+        /// <summary>
+        /// Metoda zwraca tablice z danymi Exif zdjecia
+        /// </summary>
+        /// <returns>Tablica z danymi Exif</returns>
         public PropertyItem[] PobierzDaneExif()
         {
             using (FileStream stream = new FileStream(Path, FileMode.Open, FileAccess.Read))
@@ -1017,6 +1135,10 @@ namespace Photo
             return null;
         }
 
+        /// <summary>
+        /// Metoda zwraca slownik z danymi Exif, ktore zostana wpisane do bazy danych
+        /// </summary>
+        /// <returns>Slownik z danymi Exif</returns>
         public Dictionary<string, string> PobierzExifDoBazy()
         {
             PropertyItem[] propertyItems = Zdjecie.PobierzDaneExif(Path);
@@ -1040,6 +1162,9 @@ namespace Photo
 
         #endregion
 
+        /// <summary>
+        /// Propercja ustawiajaca/sprawdzajaca czy zdjecie bylo edytowane
+        /// </summary>
         public bool Edytowano
         {
             get
@@ -1052,6 +1177,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda zapisujaca zdjecie na dysku
+        /// </summary>
         public void Zapisz()
         {
             if (duze == null || Edytowano == false)
@@ -1077,6 +1205,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda usuwajaca bitmape zdjecia z pamieci
+        /// </summary>
         public void DisposeDuze() 
         {
             if (duze != null)
@@ -1086,6 +1217,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda usuwajaca bitmape miniatury zdjecia z pamieci
+        /// </summary>
         public void DisposeMini()
         {
             if (miniatura != null)
@@ -1097,6 +1231,9 @@ namespace Photo
 
         #region IDisposable Members
 
+        /// <summary>
+        /// Metoda usuwajaca bitmapy zdjecia z pamieci
+        /// </summary>
         public void Dispose()
         {
             DisposeMini();
@@ -1105,16 +1242,26 @@ namespace Photo
 
         #endregion
 
+        /// <summary>
+        /// Metoda resetujaca identyfikator
+        /// </summary>
         public void ResetujId() 
         {
             iiphotoTag = "brak";
         }
 
+        /// <summary>
+        /// Metoda odswiezajaca tagi zdjecia
+        /// </summary>
         public void ResetujTagi()
         {
             WypelnijListeTagow();
         }
 
+        /// <summary>
+        /// Metoda usuwajaca zdjecie o podanym identyfikatorze z albumu
+        /// </summary>
+        /// <param name="id">Identyfikator zdjecia</param>
         internal static void UsunZAlbumu(long id)
         {
             Db baza = new Db();

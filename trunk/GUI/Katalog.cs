@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Photo
 {
+    /// <summary>
+    /// Klasa zawierajaca podstawowe informacje o katalogu
+    /// </summary>
     public class Katalog
     {
         string path;
@@ -15,6 +18,9 @@ namespace Photo
             do_gory = d;
         }
 
+        /// <summary>
+        /// Propercja zwracajaca sciezke katalogu
+        /// </summary>
         public string Path
         {
             get
@@ -23,13 +29,15 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Propercja zwracajaca wartosc boolowska, czy katalog jest linkiem do katalogu nadrzednego
+        /// </summary>
         public bool CzyDoGory
         {
             get
             {
                 return do_gory;
             }
-
         }
 
     }

@@ -88,7 +88,7 @@ namespace Photo
                     {
                         if (!(r[0] is DBNull))
                         {
-                            lista = zdjecie.ZwrocListeTagow;
+                            lista = zdjecie.Tagi;
                             //MessageBox.Show("lista.count: " + lista.Count);
                             foreach (Int64 tag in lista)
                             {                                

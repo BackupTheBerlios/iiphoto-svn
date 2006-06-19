@@ -5,6 +5,9 @@ using System.Drawing.Imaging;
 
 namespace Photo
 {
+    /// <summary>
+    /// Klasa zawierajaca spis danych Exif oraz przeprowadzajaca podstawowe operacje na nich
+    /// </summary>
     static class PropertyTags
     {
         public const int GpsVer = 0;
@@ -266,6 +269,9 @@ namespace Photo
             defaultExifDoBazyDictionary.Add(Author, "autor");
         }
 
+        /// <summary>
+        /// Metoda zwraca kolekcje identyfikatorow wraz z ich tekstowymi odpowiednikami podstawowych danych Exif
+        /// </summary>
         public static Dictionary<int, string> defaultExifIds
         {
             get
@@ -274,6 +280,10 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda zwraca kolekcje identyfikatorow wraz z ich tekstowymi odpowiednikami podstawowych danych Exif,
+        /// ktore zostana wstawione do bazy danych
+        /// </summary>
         public static Dictionary<int, string> defaultExifDoBazy
         {
             get 
@@ -282,7 +292,12 @@ namespace Photo
             }
         }
 
-        internal static string ParseProp(PropertyItem propItem/* int propID, string val*/)
+        /// <summary>
+        /// Metoda parsujaca podany PropertyItem to zmiennej napisowej
+        /// </summary>
+        /// <param name="propItem">Wartosc do sparsowania</param>
+        /// <returns>Napisowa wartosc podanej PropertyItem</returns>
+        internal static string ParseProp(PropertyItem propItem)
         {
             string val;
             switch (propItem.Type)

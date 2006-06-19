@@ -48,11 +48,17 @@ namespace Photo
 
     public delegate void ZazadanieOperacjiDelegate(PolecenieOperacji polecenie);
 
+    /// <summary>
+    /// Klasa wykonujaca czynnosci inicjalizujace Operacje
+    /// </summary>
     class Operacje
     {
         private List<IOperacja> operacje = new List<IOperacja>();
         public event ZazadanieOperacjiDelegate ZazadanieOperacji;
 
+        /// <summary>
+        /// Metoda wczytujaca dynamicznie pluginy z Operacjami
+        /// </summary>
         public void WczytajPluginy()
         {
             string[] pluginy = System.IO.Directory.GetFiles(System.IO.Path.GetFullPath("..\\..\\plugins\\"), "*.dll");
@@ -72,6 +78,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Metoda wczytujaca wbudowane Operacje
+        /// </summary>
         public void WczytajWbudowane()
         {
             operacje.Add(new XOR());
@@ -82,6 +91,11 @@ namespace Photo
             operacje.Add(new Rotate(3));
         }
 
+        /// <summary>
+        /// Metoda dodajaca wczytane operacje do interfejsu graficznego
+        /// </summary>
+        /// <param name="tool">ToolStip na ktory ma zostac dodana operacja</param>
+        /// <param name="filtry">ToolStripMenuItem na ktory ma zostac dodana operacja</param>
         public void WrzucDoGui(ToolStrip tool, ToolStripMenuItem filtry)
         {
             foreach (IOperacja operacja in operacje)
@@ -112,6 +126,9 @@ namespace Photo
         }
     }
 
+    /// <summary>
+    /// Klasa wykonujaca odwrocenie kolorow zdjecia
+    /// </summary>
     class XOR : IOperacja
     {
         private int kodOperacji;
@@ -205,6 +222,9 @@ namespace Photo
         #endregion
     }
 
+    /// <summary>
+    /// Klasa wykonujaca konwersje zdjecia do odcieni szarosci
+    /// </summary>
     class Grayscale : IOperacja
     {
         #region IOperacja Members
@@ -290,6 +310,9 @@ namespace Photo
         #endregion
     }
 
+    /// <summary>
+    /// Klasa wykonujaca obcinanie zdjecia do podanych rozmiarow
+    /// </summary>
     class Crop : IOperacja
     {
         #region IOperacja Members
@@ -371,6 +394,10 @@ namespace Photo
 
         #endregion
     }
+
+    /// <summary>
+    /// Klasa wykonujaca obroty zdjecia
+    /// </summary>
     class Rotate : IOperacja
     {
         #region IOperacja Members

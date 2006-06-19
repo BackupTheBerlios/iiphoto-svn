@@ -4,6 +4,9 @@ using System.Drawing.Imaging;
 
 namespace Photo
 {
+    /// <summary>
+    /// Klasa macierzy przeksztalcenia
+    /// </summary>
 	public class ConvMatrix
 	{
 		public int TopLeft = 0, TopMid = 0, TopRight = 0;
@@ -17,10 +20,16 @@ namespace Photo
 		}
 	}
 
-
+    /// <summary>
+    /// Klasa implementujaca podstawowe operacje na zdjeciach
+    /// </summary>
 	public class BitmapFilter
 	{
-		public static bool Invert(Bitmap b)
+        /// <summary>
+        /// Metoda wykonujaca odwrocenie kolorow Bitmap'y
+        /// </summary>
+        /// <param name="b">Bitmapa na ktorej ma zostac wykonana operacja</param>
+		public static void Invert(Bitmap b)
 		{
 			// GDI+ still lies to us - the return format is BGR, NOT RGB.
 			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
@@ -47,11 +56,9 @@ namespace Photo
 			}
 
 			b.UnlockBits(bmData);
-
-			return true;
 		}
 
-		public static bool GrayScale(Bitmap b)
+		public static void GrayScale(Bitmap b)
 		{
             BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
 
@@ -79,14 +86,12 @@ namespace Photo
             }
 
             b.UnlockBits(bmData);
-
-            return true;
 		}
 
-		public static bool Brightness(Bitmap b, int nBrightness)
+		public static void Brightness(Bitmap b, int nBrightness)
 		{
 			if (nBrightness < -255 || nBrightness > 255)
-				return false;
+				return;
 
 			// GDI+ still lies to us - the return format is BGR, NOT RGB.
 			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
@@ -121,14 +126,12 @@ namespace Photo
 			}
 
 			b.UnlockBits(bmData);
-
-			return true;
 		}
 
-		public static bool Contrast(Bitmap b, sbyte nContrast)
+		public static void Contrast(Bitmap b, sbyte nContrast)
 		{
-			if (nContrast < -100) return false;
-			if (nContrast >  100) return false;
+			if (nContrast < -100) return ;
+			if (nContrast >  100) return ;
 
 			double pixel = 0, contrast = (100.0+nContrast)/100.0;
 
@@ -190,15 +193,13 @@ namespace Photo
 			}
 
 			b.UnlockBits(bmData);
-
-			return true;
 		}
 	
-		public static bool Gamma(Bitmap b, double red, double green, double blue)
+		public static void Gamma(Bitmap b, double red, double green, double blue)
 		{
-			if (red < .2 || red > 5) return false;
-			if (green < .2 || green > 5) return false;
-			if (blue < .2 || blue > 5) return false;
+			if (red < .2 || red > 5) return ;
+			if (green < .2 || green > 5) return ;
+			if (blue < .2 || blue > 5) return ;
 
 			byte [] redGamma = new byte [256];
 			byte [] greenGamma = new byte [256];
@@ -238,15 +239,13 @@ namespace Photo
 			}
 
 			b.UnlockBits(bmData);
-
-			return true;
 		}
 
-		public static bool Color(Bitmap b, int red, int green, int blue)
+		public static void Color(Bitmap b, int red, int green, int blue)
 		{
-			if (red < -255 || red > 255) return false;
-			if (green < -255 || green > 255) return false;
-			if (blue < -255 || blue > 255) return false;
+			if (red < -255 || red > 255) return ;
+			if (green < -255 || green > 255) return ;
+			if (blue < -255 || blue > 255) return ;
 
 			// GDI+ still lies to us - the return format is BGR, NOT RGB.
 			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
@@ -284,14 +283,12 @@ namespace Photo
 			}
 
 			b.UnlockBits(bmData);
-
-			return true;
 		}
 
-		public static bool Conv3x3(Bitmap b, ConvMatrix m)
+		public static void Conv3x3(Bitmap b, ConvMatrix m)
 		{
 			// Avoid divide by zero errors
-			if (0 == m.Factor) return false;
+			if (0 == m.Factor) return ;
 
 			Bitmap bSrc = (Bitmap)b.Clone(); 
 
@@ -357,20 +354,19 @@ namespace Photo
 
 			b.UnlockBits(bmData);
 			bSrc.UnlockBits(bmSrc);
-
-			return true;
 		}
-		public static bool Smooth(Bitmap b, int nWeight /* default to 1 */)
+
+		public static void Smooth(Bitmap b, int nWeight /* default to 1 */)
 		{
 			ConvMatrix m = new ConvMatrix();
 			m.SetAll(1);
 			m.Pixel = nWeight;
 			m.Factor = nWeight + 8;
 
-			return  BitmapFilter.Conv3x3(b, m);
+		    BitmapFilter.Conv3x3(b, m);
 		}
 
-		public static bool GaussianBlur(Bitmap b, int nWeight /* default to 4*/)
+		public static void GaussianBlur(Bitmap b, int nWeight /* default to 4*/)
 		{
 			ConvMatrix m = new ConvMatrix();
 			m.SetAll(1);
@@ -378,18 +374,18 @@ namespace Photo
 			m.TopMid = m.MidLeft = m.MidRight = m.BottomMid = 2;
 			m.Factor = nWeight + 12;
 
-			return  BitmapFilter.Conv3x3(b, m);
+			BitmapFilter.Conv3x3(b, m);
 		}
-		public static bool MeanRemoval(Bitmap b, int nWeight /* default to 9*/ )
+		public static void MeanRemoval(Bitmap b, int nWeight /* default to 9*/ )
 		{
 			ConvMatrix m = new ConvMatrix();
 			m.SetAll(-1);
 			m.Pixel = nWeight;
 			m.Factor = nWeight - 8;
 
-			return BitmapFilter.Conv3x3(b, m);
+			BitmapFilter.Conv3x3(b, m);
 		}
-		public static bool Sharpen(Bitmap b, int nWeight /* default to 11*/ )
+		public static void Sharpen(Bitmap b, int nWeight /* default to 11*/ )
 		{
 			ConvMatrix m = new ConvMatrix();
 			m.SetAll(0);
@@ -397,9 +393,9 @@ namespace Photo
 			m.TopMid = m.MidLeft = m.MidRight = m.BottomMid = -2;
 			m.Factor = nWeight - 8;
 
-			return  BitmapFilter.Conv3x3(b, m);
+			BitmapFilter.Conv3x3(b, m);
 		}
-		public static bool EmbossLaplacian(Bitmap b)
+		public static void EmbossLaplacian(Bitmap b)
 		{
 			ConvMatrix m = new ConvMatrix();
 			m.SetAll(-1);
@@ -407,9 +403,9 @@ namespace Photo
 			m.Pixel = 4;
 			m.Offset = 127;
 
-			return  BitmapFilter.Conv3x3(b, m);
+			BitmapFilter.Conv3x3(b, m);
 		}	
-		public static bool EdgeDetectQuick(Bitmap b)
+		public static void EdgeDetectQuick(Bitmap b)
 		{
 			ConvMatrix m = new ConvMatrix();
 			m.TopLeft = m.TopMid = m.TopRight = -1;
@@ -418,7 +414,7 @@ namespace Photo
 		
 			m.Offset = 127;
 
-			return  BitmapFilter.Conv3x3(b, m);
+			BitmapFilter.Conv3x3(b, m);
 		}
 	}
 }
