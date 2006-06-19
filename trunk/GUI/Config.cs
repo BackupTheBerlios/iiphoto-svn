@@ -12,6 +12,10 @@ namespace Photo
     {
         private static int rozmiarMiniatury = 100;
 
+        /// <summary>
+        /// Metoda sprawdza czy sa spelnione wszystkie warunki do pracy programu,
+        /// a jesli nie, to stara sie je zapewnic
+        /// </summary>
         public static void sprawdzWarunkiPoczatkowe()
         {
             if (!Directory.Exists(katalogAplikacji))
