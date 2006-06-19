@@ -773,7 +773,8 @@ namespace Photo
             {
                 if (e.KeyChar == (char)Keys.Enter)
                 {
-                    zaznaczony = wezel;
+                    zaznaczony = (DirTreeNode)this.SelectedNode;
+                    FullPath_zaznaczonego = zaznaczony.FullPath;                    
                     DirNode("", false);
                 }
             }
@@ -790,8 +791,10 @@ namespace Photo
             
             try
             {
-                nn = PootwierajDrzewoDoZaznaczonego(zaznaczony);                
-
+                if (napis != "" || czy_do_gory == true)
+                {
+                    nn = PootwierajDrzewoDoZaznaczonego(zaznaczony);
+                }
                 if (czy_do_gory)
                 {
                     if (nn == "")
@@ -822,8 +825,7 @@ namespace Photo
                         zaznaczony = ppp;
                         FullPath_zaznaczonego = zaznaczony.FullPath;//FullPath_zaznaczonego + "\\" + napis.Substring(napis.LastIndexOf("\\") + 1, napis.Length - napis.LastIndexOf("\\") - 1);
                     }
-
-                }
+                }                
                 PowiadomOZawartosciKatalogu(zaznaczony);
                 UstawienieEtykietyDyskietki(zaznaczony);
             }            
