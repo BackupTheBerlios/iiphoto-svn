@@ -83,13 +83,13 @@ namespace Photo
     /// <summary>
     /// Delegat informuj¹cy o wybraniu katalogu z pewnego zbioru.
     /// </summary>
-    /// <param name="zdjecie">Wybrany obiekt.</param>
+    /// <param name="katalog">Wybrany obiekt.</param>
     public delegate void WybranoKatalogDelegate(Katalog katalog);
 
     /// <summary>
     /// Delegat informuj¹cy o zaznaczeniu zdjêcia z pewnego zbioru.
     /// </summary>
-    /// <param name="Zdjecie">Wybrany obiekt.</param>
+    /// <param name="zdjecie">Wybrany obiekt.</param>
     public delegate void ZaznaczonoZdjecieDelegate(Zdjecie zdjecie);
     /// <summary>
     /// Delegat informuj¹cy o wlaczeniu widoku zdjecia
@@ -208,6 +208,8 @@ namespace Photo
     /// Delagat zdarzenia modyfikacji zdjêcia.
     /// </summary>
     /// <param name="zdjecie">Zdjêcie które zosta³o zmodyfikowane.</param>
+    /// <param name="kontekst">w jakim kontekscie zdjêcie zosta³o zdodyfikowane</param>
+    /// <param name="rodzaj">jaki rodzaj modyfikacji</param>
     public delegate void ZmodyfikowanoZdjecieDelegate(IKontekst kontekst, IZdjecie zdjecie, RodzajModyfikacjiZdjecia rodzaj);
 
     /// <summary>
@@ -331,9 +333,15 @@ namespace Photo
         /// </summary>
         /// <returns></returns>
         IWyszukiwanie Wyszukaj();
+        /// <summary>
+        /// delegat informujê aplikacje ze wyszukiwanie zdjêæ siê zakoñczy³o
+        /// </summary>
         event ZakonczonoWyszukiwanieDelegate ZakonczonoWyszukiwanie;
+        /// <summary>
+        /// delegat informujê aplikacje ze wyszukiwanie zdjêæ siê rozpocze³o
+        /// </summary>
         event RozpoczetoWyszukiwanieDelegate RozpoczetoWyszukiwanie;
-        event ZnalezionoZdjecieDelegate ZnalezionoZdjecie;
+        //event ZnalezionoZdjecieDelegate ZnalezionoZdjecie;
     }
 
     /// <summary>
