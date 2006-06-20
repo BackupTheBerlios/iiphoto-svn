@@ -506,6 +506,7 @@ namespace Photo
             public delegate void WyswietlZdjecie(Zdjecie z);
             public delegate void WyswietlKatalog(Katalog k);
             public delegate void OproznijWidokMiniatur();
+            public delegate void ZapiszZdjecieDelegate();
 
             public void ThreadFunc()
             {
@@ -516,7 +517,8 @@ namespace Photo
                     if (z.Edytowano == true)
                     {
                         if (MessageBox.Show("S¹ niezapisane zmiany w zdjêciu " + z.NazwaPliku + ". Czy zapisaæ?", "Czy zapisaæ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                            z.Zapisz();
+                            widokMiniatur.Invoke(new ZapiszZdjecieDelegate(z.Zapisz));
+                            //z.Zapisz();
                     }
                 }
 
