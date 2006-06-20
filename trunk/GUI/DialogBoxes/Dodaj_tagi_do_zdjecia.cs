@@ -21,6 +21,9 @@ namespace Photo
         private int opcja = 0;
         bool czy_lista_z_katalogu = false;
 
+        /// <summary>
+        /// delegat ten informuje kontrolke wyœwietlaj¹ca miniaturki ¿e zosta³y zmiennione tagi ¿eby kontrolka wyœwietla³a tylko zdjêcia z odpowiednimi tagami
+        /// </summary>        
         public event ZmienionoTagiDelegate ZmienionoTagi;
 
         /// <summary>

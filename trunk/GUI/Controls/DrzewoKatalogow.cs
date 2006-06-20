@@ -254,6 +254,9 @@ namespace Photo
         {
             string path;
             int type;
+            /// <summary>
+            /// metoda virtualna wracaj¹ca œcie¿ke wêz³¹
+            /// </summary>
             public virtual string Path { get { return path; } }
 
             /// <summary>
@@ -501,16 +504,33 @@ namespace Photo
 
         #region IWyszukiwacz Members
 
+        /// <summary>
+        /// metoda s³u¿¹cza do sk³adania zapytania sql i zwracaj¹ca Obiekt Wyszukania
+        /// </summary>
+        /// <returns>zwraca obiekt Wyszukanie</returns>
         public IWyszukiwanie Wyszukaj()
         {
             throw new Exception("The method or operation is not implemented.");
         }
-
+        /// <summary>
+        /// delegat informujê aplikacje ze wyszukiwanie zdjêæ siê zakoñczy³o
+        /// </summary>
         public event ZakonczonoWyszukiwanieDelegate ZakonczonoWyszukiwanie;
-        public event ZnalezionoZdjecieDelegate ZnalezionoZdjecie;
-        public event RozpoczetoWyszukiwanieDelegate RozpoczetoWyszukiwanie;
+        /// <summary>
+        /// delegat informujê aplikacje ze wyszukiwanie zdjêæ siê rozpocze³o
+        /// </summary>
+        public event RozpoczetoWyszukiwanieDelegate RozpoczetoWyszukiwanie;       
+        /// <summary>
+        /// delegat informuje pasek który wyœwietla sk¹d sa wyœwietlane zdjêcia
+        /// </summary>
         public event ZmienionoZrodloDelegate ZmienionoZrodlo;
+        /// <summary>
+        /// delegat informujê aplikacje ¿e zosta³y zmienione tagi i aplikacja musi wczytaæ od nowa liste tagów dla ka¿dego zdjêcia
+        /// </summary>
         public event ZmienionoTagiDelegate ZmienionoTagi;
+        /// <summary>
+        /// delegat informujê aplikacje ¿e zosta³y zmienione id i aplikacja musi wczytaæ od nowa id dla ka¿dego zdjêcia
+        /// </summary>
         public event ZmienionoIdsDelegate ZmienionoIds;
 
         #endregion

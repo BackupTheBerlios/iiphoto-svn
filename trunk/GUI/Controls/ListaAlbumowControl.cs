@@ -28,7 +28,13 @@ namespace Photo
         //private bool czy_wszystkie_tagi_ustawione = false, czy_wszystkie_albumy_ustawione = false;
         //private string albumy = "";
 
+        /// <summary>
+        /// delegat ten informuje kontrolke wyœwietlaj¹ca miniaturki ¿e zosta³y zmiennione tagi ¿eby kontrolka wyœwietla³a tylko zdjêcia z odpowiednimi tagami
+        /// </summary>        
         public event ZmieninoTagiDelegate ZmienionoTagi;
+        /// <summary>
+        /// delegat informuje pasek który wyœwietla sk¹d sa wyœwietlane zdjêcia
+        /// </summary>
         public event ZmienionoZrodloDelegate ZmienionoZrodlo;
 
         private const int contacts = 0;
@@ -178,22 +184,18 @@ namespace Photo
                     }
 
                     sql = sql.Substring(3, sql.Length - 3);
-
-                    //MessageBox.Show(sql);
-
+                                        
                     if (RozpoczetoWyszukiwanie != null)
                         RozpoczetoWyszukiwanie(null);
 
                     try
                     {
                         zdjecia = PokazPlikiZAlbumu(null, true);
-                        //MessageBox.Show("dlugosc: " + zdjecia.Count);
+                        
                         Db baza = new Db();
                         baza.Polacz();
 
-                        string tag;
-
-                        
+                        string tag;                        
 
                         //MessageBox.Show("select * from TagZdjecia where id_zdjecia=" + "tag_zdjecia" + " and ( " + sql + " )");
                         int do_ilu = zdjecia.Count;
@@ -232,14 +234,10 @@ namespace Photo
                     {
                         MessageBox.Show("Brak dostêpu do wybranego katalogu.");
                         return;
-                    }
-
-                   // Zdjecie[] tablica = zdjecia.ToArray();
+                    }                   
 
                     if (ZakonczonoWyszukiwanie != null)
-                        ZakonczonoWyszukiwanie(przefi.ToArray(), new Katalog[0], false);
-
-                    //przefiltrowac
+                        ZakonczonoWyszukiwanie(przefi.ToArray(), new Katalog[0], false);                    
                 }
                 else
                 {
@@ -257,33 +255,30 @@ namespace Photo
                     }
 
                     if (ZakonczonoWyszukiwanie != null)
-                        ZakonczonoWyszukiwanie(zdjecia.ToArray(), new Katalog[0], false);
-                    //wyswietlic pare albomow
+                        ZakonczonoWyszukiwanie(zdjecia.ToArray(), new Katalog[0], false);                   
                 }
-
-
-
-            }
-            else
-            {
-                //tu przeladowac okienko z miniaturkami chyba
-            }
-
-            /*odswiez();
-            IZdjecie[] zdjecia = Wyszukaj().PodajWynik();
-            if (ZakonczonoWyszukiwanie != null)
-                ZakonczonoWyszukiwanie(zdjecia);
-             */
+            }            
         }
-
-        //protected override ons
+        
 
         #region IWyszukiwacz Members
 
+        /// <summary>
+        /// delegat informujê aplikacje ze wyszukiwanie zdjêæ siê zakoñczy³o
+        /// </summary>
         public event ZakonczonoWyszukiwanieDelegate ZakonczonoWyszukiwanie;
-        public event RozpoczetoWyszukiwanieDelegate RozpoczetoWyszukiwanie;
-        public event ZnalezionoZdjecieDelegate ZnalezionoZdjecie;
 
+        /// <summary>
+        /// delegat informujê aplikacje ze wyszukiwanie zdjêæ siê rozpocze³o
+        /// </summary>
+        public event RozpoczetoWyszukiwanieDelegate RozpoczetoWyszukiwanie;
+
+        
+
+        /// <summary>
+        /// metoda s³u¿¹cza do sk³adania zapytania sql i zwracaj¹ca Obiekt Wyszukania
+        /// </summary>
+        /// <returns>zwraca obiekt Wyszukanie</returns>
         public IWyszukiwanie Wyszukaj()
         {
            /* Wyszukiwanie wynik = new Wyszukiwanie();

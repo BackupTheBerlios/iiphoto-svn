@@ -86,6 +86,9 @@ namespace Photo
         public FileTree fileTree1;
         private System.Windows.Forms.Panel panel1;
 
+        /// <summary>
+        /// delegat który przenosi fokus z drzewa katalogów do widoku miniatur
+        /// </summary>
         public event ZabierzFocusDelegate ZabierzFocus;
 
 

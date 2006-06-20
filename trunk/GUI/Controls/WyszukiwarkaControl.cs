@@ -155,10 +155,20 @@ namespace Photo
 
         #region Wyszukiwacz Members
 
+        /// <summary>
+        /// delegat informujê aplikacje ze wyszukiwanie zdjêæ siê zakoñczy³o
+        /// </summary>
         public event ZakonczonoWyszukiwanieDelegate ZakonczonoWyszukiwanie;
+        /// <summary>
+        /// delegat informujê aplikacje ze wyszukiwanie zdjêæ siê rozpocze³o
+        /// </summary>
         public event RozpoczetoWyszukiwanieDelegate RozpoczetoWyszukiwanie;
-        public event ZnalezionoZdjecieDelegate ZnalezionoZdjecie;
+        
 
+        /// <summary>
+        /// metoda s³u¿¹cza do sk³adania zapytania sql i zwracaj¹ca Obiekt Wyszukania
+        /// </summary>
+        /// <returns>zwraca obiekt Wyszukanie</returns>
         public IWyszukiwanie Wyszukaj()
         {
             throw new Exception("The method or operation is not implemented.");
