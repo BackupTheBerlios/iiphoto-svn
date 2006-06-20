@@ -92,6 +92,11 @@ namespace Photo
             b.UnlockBits(bmData);
 		}
 
+        /// <summary>
+        /// Metoda wykonujaca zmiane jasnosci Bitmap'y
+        /// </summary>
+        /// <param name="b">Bitmapa na ktorej ma zostac wykonana operacja</param>
+        /// <param name="nBrightness">Wartosc jasnosci</param>
 		public static void Brightness(Bitmap b, int nBrightness)
 		{
 			if (nBrightness < -255 || nBrightness > 255)
@@ -132,6 +137,11 @@ namespace Photo
 			b.UnlockBits(bmData);
 		}
 
+        /// <summary>
+        /// Metoda wykonujaca zmiane kontrastu Bitmap'y
+        /// </summary>
+        /// <param name="b">Bitmapa na ktorej ma zostac wykonana operacja</param>
+        /// <param name="nContrast">Wartosc kontrastu</param>
 		public static void Contrast(Bitmap b, sbyte nContrast)
 		{
 			if (nContrast < -100) return ;
@@ -198,7 +208,14 @@ namespace Photo
 
 			b.UnlockBits(bmData);
 		}
-	
+
+        /// <summary>
+        /// Metoda wykonujaca korekcje kontrastu Bitmap'y wg krzywej gamma 
+        /// </summary>
+        /// <param name="b">Bitmapa na ktorej ma zostac wykonana operacja</param>
+        /// <param name="red">Wartosc koloru czerwonego</param>
+        /// <param name="green">Wartosc koloru zielonego</param>
+        /// <param name="blue">Wartosc koloru niebieskiego</param>
 		public static void Gamma(Bitmap b, double red, double green, double blue)
 		{
 			if (red < .2 || red > 5) return ;
@@ -245,6 +262,13 @@ namespace Photo
 			b.UnlockBits(bmData);
 		}
 
+        /// <summary>
+        /// Metoda wykonujaca zmiane kolorow w Bitmap'ie do
+        /// </summary>
+        /// <param name="b">Bitmapa na ktorej ma zostac wykonana operacja</param>
+        /// <param name="red">Wartosc koloru czerwonego</param>
+        /// <param name="green">Wartosc koloru zielonego</param>
+        /// <param name="blue">Wartosc koloru niebieskiego</param>
 		public static void Color(Bitmap b, int red, int green, int blue)
 		{
 			if (red < -255 || red > 255) return ;
@@ -289,6 +313,11 @@ namespace Photo
 			b.UnlockBits(bmData);
 		}
 
+        /// <summary>
+        /// Metoda wykonujaca nalozenie na Bitmap'e macierzy przeksztalcenia
+        /// </summary>
+        /// <param name="b">Bitmapa na ktorej ma zostac wykonana operacja</param>
+        /// <param name="m">Macierz przeksztalcenia</param>
 		public static void Conv3x3(Bitmap b, ConvMatrix m)
 		{
 			// Avoid divide by zero errors
@@ -360,6 +389,11 @@ namespace Photo
 			bSrc.UnlockBits(bmSrc);
 		}
 
+        /// <summary>
+        /// Metoda wykonujaca wygladzanie Bitmap'y
+        /// </summary>
+        /// <param name="b">Bitmapa na ktorej ma zostac wykonana operacja</param>
+        /// <param name="nWeight">Intensywnosc rozmycia</param>
 		public static void Smooth(Bitmap b, int nWeight /* default to 1 */)
 		{
 			ConvMatrix m = new ConvMatrix();
@@ -370,6 +404,11 @@ namespace Photo
 		    BitmapFilter.Conv3x3(b, m);
 		}
 
+        /// <summary>
+        /// Metoda wykonujaca rozmycie gaussa Bitmap'y
+        /// </summary>
+        /// <param name="b">Bitmapa na ktorej ma zostac wykonana operacja</param>
+        /// <param name="nWeight">Intensywnosc rozmycia</param>
 		public static void GaussianBlur(Bitmap b, int nWeight /* default to 4*/)
 		{
 			ConvMatrix m = new ConvMatrix();
@@ -380,6 +419,12 @@ namespace Photo
 
 			BitmapFilter.Conv3x3(b, m);
 		}
+
+        /// <summary>
+        /// Metoda wykonujaca usrednianie Bitmap'y
+        /// </summary>
+        /// <param name="b">Bitmapa na ktorej ma zostac wykonana operacja</param>
+        /// <param name="nWeight">Intensywnosc usrednienia</param>
 		public static void MeanRemoval(Bitmap b, int nWeight /* default to 9*/ )
 		{
 			ConvMatrix m = new ConvMatrix();
@@ -389,6 +434,12 @@ namespace Photo
 
 			BitmapFilter.Conv3x3(b, m);
 		}
+
+        /// <summary>
+        /// Metoda wykonujaca wyostrzanie Bitmap'y
+        /// </summary>
+        /// <param name="b">Bitmapa na ktorej ma zostac wykonana operacja</param>
+        /// <param name="nWeight">Intensywnosc wyostrzania</param>
 		public static void Sharpen(Bitmap b, int nWeight /* default to 11*/ )
 		{
 			ConvMatrix m = new ConvMatrix();
@@ -399,16 +450,11 @@ namespace Photo
 
 			BitmapFilter.Conv3x3(b, m);
 		}
-		public static void EmbossLaplacian(Bitmap b)
-		{
-			ConvMatrix m = new ConvMatrix();
-			m.SetAll(-1);
-			m.TopMid = m.MidLeft = m.MidRight = m.BottomMid = 0;
-			m.Pixel = 4;
-			m.Offset = 127;
 
-			BitmapFilter.Conv3x3(b, m);
-		}	
+        /// <summary>
+        /// Metoda wykonujaca wykrywanie krawedzi w Bitmap'ie
+        /// </summary>
+        /// <param name="b">Bitmapa na ktorej ma zostac wykonana operacja</param>
 		public static void EdgeDetectQuick(Bitmap b)
 		{
 			ConvMatrix m = new ConvMatrix();
