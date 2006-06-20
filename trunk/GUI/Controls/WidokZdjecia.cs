@@ -446,8 +446,21 @@ namespace Photo
                 {
                     if (temp.Edytowano)
                     {
-                        if (MessageBox.Show("S¹ niezapisane zmiany w zdjêciu " + temp.NazwaPliku + ". Czy zapisaæ?", "Czy zapisaæ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                            temp.Zapisz();
+                        RodzajDecyzji decyzja = temp.ZapisanieNiezapisanych();
+                        switch (decyzja)
+                        {
+                            case RodzajDecyzji.Tak:
+                                temp.Zapisz();
+                                break;
+                            case RodzajDecyzji.Nie:
+                                break;
+                            case RodzajDecyzji.TakDlaWszystkich:
+                                temp.Zapisz();
+                                break;
+                            case RodzajDecyzji.NieDlaWszystkich:
+                                break;
+                        }
+                        
                     }
                     temp.Dispose();
                     if (ZmodyfikowanoZdjecie != null)

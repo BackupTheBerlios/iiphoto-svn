@@ -1294,6 +1294,16 @@ namespace Photo
             baza.Rozlacz();            
         }
 
-        
+        /// <summary>
+        /// Metoda wywoluje DialogBox z pytaniem do uzytkownika czy ma zapisac zdjecie
+        /// </summary>
+        public RodzajDecyzji ZapisanieNiezapisanych()
+        {
+            DialogBoxes.CzyZapisac CzyZapisac = new Photo.DialogBoxes.CzyZapisac(this.Path);
+            CzyZapisac.ShowDialog();
+            RodzajDecyzji decyzja = CzyZapisac.Decyzja;
+            CzyZapisac.Dispose();
+            return decyzja;
+        }
     }
 }

@@ -65,6 +65,12 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="Db.cs" />
+    <Compile Include="DialogBoxes\CzyZapisac.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DialogBoxes\CzyZapisac.Designer.cs">
+      <DependentUpon>CzyZapisac.cs</DependentUpon>
+    </Compile>
     <Compile Include="DialogBoxes\Dodaj_albumy_do_zdjecia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,6 +155,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DialogBoxes\CzyZapisac.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CzyZapisac.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DialogBoxes\Dodaj_albumy_do_zdjecia.resx">
       <DependentUpon>Dodaj_albumy_do_zdjecia.cs</DependentUpon>
       <SubType>Designer</SubType>

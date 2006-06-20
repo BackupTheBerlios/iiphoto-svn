@@ -506,19 +506,38 @@ namespace Photo
             public delegate void WyswietlZdjecie(Zdjecie z);
             public delegate void WyswietlKatalog(Katalog k);
             public delegate void OproznijWidokMiniatur();
-            public delegate void ZapiszZdjecieDelegate();
+            public delegate RodzajDecyzji ZapiszZdjecieDelegate();
 
             public void ThreadFunc()
             {
                 widokMiniatur.sem.WaitOne();
-
+                bool takDlaWszystkich = false;
                 foreach (Zdjecie z in widokMiniatur.Zdjecia)
                 {
                     if (z.Edytowano == true)
                     {
-                        if (MessageBox.Show("S¹ niezapisane zmiany w zdjêciu " + z.NazwaPliku + ". Czy zapisaæ?", "Czy zapisaæ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                            widokMiniatur.Invoke(new ZapiszZdjecieDelegate(z.Zapisz));
-                            //z.Zapisz();
+                        if (takDlaWszystkich)
+                        {
+                            z.Zapisz();
+                        }
+                        else
+                        {
+                            RodzajDecyzji decyzja = (RodzajDecyzji)widokMiniatur.Invoke(new ZapiszZdjecieDelegate(z.ZapisanieNiezapisanych));
+                            if (decyzja == RodzajDecyzji.Tak)
+                            {
+                                z.Zapisz();
+                            }
+                            else if (decyzja == RodzajDecyzji.TakDlaWszystkich)
+                            {
+                                takDlaWszystkich = true;
+                                z.Zapisz();
+                            }
+                            else if (decyzja == RodzajDecyzji.NieDlaWszystkich)
+                            {
+                                break;
+                            }
+                        }
+
                     }
                 }
 

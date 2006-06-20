@@ -204,6 +204,14 @@ namespace Photo
         DodanoDoBazy
     }
 
+    public enum RodzajDecyzji
+    {
+        Tak,
+        TakDlaWszystkich,
+        Nie,
+        NieDlaWszystkich
+    }
+
     /// <summary>
     /// Delagat zdarzenia modyfikacji zdjêcia.
     /// </summary>
