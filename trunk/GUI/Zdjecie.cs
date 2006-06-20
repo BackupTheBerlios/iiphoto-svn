@@ -191,7 +191,7 @@ namespace Photo
         }
 
         /// <summary>
-        /// Metoda zwraca lub ustawia miniature zdjecia
+        /// Propercja zwraca lub ustawia miniature zdjecia
         /// </summary>
         public Bitmap Miniatura
         {

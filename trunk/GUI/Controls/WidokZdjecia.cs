@@ -101,7 +101,7 @@ namespace Photo
         /// </summary>
         /// <param name="x">Wspolrzedna X-owa</param>
         /// <param name="y">Wspolrzedna Y-kowa</param>
-        /// <param name="c">Kolor z ktorym ma zostac xorowany piksel</param>
+        /// <param name="color">Kolor z ktorym ma zostac xorowany piksel</param>
         private void XorPixel(int x, int y, Color color)
         {
 

@@ -46,6 +46,10 @@ namespace Photo
         }
     }
 
+    /// <summary>
+    /// Delegat zazadania peracji
+    /// </summary>
+    /// <param name="polecenie">Polecenie operacji, o ktora zazadano</param>
     public delegate void ZazadanieOperacjiDelegate(PolecenieOperacji polecenie);
 
     /// <summary>

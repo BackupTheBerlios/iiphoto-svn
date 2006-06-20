@@ -62,10 +62,15 @@ namespace Photo
         /// <summary>
         /// Wykonuje zaimplementowan¹ operacje graficzn¹ na bitmapie.
         /// </summary>
-        /// <param name="Bitmap">Bitmapa na której ma zostaæ wykonana operacja.</param>
+        /// <param name="z">Zdjecie na którym ma zostaæ wykonana operacja.</param>
         /// <param name="Argumenty">Argumenty dla operacji. Na dnie stosu le¿y argument pierwszy.</param>
         void Wykonaj(Zdjecie z, Stack<object> Argumenty);
 
+        /// <summary>
+        /// Metoda zwracajaca informacje, czy operacja ma zostac umieszczona
+        /// na toolbarze, czy nie.
+        /// </summary>
+        /// <returns>Czy umiescic na toolbarze</returns>
         bool CzyNaToolbar();
     }
 
@@ -170,6 +175,9 @@ namespace Photo
         /// </summary>
         /// <param name="operacja">Obiekt polecenia operacji która ma zostaæ wykonana.</param>
         void DodajOperacje(PolecenieOperacji operacja);
+        /// <summary>
+        /// Metoda usuwajaca wszystkie operacje na zdjeciu/ach
+        /// </summary>
         void UsunWszystkieOperacje();
         /// <summary>
         /// Zdarzenie informuj¹ce o wskazaniu nowego zdjêcia przez u¿ytkownika.
@@ -180,7 +188,9 @@ namespace Photo
         /// <summary>
         /// Powoduje ¿e opakowanie wype³nia siê nowym zbiorem zdjêæ.
         /// </summary>
-        /// <param name="zdjecia">Nowy zbiór obiektów dla opakowania.</param>
+        /// <param name="zdjecia">Nowy zbiór zdjec dla opakowania.</param>
+        /// <param name="katalogi">Nowy zbior katalogow dla opakowania</param>
+        /// <param name="CzyZDrzewa">Czy zdjecia pochodza z drzewa katalogow</param>
         void Wypelnij(IZdjecie[] zdjecia, Katalog[] katalogi, bool CzyZDrzewa);
     }
 
@@ -224,16 +234,25 @@ namespace Photo
         {
             get;
         }
+        /// <summary>
+        /// Propercja zwraca lub ustawia miniature zdjecia
+        /// </summary>
         Bitmap Miniatura
         {
             get;
             set;
         }
+        /// <summary>
+        /// Propercja zwraca nazwe pliku
+        /// </summary>
         string NazwaPliku
         {
             get;
         }
 
+        /// <summary>
+        /// Propercja zwraca rozmiar zdjecia
+        /// </summary>
         Size Rozmiar
         {
             get;
@@ -323,7 +342,7 @@ namespace Photo
         /// Na przyk³ad: warunek dla 'data_wykonania' w relacji 'zdjecie'.
         /// </summary>
         /// <param name="Relacja"></param>
-        /// <param name="Wartosc"></param>
+        /// <param name="Warunek"></param>
         void And(string Relacja, string Warunek);
         void Or(string Relacja, string Warunek);
         void And(string Wyrazenie);

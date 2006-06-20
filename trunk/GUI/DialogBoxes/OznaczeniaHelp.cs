@@ -8,8 +8,14 @@ using System.Windows.Forms;
 
 namespace Photo
 {
+    /// <summary>
+    /// Formatka wyswietlajaca informacje dla uzytkownika o uzytych oznaczeniach w programie
+    /// </summary>
     public partial class OznaczeniaHelp : Form
     {
+        /// <summary>
+        /// Konstruktor bezparametryczny
+        /// </summary>
         public OznaczeniaHelp()
         {
             InitializeComponent();

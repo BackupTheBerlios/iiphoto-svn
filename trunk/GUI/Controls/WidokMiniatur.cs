@@ -298,6 +298,9 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Zdarzenie informujace o wybraniu zdjecia z kolekcji
+        /// </summary>
         public event WybranoZdjecieDelegate WybranoZdjecie;
 
         /// <summary>

@@ -65,7 +65,7 @@ namespace Photo
         /// <summary>
         /// Metoda informujaca uzytkownika o zmianie zrodla wyswietlanych zdjec
         /// </summary>
-        /// <param name="Nazwa">Nazwa zrodla do wyswietlenia</param>
+        /// <param name="dir">Nazwa zrodla do wyswietlenia</param>
         public void ZmienionoZrodlo(string dir)
         {
             katalogLabel.Text = dir;

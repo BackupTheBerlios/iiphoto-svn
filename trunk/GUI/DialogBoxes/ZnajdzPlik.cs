@@ -10,12 +10,20 @@ using System.Drawing.Imaging;
 
 namespace Photo
 {
+    /// <summary>
+    /// Formatka wyswietlana, jesli zostanie zazadane wyswietlenie zdjecia z kolekcji,
+    /// a nie zostanie odnaleziono one na dysku twardym. Formatka umozliwa odnalezienie 
+    /// brakujacych zdjec.
+    /// </summary>
     public partial class ZnajdzPliki : Form
     {
         private string plikSzukany;
         private string plikOdnaleziony;
         private long id;
 
+        /// <summary>
+        /// Propercja zwracajaca odnaleziony plik
+        /// </summary>
         public string OdnalezionyPlik
         {
             get
@@ -24,6 +32,10 @@ namespace Photo
             }
         }
 
+        /// <summary>
+        /// Konstruktor 
+        /// </summary>
+        /// <param name="kv">Para identyfikatora i lokalizacji szukanego zdjecia</param>
         public ZnajdzPliki(KeyValuePair<long, string> kv)
         {
             InitializeComponent();
