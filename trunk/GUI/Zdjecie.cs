@@ -12,6 +12,10 @@ using System.Data;
 
 namespace Photo
 {
+    /// <summary>
+    /// Klasa implementujace interfejs IZdjecie. 
+    /// Zawierajaca wszystkie potrzebne informacje oraz wykonujaca wszystkie wymagane operacje.
+    /// </summary>
     public class Zdjecie : IZdjecie, IDisposable
     {
         private string iiphotoTag;
@@ -20,17 +24,29 @@ namespace Photo
         string path;
         int Orientation;
         string format;
-        public Rectangle Zaznaczenie;
         Size size;
-        public int indeks;
         bool edytowano;
         bool tylkoDoOdczytu;
         string autor = "", komentarz = "", orientacja = "";
         int orient = -1;
 
+        /// <summary>
+        /// Indeks zdjecia w kolekcji
+        /// </summary>
+        public int indeks;
+
+        /// <summary>
+        /// Zaznaczenie wykonane na zdjeciu
+        /// </summary>
+        public Rectangle Zaznaczenie;
+
         List<PolecenieOperacji> operacje = new List<PolecenieOperacji>();
         List<long> tagi = new List<long>();
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="Path">Lokalizacja zdjecia na dysku</param>
         public Zdjecie(string Path)
         {
             path = Path;

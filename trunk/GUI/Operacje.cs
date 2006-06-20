@@ -39,7 +39,7 @@ namespace Photo
         /// <summary>
         /// Powoduje wykonanie operacji opisanej przez to polecenie na bitmapie.
         /// </summary>
-        /// <param name="bitmap">Bitmapa na której wykonywana jest operacja.</param>
+        /// <param name="z">Bitmapa na której wykonywana jest operacja.</param>
         public void Wykonaj(Zdjecie z)
         {
             Operacja.Wykonaj(z, Argumenty);

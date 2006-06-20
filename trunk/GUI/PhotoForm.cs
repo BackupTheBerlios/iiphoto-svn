@@ -10,6 +10,9 @@ using System.Data.SqlClient;
 
 namespace Photo
 {
+    /// <summary>
+    /// Glowna formatka - Gui za pomoca ktorego uzytkownik wykonuje wszystkie operacje
+    /// </summary>
     public partial class PhotoForm : Form
     {
         private Operacje operacje;

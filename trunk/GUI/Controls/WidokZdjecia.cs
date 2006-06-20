@@ -401,13 +401,22 @@ namespace Photo
             zdjecie.UsunWszystkieOperacje();
         }
 
+        /// <summary>
+        /// Zdarzenie informujace o wybraniu zdjecia
+        /// </summary>
         public event WybranoZdjecieDelegate WybranoZdjecie;
 
+        /// <summary>
+        /// Metoda niezywana
+        /// </summary>
         public void Wypelnij(IZdjecie[] zdjecia, Katalog[] k, bool CzyZDrzewa)
         {
             throw new Exception("This method is not used");
         }
 
+        /// <summary>
+        /// Zdarzenie informujace o modyfikacji zdjecia
+        /// </summary>
         public event ZmodyfikowanoZdjecieDelegate ZmodyfikowanoZdjecie;
 
         /// <summary>
