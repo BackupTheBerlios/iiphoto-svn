@@ -284,6 +284,7 @@
     <Content Include="icons\Cdrom_z.jpg" />
     <Content Include="icons\Cdrom_z_2.png" />
     <Content Include="icons\Computer.png" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="icons\crop.png" />
     <None Include="icons\desaturate.png" />
     <None Include="icons\delete-tag.png" />
