@@ -65,7 +65,9 @@ namespace Photo
         /// </summary>
         public void WczytajPluginy()
         {
-            string[] pluginy = System.IO.Directory.GetFiles(System.IO.Path.GetFullPath("..\\..\\plugins\\"), "*.dll");
+            if (!System.IO.Directory.Exists(Config.katalogPluginow))
+                return;
+            string[] pluginy = System.IO.Directory.GetFiles(Config.katalogPluginow, "*.dll");
             foreach (string plugin in pluginy)
             {
                 Assembly asm = Assembly.LoadFile(plugin);

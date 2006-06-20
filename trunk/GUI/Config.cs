@@ -25,6 +25,17 @@ namespace Photo
         }
 
         /// <summary>
+        /// Zwraca katalog z pluginami
+        /// </summary>
+        public static string katalogPluginow
+        {
+            get
+            {
+                return System.IO.Path.GetFullPath("plugins");
+            }
+        }
+
+        /// <summary>
         /// Zwraca katalog domowy aplikacji
         /// </summary>
         public static string katalogAplikacji
