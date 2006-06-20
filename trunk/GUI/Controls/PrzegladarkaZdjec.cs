@@ -425,6 +425,10 @@ namespace Photo
                 MessageBox.Show(sb.ToString());            
         }
 
+        /// <summary>
+        /// Metoda dodajaca zaznaczone zdjecia do bazy danych
+        /// </summary>
+        /// <returns>Lista lokalizacji zdjec dodanych do bazy</returns>
         public List<string> dodaj_kolekcje_do_bazy()
         {
             List<Zdjecie> lista = ZwrocZdjeciaZaznaczone();

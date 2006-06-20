@@ -26,6 +26,10 @@ namespace Photo
         private Katalog[] katalogi;
         private List<long> tagi;
 
+        /// <summary>
+        /// Pole informujace czy miniatury pochodza z drzewa katalogow,
+        /// czy z innego zrodla
+        /// </summary>
         public bool MiniaturyZDrzewa;
 
         /// <summary>
@@ -38,7 +42,7 @@ namespace Photo
         }
 
         /// <summary>
-        /// Konstruktor
+        /// Konstruktor bezparametryczny
         /// </summary>
         public WidokMiniatur()
         {

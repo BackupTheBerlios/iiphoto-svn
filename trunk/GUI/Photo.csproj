@@ -257,10 +257,6 @@
     <Compile Include="Zdjecie.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="OgolnyDiagramKlas.cd">
-      <SubType>
-      </SubType>
-    </None>
     <None Include="GUI_TemporaryKey.pfx" />
     <BaseApplicationManifest Include="Properties\app.manifest" />
   </ItemGroup>
