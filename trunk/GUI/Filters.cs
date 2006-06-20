@@ -14,6 +14,10 @@ namespace Photo
 		public int BottomLeft = 0, BottomMid = 0, BottomRight = 0;
 		public int Factor = 1;
 		public int Offset = 0;
+        /// <summary>
+        /// Metoda ustawiaj¹ca wszystkie pola klasy
+        /// </summary>
+        /// <param name="nVal">wartoœæ jak¹ maj¹ byæ pola zainicjowane</param>
 		public void SetAll(int nVal)
 		{
 			TopLeft = TopMid = TopRight = MidLeft = Pixel = MidRight = BottomLeft = BottomMid = BottomRight = nVal;

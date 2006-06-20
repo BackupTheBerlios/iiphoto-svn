@@ -296,7 +296,9 @@ namespace Photo
     /// <summary>
     /// Delegat informuj¹cy o zakoñczeniu wyszukiwania.
     /// </summary>
-    /// <param name="zdjecia">Lista zdjêæ bed¹ca wynikiem wyszukiwania.</param>
+    /// <param name="zdjecia">tablica zdjêæ bed¹ca wynikiem wyszukiwania.</param>
+    /// <param name="CzyZDrzewa">zmienna informuj¹ca czy dane s¹ wyœwietlane z drzewa katalogów czy nie</param>
+    /// <param name="katalogi">tablica katalogów bêd¹ca wynikiem wyszukiwania</param>
     public delegate void ZakonczonoWyszukiwanieDelegate(IZdjecie[] zdjecia, Katalog[] katalogi, bool CzyZDrzewa);
 
     /// <summary>
@@ -305,7 +307,7 @@ namespace Photo
     /// <param name="wyszukiwanie">Rozpoczete wyszkukiwanie</param>
     public delegate void RozpoczetoWyszukiwanieDelegate(IWyszukiwanie wyszukiwanie);
 
-    public delegate void ZnalezionoZdjecieDelegate(IZdjecie zdjecie);
+    //public delegate void ZnalezionoZdjecieDelegate(IZdjecie zdjecie);
 
     /// <summary>
     /// Delegat informujacy o zmianie zrodla zdjec
@@ -365,11 +367,25 @@ namespace Photo
         /// Koniunkcja tego wyra¿enia z warunkiem dla relacji.
         /// Na przyk³ad: warunek dla 'data_wykonania' w relacji 'zdjecie'.
         /// </summary>
-        /// <param name="Relacja"></param>
-        /// <param name="Warunek"></param>
+        /// <param name="Relacja">jaka relacja</param>
+        /// <param name="Warunek">pod jakim warunkiem</param>
         void And(string Relacja, string Warunek);
+        /// <summary>
+        /// Alternatywa tego wyra¿enia z warunkiem dla relacji.
+        /// Na przyk³ad: warunek dla 'data_wykonania' w relacji 'zdjecie'.
+        /// </summary>
+        /// <param name="Relacja">jaka relacja</param>
+        /// <param name="Warunek">pod jakim warunkiem</param>
         void Or(string Relacja, string Warunek);
+        /// <summary>
+        /// Metoda do tworzenia koniunkcji wyra¿enia
+        /// </summary>
+        /// <param name="Wyrazenie">wyra¿enie sql</param>
         void And(string Wyrazenie);
+        /// <summary>
+        /// Metoda do tworzenia alternatywy wyra¿enia
+        /// </summary>
+        /// <param name="Wyrazenie">wyra¿enie sql</param>
         void Or(string Wyrazenie);
         /// <summary>
         /// Zwraca tablicê zdjêc bêd¹c¹ rezultatem tego wyra¿enia wyszukuj¹cego.
