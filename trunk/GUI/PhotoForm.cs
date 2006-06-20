@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 namespace Photo
 {
     /// <summary>
-    /// Glowna formatka - Gui za pomoca ktorego uzytkownik wykonuje wszystkie operacje
+    /// G³ówna formatka - Gui za pomoc¹ którego u¿ytkownik wykonuje wszystkie operacje
     /// </summary>
     public partial class PhotoForm : Form
     {
