@@ -17,6 +17,9 @@ namespace Photo
     {
         private Operacje operacje;
 
+        /// <summary>
+        /// Konstruktor bezparametryczny
+        /// </summary>
         public PhotoForm()
         {
             InitializeComponent();

@@ -8,8 +8,14 @@ using System.Windows.Forms;
 
 namespace Photo
 {
+    /// <summary>
+    /// Formatka wyswietlajaca informacje dla uzytkownika o uzytych skrotach klawiaturowych w programie
+    /// </summary>
     public partial class SkrotyKlawiaturoweHelp : Form
     {
+        /// <summary>
+        /// Konstruktor bezparametryczny
+        /// </summary>
         public SkrotyKlawiaturoweHelp()
         {
             InitializeComponent();

@@ -296,13 +296,29 @@ namespace Photo
     /// </summary>
     /// <param name="zdjecia">Lista zdjêæ bed¹ca wynikiem wyszukiwania.</param>
     public delegate void ZakonczonoWyszukiwanieDelegate(IZdjecie[] zdjecia, Katalog[] katalogi, bool CzyZDrzewa);
+
+    /// <summary>
+    /// Delegat informujacy o rozpoczeciu wyszukiwania
+    /// </summary>
+    /// <param name="wyszukiwanie">Rozpoczete wyszkukiwanie</param>
     public delegate void RozpoczetoWyszukiwanieDelegate(IWyszukiwanie wyszukiwanie);
 
     public delegate void ZnalezionoZdjecieDelegate(IZdjecie zdjecie);
 
+    /// <summary>
+    /// Delegat informujacy o zmianie zrodla zdjec
+    /// </summary>
+    /// <param name="dir">Nowe zrodlo zdjec</param>
     public delegate void ZmienionoZrodloDelegate(string dir);
 
+    /// <summary>
+    /// Delegat informujacy o zmianie tagow
+    /// </summary>
     public delegate void ZmienionoTagiDelegate();
+
+    /// <summary>
+    /// Delegat informujacy o zmianie identyfikatora
+    /// </summary>
     public delegate void ZmienionoIdsDelegate();
 
     /// <summary>

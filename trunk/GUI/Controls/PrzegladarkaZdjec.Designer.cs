@@ -130,11 +130,34 @@ namespace Photo
         private TabPage zdjecie1Tab;
         private ContextMenuStrip Context;
 
+        /// <summary>
+        /// Zdarzenie informujace o wlaczeniu widoku zdjecia
+        /// </summary>
         public event WlaczonoWidokZdjeciaDelegate WlaczonoWidokZdjecia;
+
+        /// <summary>
+        /// Zdarzenie informujace o wylaczeniu widoku zdjecia
+        /// </summary>
         public event WylaczonoWidokZdjeciaDelegate WylaczonoWidokZdjecia;
+
+        /// <summary>
+        /// Zdarzenie informujace o wybraniu zdjecia
+        /// </summary>
         public event WybranoZdjecieDelegate WybranoZdjecie;
+
+        /// <summary>
+        /// Zdarzenie informujace o wybraniu katalogu
+        /// </summary>
         public event WybranoKatalogDelegate WybranoKatalog;
+
+        /// <summary>
+        /// Zdarzenie informujace o zaznaczeniu zdjecia
+        /// </summary>
         public event ZaznaczonoZdjecieDelegate ZaznaczonoZdjecie;
+
+        /// <summary>
+        /// Zdarzenie informujace o akcji przekazania focus'a innej kontrolce
+        /// </summary>
         public event ZabierzFocusDelegate ZabierzFocus;
 
     }

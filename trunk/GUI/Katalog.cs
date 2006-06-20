@@ -12,6 +12,11 @@ namespace Photo
         string path;
         bool do_gory;
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="p">Sciezka katalogu na dysku twardym</param>
+        /// <param name="d">Czy katalog jest linkiem do katalogu nadrzednego</param>
         public Katalog(string p, bool d)
         {
             path = p;
