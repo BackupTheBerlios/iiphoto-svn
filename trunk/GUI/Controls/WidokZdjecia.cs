@@ -230,13 +230,20 @@ namespace Photo
             if (e.Button == MouseButtons.Left)
             {
                 //this.zdjecie.Zaznaczenie = new Rectangle((int)(selectedRectangle.X * WidthRatio), (int)(selectedRectangle.Y * HeightRatio), (int)(selectedRectangle.Width * WidthRatio), (int)(selectedRectangle.Height * HeightRatio));
-                if (zoom == 1.0)
-                    zdjecie.Zaznaczenie = selectedRectangle;
-                else if (zoom == 0.0)
-                    zdjecie.Zaznaczenie = new Rectangle((int)(selectedRectangle.X * WidthRatio), (int)(selectedRectangle.Y * WidthRatio), (int)(selectedRectangle.Width * WidthRatio), (int)(selectedRectangle.Height * WidthRatio));
+                if (selectedRectangle.Width == 0 || selectedRectangle.Height == 0)
+                {
+                    zdjecie.Zaznaczenie = new Rectangle(0, 0, 0, 0);
+                }
                 else
-                    zdjecie.Zaznaczenie = new Rectangle((int)(selectedRectangle.X / zoom), (int)(selectedRectangle.Y / zoom), (int)(selectedRectangle.Width / zoom), (int)(selectedRectangle.Height / zoom));
+                {
 
+                    if (zoom == 1.0)
+                        zdjecie.Zaznaczenie = selectedRectangle;
+                    else if (zoom == 0.0)
+                        zdjecie.Zaznaczenie = new Rectangle((int)(selectedRectangle.X * WidthRatio), (int)(selectedRectangle.Y * WidthRatio), (int)(selectedRectangle.Width * WidthRatio), (int)(selectedRectangle.Height * WidthRatio));
+                    else
+                        zdjecie.Zaznaczenie = new Rectangle((int)(selectedRectangle.X / zoom), (int)(selectedRectangle.Y / zoom), (int)(selectedRectangle.Width / zoom), (int)(selectedRectangle.Height / zoom));
+                }
                 this.Refresh();
             }
             else if (e.Button == MouseButtons.Right)
