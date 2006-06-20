@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="Photo.FileTree" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="19" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\DrzewoKatalogow.cs</FileName>
+      <HashCode>ckERAABCGwEAqCEWEQMAQAACUAMgahAAAYQQEMSRGEA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RozpoczetoWyszukiwanieDelegate" />
+      <Property Name="ZakonczonoWyszukiwanieDelegate" />
+      <Property Name="ZmieninoTagiDelegate" />
+      <Property Name="ZmienionoIdsDelegate" />
+      <Property Name="ZmienionoZrodloDelegate" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.544" Collapsed="true" />
+  </Class>
+  <Class Name="Photo.ListaAlbumowControl" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="19" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Controls\ListaAlbumowControl.cs</FileName>
+      <HashCode>EhEAgCUBAjwAhCIQAYCIBAACQAYKIAAIAEAQAAAwikA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RozpoczetoWyszukiwanieDelegate" />
+      <Property Name="ZakonczonoWyszukiwanieDelegate" />
+      <Property Name="ZmieninoTagiDelegate" />
+      <Property Name="ZmienionoZrodloDelegate" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Photo.PrzegladarkaZdjec" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="18" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Controls\PrzegladarkaZdjec.cs</FileName>
+      <HashCode>KAYIEBEAUiKCgABAmIWB0CACiACgTGAQQUAAYUBgESA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="WybranoKatalogDelegate" />
+      <Property Name="ZabierzFocusDelegate" />
+      <Property Name="WybranoZdjecieDelegate" />
+      <Property Name="WlaczonoWidokZdjeciaDelegate" />
+      <Property Name="WylaczonoWidokZdjeciaDelegate" />
+    </ShowAsAssociation>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <Lollipop Orientation="Right" Position="0.153" Collapsed="true" />
+  </Class>
+  <Class Name="Photo.WidokMiniatur" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="19.5" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Controls\WidokMiniatur.cs</FileName>
+      <HashCode>IABESAEAEhAhoJAACKwRAAAgAADgYCABAQwDgABQEAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Orientation="Right" Position="0.122" Collapsed="true" />
+  </Class>
+  <Class Name="Photo.WidokZdjecia" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="18.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Controls\WidokZdjecia.cs</FileName>
+      <HashCode>KIKMAAEAkiEAEAIAWIDQEBMCAEDgQCIAAQEQAITQEAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Orientation="Right" Position="0.101" Collapsed="true" />
+  </Class>
+  <Class Name="Photo.WyszukiwarkaControl" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="19" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Controls\WyszukiwarkaControl.cs</FileName>
+      <HashCode>EAEAAAAAACAAAABAAQCABABDQAAIAAAAMEAAAAAAAEA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RozpoczetoWyszukiwanieDelegate" />
+      <Property Name="ZakonczonoWyszukiwanieDelegate" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Photo.DrzewoOpakowane" Collapsed="true">
+    <Position X="6.75" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Controls\DrzewoOpakowane.cs</FileName>
+      <HashCode>AAAQAAQAACAAEAAAAACAAAACAAAIAAgAAAAAAQAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Delegate Name="Photo.WybranoKatalogDelegate" Collapsed="true">
+    <Position X="0.5" Y="20.75" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Interfejsy.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Photo.ZakonczonoWyszukiwanieDelegate" Collapsed="true">
+    <Position X="5.5" Y="22.25" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Interfejsy.cs</FileName>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAQAAABAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Photo.RozpoczetoWyszukiwanieDelegate" Collapsed="true">
+    <Position X="5.5" Y="21.25" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Interfejsy.cs</FileName>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Photo.WybranoZdjecieDelegate" Collapsed="true">
+    <Position X="0.5" Y="22.25" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Interfejsy.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Photo.ZmieninoTagiDelegate" Collapsed="true">
+    <Position X="5.5" Y="24.25" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>Interfejsy.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Photo.ZmodyfikowanoZdjecieDelegate" Collapsed="true">
+    <Position X="8.25" Y="25.25" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Interfejsy.cs</FileName>
+      <HashCode>AAAAEAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Photo.ZmienionoIdsDelegate" Collapsed="true">
+    <Position X="8.25" Y="24.25" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Interfejsy.cs</FileName>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Photo.ZaznaczonoZdjecieDelegate" Collapsed="true">
+    <Position X="11.5" Y="21.25" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Interfejsy.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Photo.WlaczonoWidokZdjeciaDelegate" Collapsed="true">
+    <Position X="0.5" Y="19.25" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Interfejsy.cs</FileName>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Photo.WylaczonoWidokZdjeciaDelegate" Collapsed="true">
+    <Position X="0.5" Y="20" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Interfejsy.cs</FileName>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Photo.ZabierzFocusDelegate" Collapsed="true">
+    <Position X="0.5" Y="21.5" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Interfejsy.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Photo.ZmienionoZrodloDelegate" Collapsed="true">
+    <Position X="11.5" Y="22.25" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Interfejsy.cs</FileName>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="Photo.ZazadanieOperacjiDelegate" Collapsed="true">
+    <Position X="11.5" Y="24.25" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>Operacje.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Delegate>
+</ClassDiagram>
