@@ -287,9 +287,6 @@
     <Content Include="icons\Cdrom_z.jpg" />
     <Content Include="icons\Cdrom_z_2.png" />
     <Content Include="icons\Computer.png" />
-    <None Include="Diagram_wraz_z_delegatami.cd" />
-    <None Include="Nowy_Diagram.cd" />
-    <None Include="Ogólny_zarys_komunikacji.cd" />
     <None Include="icons\crop.png" />
     <None Include="icons\desaturate.png" />
     <None Include="icons\delete-tag.png" />
