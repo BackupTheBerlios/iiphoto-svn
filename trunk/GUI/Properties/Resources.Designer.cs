@@ -67,6 +67,13 @@ namespace Photo.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap blad {
+            get {
+                object obj = ResourceManager.GetObject("blad", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Cdrom {
             get {
                 object obj = ResourceManager.GetObject("Cdrom", resourceCulture);

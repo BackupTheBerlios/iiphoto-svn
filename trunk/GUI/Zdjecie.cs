@@ -231,7 +231,14 @@ namespace Photo
                                 }
                                 size = image.Size;
                                 format = Zdjecie.sprawdzFormatPliku(image);
-                                miniatura = (Bitmap)image.GetThumbnailImage(scaledW, scaledH, new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback), System.IntPtr.Zero);
+                                try
+                                {
+                                    miniatura = (Bitmap)image.GetThumbnailImage(scaledW, scaledH, new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback), System.IntPtr.Zero);
+                                }
+                                catch (Exception)
+                                {
+                                    miniatura = (Bitmap)Properties.Resources.blad.GetThumbnailImage(scaledW, scaledH, new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback), System.IntPtr.Zero);
+                                }
                                 Orientation = SprawdzOrientacje(image);
                                 //UzyjOrientacji(miniatura);
                             }
@@ -254,7 +261,15 @@ namespace Photo
         /// <returns>Bitmapa</returns>
         public static Bitmap FromImage(Image i)
         {
-            Bitmap from = new Bitmap(i);
+            Bitmap from = null;
+            try
+            {
+                from = new Bitmap(i);
+            }
+            catch (System.Runtime.InteropServices.ExternalException)
+            {
+                from = new Bitmap(Properties.Resources.blad);
+            }
             foreach (PropertyItem pi in i.PropertyItems)
             {
                 from.SetPropertyItem(pi);

@@ -374,6 +374,7 @@ namespace Photo
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "PhotoForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "IIPhoto";
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ContentPanel.PerformLayout();

@@ -55,7 +55,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite, Version=1.0.27.1, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86" />
+    <Reference Include="System.Data.SQLite, Version=1.0.27.1, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Deployment" />
     <Reference Include="System.Design" />
     <Reference Include="System.DirectoryServices" />
@@ -316,6 +319,7 @@
     <Content Include="icons\Trash_full_d.png" />
     <Content Include="icons\User.png" />
     <Content Include="icons\usun_z_kolekcji.png" />
+    <None Include="Resources\blad.png" />
     <None Include="icons\xor.png" />
     <None Include="Resources\Grayscale.png" />
     <None Include="Resources\katalog_do_gory.png" />

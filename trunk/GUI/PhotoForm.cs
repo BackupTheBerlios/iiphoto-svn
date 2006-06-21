@@ -23,7 +23,9 @@ namespace Photo
         public PhotoForm()
         {
             InitializeComponent();
-
+            this.Location = new Point(10, 10);
+            this.Width = Screen.PrimaryScreen.Bounds.Width - 25;
+            this.Height = Screen.PrimaryScreen.Bounds.Height - 45;
             /* Inicjalizacja okna g³ównego.
              */
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
